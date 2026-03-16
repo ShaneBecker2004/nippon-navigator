@@ -3,7 +3,7 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
 :root {
-  --primaryClr: #fe4e37;
+  --primaryClr: #f15c5c;
   --secondaryClr: #fffaf9;
   --bgClr: #f8f9fd;
   --white: #ffffff;
@@ -11,7 +11,6 @@
   --textclr: #4f5e71;
 
   --smallText: 12px;
-  --detailText: 14px;
   --bodyText: 16px;
   --subTitle: 18px;
   --heading: 26px;

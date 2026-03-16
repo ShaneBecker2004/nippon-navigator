@@ -1,0 +1,33 @@
+header{
+    position: absolute;
+    top: 0;
+    z-index: 9999;
+    padding: 12pdx 0px;
+    width: 100%;
+}
+
+header .navbar .navbar-brand a {
+    font-size: 22px;
+    color:var(--white);
+    line-height: 150%;
+    font-family: var(--fontFamily);
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+header .navbar .offcanvas-body a {
+    font-size: var(--bodyText);
+    color:var(--white) !important;
+    line-height: 150%;
+    font-family: var(--fontFamily);
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+header .navbar .offcanvas-body a:hover {
+    color:var(--primaryClr) !important;
+}
+
+header .navbar .offcanvas-body .dropdown-menu {
+    min-width: 12rem;
+}
