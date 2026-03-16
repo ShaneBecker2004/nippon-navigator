@@ -28,8 +28,7 @@ const Header = () => {
   return (
     <header className='header-section'>
         <Container>
-            <Row>
-                <Navbar expand='lg' className="">
+                <Navbar expand='lg' className="p-0">
                 {/* Logo Section */}
                     <Navbar.Brand>
                         <NavLink to='/' >Nippon Navigator</NavLink>
@@ -89,7 +88,6 @@ const Header = () => {
                         </li>
                     </div>
                 </Navbar>
-            </Row>
         </Container>
     </header>
   )
