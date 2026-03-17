@@ -1,4 +1,4 @@
-.dropdown-custom {
+.dropdown-custom #dropdown-custom-components {
     width: 100%;
     background: none;
     font-family: var(--fontFamily);
@@ -9,6 +9,11 @@
     font-size: var(--textFont);
     position: relative;
     color: var(--textClr);
+}
+
+.dropdown-custom #dropdown-custom-components span {
+    font-family: var(--fontFamily) !important;
+    font-weight: bold;
 }
 
 .dropdown-custom #dropdown-custom-components:focus {

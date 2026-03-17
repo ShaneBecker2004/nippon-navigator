@@ -1,7 +1,7 @@
 import React from 'react'
 import { Carousel } from 'react-bootstrap'
-import sliderImg from "../../assets/images/slider/tokyo-tower-day.jpg"
-import sliderImg1 from "../../assets/images/slider/tokyo-disney.jpg"
+import sliderImg1 from "../../assets/images/slider/tokyo-tower-day.jpg"
+import sliderImg from "../../assets/images/slider/mount-fuji.jpg"
 import sliderImg2 from "../../assets/images/slider/dotonbori.webp"
 import '../Banner/banner.css'
 

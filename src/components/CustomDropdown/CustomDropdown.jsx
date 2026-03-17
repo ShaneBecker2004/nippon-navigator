@@ -18,14 +18,14 @@ const CustomDropdown = ({label, options, onSelect}) => {
     <Dropdown className='dropdown-custom' onSelect={handleClick}>
 
         <Dropdown.Toggle id="dropdown-custom-components">
-            {selectedValue ? selectedValue : label}
+           <span>{selectedValue ? selectedValue : label}</span> 
         </Dropdown.Toggle>
 
         <Dropdown.Menu >
             
         <Form.Control
           autoFocus
-          className="mx-3 my-2 w-auto"
+          className="my-1"
           placeholder="Search..."
           onChange={(e) => setValue(e.target.value)}
           value={value}
