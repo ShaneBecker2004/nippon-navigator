@@ -47,7 +47,7 @@ const CustomDropdown = ({label, options, onSelect}) => {
         </ul>
 
         </Dropdown.Menu>
-    </Dropdown>,
+    </Dropdown>
     </>
   )
 }
