@@ -26,7 +26,7 @@ const AdvanceSearch = () => {
             <Row>
                 <Col md={12} xs={12} >
 
-                    <div className='box-search'>
+                    <div className='box-search shadow-sm'>
                         <div className='item-search'>
                             {/* Using Props to Pass Data */}
                             <CustomDropdown 
@@ -48,7 +48,7 @@ const AdvanceSearch = () => {
                             <DatePicker 
                             selected={startDate} 
                             onChange={(date) => setStartDate(date)}
-                            selectedStart
+                            selectsStart
                             startDate={startDate}
                             endDate={endDate}
                             dateFormat="dd, MMMM, yyyy"

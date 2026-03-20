@@ -1,7 +1,7 @@
 import React from 'react'
 import "../Features/features.css"
 
-import feature1 from "../../assets/images/feature/kyoto-evening.jpg";
+import feature1 from "../../assets/images/feature/japan-map-graphic.webp";
 import feature2 from "../../assets/images/feature/shibuya-crossing-night.jpg";
 import feature3 from "../../assets/images/feature/tokyo-disney.jpg";
 import feature4 from "../../assets/images/feature/inari-shrine-day.webp";
@@ -12,12 +12,13 @@ import "slick-carousel/slick/slick-theme.css";
 
 const Features = () => {
     var settings = {
-    dots: true,
+    dots: false,
     infinite: true,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 1500,
     slidesToShow: 4,
     slidesToScroll: 1,
+
     responsive: [
       {
         breakpoint: 1024,
@@ -65,25 +66,25 @@ const Features = () => {
             id: 0,
             image: feature1,
             title: "Discover the magic of Japan",
-            des: "test"
+            des: "Booking made easier, you can count on us to help you plan for your trip."
         },
         {
             id: 1,
             image: feature2,
-            title: "Test 2",
-            des: "test"
+            title: "Reviews you can trust",
+            des: "Within a glance, you can trust what others have experienced."
         },
         {
             id: 2,
             image: feature3,
-            title: "Test 3",
-            des: "test"
+            title: "Go and enjoy the fun",
+            des: "With a lot of activities to do and see, you are guaranteed to have fun no matter where you are."
         },
         {
             id: 3,
             image: feature4,
-            title: "Test 4",
-            des: "test"
+            title: "Need to know what to expect",
+            des: "Needing to know how to get around the city or what common phrases to use, we can help you."
         },
     ];
 
@@ -110,11 +111,8 @@ const Features = () => {
 
                                 </Card>
                             )
-                        })
-
-                        }
+                        })}
                         </Slider>
-
                     </Col>
                 </Row>
             </Container>
