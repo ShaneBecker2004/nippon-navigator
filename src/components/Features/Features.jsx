@@ -97,7 +97,8 @@ const Features = () => {
                         <Slider {...settings} >
                         {featureList.map((feature, inx)=>{
                             return (
-                                <Card key={inx}>
+                              <div key={inx} className="img-box">
+                                <Card>
                                     <Card.Img
                                     variant='top'
                                     src={feature.image}
@@ -108,8 +109,8 @@ const Features = () => {
                                     <Card.Text>
                                         {feature.des}
                                     </Card.Text>
-
                                 </Card>
+                                </div>
                             )
                         })}
                         </Slider>

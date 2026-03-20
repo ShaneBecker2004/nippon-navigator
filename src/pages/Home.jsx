@@ -8,7 +8,7 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import "../pages/home.css"
+import "./home.css"
 
 import tour from "../assets/images/tour/tokyo-night.jpg"
 import tour1 from "../assets/images/tour/osaka-castle-evening.jpg"
@@ -158,7 +158,8 @@ const Home = () => {
               <Slider {...settings} >
                 {destinations.map((destination, inx)=>{
                   return (
-                      <Card key={inx}>
+                    <div className="img-box" key={inx}>
+                      <Card>
                           <Card.Img
                           variant='top'
                           src={destination.image}
@@ -168,6 +169,7 @@ const Home = () => {
                           <Card.Title>{destination.name}</Card.Title>
                           <span className="tours">{destination.tours}</span>
                       </Card>
+                    </div>
                   )
               })}
               </Slider>
