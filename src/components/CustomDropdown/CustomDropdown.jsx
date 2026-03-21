@@ -37,10 +37,10 @@ const CustomDropdown = ({label, options, onSelect}) => {
 
           )
           .map((option, index)=>(
-            <li>
+            <li key={index}>
 
             
-            <Dropdown.Item eventKey={option} key={index}>
+            <Dropdown.Item eventKey={option}>
             {option}    
             </Dropdown.Item>
             </li>

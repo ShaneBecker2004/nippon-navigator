@@ -16,6 +16,7 @@ import tour2 from "../assets/images/tour/kyoto-evening.jpg"
 import tour3 from "../assets/images/tour/yokohama-evening.jpg"
 import tour4 from "../assets/images/tour/sapporo-night.webp"
 import tour5 from "../assets/images/tour/hiroshima-city-night.jpg"
+import PopularPlace from '../components/PopularPlace/PopularPlace';
 
 
 const Home = () => {
@@ -181,6 +182,8 @@ const Home = () => {
 
     {/* Tour section start */}
 
+    
+    <PopularPlace /> 
 
     </>
   )

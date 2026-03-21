@@ -3,7 +3,7 @@ import "../Features/features.css"
 
 import feature1 from "../../assets/images/feature/japan-map-graphic.webp";
 import feature2 from "../../assets/images/feature/shibuya-crossing-night.jpg";
-import feature3 from "../../assets/images/feature/tokyo-disney.jpg";
+import feature3 from "../../assets/images/feature/gokart-tokyo.webp";
 import feature4 from "../../assets/images/feature/inari-shrine-day.webp";
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import Slider from 'react-slick';
