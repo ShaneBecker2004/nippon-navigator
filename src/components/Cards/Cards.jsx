@@ -13,9 +13,12 @@ const Cards = ({destination}) => {
                 className='img-fluid'
                 alt={destination.name}
                 />
-                <Card.Title>{destination.name}</Card.Title>
 
-                <span className="tours">{destination.tours}</span>
+                <Card.Body>
+                    <Card.Title>{destination.name}</Card.Title>
+                </Card.Body>
+
+                <span className="tours">{destination.tours}Tours</span>
             </Card>
         </div>
     </>

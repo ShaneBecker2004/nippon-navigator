@@ -53,35 +53,75 @@ const Header = () => {
                     <Offcanvas.Body>
                         <Nav className="justify-content-end flex-grow-1 pe-3">
                         <NavLink className='nav-link' to="/">Home</NavLink>
-                        <NavLink className='nav-link' to="/</Nav>">Explore</NavLink>
+                        <NavLink className='nav-link' to="/">About Us</NavLink>
 
+                        <NavDropdown
+                            title="Explore"
+                            id={`offcanvasNavbarDropdown-expand-lg`}
+                        >
+                            <NavDropdown
+                                title="Tradition" className='inner-dropdown'
+                                id={`dropdown-tradition`}
+                            >
+                                <NavDropdown.Item href="#action3">Japanese Gardens</NavDropdown.Item>
+                                <NavDropdown.Item href="#action4">Temple Stays</NavDropdown.Item>
+                                <NavDropdown.Item href="#action4">Festivals and Events</NavDropdown.Item>
+                                <NavDropdown.Item href="#action4">Culture in Japan</NavDropdown.Item>
+                            </NavDropdown>
+                            <NavDropdown
+                                title="Nature" className='inner-dropdown'
+                                id={`dropdown-nature`}
+                            >
+                                <NavDropdown.Item href="#action3">Scenic Spots</NavDropdown.Item>
+                                <NavDropdown.Item href="#action4">Adventure</NavDropdown.Item>
+                                <NavDropdown.Item href="#action4">Seasonal Flowers in Japan</NavDropdown.Item>
+                                <NavDropdown.Item href="#action4">Skiing in Japan</NavDropdown.Item>
+                            </NavDropdown>
+                            <NavDropdown
+                                title="Food & Drink" className='inner-dropdown'
+                                id={`dropdown-food`}
+                            >
+                                <NavDropdown.Item href="#action3">Local Cuisine Western Japan</NavDropdown.Item>
+                                <NavDropdown.Item href="#action4">Local Street Food</NavDropdown.Item>
+                                <NavDropdown.Item href="#action4">Sushi In Japan</NavDropdown.Item>
+                                <NavDropdown.Item href="#action4">Vegetarian and Vegan</NavDropdown.Item>
+                            </NavDropdown>
+                            <NavDropdown
+                                title="Cities" className='inner-dropdown'
+                                id={`dropdown-cities`}
+                            >
+                                <NavDropdown.Item href="#action3">Scenic Spots</NavDropdown.Item>
+                                <NavDropdown.Item href="#action4">Scenic Night Views</NavDropdown.Item>
+                                <NavDropdown.Item href="#action4">Theme Parks</NavDropdown.Item>
+                                <NavDropdown.Item href="#action4">Shopping</NavDropdown.Item>
+                                <NavDropdown.Item href="#action4">Nightlife</NavDropdown.Item>
+                                <NavDropdown.Item href="#action4">Natrual Wonders</NavDropdown.Item>
+                                <NavDropdown.Item href="#action4">Iconic Architecture</NavDropdown.Item>
+                            </NavDropdown>
+                        </NavDropdown>
+                            
                         <NavDropdown
                             title="Information"
                             id={`offcanvasNavbarDropdown-expand-lg`}
                         >
-                            <NavDropdown.Item href="#action3">About Us</NavDropdown.Item>
+                            <NavDropdown.Item href="#action3">Navigating the Airport</NavDropdown.Item>
+                            <NavDropdown.Item href="#action3">How to Get to the City</NavDropdown.Item>
+                            <NavDropdown.Item href="#action4">Staying Connected Online</NavDropdown.Item>
                             <NavDropdown.Item href="#action4">Important Phrases to Know</NavDropdown.Item>
+                            <NavDropdown.Item href="#action4">VISA Information</NavDropdown.Item>
                             <NavDropdown.Item href="#action4">Japan Immigration Forms</NavDropdown.Item>
                             <NavDropdown.Item href="#action4">Currency Exchange</NavDropdown.Item>
                         </NavDropdown>
-                            
-                        <NavDropdown
-                            title="Travel Tips"
-                            id={`offcanvasNavbarDropdown-expand-lg`}
-                        >
-                            <NavDropdown.Item href="#action3">Navigating the Airport</NavDropdown.Item>
-                            <NavDropdown.Item href="#action3">How to Get Wi-Fi</NavDropdown.Item>
-                            <NavDropdown.Item href="#action4">How to Get to the City</NavDropdown.Item>
-                        </NavDropdown>
 
-                        <NavLink className='nav-link' to="/</Nav>">Account</NavLink>
+                        <NavLink className='nav-link' to="/</Nav>">Contact</NavLink>
+                        <NavLink className='nav-link' to="/</Nav>">Plan Your Trip</NavLink>
                         
                         </Nav>
                     </Offcanvas.Body>
                     </Navbar.Offcanvas>
                     <div className='ms-md-4 ms-2'>
                         <NavLink className='primaryBtn d-none d-sm-inline-block'>
-                            Plan your Trip
+                            Log In/Sign Up
                         </NavLink>
                         <li className='d-inline-block d-lg-none ms-3 toggle_btn'>
                         <i className={open ? "bi bi-x-lg" : "bi bi-list"}  onClick={toggleMenu}></i>

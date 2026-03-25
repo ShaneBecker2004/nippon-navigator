@@ -97,7 +97,7 @@ const Features = () => {
                         <Slider {...settings} >
                         {featureList.map((feature, inx)=>{
                             return (
-                              <div key={inx} className="img-box">
+                              <div key={inx} className="img-box-feature">
                                 <Card>
                                     <Card.Img
                                     variant='top'

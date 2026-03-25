@@ -1,9 +1,9 @@
 // Popular Images
-import Disney from "../../assets/images/popular/tokyo-disney.jpg"
-import Universal from "../../assets/images/popular/universal-japan-globe-day.jpg"
-import Skytree from "../../assets/images/popular/tokyo-skytree-afternoon.avif"
-import Strawberry from "../../assets/images/popular/yokohama_strawberry_festival.webp"
-import Ichiran from "../../assets/images/popular/ichiran_ramen.jpg"
+import Disney from "../assets/images/popular/tokyo-disney.jpg"
+import Universal from "../assets/images/popular/universal-japan-globe-day.jpg"
+import Skytree from "../assets/images/popular/tokyo-skytree-afternoon.avif"
+import Strawberry from "../assets/images/popular/yokohama_strawberry_festival.webp"
+import Ichiran from "../assets/images/popular/ichiran_ramen.jpg"
 
 // Destination Images
 import tour from "../assets/images/tour/tokyo-night.jpg"

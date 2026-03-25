@@ -1,5 +1,3 @@
-/* sticky menu */
-
 .is-sticky {
     position: fixed;
     top: 0;
@@ -9,6 +7,7 @@
     background: var(--white);
     z-index: 999;
 }
+
 @keyframes smothScroll {
     0%{
         transform: translateY(-40px);
@@ -54,6 +53,15 @@ header .navbar .offcanvas-body a {
     text-transform: capitalize;
 }
 
+header .navbar .offcanvas-body .inner-dropdown a  {
+    font-size: var(--bodyText);
+    color:var(--black) !important;
+    line-height: 150%;
+    font-family: var(--fontFamily);
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
 header .navbar .offcanvas-body a:hover {
     color:var(--primaryClr) !important;
 }
@@ -62,9 +70,14 @@ header .navbar .offcanvas-body .dropdown-menu {
     min-width: 12rem;
 }
 
-header .navbar .offcanvas-body .dropdown-menu .dropdown-item {
+header .navbar .offcanvas-body .dropdown-menu > .dropdown-item {
     color:var(--black) !important;
 }
+
+header .navbar .offcanvas-body .dropdown-menu .dropdown-menu .dropdown-item{
+    color: var(--black) !important;
+}
+
 
 @media only screen and (max-width : 991px) {
     header .navbar .toggle_btn {

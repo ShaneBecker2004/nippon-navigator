@@ -3,7 +3,9 @@ import Banner from '../../components/Banner/Banner';
 import AdvanceSearch from '../../components/AdvanceSearch/AdvanceSearch';
 import Features from '../../components/Features/Features';
 import Gallery from '../../components/Gallery/Gallery';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
+import Cards from '../../components/Cards/Cards';
+import PopularCard from '../../components/Cards/PopularCard';
 
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
@@ -11,8 +13,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import "./home.css"
 
-import PopularPlace from '../../components/PopularPlace/PopularPlace';
-import { destinationsData } from "../../utils/data"
+import { destinationsData, popularsData } from "../../utils/data"
 
 
 const Home = () => {
@@ -68,69 +69,6 @@ const Home = () => {
     ]
   };
 
-  // const destinations = [
-  //   {
-  //     id: 0,
-  //     name: "Tokyo",
-  //     tours: "10 tours and activities",
-  //     image: tour,
-  //     link: 'tour-name',
-  //     shortDes: '',
-  //     link: "/tour",
-  //     location: "Tokyo Prefecture",
-  //   },
-  //   {
-  //     id: 1,
-  //     name: "Osaka",
-  //     tours: "10 tours and activities",
-  //     image: tour1,
-  //     link: 'tour-name',
-  //     shortDes: '',
-  //     link: "/tour",
-  //     location: "Osaka Prefecture",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Kyoto",
-  //     tours: "10 tours and activities",
-  //     image: tour2,
-  //     link: 'tour-name',
-  //     shortDes: '',
-  //     link: "/tour",
-  //     location: "Kyoto Prefecture",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Yokohama",
-  //     tours: "10 tours and activities",
-  //     image: tour3,
-  //     link: 'tour-name',
-  //     shortDes: '',
-  //     link: "/tour",
-  //     location: "Kanagawa Prefecture",
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Sapporo",
-  //     tours: "10 tours and activities",
-  //     image: tour4,
-  //     link: 'tour-name',
-  //     shortDes: '',
-  //     link: "/tour",
-  //     location: "Hokkaido Prefecture",
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Hiroshima",
-  //     tours: "10 tours and activities",
-  //     image: tour5,
-  //     link: 'tour-name',
-  //     shortDes: '',
-  //     link: "/tour",
-  //     location: "Hiroshima Prefecture",
-  //   },
-  // ]
-
 
   return (
     <>
@@ -166,9 +104,28 @@ const Home = () => {
     </section>
 
     {/* Tour section start */}
-
     
-    <PopularPlace /> 
+    <section className='popular'>
+        <Container>
+            <Row>
+                <Col md="12">
+                    <div className='main_heading'>
+                        <h1> Popular Activities </h1>
+                    </div>
+                </Col>
+            </Row>
+            <Row>
+            {popularsData.map((val, inx) => {
+                return (
+                <Col md={3} sm={6} xs={12} className='mb-5' key={inx}>
+                  <PopularCard val={val}  key={inx} />
+                </Col>
+            )
+            })}
+
+            </Row>
+        </Container>
+    </section> 
 
     <section className="call_us">
       <Container>
