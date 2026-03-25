@@ -1,30 +1,25 @@
-.tours_section {
-    padding: 50px 0px;
-    background-color: var(--secondaryClr);
-}
-
 .tours_section .img-box {
     padding: 0px 12px;
 }
 
-.tours_section .img-box .card {
+ .img-box .card {
     border: none;
     width: 100%;
     overflow: hidden;
     position: relative;
 }
 
-.tours_section .img-box .card a {
+.img-box .card a {
     padding: 0;
 }
 
-.tours_section .img-box .card img {
+.img-box .card img {
     transition: all 0.5s ease 0s;
     display: block;
     filter: brightness(0.8);
 }
 
-.tours_section .img-box .card .card-title {
+.img-box .card .card-title {
     position: absolute;
     top: 5%;
     left: 3%;
@@ -35,7 +30,7 @@
     width: 100%;
 }
 
-.tours_section .img-box .card .tours {
+.img-box .card .tours {
     position: absolute;
     right: 5%;
     bottom: 5%;
@@ -50,15 +45,15 @@
     transition: 0.2s ease-in;
 }
 
-.tours_section .img-box .card:hover {
+.img-box .card:hover {
     transition: 0.2 ease-in;
 }
 
-.tours_section .img-box .card:hover img {
+.img-box .card:hover img {
     filter: brightness(1);
     transform: scale(1.1);
 }
 
-.tours_section .img-box .card:hover .tours {
+.img-box .card:hover .tours {
     transform: translateX(0);
 }

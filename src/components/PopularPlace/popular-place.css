@@ -22,10 +22,14 @@
     transition: all 0.5s ease 0s;
 }
 
+.popular .card:hover img {
+    transform: scale(1.1);
+}
+
 .popular .card .card-body .badge {
     padding: 4px 8px;
     border-radius: 4px;
-    margin-left: 8px;
+    margin-right: 8px;
     font-size: var(--bodyText);
 }
 

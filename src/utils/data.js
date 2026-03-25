@@ -1,14 +1,85 @@
-import React from 'react'
-import "../PopularPlace/popular-place.css"
-import { Container, Row, Card, Col, Stack } from 'react-bootstrap'
+// Popular Images
 import Disney from "../../assets/images/popular/tokyo-disney.jpg"
 import Universal from "../../assets/images/popular/universal-japan-globe-day.jpg"
 import Skytree from "../../assets/images/popular/tokyo-skytree-afternoon.avif"
 import Strawberry from "../../assets/images/popular/yokohama_strawberry_festival.webp"
 import Ichiran from "../../assets/images/popular/ichiran_ramen.jpg"
 
-const PopularPlace = () => {
-    const populars = [
+// Destination Images
+import tour from "../assets/images/tour/tokyo-night.jpg"
+import tour1 from "../assets/images/tour/osaka-castle-evening.jpg"
+import tour2 from "../assets/images/tour/kyoto-evening.jpg"
+import tour3 from "../assets/images/tour/yokohama-evening.jpg"
+import tour4 from "../assets/images/tour/sapporo-night.webp"
+import tour5 from "../assets/images/tour/hiroshima-city-night.jpg"
+
+// *Tour Images
+
+
+export const destinationsData = [
+    {
+      id: 0,
+      name: "Tokyo",
+      tours: "10 tours and activities",
+      image: tour,
+      link: 'tour-name',
+      shortDes: '',
+      link: "/tour",
+      location: "Tokyo Prefecture",
+    },
+    {
+      id: 1,
+      name: "Osaka",
+      tours: "10 tours and activities",
+      image: tour1,
+      link: 'tour-name',
+      shortDes: '',
+      link: "/tour",
+      location: "Osaka Prefecture",
+    },
+    {
+      id: 2,
+      name: "Kyoto",
+      tours: "10 tours and activities",
+      image: tour2,
+      link: 'tour-name',
+      shortDes: '',
+      link: "/tour",
+      location: "Kyoto Prefecture",
+    },
+    {
+      id: 3,
+      name: "Yokohama",
+      tours: "10 tours and activities",
+      image: tour3,
+      link: 'tour-name',
+      shortDes: '',
+      link: "/tour",
+      location: "Kanagawa Prefecture",
+    },
+    {
+      id: 4,
+      name: "Sapporo",
+      tours: "10 tours and activities",
+      image: tour4,
+      link: 'tour-name',
+      shortDes: '',
+      link: "/tour",
+      location: "Hokkaido Prefecture",
+    },
+    {
+      id: 5,
+      name: "Hiroshima",
+      tours: "10 tours and activities",
+      image: tour5,
+      link: 'tour-name',
+      shortDes: '',
+      link: "/tour",
+      location: "Hiroshima Prefecture",
+    },
+  ]
+
+export const popularsData = [
         {
             id: 0,
             title: "Tokyo Disney Resort",
@@ -107,72 +178,23 @@ const PopularPlace = () => {
         },
     ]
 
-  return (
-    <section className='popular'>
-        <Container>
-            <Row>
-                <Col md="12">
-                    <div className='main_heading'>
-                        <h1> Popular Activities </h1>
-                    </div>
-                </Col>
-            </Row>
-            <Row>
-            {populars.map((val, inx) => {
-                return (
-                <Col md={3} sm={6} xs={12} className='mb-5' key={inx}>
-                      <Card className='rounded-2 shadow-sm'>
-                          <Card.Img
-                          variant='top'
-                          src={val.image}
-                          className='img-fluid'
-                          alt={"image"}
-                          />
-                          <Card.Body>
-                          <Card.Text> 
-                          <i className="bi bi-geo-alt"></i>
-                          <span className='text'>{val.location}</span>
-                            </Card.Text>
-                          <Card.Title> {val.title} </Card.Title>
-                          <p className='review'>
-                            <span>
-                                <i className="bi bi-star-fill me-1"></i>
-                            </span>
-                            <span>{val.rating} </span>
-                            <span>( {val.review} reviews )</span>
-                          </p>
-                          {val.category.map((cat, index) => {
-                            return (
-                                <span key={index} 
-                                className={cat.replace(/ .*/, "") + " badge"}>{cat}</span>                                
-                            )
-                          })}
-
-                          </Card.Body>
-
-                          <Card.Footer className='py-4'>
-                            {val.afterDiscount ? (
-                                <p className="text-decoration-line-through"> ${val.price.toFixed(2)}</p>
-                            ): ""}
-                            
-                        <Stack direction="horizontal" className="justify-content-between mt-3">
-                            <p>From <b>${val.afterDiscount  ? val.afterDiscount.toFixed(2) : val.price.toFixed(2)}</b></p>
-                            <p> 
-                                <i class="bi bi-clock"></i> {val.days} 
-                            </p>
-                        </Stack>
-
-                          </Card.Footer>
-
-                      </Card>
-                </Col>
-            )
-            })}
-
-            </Row>
-        </Container>
-    </section>
-  )
+export const tourDetails = {
+    title: "Tokyo Disney Resort",
+    des: "This is a test text description",
+    tourInfo: [
+        '<strong className="font-bold"> Test </strong>: Urayasu, Tokyo',
+        '<strong className="font-bold"> Test2 </strong>: Filler Test',
+        '<strong className="font-bold"> Test3 </strong>: Narita International Airport',
+        '<strong className="font-bold"> Test4 </strong>: Haneda International Airport',
+    ]
 }
 
-export default PopularPlace
+export const location = [
+    "Tokyo",
+    "Osaka",
+    "Nagoya",
+    "Hokkaido",
+    "Yokohama",
+    "Nara",
+    "Fukuoka"
+];
