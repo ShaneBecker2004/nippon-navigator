@@ -1,12 +1,12 @@
 .box-search-advance .box-search {
     border: 1px solid var(--bgClr);
-    border-radius: 15px;
+    border-radius: 5px;
     background-color: var(--white);
-    padding: 20px;
+    padding: 18px;
     position: relative;
-    top: -70px;
+    top: -75px;
     z-index: 12;
-    margin-bottom: -50px;
+    margin-bottom: -60px;
     display: flex;
     align-items: flex-end;
 }

@@ -53,17 +53,19 @@ const Header = () => {
                     <Offcanvas.Body>
                         <Nav className="justify-content-end flex-grow-1 pe-3">
                         <NavLink className='nav-link' to="/">Home</NavLink>
-                        <NavLink className='nav-link' to="/">About Us</NavLink>
+                        <NavLink className='nav-link' to="about-us">About Us</NavLink>
 
                         <NavDropdown
                             title="Explore"
                             id={`offcanvasNavbarDropdown-expand-lg`}
                         >
+                            <NavLink className='nav-link' to="explore">Test Link</NavLink>
+
                             <NavDropdown
                                 title="Tradition" className='inner-dropdown'
                                 id={`dropdown-tradition`}
                             >
-                                <NavDropdown.Item href="#action3">Japanese Gardens</NavDropdown.Item>
+                                <NavDropdown.Item href="explore">Japanese Gardens</NavDropdown.Item>
                                 <NavDropdown.Item href="#action4">Temple Stays</NavDropdown.Item>
                                 <NavDropdown.Item href="#action4">Festivals and Events</NavDropdown.Item>
                                 <NavDropdown.Item href="#action4">Culture in Japan</NavDropdown.Item>
@@ -99,6 +101,8 @@ const Header = () => {
                                 <NavDropdown.Item href="#action4">Iconic Architecture</NavDropdown.Item>
                             </NavDropdown>
                         </NavDropdown>
+                        
+                        <NavLink className='nav-link' to="cities">Cities</NavLink>
                             
                         <NavDropdown
                             title="Information"
@@ -113,8 +117,8 @@ const Header = () => {
                             <NavDropdown.Item href="#action4">Currency Exchange</NavDropdown.Item>
                         </NavDropdown>
 
-                        <NavLink className='nav-link' to="/</Nav>">Contact</NavLink>
-                        <NavLink className='nav-link' to="/</Nav>">Plan Your Trip</NavLink>
+                        <NavLink className='nav-link' to="contact-us">Contact</NavLink>
+                        <NavLink className='nav-link' to="planning">Plan Your Trip</NavLink>
                         
                         </Nav>
                     </Offcanvas.Body>

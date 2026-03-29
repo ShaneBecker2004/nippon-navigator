@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     animation: smothScroll 1s forwards;
-    background: var(--white);
+    background: var(--primaryClr);
     z-index: 999;
 }
 
@@ -26,7 +26,15 @@
     color: var(--primaryClr) !important;
 }
 
-header{
+.is-sticky .navbar .offcanvas-body a:hover  {
+    color: var(--white) !important;
+}
+
+.is-sticky .navbar .offcanvas-body .inner-dropdown a:hover  {
+    color: var(--primaryClr) !important;
+}
+
+header {
     position: absolute;
     top: 0;
     z-index: 999;
@@ -63,6 +71,10 @@ header .navbar .offcanvas-body .inner-dropdown a  {
 }
 
 header .navbar .offcanvas-body a:hover {
+    color:var(--primaryClr) !important;
+}
+
+header .is-sticky .navbar .offcanvas-body a:hover {
     color:var(--primaryClr) !important;
 }
 
@@ -112,5 +124,9 @@ header .navbar .offcanvas-body .dropdown-menu .dropdown-menu .dropdown-item{
     .offcanvas-body .dropdown-item {
         padding: 12px 10px;
         color: var(--black);
+    }
+
+    .offcanvas-body .dropdown-item:hober {
+        color: var(--primaryClr) !important;
     }
 }

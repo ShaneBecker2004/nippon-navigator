@@ -6,12 +6,14 @@ import Strawberry from "../assets/images/popular/yokohama_strawberry_festival.we
 import Ichiran from "../assets/images/popular/ichiran_ramen.jpg"
 
 // Destination Images
-import tour from "../assets/images/tour/tokyo-night.jpg"
-import tour1 from "../assets/images/tour/osaka-castle-evening.jpg"
-import tour2 from "../assets/images/tour/kyoto-evening.jpg"
-import tour3 from "../assets/images/tour/yokohama-evening.jpg"
-import tour4 from "../assets/images/tour/sapporo-night.webp"
-import tour5 from "../assets/images/tour/hiroshima-city-night.jpg"
+import explore1 from "../assets/images/explore/tokyo-night.jpg"
+import explore2 from "../assets/images/explore/osaka-castle-evening.jpg"
+import explore3 from "../assets/images/explore/kyoto-evening.jpg"
+import explore4 from "../assets/images/explore/yokohama-evening.jpg"
+import explore5 from "../assets/images/explore/sapporo-night.webp"
+import explore6 from "../assets/images/explore/hiroshima-city-night.jpg"
+import explore7 from "../assets/images/explore/nara-deer-park-afternoon.jpg"
+import explore8 from "../assets/images/explore/fukuoka-city-night.jpg"
 
 // *Tour Images
 
@@ -20,62 +22,82 @@ export const destinationsData = [
     {
       id: 0,
       name: "Tokyo",
-      tours: "10 tours and activities",
-      image: tour,
-      link: 'tour-name',
+      tours: "10 things to do",
+      image: explore1,
+      link: 'explore-name',
       shortDes: '',
-      link: "/tour",
+      link: "/explore",
       location: "Tokyo Prefecture",
     },
     {
       id: 1,
       name: "Osaka",
-      tours: "10 tours and activities",
-      image: tour1,
-      link: 'tour-name',
+      tours: "10 things to do",
+      image: explore2,
+      link: 'explore-name',
       shortDes: '',
-      link: "/tour",
+      link: "/explore",
       location: "Osaka Prefecture",
     },
     {
       id: 2,
       name: "Kyoto",
-      tours: "10 tours and activities",
-      image: tour2,
-      link: 'tour-name',
+      tours: "10 things to do",
+      image: explore3,
+      link: 'explore-name',
       shortDes: '',
-      link: "/tour",
+      link: "/explore",
       location: "Kyoto Prefecture",
     },
     {
       id: 3,
       name: "Yokohama",
-      tours: "10 tours and activities",
-      image: tour3,
-      link: 'tour-name',
+      tours: "10 things to do",
+      image: explore4,
+      link: 'explore-name',
       shortDes: '',
-      link: "/tour",
+      link: "/explore",
       location: "Kanagawa Prefecture",
     },
     {
       id: 4,
       name: "Sapporo",
-      tours: "10 tours and activities",
-      image: tour4,
-      link: 'tour-name',
+      tours: "10 things to do",
+      image: explore5,
+      link: 'explore-name',
       shortDes: '',
-      link: "/tour",
+      link: "/explore",
       location: "Hokkaido Prefecture",
     },
     {
       id: 5,
       name: "Hiroshima",
-      tours: "10 tours and activities",
-      image: tour5,
-      link: 'tour-name',
+      tours: "10 things to do",
+      image: explore6,
+      link: 'explore-name',
       shortDes: '',
-      link: "/tour",
+      link: "/explore",
       location: "Hiroshima Prefecture",
+    },
+    {
+      id: 6,
+      name: "Nara",
+      tours: "10 things to do",
+      image: explore7,
+      link: 'explore-name',
+      shortDes: '',
+      link: "/explore",
+      location: "Nara Prefecture",
+    },
+    {
+      id: 7,
+      name: "Fukuoka",
+      tours: "10 things to do",
+      image: explore8,
+      link: 'explore-name',
+      shortDes: '',
+      link: "/explore",
+      location: "Fukuoka Prefecture",
     },
   ]
 
@@ -86,7 +108,7 @@ export const popularsData = [
             image: Disney,
             location: "Tokyo",
             category: ["Theme Park"],
-            days: "5 days - 4 nights",
+            days: "1-2 days",
             price: 65,
             afterDiscount: 0,
             rating: 4.5,
@@ -98,7 +120,7 @@ export const popularsData = [
             image: Universal,
             location: "Osaka",
             category: [("Theme Park")],
-            days: "3 days - 2 nights",
+            days: "1-2 days",
             price: 85,
             afterDiscount: 60,
             rating: 4.5,
@@ -178,7 +200,7 @@ export const popularsData = [
         },
     ]
 
-export const tourDetails = {
+export const exploreDetails = {
     title: "Tokyo Disney Resort",
     des: "This is a test text description",
     tourInfo: [
@@ -198,3 +220,28 @@ export const location = [
     "Nara",
     "Fukuoka"
 ];
+
+export const Categories = [
+    "Touristy",
+    "Cultural",
+    "Historical",
+    "Food",
+    "Shopping",
+    "Entertainment"
+]
+
+export const Duration = [
+
+]
+
+export const PriceRange = [
+
+]
+
+export const Ratings = [
+    "⭐", 
+    "⭐⭐", 
+    "⭐⭐⭐", 
+    "⭐⭐⭐⭐", 
+    "⭐⭐⭐⭐⭐"
+]

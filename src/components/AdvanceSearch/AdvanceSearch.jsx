@@ -25,7 +25,9 @@ const AdvanceSearch = () => {
         <Container>
             <Row>
                 <Col md={12} xs={12} >
-
+                    <div className='Title-text'>
+                        <h2> Create a new plan </h2>
+                    </div>
                     <div className='box-search shadow-sm'>
                         <div className='item-search'>
                             {/* Using Props to Pass Data */}
@@ -34,17 +36,19 @@ const AdvanceSearch = () => {
                                 onSelect={selectedLocation}
                                 options={
                                     [
-                                       "Tokyo",
-                                       "Osaka",
-                                       "Nagoya",
-                                       "Hokkaido",
-                                       "Yokohama"
+                                        "Tokyo",
+                                        "Osaka",
+                                        "Nagoya",
+                                        "Hokkaido",
+                                        "Yokohama",
+                                        "Nara",
+                                        "Fukuoka"
                                     ]
                                 }
                             />
                         </div>
                         <div className='item-search item-search-2'>
-                            <label className='item-search-label'> Check In </label>
+                            <label className='item-search-label'> Arriving </label>
                             <DatePicker 
                             selected={startDate} 
                             onChange={(date) => setStartDate(date)}
@@ -56,7 +60,7 @@ const AdvanceSearch = () => {
 
                         </div>
                         <div className='item-search item-search-2'>
-                            <label className='item-search-label'> Check Out </label>
+                            <label className='item-search-label'> Departing </label>
                             <DatePicker 
                             selected={endDate} 
                             onChange={(date) => setEndDate(date)}
@@ -69,20 +73,49 @@ const AdvanceSearch = () => {
                         </div>
                         <div className='item-search bd-none'>
                             <CustomDropdown 
-                                label="Guest"
+                                label="Adults"
                                 onSelect={selectedGuest}
                                 options={
                                     [
-                                       "2 adults, 1 children",
-                                       "2 adults, 1 children",
-                                       "2 adults, 3 children"
+                                       "1 adult",
+                                       "2 adults",
+                                       "3 adults",
+                                       "4 adults"
+                                    ]
+                                }
+                                />
+                        </div>
+                        <div className='item-search bd-none'>
+                            <CustomDropdown
+                                label="Children"
+                                onSelect={selectedGuest}
+                                options={
+                                    [
+                                        "1 child",
+                                        "2 children",
+                                        "3 children",
+                                        "4 children"
+                                    ]
+                                }
+                                />
+                        </div>
+                        <div className='item-search bd-none'>
+                            <CustomDropdown 
+                                label="Seniors"
+                                onSelect={selectedGuest}
+                                options={
+                                    [
+                                       "1 senior",
+                                       "2 seniors",
+                                       "3 seniors",
+                                       "4 seniors"
                                     ]
                                 }
                                 />
                         </div>
                         <div className='item-search bd-none'>
                             <Button className="primaryBtn flex-even d-flex justify-content-center">
-                                <i className="bi bi-search me-2">Search</i>
+                                <i className="bi bi-plus-square">Create</i>
                             </Button>
 
                         </div>

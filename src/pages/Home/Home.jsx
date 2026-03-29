@@ -105,7 +105,7 @@ const Home = () => {
 
     {/* Tour section start */}
     
-    <section className='popular'>
+    <section className='popular py-5'>
         <Container>
             <Row>
                 <Col md="12">
