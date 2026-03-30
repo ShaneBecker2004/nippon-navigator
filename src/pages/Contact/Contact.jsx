@@ -1,8 +1,11 @@
 import React from 'react'
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
 
 const Contact = () => {
   return (
-    <div>Contact</div>
+    <>
+      <Breadcrumbs title="Contact us" pagename="Contact us" />
+    </>
   )
 }
 

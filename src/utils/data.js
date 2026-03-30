@@ -6,16 +6,16 @@ import Strawberry from "../assets/images/popular/yokohama_strawberry_festival.we
 import Ichiran from "../assets/images/popular/ichiran_ramen.jpg"
 
 // Destination Images
-import explore1 from "../assets/images/explore/tokyo-night.jpg"
-import explore2 from "../assets/images/explore/osaka-castle-evening.jpg"
-import explore3 from "../assets/images/explore/kyoto-evening.jpg"
-import explore4 from "../assets/images/explore/yokohama-evening.jpg"
-import explore5 from "../assets/images/explore/sapporo-night.webp"
-import explore6 from "../assets/images/explore/hiroshima-city-night.jpg"
-import explore7 from "../assets/images/explore/nara-deer-park-afternoon.jpg"
-import explore8 from "../assets/images/explore/fukuoka-city-night.jpg"
+import city1 from "../assets/images/explore/tokyo-night.jpg"
+import city2 from "../assets/images/explore/osaka-castle-evening.jpg"
+import city3 from "../assets/images/explore/kyoto-evening.jpg"
+import city4 from "../assets/images/explore/yokohama-evening.jpg"
+import city5 from "../assets/images/explore/sapporo-night.webp"
+import city6 from "../assets/images/explore/hiroshima-city-night.jpg"
+import city7 from "../assets/images/explore/nara-deer-park-afternoon.jpg"
+import city8 from "../assets/images/explore/fukuoka-city-night.jpg"
 
-// *Tour Images
+// *Explore Images
 
 
 export const destinationsData = [
@@ -23,7 +23,7 @@ export const destinationsData = [
       id: 0,
       name: "Tokyo",
       tours: "10 things to do",
-      image: explore1,
+      image: city1,
       link: 'explore-name',
       shortDes: '',
       link: "/explore",
@@ -33,7 +33,7 @@ export const destinationsData = [
       id: 1,
       name: "Osaka",
       tours: "10 things to do",
-      image: explore2,
+      image: city2,
       link: 'explore-name',
       shortDes: '',
       link: "/explore",
@@ -43,7 +43,7 @@ export const destinationsData = [
       id: 2,
       name: "Kyoto",
       tours: "10 things to do",
-      image: explore3,
+      image: city3,
       link: 'explore-name',
       shortDes: '',
       link: "/explore",
@@ -53,7 +53,7 @@ export const destinationsData = [
       id: 3,
       name: "Yokohama",
       tours: "10 things to do",
-      image: explore4,
+      image: city4,
       link: 'explore-name',
       shortDes: '',
       link: "/explore",
@@ -63,7 +63,7 @@ export const destinationsData = [
       id: 4,
       name: "Sapporo",
       tours: "10 things to do",
-      image: explore5,
+      image: city5,
       link: 'explore-name',
       shortDes: '',
       link: "/explore",
@@ -73,7 +73,7 @@ export const destinationsData = [
       id: 5,
       name: "Hiroshima",
       tours: "10 things to do",
-      image: explore6,
+      image: city6,
       link: 'explore-name',
       shortDes: '',
       link: "/explore",
@@ -83,7 +83,7 @@ export const destinationsData = [
       id: 6,
       name: "Nara",
       tours: "10 things to do",
-      image: explore7,
+      image: city7,
       link: 'explore-name',
       shortDes: '',
       link: "/explore",
@@ -93,13 +93,13 @@ export const destinationsData = [
       id: 7,
       name: "Fukuoka",
       tours: "10 things to do",
-      image: explore8,
+      image: city8,
       link: 'explore-name',
       shortDes: '',
       link: "/explore",
       location: "Fukuoka Prefecture",
     },
-  ]
+]
 
 export const popularsData = [
         {
@@ -198,7 +198,7 @@ export const popularsData = [
             rating: 4.1,
             review: 25,
         },
-    ]
+]
 
 export const exploreDetails = {
     title: "Tokyo Disney Resort",
@@ -231,11 +231,21 @@ export const Categories = [
 ]
 
 export const Duration = [
-
+    "1-2 hours",
+    "3-4 hours",
+    "5-6 hours",
+    "7-8 hours",
+    "9-10 hours",
+    "11-12 hours"
 ]
 
 export const PriceRange = [
-
+    "$0 - $25",
+    "$25 - $50",
+    "$50 - $75",
+    "$75 - $100",
+    "$100 - $125",
+    "$125 - $150",
 ]
 
 export const Ratings = [

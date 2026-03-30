@@ -6,6 +6,7 @@
     animation: smothScroll 1s forwards;
     background: var(--primaryClr);
     z-index: 999;
+    box-shadow: var(--bs-box-shadow-sm) !important;
 }
 
 @keyframes smothScroll {

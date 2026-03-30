@@ -1,13 +1,14 @@
 import React from 'react'
 import { Accordion, Form } from 'react-bootstrap'
 import { location, Categories, Duration, PriceRange, Ratings } from '../../utils/data'
+import "../Explore/explore.css"
 
 const Filters = () => {
   return (
     <div className='side_bar'>
-        <div className='filter_Box'>
+        <div className='filter_box shadow-sm rounded-2'>
               <Accordion defaultActiveKey="0">
-                  <Accordion.Item eventKey="0">
+                  <Accordion.Item eventKey="1">
                       <Accordion.Header>Location </Accordion.Header>
                       <Accordion.Body>
                           {location.map((location, inx) => {
@@ -26,7 +27,7 @@ const Filters = () => {
               </Accordion>
 
             <Accordion defaultActiveKey="0">
-                  <Accordion.Item eventKey="0">
+                  <Accordion.Item eventKey="1">
                       <Accordion.Header>Categories </Accordion.Header>
                       <Accordion.Body>
                           {Categories.map((category, inx) => {
@@ -45,17 +46,17 @@ const Filters = () => {
               </Accordion>
 
               <Accordion defaultActiveKey="0">
-                  <Accordion.Item eventKey="0">
+                  <Accordion.Item eventKey="1">
                       <Accordion.Header>Duration </Accordion.Header>
                       <Accordion.Body>
-                          {Duration.map((days, inx) => {
+                          {Duration.map((times, inx) => {
                               return (
                                   <Form.Check
                                       key={inx}
                                       type="checkbox"
-                                      id={days}
-                                      label={days}
-                                      value={days}
+                                      id={times}
+                                      label={times}
+                                      value={times}
                                   />
                               )
                           })}
@@ -64,7 +65,7 @@ const Filters = () => {
               </Accordion>
 
               <Accordion defaultActiveKey="0">
-                  <Accordion.Item eventKey="0">
+                  <Accordion.Item eventKey="1">
                       <Accordion.Header>Price </Accordion.Header>
                       <Accordion.Body>
                           {PriceRange.map((Price, inx) => {
@@ -83,7 +84,7 @@ const Filters = () => {
               </Accordion>
 
               <Accordion defaultActiveKey="0">
-                  <Accordion.Item eventKey="0">
+                  <Accordion.Item eventKey="1">
                       <Accordion.Header>Ratings </Accordion.Header>
                       <Accordion.Body>
                           {Ratings.map((rating, inx) => {
