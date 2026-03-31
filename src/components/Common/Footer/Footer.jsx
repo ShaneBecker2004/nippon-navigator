@@ -37,7 +37,7 @@ const Footer = () => {
             <h4 className='mt-lg-0 mt-sm-3'>Company</h4>
             <ListGroup variant='flush'>
               <ListGroup.Item>
-                <NavLink to="/">About Us</NavLink>
+                <NavLink to="about-us">About Us</NavLink>
               </ListGroup.Item>
               <ListGroup.Item>
                 <NavLink to="/">News</NavLink>
@@ -59,7 +59,7 @@ const Footer = () => {
                 <NavLink to="/">Tour Listings</NavLink>
               </ListGroup.Item>
               <ListGroup.Item>
-                <NavLink to="/">Destinations</NavLink>
+                <NavLink to="explore">Destinations</NavLink>
               </ListGroup.Item>       
             </ListGroup>
           </Col>
@@ -71,10 +71,10 @@ const Footer = () => {
                 <NavLink to="/">Home</NavLink>
               </ListGroup.Item>
               <ListGroup.Item>
-                <NavLink to="/">About Us</NavLink>
+                <NavLink to="about-us">About Us</NavLink>
               </ListGroup.Item>
               <ListGroup.Item>
-                <NavLink to="/">Contact Us</NavLink>
+                <NavLink to="contact-us">Contact Us</NavLink>
               </ListGroup.Item>       
             </ListGroup>
           </Col>

@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Container,Row,Navbar,Offcanvas,Nav,NavDropdown} from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import "../Header/header.css";
+import { useAuth } from '../../../contexts/authContext';
+import { doSignOut } from '../../../firebase/auth';
 
 const Header = () => {
+    const navigate = useNavigate()
+    const { userLoggedIn } = useAuth()
+
     const [open, setOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -118,15 +123,23 @@ const Header = () => {
                         </NavDropdown>
 
                         <NavLink className='nav-link' to="contact-us">Contact</NavLink>
-                        <NavLink className='nav-link' to="planning">Plan Your Trip</NavLink>
+                        <NavLink className='nav-link' to="planning">Planner</NavLink>
                         
                         </Nav>
                     </Offcanvas.Body>
                     </Navbar.Offcanvas>
                     <div className='ms-md-4 ms-2'>
-                        <NavLink className='primaryBtn d-none d-sm-inline-block' to='account'>
-                            Log In/Sign Up
-                        </NavLink>
+                        {
+                            userLoggedIn
+                                ?
+                                <>
+                                    <button onClick={() => { doSignOut().then(() => { navigate('/') }) }} className='primaryBtn d-none d-sm-inline-block'>Logout</button>
+                                </>
+                                :
+                                <>
+                                    <Link className='primaryBtn d-none d-sm-inline-block' to={'/login'}>Login/Sign Up</Link>
+                                </>
+                        }
                         <li className='d-inline-block d-lg-none ms-3 toggle_btn'>
                         <i className={open ? "bi bi-x-lg" : "bi bi-list"}  onClick={toggleMenu}></i>
                         </li>

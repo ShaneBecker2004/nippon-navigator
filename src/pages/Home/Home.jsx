@@ -13,11 +13,14 @@ import "slick-carousel/slick/slick-theme.css";
 
 import "./home.css"
 
+import { useAuth } from '../../contexts/authContext';
+
 import { destinationsData, popularsData } from "../../utils/data"
 
 
 const Home = () => {
 
+  const { currentUser } = useAuth()
 
   var settings = {
     dots: false,
@@ -72,7 +75,14 @@ const Home = () => {
 
   return (
     <>
+    
+
     <Banner />
+    <div className='main_heading'>Hello {currentUser ? (
+      <h1>Welcome {currentUser.displayName}</h1>
+        ) : (
+          <h1>Welcome Guest</h1>
+        )}</div>
     {/* <AdvanceSearch /> */}
     <Features />
 
