@@ -9,8 +9,9 @@ import About from './pages/About/About';
 import Contact from './pages/Contact/Contact';
 import Explore from './pages/Explore/Explore'; 
 import Booking from './pages/Booking/Booking';
-import ExploreDetails from './pages/Explore/Explore';
+import ExploreDetails from './pages/Explore/ExploreDetails';
 import Planning from './pages/Planning/Planning';
+import Account from './pages/Account/Account';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
       <Route path='explore' element={<Explore />} />
       <Route path='explore-details' element={<ExploreDetails />} />
       <Route path='planning' element={<Planning />} />
+      <Route path='account' element={<Account />} />
     </Routes> 
     <Footer /> 
     </>

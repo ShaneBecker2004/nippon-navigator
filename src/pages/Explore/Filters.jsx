@@ -7,6 +7,7 @@ const Filters = () => {
   return (
     <div className='side_bar'>
         <div className='filter_box shadow-sm rounded-2'>
+            {/* Location */}
               <Accordion defaultActiveKey="0">
                   <Accordion.Item eventKey="1">
                       <Accordion.Header>Location </Accordion.Header>
@@ -25,7 +26,7 @@ const Filters = () => {
                       </Accordion.Body>
                   </Accordion.Item>
               </Accordion>
-
+            {/* Category */}
             <Accordion defaultActiveKey="0">
                   <Accordion.Item eventKey="1">
                       <Accordion.Header>Categories </Accordion.Header>
@@ -44,7 +45,7 @@ const Filters = () => {
                       </Accordion.Body>
                   </Accordion.Item>
               </Accordion>
-
+            {/* Duration */}
               <Accordion defaultActiveKey="0">
                   <Accordion.Item eventKey="1">
                       <Accordion.Header>Duration </Accordion.Header>
@@ -63,7 +64,7 @@ const Filters = () => {
                       </Accordion.Body>
                   </Accordion.Item>
               </Accordion>
-
+            {/* Price Range */}
               <Accordion defaultActiveKey="0">
                   <Accordion.Item eventKey="1">
                       <Accordion.Header>Price </Accordion.Header>
@@ -82,7 +83,7 @@ const Filters = () => {
                       </Accordion.Body>
                   </Accordion.Item>
               </Accordion>
-
+            {/* Rating */}
               <Accordion defaultActiveKey="0">
                   <Accordion.Item eventKey="1">
                       <Accordion.Header>Ratings </Accordion.Header>

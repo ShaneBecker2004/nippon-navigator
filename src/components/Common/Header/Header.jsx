@@ -66,9 +66,9 @@ const Header = () => {
                                 id={`dropdown-tradition`}
                             >
                                 <NavDropdown.Item href="explore">Japanese Gardens</NavDropdown.Item>
-                                <NavDropdown.Item href="#action4">Temple Stays</NavDropdown.Item>
-                                <NavDropdown.Item href="#action4">Festivals and Events</NavDropdown.Item>
-                                <NavDropdown.Item href="#action4">Culture in Japan</NavDropdown.Item>
+                                <NavDropdown.Item href="explore">Temple Stays</NavDropdown.Item>
+                                <NavDropdown.Item href="explore">Festivals and Events</NavDropdown.Item>
+                                <NavDropdown.Item href="explore">Culture in Japan</NavDropdown.Item>
                             </NavDropdown>
                             <NavDropdown
                                 title="Nature" className='inner-dropdown'
@@ -124,7 +124,7 @@ const Header = () => {
                     </Offcanvas.Body>
                     </Navbar.Offcanvas>
                     <div className='ms-md-4 ms-2'>
-                        <NavLink className='primaryBtn d-none d-sm-inline-block'>
+                        <NavLink className='primaryBtn d-none d-sm-inline-block' to='account'>
                             Log In/Sign Up
                         </NavLink>
                         <li className='d-inline-block d-lg-none ms-3 toggle_btn'>

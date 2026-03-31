@@ -43,6 +43,7 @@
 .navbar-link .breadcrumb-item a {
     color: white;
     text-decoration: none;
+    
 } 
 
 .navbar-link .breadcrumb a {
@@ -58,8 +59,12 @@
     padding: 0 6px;
 }
 
-
 .navbar-link .breadcrumb-item.active {
     color: white;
     opacity: 0.9;
+}
+
+.breadcrumb a,
+.breadcrumb span {
+  display: inline;
 }
