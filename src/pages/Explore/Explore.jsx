@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
 import { Col, Container, Row, Offcanvas, NavLink } from 'react-bootstrap'
-import PopularCard from '../../components/Cards/PopularCard'
-import { popularsData } from '../../utils/data'
+import ActivtyCard from '../../components/Cards/ActivityCard'
+import { activitiesData } from '../../utils/data'
 import Filters from './Filters'
 import "../Explore/explore.css"
 
@@ -32,10 +32,10 @@ const Explore = () => {
               </Col>
               <Col xl='9' lg='8' md='12' sm='12'>
                 <Row>
-                {popularsData.map((val, inx) => {
+                {activitiesData.map((val, inx) => {
                   return (
                   <Col xl={4} lg={6} md={6} sm={6} className='mb-5' key={inx}>
-                    <PopularCard val={val} />
+                    <ActivtyCard val={val} />
                   </Col>
                 );
               })}

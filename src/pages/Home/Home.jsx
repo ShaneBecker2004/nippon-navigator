@@ -73,10 +73,8 @@ const Home = () => {
   return (
     <>
     <Banner />
-    <AdvanceSearch />
+    {/* <AdvanceSearch /> */}
     <Features />
-
-    {/* Tour section start */}
 
     <section className="tours_section slick_slider">
       <Container>
@@ -102,10 +100,8 @@ const Home = () => {
 
       </Container>
     </section>
-
-    {/* Tour section start */}
     
-    <section className='popular py-5'>
+    <section className='popular-home py-5 slick_slider'>
         <Container>
             <Row>
                 <Col md="12">
@@ -115,6 +111,8 @@ const Home = () => {
                 </Col>
             </Row>
             <Row>
+            <Col md='12'>
+              <Slider {...settings} >
             {popularsData.map((val, inx) => {
                 return (
                 <Col md={3} sm={6} xs={12} className='mb-5' key={inx}>
@@ -122,8 +120,10 @@ const Home = () => {
                 </Col>
             )
             })}
+              </Slider>
+          </Col>
+          </Row>
 
-            </Row>
         </Container>
     </section> 
 

@@ -108,6 +108,51 @@ export const popularsData = [
             image: Disney,
             location: "Tokyo",
             category: ["Theme Park"],
+        },
+        {
+            id: 1,
+            title: "Universal Studios Japan",
+            image: Universal,
+            location: "Osaka",
+            category: [("Theme Park")],
+        },
+        {
+            id: 2,
+            title: "Tokyo Skytree",
+            image: Skytree,
+            location: "Tokyo",
+            category: ["Shopping", "Observation Deck"],
+        },
+        {
+            id: 3,
+            title: "Ichiran Ramen",
+            image: Ichiran,
+            location: "Tokyo",
+            category: ["Restaurant"],
+        },
+        {
+            id: 4,
+            title: "Ichiran Ramen",
+            image: Ichiran,
+            location: "Tokyo",
+            category: ["Restaurant"],
+        },
+        {
+            id: 5,
+            title: "Ichiran Ramen",
+            image: Ichiran,
+            location: "Tokyo",
+            category: ["Restaurant"],
+        }
+]
+
+export const activitiesData = [
+        {
+            id: 0,
+            title: "Tokyo Disney Resort",
+            image: Disney,
+            location: "Tokyo",
+            category: ["Theme Park"],
             days: "1-2 days",
             price: 65,
             afterDiscount: 0,
