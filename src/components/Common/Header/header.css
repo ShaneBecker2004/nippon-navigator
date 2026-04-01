@@ -91,6 +91,10 @@ header .navbar .offcanvas-body .dropdown-menu .dropdown-menu .dropdown-item{
     color: var(--black) !important;
 }
 
+header .dropdown-item:active {
+    background-color: lightgray;
+}
+
 
 @media only screen and (max-width : 991px) {
     header .navbar .toggle_btn {
@@ -122,6 +126,10 @@ header .navbar .offcanvas-body .dropdown-menu .dropdown-menu .dropdown-item{
         color: var(--black);
     }
 
+    .offcanvas-body .nav-link:active {
+        background-color: lightgray;
+    }
+
     .offcanvas-body .dropdown-item {
         padding: 12px 10px;
         color: var(--black);
@@ -130,4 +138,8 @@ header .navbar .offcanvas-body .dropdown-menu .dropdown-menu .dropdown-item{
     .offcanvas-body .dropdown-item:hober {
         color: var(--primaryClr) !important;
     }
+
+    .offcanvas-body .dropdown-item:active {
+    background-color: lightgray;
+}
 }
