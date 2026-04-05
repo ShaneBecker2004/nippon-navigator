@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Trip {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  title     String
+  createdAt DateTime @default(now())
+
+  activities Activity[]
+}
+
+model Activity {
+  id        Int      @id @default(autoincrement())
+  tripId    Int
+  name      String
+  details   String?
+  createdAt DateTime @default(now())
+
+  trip      Trip     @relation(fields: [tripId], references: [id])
+}

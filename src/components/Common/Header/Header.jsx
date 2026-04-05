@@ -123,23 +123,46 @@ const Header = () => {
                         </NavDropdown>
 
                         <NavLink className='nav-link' to="contact-us">Contact</NavLink>
-                        <NavLink className='nav-link' to="planning">Planner</NavLink>
+                        <NavLink
+                                  className='nav-link'
+                                  to={userLoggedIn ? "/planning" : "/login"}
+                              >
+                                  Planner
+                              </NavLink>
                         
                         </Nav>
                     </Offcanvas.Body>
                     </Navbar.Offcanvas>
-                    <div className='ms-md-4 ms-2'>
-                        {
-                            userLoggedIn
-                                ?
-                                <>
-                                    <button onClick={() => { doSignOut().then(() => { navigate('/') }) }} className='primaryBtn d-none d-sm-inline-block'>Logout</button>
-                                </>
-                                :
-                                <>
-                                    <Link className='primaryBtn d-none d-sm-inline-block' to={'/login'}>Login/Sign Up</Link>
-                                </>
-                        }
+                    <div className=' profile-dropdown ms-md-4 ms-2'>
+                        {userLoggedIn ? (
+                          <NavDropdown
+                              title={<i className="bi bi-person-circle fs-4"></i>}
+                              id="profile-dropdown"
+                              align="end"
+                              className="d-inline-block"
+                          >
+                              <NavDropdown.Item onClick={() => navigate("/planning")}>
+                                  My Plans
+                              </NavDropdown.Item>
+                              <NavDropdown.Item onClick={() => navigate("/profile")}>
+                                  Profile
+                              </NavDropdown.Item>
+                              <NavDropdown.Divider />
+                              <NavDropdown.Item
+                                  onClick={() =>
+                                      doSignOut().then(() => {
+                                          navigate("/");
+                                      })
+                                  }
+                              >
+                                  Logout
+                              </NavDropdown.Item>
+                          </NavDropdown>
+                      ) : (
+                          <Link className="primaryBtn d-none d-sm-inline-block" to="/login">
+                              Login/Sign Up
+                          </Link>
+                      )}
                         <li className='d-inline-block d-lg-none ms-3 toggle_btn'>
                         <i className={open ? "bi bi-x-lg" : "bi bi-list"}  onClick={toggleMenu}></i>
                         </li>

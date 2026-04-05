@@ -65,3 +65,55 @@
         display: inline-block;
     }
 }
+
+/* Main gallery (LEFT SIDE) */
+.explore-swiper {
+  width: 100%;
+  height: 400px;
+}
+
+.explore-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* FULLSCREEN (UNCHANGED - TRUE FULLSCREEN) */
+.fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fullscreen-swiper {
+  width: 90%;
+  height: 90%;
+}
+
+.fullscreen-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: white;
+  border: none;
+  font-size: 22px;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  z-index: 10000;
+}

@@ -78,8 +78,9 @@ const Home = () => {
     
 
     <Banner />
-    <div className='main_heading'>Hello {currentUser ? (
-      <h1>Welcome {currentUser.displayName}</h1>
+    <div className='main_heading'>
+      {currentUser ? (
+      <h1>Welcome {currentUser.displayName || "User"}</h1>
         ) : (
           <h1>Welcome Guest</h1>
         )}</div>
