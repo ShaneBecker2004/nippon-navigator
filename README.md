@@ -1,5 +1,5 @@
 #Nippon Navigator
-#Nippon Navigator is a website application designed to help travelers explore cities in Japan and plan their travel itinerary.
+Nippon Navigator is a website application designed to help travelers explore cities in Japan and plan their travel itinerary.
 
 #Features
 #Explore major Japanese cities
