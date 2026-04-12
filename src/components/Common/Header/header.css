@@ -39,7 +39,7 @@ header {
     position: absolute;
     top: 0;
     z-index: 999;
-    padding: 12pdx 0px;
+    padding: 12px 0px;
     width: 100%;
 }
 
@@ -97,6 +97,12 @@ header .dropdown-item:active {
 
 .profile-dropdown:hover .dropdown-menu {
   display: block;
+}
+
+.navbar-logo {
+    padding: 0 0 0 0;
+    width: 100%;
+    max-height: 75px;
 }
 
 

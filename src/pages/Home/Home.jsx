@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Banner from '../../components/Banner/Banner';
 import AdvanceSearch from '../../components/AdvanceSearch/AdvanceSearch';
 import Features from '../../components/Features/Features';
@@ -15,12 +15,35 @@ import "./home.css"
 
 import { useAuth } from '../../contexts/authContext';
 
-import { destinationsData, popularsData } from "../../utils/data"
-
 
 const Home = () => {
 
   const { currentUser } = useAuth()
+
+  const [destinations, setDestinations] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+  const fetchDestinations = async () => {
+    try {
+      const res = await fetch("http://localhost:5001/api/destinations");
+      const data = await res.json();
+
+      const updatedData = data.map((dest) => ({
+        ...dest,
+        image: dest.image || "/images/default.jpg",
+      }));
+
+      setDestinations(updatedData);
+    } catch (err) {
+      console.error("Failed to fetch destinations:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchDestinations();
+}, []);
 
   var settings = {
     dots: false,
@@ -100,11 +123,13 @@ const Home = () => {
         <Row>
             <Col md='12'>
               <Slider {...settings} >
-                {destinationsData.map((destination, inx)=>{
-                  return (
-                    <Cards destination = {destination} key={inx} />
-                  )
-              })}
+                {loading ? (
+                  <p className="text-center">Loading destinations...</p>
+                ) : (
+                  destinations.map((destination) => (
+                    <Cards destination={destination} key={destination.id} />
+                  ))
+                )}
               </Slider>
           </Col>
         </Row>
@@ -112,7 +137,7 @@ const Home = () => {
       </Container>
     </section>
     
-    <section className='popular-home py-5 slick_slider'>
+    {/* <section className='popular-home py-5 slick_slider'>
         <Container>
             <Row>
                 <Col md="12">
@@ -136,7 +161,7 @@ const Home = () => {
           </Row>
 
         </Container>
-    </section> 
+    </section>  */}
 
     <section className="call_us">
       <Container>

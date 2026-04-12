@@ -6,21 +6,56 @@ datasource db {
   provider = "postgresql"
 }
 
-model Trip {
-  id        Int      @id @default(autoincrement())
-  userId    String
-  title     String
-  createdAt DateTime @default(now())
-
-  activities Activity[]
+model Destination {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  image      String?
+  location   String
+  Activities Activity[]
 }
 
 model Activity {
-  id        Int      @id @default(autoincrement())
-  tripId    Int
-  name      String
-  details   String?
-  createdAt DateTime @default(now())
+  id            Int             @id @default(autoincrement())
+  title         String
+  description   String?
+  type          String
+  location      String
+  open_hours    String?
+  phone         String?
+  website       String?
+  destinationId Int?
+  details       Json?
+  duration      String?
+  price         Float?
+  rating        Float?
+  highlights    String[]
+  images        Json?
+  thumbnail     String?
+  category      String?
+  destination   Destination?    @relation(fields: [destinationId], references: [id])
+  savedInTrips  SavedActivity[] @relation("ActivitySavedInTrips")
+}
 
-  trip      Trip     @relation(fields: [tripId], references: [id])
+model Trip {
+  id              String             @id @default(cuid())
+  userId          String
+  createdAt       DateTime        @default(now())
+  endDate         DateTime?
+  startDate       DateTime?
+  tripName        String
+  description String?
+  savedItems      SavedActivity[] @relation("TripSavedActivities")
+}
+
+model SavedActivity {
+  id         Int      @id @default(autoincrement())
+
+  tripId     String   // 🔥 MUST be String now
+  activityId Int
+
+  notes      String?
+
+  activity   Activity @relation("ActivitySavedInTrips", fields: [activityId], references: [id])
+
+  trip       Trip @relation("TripSavedActivities", fields: [tripId], references: [id])
 }

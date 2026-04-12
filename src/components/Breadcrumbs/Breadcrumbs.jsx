@@ -5,9 +5,16 @@ import { NavLink } from 'react-router-dom'
 
 
 const Breadcrumbs = (props) => {
+
+    const bannerStyle = {
+        backgroundImage: `url(${props.bgImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+    }
   return (
     <>
-    <div className='inner-banner-wrap'>
+    <div className='inner-banner-wrap' style={props.bgImage ? bannerStyle : {}}>
         <div className='inner-banner-container'>
             <Container>
                 <div className='inner-banner-content'>
@@ -23,16 +30,18 @@ const Breadcrumbs = (props) => {
             <Container>
                 <Row>
                     <Breadcrumb>
-                            <Breadcrumb.Item active>
-                                <NavLink to ="/">
-                                    <i className="bi bi-house-door-fill me-1"></i> Home
-                                </NavLink>
+                            <Breadcrumb.Item linkAs={NavLink} linkProps={{ to: "/" }}>
+                                <i className="bi bi-house-door-fill me-1"></i> Home
                             </Breadcrumb.Item>
-                            <Breadcrumb.Item active>{props.pagename}</Breadcrumb.Item>
-                            {props.childpagename ? (
-                                <Breadcrumb.Item active>{props.childpagename}</Breadcrumb.Item>
-                            ) : (
-                                ""
+                        
+                            <Breadcrumb.Item active={!props.childpagename}>
+                                {props.pagename}
+                            </Breadcrumb.Item>
+
+                            {props.childpagename && (
+                                <Breadcrumb.Item active>
+                                    {props.childpagename}
+                                </Breadcrumb.Item>
                             )}
                     </Breadcrumb> 
                 </Row>

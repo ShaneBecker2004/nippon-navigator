@@ -1,56 +1,69 @@
-import React from 'react'
+import React from 'react';
 import "../Cards/card.css";
-import { Card ,Stack} from 'react-bootstrap';
+import { Card, Stack } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
-const ActivityCard = ({val}) => {
+const ActivityCard = ({ val }) => {
+  // Use thumbnail first, fallback to first image, then default
+  const imageSrc =
+    val.thumbnail || (val.images && val.images.length > 0 ? val.images[0] : "/images/default.jpg");
+
+  // Ensure category is an array
+  const categories = Array.isArray(val.category) ? val.category : [];
+
+  // Duration and price
+  const duration = val.duration || "N/A";
+  const price = val.price !== null && val.price !== undefined ? `$${val.price.toFixed(2)}` : "N/A";
+
   return (
-    <>
-        <Card className="rounded-2 shadow-sm popular-card">
-            <Card.Img
-            variant='top'
-            src={val.image}
-            className='img-fluid'
-            alt={"image"}
-            />
-            <Card.Body>
-            <Card.Text> 
-            <i className="bi bi-geo-alt"></i>
-            <span className='text'>{val.location}</span>
-            </Card.Text>
-            <Card.Title><NavLink className="body-text text-dark text-decoration-none" to="/explore-details"> {val.title} </NavLink></Card.Title>
-            <p className='review'>
-            <span>
-                <i className="bi bi-star-fill me-1"></i>
+    <Card className="rounded-2 shadow-sm popular-card">
+      <Card.Img
+        variant='top'
+        src={imageSrc}
+        className='img-fluid'
+        alt={val.title || "activity image"}
+      />
+
+      <Card.Body>
+        <Card.Text>
+          <i className="bi bi-geo-alt"></i>{" "}
+          <span className='text'>{val.location || "Unknown"}</span>
+        </Card.Text>
+
+        <Card.Title>
+          <NavLink
+            className="body-text text-dark text-decoration-none"
+            to={`/explore-details/${val.id}`}
+          >
+            {val.title}
+          </NavLink>
+        </Card.Title>
+
+        {val.rating && (
+          <p className='review'>
+            <span><i className="bi bi-star-fill me-1"></i></span>
+            <span>{val.rating}</span>
+            <span> ({val.reviews || 0} reviews)</span>
+          </p>
+        )}
+
+        <div className="mb-2">
+          {categories.map((cat, index) => (
+            <span key={index} className={cat.replace(/ .*/, "") + " badge me-1"}>
+              {cat}
             </span>
-            <span>{val.rating} </span>
-            <span>( {val.review} reviews )</span>
-            </p>
-            {val.category.map((cat, index) => {
-            return (
-                <span key={index} 
-                className={cat.replace(/ .*/, "") + " badge"}>{cat}</span>                                
-            )
-            })}
-            </Card.Body>
+          ))}
+        </div>
+      </Card.Body>
 
-            <Card.Footer className='py-4'>
-            {val.afterDiscount ? (
-                <p className="text-decoration-line-through"> ${val.price.toFixed(2)}</p>
-            ): ""}
-            
+      <Card.Footer className='py-4'>
         <Stack direction="horizontal" className="justify-content-between mt-3">
-            <p>From <b>${val.afterDiscount  ? val.afterDiscount.toFixed(2) : val.price.toFixed(2)}</b></p>
-            <p> 
-                <i className="bi bi-clock"></i> {val.days} 
-            </p>
+          <p>From <b>{price}</b></p>
+          <p><i className="bi bi-clock"></i> {duration}</p>
         </Stack>
+      </Card.Footer>
+    </Card>
+  );
+};
 
-            </Card.Footer>
-
-        </Card>
-    </>
-  )
-}
-
-export default ActivityCard
+export default ActivityCard;

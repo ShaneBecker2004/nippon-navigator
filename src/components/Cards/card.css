@@ -2,7 +2,7 @@
     padding: 0px 12px;
 }
 
- .img-box .card {
+.img-box .card {
     border: none;
     width: 100%;
     overflow: hidden;
@@ -28,6 +28,7 @@
     list-style: 18px;
     font-weight: bold;
     width: 100%;
+    z-index: 15;
 }
 
 .img-box .card .tours {
@@ -58,10 +59,34 @@
     transform: translateX(0);
 }
 
+/* ------------------ NEW: Hover Overlay for Activities ------------------ */
+.img-box .card .hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6); /* semi-transparent black */
+    color: #ffffff;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 0.25rem;
+    z-index: 10;
+}
 
+.img-box .card:hover .hover-overlay {
+    opacity: 1;
+}
 
+/* ------------------ END Hover Overlay ------------------ */
 
-.popular-card  {
+.popular-card {
     padding: 5px;
     border: none;
     transition: all 0.5s ease 0s;
@@ -112,10 +137,10 @@
     color: #ffffff !important;
 }
 
-.popular-card .card-body .Arcade {
+/* .popular-card .card-body .Arcade {
     background-color: #6088c4 !important;
     color: #ffffff !important;
-}
+} */
 
 /* .popular-card .card-body .Park {
     background-color: #e8edf1 !important;
@@ -180,4 +205,3 @@
     color: black;
     font-weight: bold;
 }
-

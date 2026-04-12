@@ -1,345 +1,269 @@
-// Popular Images
-import Disney from "../assets/images/popular/tokyo-disney.jpg"
-import Universal from "../assets/images/popular/universal-japan-globe-day.jpg"
-import Skytree from "../assets/images/popular/tokyo-skytree-afternoon.avif"
-import Strawberry from "../assets/images/popular/yokohama_strawberry_festival.webp"
-import Ichiran from "../assets/images/popular/ichiran_ramen.jpg"
+// // Popular Images
+// import Disney from "../assets/images/popular/tokyo-disney.jpg"
+// import Universal from "../assets/images/popular/universal-japan-globe-day.jpg"
+// import Skytree from "../assets/images/popular/tokyo-skytree-afternoon.avif"
+// import Strawberry from "../assets/images/popular/yokohama_strawberry_festival.webp"
+// import Ichiran from "../assets/images/popular/ichiran_ramen.jpg"
 
-// Destination Images
-import city1 from "../assets/images/explore/tokyo-night.jpg"
-import city2 from "../assets/images/explore/osaka-castle-evening.jpg"
-import city3 from "../assets/images/explore/kyoto-evening.jpg"
-import city4 from "../assets/images/explore/yokohama-evening.jpg"
-import city5 from "../assets/images/explore/sapporo-night.webp"
-import city6 from "../assets/images/explore/hiroshima-city-night.jpg"
-import city7 from "../assets/images/explore/nara-deer-park-afternoon.jpg"
-import city8 from "../assets/images/explore/fukuoka-city-night.jpg"
+// // Destination Images
+// import city1 from "../assets/images/explore/tokyo-night.jpg"
+// import city2 from "../assets/images/explore/osaka-castle-evening.jpg"
+// import city3 from "../assets/images/explore/kyoto-evening.jpg"
+// import city4 from "../assets/images/explore/yokohama-evening.jpg"
+// import city5 from "../assets/images/explore/sapporo-night.webp"
+// import city6 from "../assets/images/explore/hiroshima-city-night.jpg"
+// import city7 from "../assets/images/explore/nara-deer-park-afternoon.jpg"
+// import city8 from "../assets/images/explore/fukuoka-city-night.jpg"
 
-// Details Images (until database is working)
-import image1 from "../assets/images/disney/eneos-disney-ad.jpg"
-import image2 from "../assets/images/disney/frozen-land-day.png"
-import image3 from "../assets/images/disney/mickey-minnie-day.jpg"
-import image4 from "../assets/images/disney/mysterious-island-night.jpg"
-import image5 from "../assets/images/disney/neverland-day.webp"
-import image6 from "../assets/images/disney/tokyo-disney-map.webp"
-import image7 from "../assets/images/disney/tokyo-disney.jpg"
+// // Details Images (until database is working)
+// import image1 from "../assets/images/disney/eneos-disney-ad.jpg"
+// import image2 from "../assets/images/disney/frozen-land-day.png"
+// import image3 from "../assets/images/disney/mickey-minnie-day.jpg"
+// import image4 from "../assets/images/disney/mysterious-island-night.jpg"
+// import image5 from "../assets/images/disney/neverland-day.webp"
+// import image6 from "../assets/images/disney/tokyo-disney-map.webp"
+// import image7 from "../assets/images/disney/tokyo-disney.jpg"
 
+
+// src/utils/data.js
 
 export const destinationsData = [
-    {
-      id: 0,
-      name: "Tokyo",
-      tours: "10 things to do",
-      image: city1,
-      link: 'explore-name',
-      shortDes: '',
-      link: "/explore",
-      location: "Tokyo Prefecture",
-    },
-    {
-      id: 1,
-      name: "Osaka",
-      tours: "10 things to do",
-      image: city2,
-      link: 'explore-name',
-      shortDes: '',
-      link: "/explore",
-      location: "Osaka Prefecture",
-    },
-    {
-      id: 2,
-      name: "Kyoto",
-      tours: "10 things to do",
-      image: city3,
-      link: 'explore-name',
-      shortDes: '',
-      link: "/explore",
-      location: "Kyoto Prefecture",
-    },
-    {
-      id: 3,
-      name: "Yokohama",
-      tours: "10 things to do",
-      image: city4,
-      link: 'explore-name',
-      shortDes: '',
-      link: "/explore",
-      location: "Kanagawa Prefecture",
-    },
-    {
-      id: 4,
-      name: "Sapporo",
-      tours: "10 things to do",
-      image: city5,
-      link: 'explore-name',
-      shortDes: '',
-      link: "/explore",
-      location: "Hokkaido Prefecture",
-    },
-    {
-      id: 5,
-      name: "Hiroshima",
-      tours: "10 things to do",
-      image: city6,
-      link: 'explore-name',
-      shortDes: '',
-      link: "/explore",
-      location: "Hiroshima Prefecture",
-    },
-    {
-      id: 6,
-      name: "Nara",
-      tours: "10 things to do",
-      image: city7,
-      link: 'explore-name',
-      shortDes: '',
-      link: "/explore",
-      location: "Nara Prefecture",
-    },
-    {
-      id: 7,
-      name: "Fukuoka",
-      tours: "10 things to do",
-      image: city8,
-      link: 'explore-name',
-      shortDes: '',
-      link: "/explore",
-      location: "Fukuoka Prefecture",
-    },
-]
+  {
+    name: "Tokyo",
+    activities: "10 things to do",
+    image: "/images/explore/tokyo-night.jpg",
+    location: "Tokyo Prefecture",
+  },
+  {
+    name: "Osaka",
+    activities: "10 things to do",
+    image: "/images/explore/osaka-castle-evening.jpg",
+    location: "Osaka Prefecture",
+  },
+  {
+    name: "Kyoto",
+    activities: "10 things to do",
+    image: "/images/explore/kyoto-evening.jpg",
+    location: "Kyoto Prefecture",
+  },
+  {
+    name: "Yokohama",
+    activities: "10 things to do",
+    image: "/images/explore/yokohama-evening.jpg",
+    location: "Kanagawa Prefecture",
+  },
+  {
+    name: "Sapporo",
+    activities: "10 things to do",
+    image: "/images/explore/sapporo-night.webp",
+    location: "Hokkaido Prefecture",
+  },
+  {
+    name: "Hiroshima",
+    activities: "10 things to do",
+    image: "/images/explore/hiroshima-city-night.jpg",
+    location: "Hiroshima Prefecture",
+  },
+  {
+    name: "Nara",
+    activities: "10 things to do",
+    image: "/images/explore/nara-deer-park-afternoon.jpg",
+    location: "Nara Prefecture",
+  },
+  {
+    name: "Fukuoka",
+    activities: "10 things to do",
+    image: "/images/explore/fukuoka-city-night.jpg",
+    location: "Fukuoka Prefecture",
+  },
+];
 
 export const popularsData = [
-        {
-            id: 0,
-            title: "Tokyo Disney Resort",
-            image: Disney,
-            location: "Tokyo",
-            category: ["Theme Park"],
-        },
-        {
-            id: 1,
-            title: "Universal Studios Japan",
-            image: Universal,
-            location: "Osaka",
-            category: [("Theme Park")],
-        },
-        {
-            id: 2,
-            title: "Tokyo Skytree",
-            image: Skytree,
-            location: "Tokyo",
-            category: ["Shopping", "Observation Deck"],
-        },
-        {
-            id: 3,
-            title: "Ichiran Ramen",
-            image: Ichiran,
-            location: "Tokyo",
-            category: ["Restaurant"],
-        },
-        {
-            id: 4,
-            title: "Ichiran Ramen",
-            image: Ichiran,
-            location: "Tokyo",
-            category: ["Restaurant"],
-        }
-]
+  {
+    title: "Tokyo Disney Resort",
+    image: "/images/popular/tokyo-disney.jpg",
+    location: "Tokyo",
+    category: ["Theme Park"],
+  },
+  {
+    title: "Universal Studios Japan",
+    image: "/images/popular/universal-japan-globe-day.jpg",
+    location: "Osaka",
+    category: ["Theme Park"],
+  },
+  {
+    title: "Tokyo Skytree",
+    image: "/images/popular/tokyo-skytree-afternoon.avif",
+    location: "Tokyo",
+    category: ["Shopping", "Observation Deck"],
+  },
+  {
+    title: "Ichiran Ramen",
+    image: "/images/popular/ichiran_ramen.jpg",
+    location: "Tokyo",
+    category: ["Restaurant"],
+  },
+];
 
 export const activitiesData = [
-        {
-            id: 0,
-            title: "Tokyo Disney Resort",
-            image: Disney,
-            location: "Tokyo",
-            category: ["Theme Park"],
-            days: "1-2 days",
-            price: 65,
-            afterDiscount: 0,
-            rating: 4.5,
-            review: 100,
-        },
-        {
-            id: 1,
-            title: "Universal Studios Japan",
-            image: Universal,
-            location: "Osaka",
-            category: [("Theme Park")],
-            days: "1-2 days",
-            price: 85,
-            afterDiscount: 60,
-            rating: 4.5,
-            review: 95,
-        },
-        {
-            id: 2,
-            title: "Tokyo Skytree",
-            image: Skytree,
-            location: "Tokyo",
-            category: ["Shopping", "Observation Deck"],
-            days: "unlimited",
-            price: 45,
-            afterDiscount: 32,
-            rating: 4.2,
-            review: 50,
-        },
-        {
-            id: 3,
-            title: "Ichiran Ramen",
-            image: Ichiran,
-            location: "Tokyo",
-            category: ["Restaurant"],
-            days: "24/7",
-            price: 12,
-            afterDiscount: 0,
-            rating: 4.2,
-            review: 99,
-        },
-        {
-            id: 4,
-            title: "Tokyo Disney Resort",
-            image: Disney,
-            location: "Tokyo",
-            category: ["Amusement"],
-            days: "5 days - 4 nights",
-            price: 75,
-            afterDiscount: 58,
-            rating: 4.5,
-            review: 5,
-        },
-        {
-            id: 5,
-            title: "Tokyo Disney Resort",
-            image: Disney,
-            location: "Tokyo",
-            category: ["Amusement"],
-            days: "5 days - 4 nights",
-            price: 75,
-            afterDiscount: 58,
-            rating: 4.5,
-            review: 5,
-        },
-        {
-            id: 6,
-            title: "Tokyo Disney Resort",
-            image: Disney,
-            location: "Tokyo",
-            category: ["Amusement"],
-            days: "5 days - 4 nights",
-            price: 75,
-            afterDiscount: 58,
-            rating: 4.5,
-            review: 5,
-        },
-        {
-            id: 7,
-            title: "Yokohama Strawberry Festival",
-            image: Strawberry,
-            location: "Yokohama",
-            category: ["Festival"],
-            days: "All Day",
-            price: 5,
-            afterDiscount: 0,
-            rating: 4.1,
-            review: 25,
-        },
-]
+  {
+    title: "Tokyo Disney Resort",
+    location: "Tokyo",
+    category: ["Theme Park"],
+    duration: "1-2 hours",
+    price: 65,
+    rating: 4.5,
+    review: 100,
+    galleryImages: [
+      "/images/disney/eneos-disney-ad.jpg",
+      "/images/disney/frozen-land-day.png",
+      "/images/disney/mickey-minnie-day.jpg",
+      "/images/disney/mysterious-island-night.jpg",
+      "/images/disney/neverland-day.webp",
+      "/images/disney/tokyo-disney-map.webp",
+      "/images/disney/tokyo-disney.jpg",
+    ],
+  },
+  {
+    title: "Universal Studios Japan",
+    location: "Osaka",
+    category: ["Theme Park"],
+    duration: "1-2 hours",
+    price: 85,
+    rating: 4.5,
+    review: 95,
+    galleryImages: [
+      "/images/popular/universal-japan-globe-day.jpg",
+    ],
+  },
+  {
+    title: "Tokyo Skytree",
+    location: "Tokyo",
+    category: ["Shopping", "Observation Deck"],
+    duration: "unlimited",
+    price: 45,
+    rating: 4.2,
+    review: 50,
+    galleryImages: [
+      "/images/popular/tokyo-skytree-afternoon.avif",
+    ],
+  },
+  {
+    title: "Ichiran Ramen",
+    location: "Tokyo",
+    category: ["Food & Drink"],
+    duration: "24/7",
+    price: 12,
+    rating: 4.2,
+    review: 99,
+    galleryImages: [
+      "/images/popular/ichiran_ramen.jpg",
+    ],
+  },
+  {
+    title: "Yokohama Strawberry Festival",
+    location: "Yokohama",
+    category: ["Festival"],
+    duration: "All Day",
+    price: 5,
+    rating: 4.1,
+    review: 25,
+    galleryImages: [
+      "/images/popular/yokohama_strawberry_festival.webp",
+    ],
+  },
+];
 
 export const exploreDetails = {
-    title: "Tokyo Disney Resort",
-    des: "This is a test text description",
-    tourInfo: [
-        '<strong className="font-bold"> Test </strong>: Urayasu, Tokyo',
-        '<strong className="font-bold"> Test2 </strong>: Filler Test',
-        '<strong className="font-bold"> Test3 </strong>: Narita International Airport',
-        '<strong className="font-bold"> Test4 </strong>: Haneda International Airport',
-    ],
-    highlights: [
-    " Experience a delightful tropical getaway with a luxurious stay and witness the picture-perfect beaches, charming waterfalls and so much more",
-    " Dependent on so extremely delivered by. Yet no jokes  worse her why. Bed one supposing breakfast day fulfilled off depending questions.",
-    " Whatever boy her exertion his extended. Ecstatic  followed handsome drawings entirely Mrs one yet  outweigh.",
-    "Meant balls it if up doubt small purse. Required his  you put the outlived answered position. A pleasure exertion if believed provided to.",
+  title: "Tokyo Disney Resort",
+  description: "Explore a resort full of magic, wonder, and discoveries ranging from seeing storybooks and movies come to life at FantasyLand at Tokyo Disneyland, to exploring the many wonders of the seas and ports that await you at Tokyo DisneySea. Take the Disney Monorail to Ikspiari, the official Disney hotels, and get access to Maihama Station to get access to Tokyo and everywhere else. Go and explore the magic that awaits you!",
+  type: "theme_park",
+  location: "Tokyo",
+  open_hours: "9AM - 9PM",
+  phone: "+81 50-3090-2613",
+  website: "https://www.tokyodisneyresort.jp/en/index.html",
+  price: null,
+  rating: 4.8,
+  category: ["theme_park","family_friendly","amusement"],
+  highlights: [
+    "Experience the magic and fun of the Disney Parks, Tokyo Disneyland and Tokyo DisneySea",
+    "Enjoy and explore the magic of fantasy and stories in the world of Tokyo Disneyland",
+    "Discover the eight ports that make the journey across the seas special at Tokyo DisneySea",
+    "Take the Disney Monorail across the two parks, plus stop at the Resort Gateway Station for the Ikspiari shopping mall with access to Maihama Station and the Disney Ambassador Hotel",
+    "Stay at one of the five Disney Hotels for a special magical experience and extra perks: Tokyo Disneyland Hotel, Tokyo DisneySea Hotel MiraCosta, Tokyo DisneySea Fantasy Springs Hotel, The Toy Story Hotel, or the Tokyo Disney Celebration Hotel",
+    "From Bayside Station (Disney Monorail), take a complimentary bus or walk to the Disney Official Hotels: Hilton Tokyo Bay, Sheraton Grande Tokyo Bay Hotel, Grand Nikko Tokyo Bay Maihama, Maihama View Hotel, Hotel Okura Tokyo Bay, and the Tokyo Bay Maihama Hotel First Resort"
   ],
-
-  itinerary: [
-    {
-      title: `<span class="me-1 fw-bold">Day 1:</span>  Airport Pick Up `,
-      des: ` Like on all of our trips, we can collect you from the airport when you land and take you directly to your hotel. The first Day is just a check-in Day so you have this freedom to explore the city and get settled in.`,
-    },
-
-    {
-      title: `<span class="me-1 fw-bold">Day 2:</span>  Temples & River Cruise `,
-      des: ` Like on all of our trips, we can collect you from the airport when you land and take you directly to your hotel. The first Day is just a check-in Day so you have this freedom to explore the city and get settled in. `,
-    },
-    {
-      title: `<span class="me-1 fw-bold">Day 3:</span>  Massage & Overnight Train`,
-      des: ` Like on all of our trips, we can collect you from the airport when you land and take you directly to your hotel. The first Day is just a check-in Day so you have this freedom to explore the city and get settled in.`,
-    },
-    {
-      title: `<span class="me-1 fw-bold">Day 4:</span>  Khao Sok National Park `,
-      des: ` Like on all of our trips, we can collect you from the airport when you land and take you directly to your hotel. The first Day is just a check-in Day so you have this freedom to explore the city and get settled in.`,
-    },
-    {
-      title: `<span class="me-1 fw-bold">Day 5:</span>  Travel to Koh Phangan `,
-      des: ` Like on all of our trips, we can collect you from the airport when you land and take you directly to your hotel. The first Day is just a check-in Day so you have this freedom to explore the city and get settled in.
-      `,
-    },
-    {
-      title: `<span class="me-1 fw-bold">Day 6:</span> Morning Chill & Muay Thai Lesson `,
-      des: `Like on all of our trips, we can collect you from the airport when you land and take you directly to your hotel. The first Day is just a check-in Day so you have this freedom to explore the city and get settled in.
-      `,
-    },
-  ],
-
-  included: [
-    "Comfortable stay for 4 nights in your preferred category Hotels",
-    "Professional English speaking guide to help you explore the cities",
-    "Breakfast is included as mentioned in Itinerary.",
-    "Per Peron rate on twin sharing basis",
-    "Entrance Tickets to Genting Indoor Theme Park    ",
-    "All Tours & Transfers on Seat In Coach Basis ",
-    "Visit Bali Safari & Marine Park with Jungle Hopper Pass    ",
-  ],
-  exclusion: [
-    "Lunch and dinner are not included in CP plans",
-    "Any other services not specifically mentioned in the inclusions",
-    "Medical and Travel insurance",
-    "Airfare is not included ",
-    "Early Check-In & Late Check-Out ",
-    "Anything which is not specified in Inclusions    ",
-  ],
-
   images: [
-    {
-      original: image1,
-      thumbnail: image1,
-    },
-    {
-      original: image2,
-      thumbnail: image2,
-    },
-    {
-      original: image3,
-      thumbnail: image3,
-    },
-    {
-      original: image4,
-      thumbnail: image4,
-    },
-    {
-      original: image5,
-      thumbnail: image5,
-    },
-
-    {
-      original: image6,
-      thumbnail: image6,
-    },
-    {
-      original: image7,
-      thumbnail: image7,
-    }
+    "/images/disney/eneos-disney-ad.jpg",
+    "/images/disney/frozen-land-day.png",
+    "/images/disney/mickey-minnie-day.jpg",
+    "/images/disney/mysterious-island-night.jpg",
+    "/images/disney/neverland-day.webp",
+    "/images/disney/tokyo-disney-map.webp",
+    "/images/disney/tokyo-disney.jpg",
   ],
+  thumbnail: "/images/disney/tokyo-disney.jpg",
+  details: {
+    hotels: [
+      "Tokyo Disneyland Hotel",
+      "Tokyo DisneySea Hotel MiraCosta",
+      "Tokyo DisneySea Fantasy Springs Hotel",
+      "Toy Story Hotel",
+      "Disney Ambassador Hotel",
+      "Tokyo Disney Celebration Hotel",
+      "Hilton Tokyo Bay",
+      "Sheraton Grande Tokyo Bay Hotel", 
+      "Grand Nikko Tokyo Bay Maihama", 
+      "Maihama View Hotel", 
+      "Hotel Okura Tokyo Bay", 
+      "Tokyo Bay Maihama Hotel First Resort"
+    ],
+    stations: [
+      "Maihama Station",
+      "Bayside Station",
+      "Resort Gateway Station"
+    ]
+  },
+  duration: "Full day",
+
+  title: "Universal Studios Japan",
+  description: "Take a trip to Hollywood and visit the many worlds, from the land of Dinosaurs at Jurassic Park, to the whimsical world of Super Mario at Super Nintendo World. Explore and enjoy shopping and fine dining at Universal CityWalk and stay at The Park Front Hotel for quick access to CityWalk, the Theme Park, and Universal City Station with access to the cities of Osaka.",
+  type: "theme_park",
+  location: "Osaka",
+  open_hours: "9AM - 9PM",
+  phone: "+81 570-200-606",
+  website: "https://www.usj.co.jp/web/en/us",
+  price: null,
+  rating: 4.7,
+  category: ["theme_park","family_friendly","adventure"],
+  highlights: [
+    "Step into the world of one of the seven Universal theme parks and see what distinguishes this park from the rest.",
+    "Go see dinosaurs in Jurassic Park, explore the magical world of Harry Potter, experience the chaos from the Minions at Minion Park, catch a show at Waterworld, or hop into a quick game of Mario Kart at Super Nintendo World.",
+    "Craving delicious food or want to go shopping? Explore Universal CityWalk for experiences from the Hard Rock Cafe to shopping at Gap and vintage shops.",
+    "Get access to Osaka Station and other areas via Universal City Station at the end of CityWalk.",
+    "Stay at the Park Front Hotel at Universal Studios Japan for convenient access to the Park, CityWalk, or the station. You can also stay at any of the approved Universal Studios official hotels."
+  ],
+  images: [
+    "/images/universal/universal-japan-globe-day.jpg",
+    "/images/universal/super-nintendo-world.jpg",
+    "/images/universal/universal-gateway-entrance.webp",
+    "/images/universal/hogwarts-castle-day.jpg",
+    "/images/universal/jurassic-park-ride-banner.png",
+    "/images/universal/universal-globe-day-2.jpg",
+    "/images/universal/universal-studios-5th-anniversary-banner.webp"
+  ],
+  thumbnail: "/images/universal/universal-japan-globe-day.jpg",
+  details: {
+    hotels: [
+      "The Park Front Hotel at Universal Studios Japan",
+      "Approved Universal Studios official hotels"
+    ],
+    stations: [
+      "Universal City Station",
+      "Nearby Osaka stations"
+    ]
+  },
+  duration: "Full day"
 };
 
 export const location = [

@@ -1,29 +1,28 @@
-import React from 'react'
-import "../Cards/card.css"
-import { Card } from "react-bootstrap"
+import React from "react";
+import "../Cards/card.css";
+import { Card } from "react-bootstrap";
 
-const Cards = ({destination}) => {
+const Cards = ({ destination }) => {
   return (
-    <>
-        <div className="img-box">
-            <Card>
-                <Card.Img
-                variant='top'
-                src={destination.image}
-                className='img-fluid'
-                alt={destination.name}
-                
-                />
+    <div className="img-box">
+      <Card>
+        <Card.Img
+          variant="top"
+          src={destination.image || "/images/default.jpg"}
+          className="img-fluid"
+          alt={destination.name}
+        />
 
-                <Card.Body>
-                    <Card.Title>{destination.name}</Card.Title>
-                </Card.Body>
+        <Card.Body>
+          <Card.Title>{destination.name}</Card.Title>
+        </Card.Body>
 
-                <span className="tours">{destination.tours}</span>
-            </Card>
-        </div>
-    </>
-  )
-}
+        {destination.tours && (
+          <span className="tours">{destination.tours}</span>
+        )}
+      </Card>
+    </div>
+  );
+};
 
-export default Cards
+export default Cards;

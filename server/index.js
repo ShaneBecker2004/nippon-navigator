@@ -2,39 +2,98 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg"; // ✅ Import the PostgreSQL adapter
+import { authenticateUser } from "./middleware/authMiddleware.js";
 
+// 1. Load environment variables
 dotenv.config();
+
+// ✅ Debug: check if DATABASE_URL is loaded
+console.log("DB URL:", process.env.DATABASE_URL);
+
+// 2. Initialize Prisma with the adapter
+const prisma = new PrismaClient({
+  adapter: new PrismaPg({
+    connectionString: process.env.DATABASE_URL,
+  }),
+});
 
 const app = express();
 
-// Connect Prisma to Neon using DATABASE_URL
-const prisma = new PrismaClient({
-  datasources: {
-    db: {
-      url: process.env.DATABASE_URL,
-    },
-  },
-});
-
+// 3. Middleware
 app.use(cors());
 app.use(express.json());
 
 // Test route
 app.get("/", (req, res) => {
-  res.send("API is running 🚀");
+  res.send("Nippon Navigator API is running 🚀");
 });
 
 //////////////////////////////////
-// Trips routes
+// 1. MASTER CATALOG ROUTES
+//////////////////////////////////
+
+// Get all destinations for the homepage
+// Get all destinations for the homepage (ordered by priority)
+app.get("/api/destinations", async (req, res) => {
+  try {
+    const destinations = await prisma.destination.findMany({ // lowest numbers come first
+    });
+    res.json(destinations);
+  } catch (err) {
+    console.error("Destinations Error:", err);
+    res.status(500).json({ error: "Failed to fetch destinations" });
+  }
+});
+
+// Get all activities for the Explore page
+app.get("/api/activities", async (req, res) => {
+  try {
+    const activities = await prisma.activity.findMany();
+
+    res.json(activities);
+  } catch (err) {
+    console.error("Activities Error:", err);
+    res.status(500).json({ error: "Failed to fetch activities" });
+  }
+});
+
+// Get details for ONE activity
+app.get("/api/activities/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const activity = await prisma.activity.findUnique({
+      where: { id: Number(id) },
+    });
+    if (!activity) return res.status(404).json({ error: "Activity not found" });
+    res.json(activity);
+  } catch (err) {
+    console.error("Activity Detail Error:", err);
+    res.status(500).json({ error: "Error fetching activity details" });
+  }
+});
+
+//////////////////////////////////
+// 2. USER TRIP ROUTES
 //////////////////////////////////
 
 // Create a new trip
-app.post("/api/trips", async (req, res) => {
-  const { userId, title } = req.body;
+app.post("/api/trips", authenticateUser, async (req, res) => {
   try {
+    const uid = req.user.uid;
+
+    const { tripName, startDate, endDate, description } = req.body;
+
     const trip = await prisma.trip.create({
-      data: { userId, title },
+      data: {
+        tripName,
+        description,
+        startDate: startDate ? new Date(startDate) : null,
+        endDate: endDate ? new Date(endDate) : null,
+        userId: uid,
+      },
     });
+
     res.json(trip);
   } catch (err) {
     console.error(err);
@@ -42,14 +101,20 @@ app.post("/api/trips", async (req, res) => {
   }
 });
 
-// Get trips for a user
-app.get("/api/trips", async (req, res) => {
-  const { userId } = req.query;
+// Get trips for a specific user
+app.get("/api/trips", authenticateUser, async (req, res) => {
   try {
+    const uid = req.user.uid;
+
     const trips = await prisma.trip.findMany({
-      where: { userId },
-      include: { Activity: true },
+      where: { userId: uid },
+      include: {
+        savedItems: {
+          include: { activity: true },
+        },
+      },
     });
+
     res.json(trips);
   } catch (err) {
     console.error(err);
@@ -57,40 +122,59 @@ app.get("/api/trips", async (req, res) => {
   }
 });
 
-//////////////////////////////////
-// Activities routes
-//////////////////////////////////
-
-// Create activity for a trip
-app.post("/api/activities", async (req, res) => {
-  const { tripId, name, details } = req.body;
+// Get ONE specific trip
+app.get("/api/trips/:id", authenticateUser, async (req, res) => {
   try {
-    const activity = await prisma.activity.create({
-      data: { tripId, name, details },
+    const uid = req.user.uid;
+    const { id } = req.params;
+
+    const trip = await prisma.trip.findFirst({
+      where: {
+        id: id,        // comes from URL
+        userId: uid,   // security: only your trips
+      },
+      include: {
+        savedItems: {
+          include: { activity: true },
+        },
+      },
     });
-    res.json(activity);
+
+    if (!trip) {
+      return res.status(404).json({ error: "Trip not found" });
+    }
+
+    res.json(trip);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Failed to create activity" });
+    res.status(500).json({ error: "Failed to fetch trip" });
   }
 });
 
-// Get activities for a trip
-app.get("/api/activities", async (req, res) => {
-  const { tripId } = req.query;
+// Save an activity to a trip
+app.post("/api/trips/save-activity", async (req, res) => {
+  const { tripId, activityId, notes } = req.body;
   try {
-    const activities = await prisma.activity.findMany({
-      where: { tripId: Number(tripId) },
+    const saved = await prisma.savedActivity.create({
+      data: {
+        tripId: tripId,
+        activityId: Number(activityId),
+        notes,
+      },
     });
-    res.json(activities);
+    res.json(saved);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to fetch activities" });
+    console.error("Save Activity Error:", err);
+    res.status(500).json({ error: "Failed to save activity" });
   }
 });
 
 //////////////////////////////////
 // Start server
 //////////////////////////////////
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+const PORT = process.env.PORT || 5001;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`✅ Server is officially running on http://localhost:${PORT}`);
+});

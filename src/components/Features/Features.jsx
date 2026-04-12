@@ -78,7 +78,8 @@ const Features = () => {
             id: 2,
             image: feature3,
             title: "Go and enjoy the fun",
-            des: "With a lot of activities to do and see, you are guaranteed to have fun no matter where you are."
+            des: "With a lot of activities to do and see, you are guaranteed to have fun no matter where you are.",
+            link: "/explore"
         },
         {
             id: 3,

@@ -11,7 +11,7 @@ import icons3 from "../../assets/images/icons/hello-kitty-shinkansen.jpg"
 const About = () => {
   return (
     <>
-      <Breadcrumbs title="About us" pagename="About us" />
+      <Breadcrumbs title="About us" pagename="About us" bgImage={aboutImg} />
       <section className='py-5'>
         <Container>
           <Row>
