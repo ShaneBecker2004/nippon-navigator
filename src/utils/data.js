@@ -227,6 +227,7 @@ export const exploreDetails = {
   duration: "Full day",
 
   title: "Universal Studios Japan",
+  slug: "universal-studios-japan",
   description: "Take a trip to Hollywood and visit the many worlds, from the land of Dinosaurs at Jurassic Park, to the whimsical world of Super Mario at Super Nintendo World. Explore and enjoy shopping and fine dining at Universal CityWalk and stay at The Park Front Hotel for quick access to CityWalk, the Theme Park, and Universal City Station with access to the cities of Osaka.",
   type: "theme_park",
   location: "Osaka",

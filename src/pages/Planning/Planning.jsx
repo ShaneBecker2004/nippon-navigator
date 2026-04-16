@@ -102,7 +102,7 @@ const Planning = () => {
 
         <Card className="trip-welcome-card">
           <CardHeader>
-            <CardTitle>Welcome back, {currentUser?.displayName || currentUser?.email}</CardTitle>
+            <CardTitle>Welcome back, {currentUser?.displayName || "User"}</CardTitle>
           </CardHeader>
 
           <CardContent>

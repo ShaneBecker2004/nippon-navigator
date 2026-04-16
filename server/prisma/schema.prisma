@@ -9,53 +9,57 @@ datasource db {
 model Destination {
   id         Int        @id @default(autoincrement())
   name       String     @unique
+  tours      String
   image      String?
   location   String
-  Activities Activity[]
+  activities Activity[]
 }
 
 model Activity {
   id            Int             @id @default(autoincrement())
-  title         String
+  category      String[]
   description   String?
-  type          String
-  location      String
-  open_hours    String?
-  phone         String?
-  website       String?
   destinationId Int?
-  details       Json?
   duration      String?
-  price         Float?
-  rating        Float?
   highlights    String[]
+  location      String
+  rating        Float?
+  title         String
+  details       Json?
   images        Json?
+  phone         String?
+  slug          String          @unique
   thumbnail     String?
-  category      String?
+  website       String?
+  price         Json?
+  currency      String?
+  open_hours    String?
+  type          String[]
+  map_embed_url String?
   destination   Destination?    @relation(fields: [destinationId], references: [id])
-  savedInTrips  SavedActivity[] @relation("ActivitySavedInTrips")
+  savedItems    SavedActivity[]
 }
 
 model Trip {
-  id              String             @id @default(cuid())
-  userId          String
-  createdAt       DateTime        @default(now())
-  endDate         DateTime?
-  startDate       DateTime?
-  tripName        String
+  id         String          @id @default(cuid())
+  userId     String
+  createdAt  DateTime        @default(now())
+  endDate    DateTime?
+  startDate  DateTime?
   description String?
-  savedItems      SavedActivity[] @relation("TripSavedActivities")
+  tripName   String
+
+  savedItems SavedActivity[] @relation()
 }
 
 model SavedActivity {
   id         Int      @id @default(autoincrement())
 
-  tripId     String   // 🔥 MUST be String now
-  activityId Int
+  tripId     String   
 
+  activityId Int
   notes      String?
 
-  activity   Activity @relation("ActivitySavedInTrips", fields: [activityId], references: [id])
-
-  trip       Trip @relation("TripSavedActivities", fields: [tripId], references: [id])
+  activity   Activity @relation(fields: [activityId], references: [id])
+  trip       Trip     @relation(fields: [tripId], references: [id])
 }

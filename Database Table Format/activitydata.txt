@@ -1,0 +1,412 @@
+INSERT INTO "Activity" (
+  "title",
+  "slug",
+  "description",
+  "type",
+  "location",
+  "open_hours",
+  "phone",
+  "website",
+  "map_embed_url",
+  "price",
+  "currency",
+  "rating",
+  "category",
+  "highlights",
+  "images",
+  "thumbnail",
+  "details",
+  "duration"
+) VALUES (
+  'Tokyo Disneyland',
+  'tokyo-disneyland',
+  'Explore a magical theme park filled with classic Disney stories, attractions, and unforgettable experiences.',
+  ARRAY['theme_park',
+  'family_friendly'
+  ],
+  'Tokyo',
+  '9AM - 9PM',
+  '+81 50-3090-2613',
+  'https://www.tokyodisneyresort.jp/en/tdl/',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.7902762978356!2d139.87563069678953!3d35.632896400000014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60187d03114737b3%3A0xe4d93636d509d3cb!2sTokyo%20Disneyland!5e0!3m2!1sen!2sus!4v1776299772308!5m2!1sen!2sus',
+  '{
+      "adult": 9400,
+      "junior": 7800,
+      "child": 5600
+  }',  
+  'JPY',
+  4.8,
+  ARRAY['theme_park',
+  'family_friendly'
+  ],
+  ARRAY[
+    'World Bazaar: A covered main street filled with shops, dining, and a nostalgic turn-of-the-century atmosphere',
+    'Adventureland: A tropical-themed area featuring jungle cruises, pirates, and exotic exploration adventures.',
+    'Westernland: A frontier-inspired land with cowboys, rivers, and Wild West-style attractions and scenery.',
+    'Critter Country: A cozy woodland area home to friendly critters and water-based adventures.',
+    'Fantasyland: The heart of Disney magic, featuring fairy tales, beloved characters, and classic storybook rides.',
+    'Toontown: A playful cartoon world where Disney characters live, full of fun and interactive attractions.',
+    'Tomorrowland: A futuristic zone showcasing space travel, technology, and sci-fi-inspired attractions.'
+  ],
+  '["/images/disneyland/cinderella-castle-day.webp","/images/disneyland/big-thunder-mountain.jpg","/images/disneyland/disney-summer-parade.jpg","/images/disneyland/small-world.jpg","/images/disneyland/splash-mountain.jpg","/images/disneyland/tomorrowland-space-mountain-new.png","/images/disneyland/beauty-beast-ride-sunset.jpg"]',
+  '/images/disneyland/cinderella-castle-day.webp',
+  '{
+    "resort": ["Tokyo Disney Resort"],
+    "disney hotels": ["Tokyo Disneyland Hotel","Toy Story Hotel"],
+    "official hotels": ["Hilton Tokyo Bay","Sheraton Grande Tokyo Bay Hotel","Grand Nikko Tokyo Bay Maihama","Maihama View Hotel","Hotel Okura Tokyo Bay","Tokyo Bay Maihama Hotel First Resort"],
+    "stations": ["Tokyo Disneyland Station","Bayside Station"]
+  }',
+  'Full day'
+);
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.7902762978356!2d139.87563069678953!3d35.632896400000014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60187d03114737b3%3A0xe4d93636d509d3cb!2sTokyo%20Disneyland!5e0!3m2!1sen!2sus!4v1776299772308!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3243.041200427959!2d139.88031429678955!3d35.6267108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60187d03114737b3%3A0x41471d704ab72d25!2sTokyo%20DisneySea!5e0!3m2!1sen!2sus!4v1776295705995!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+///
+
+INSERT INTO "Activity" (
+  "title",
+  "slug",
+  "description",
+  "type",
+  "location",
+  "open_hours",
+  "phone",
+  "website",
+  "map_embed_url",
+  "price",
+  "currency",
+  "rating",
+  "category",
+  "highlights",
+  "images",
+  "thumbnail",
+  "details",
+  "duration"
+) VALUES (
+  'Tokyo DisneySea',
+  'tokyo-disneysea',
+  'Explore a one-of-a-kind Disney park themed around ocean journeys, adventure, and discovery.',
+  ARRAY['theme_park',
+  'family_friendly'
+  ],
+  'Tokyo',
+  '9AM - 9PM',
+  '+81 50-3090-2613',
+  'https://www.tokyodisneyresort.jp/en/tds/',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3243.041200427959!2d139.88031429678955!3d35.6267108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60187d03114737b3%3A0x41471d704ab72d25!2sTokyo%20DisneySea!5e0!3m2!1sen!2sus!4v1776295705995!5m2!1sen!2sus',
+  '{
+      "adult": 9400,
+      "junior": 7800,
+      "child": 5600
+  }',  
+  'JPY',
+  4.8,
+  ARRAY['theme_park',
+  'family_friendly'
+  ],
+  ARRAY[
+    'Mediterranean Harbor: A scenic waterfront inspired by Italian ports, with gondolas and stunning harbor views.',
+    'American Waterfront: A nostalgic early 20th-century American harbor with shops, dining, and entertainment.',
+    'Port Discovery: A futuristic marina focused on marine science, innovation, and interactive attractions.',
+    'Lost River Delta: An ancient jungle setting with ruins, temples, and thrilling expedition adventures.',
+    'Fantasy Springs: A magical land themed around beloved Disney stories with immersive fantasy worlds.',
+    'Arabian Coast: A vibrant Middle Eastern-inspired area filled with magic, markets, and adventure.',
+    'Mermaid Lagoon: An undersea kingdom themed around Ariel, featuring family-friendly indoor attractions.',
+    'Mysterious Island: A volcanic island base of bold scientific exploration, hidden deep within the earth.'
+  ],
+  '["/images/disneysea/mediterranean-volcano-night.jpg","/images/disneysea/american-waterfront.webp","/images/disneysea/frozen-land-day.png","/images/disneysea/arabian-coast.jpg","/images/disneysea/mysterious-island-night.jpg","/images/disneysea/neverland-day.webp","/images/disneysea/lost-river-delta.webp","/images/disneysea/mermaid-lagoon.webp","/images/disneysea/port-discovery.webp"]',
+  '/images/disneysea/mediterranean-volcano-night.jpg',
+  '{
+    "resort": ["Tokyo Disney Resort"],
+    "disney hotels": ["Tokyo DisneySea Hotel MiraCosta","Tokyo DisneySea Fantasy Springs Hotel","Toy Story Hotel"],
+    "official hotels": ["Hilton Tokyo Bay","Sheraton Grande Tokyo Bay Hotel","Grand Nikko Tokyo Bay Maihama","Maihama View Hotel","Hotel Okura Tokyo Bay","Tokyo Bay Maihama Hotel First Resort"],
+    "stations": ["Tokyo DisneySea Station", "Bayside Station"]
+  }',
+  'Full day'
+);
+
+///
+
+INSERT INTO "Activity" (
+  "title",
+  "slug",
+  "description",
+  "type",
+  "location",
+  "open_hours",
+  "phone",
+  "website",
+  "map_embed_url",
+  "price",
+  "currency",
+  "rating",
+  "category",
+  "highlights",
+  "images",
+  "thumbnail",
+  "details",
+  "duration"
+) VALUES (
+  'Universal Studios Japan',
+  'universal-studios-japan',
+  'A world-class theme park in Osaka where blockbuster movies and iconic franchises come to life. Explore immersive lands like Super Nintendo World, The Wizarding World of Harry Potter, Jurassic Park, and Minion Park, along with shopping and dining at Universal CityWalk.',
+  ARRAY['theme_park',
+  'family_friendly'
+  ],
+  'Osaka',
+  '9AM - 9PM',
+  '+81 570-200-606',
+  'https://www.usj.co.jp/web/en/us',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.5652391301114!2d135.42744758446554!3d34.66568111531402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e0d083d5e25d%3A0x3605fe25303252aa!2sUniversal%20Studios%20Japan!5e0!3m2!1sen!2sus!4v1776319444055!5m2!1sen!2sus',
+  '{
+      "adult": 8900,
+      "senior": 8000,
+      "child": 5700
+  }', 
+  'JPY',
+  4.7,
+  ARRAY['theme_park',
+  'family_friendly'
+  ],
+  ARRAY[
+  'Super Nintendo World – immersive Mario universe with interactive gameplay and Mario Kart ride',
+  'The Wizarding World of Harry Potter – explore Hogwarts Castle and experience the Forbidden Journey ride',
+  'Jurassic Park Area – dinosaur-themed rides and jungle exploration experiences',
+  'Minion Park – fun, family-friendly attractions based on the Despicable Me franchise',
+  'Hollywood Area – classic movie-themed zone with shows, shops, and street entertainment inside the park'
+  ],
+  '[
+    "/images/universal/universal-japan-globe-day.jpg",
+    "/images/universal/super-nintendo-world-promo.jpg",
+    "/images/universal/universal-gateway-entrance.webp",
+    "/images/universal/hogwarts-castle-day.jpg",
+    "/images/universal/jurassic-park-ride-banner.png",
+    "/images/universal/universal-globe-day-2.jpg",
+    "/images/universal/universal-studios-5th-anniversary-banner.webp"
+  ]',
+  '/images/universal/universal-japan-globe-day.jpg',
+  '{
+    "transport": ["Universal City Station (JR Yumesaki Line)", "Direct access from Osaka Station"],
+    "hotels": [
+      "The Park Front Hotel at Universal Studios Japan",
+      "Official Universal Partner Hotels in Osaka Bay Area"
+    ],
+    "tips": [
+      "Use Express Pass to reduce wait times",
+      "Arrive early for Super Nintendo World entry",
+      "Expect 60–180 min wait for popular rides"
+    ],
+    "must_try_food": [
+      "Butterbeer (Wizarding World)",
+      "Minion-themed snacks",
+      "Jurassic-themed meals"
+    ],
+    "shopping": [
+      "Universal CityWalk"
+    ]
+  }',
+  'Full day'
+);
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.5652391301114!2d135.42744758446554!3d34.66568111531402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e0d083d5e25d%3A0x3605fe25303252aa!2sUniversal%20Studios%20Japan!5e0!3m2!1sen!2sus!4v1776319444055!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+///
+INSERT INTO "Activity" (
+  "title",
+  "slug",
+  "description",
+  "type",
+  "location",
+  "open_hours",
+  "phone",
+  "website",
+  "map_embed_url",
+  "price",
+  "currency",
+  "rating",
+  "category",
+  "highlights",
+  "images",
+  "thumbnail",
+  "details",
+  "duration"
+) VALUES (
+  'Ichiran Ramen',
+  'ichiran-ramen',
+  'Famous Japanese ramen chain known for its customizable tonkotsu ramen and private booth dining experience.',
+  ARRAY['restaurant',
+  'food_and_drink'
+  ],
+  'Tokyo, Japan (multiple locations)',
+  'Open 24 hours (varies by location)',
+  '0120-606-313',
+  'https://en.ichiran.com/index_en.html',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d829274.2369641488!2d139.2104886457064!3d35.71754867121509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188ca8749c6b39%3A0xf2802bee15a9a6e!2sICHIRAN%20Shibuya!5e0!3m2!1sen!2sus!4v1776313747113!5m2!1sen!2sus',
+  '{
+      "regular bowl": {
+        "min": 1000,
+        "max": 1500
+      }
+  }',  
+  'JPY',
+  4.4,
+  ARRAY['restaurant',
+  'food_and_drink'
+  ],
+  ARRAY[
+    'Famous for tonkotsu pork ramen with rich broth',
+    'Customizable spice level and noodle firmness',
+    'Solo dining booths for a private experience',
+    'Quick service and fast turnover even during peak hours'
+  ],
+  '["/images/ichiran/ichiran_ramen.jpg","/images/ichiran/dotonbori-ichiran.webp","/images/ichiran/ichiran-meal.jpg","/images/ichiran/ichiran-staff-delivery","/images/ichiran/ichiran-booth.jpg"]',
+  '/images/ichiran/ichiran_ramen.jpg',
+  '{
+    "dining style": ["Fast casual ramen", "Solo booth dining"],
+    "wait times": ["10-60 min depending on peak hours"],
+    "recommended_order": ["Classic Tonkotsu Ramen", "Extra noodles (Kaedama)"],
+    "customization": ["Spice level","Noodle firmness","Garlic level","Richness of broth"],
+    "menu": ["/images/ichiran/ichiran-vending-menu.webp"]
+  }',
+  'Casual dining: ~30 - 45 minutes'
+);
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d829274.2369641488!2d139.2104886457064!3d35.71754867121509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188ca8749c6b39%3A0xf2802bee15a9a6e!2sICHIRAN%20Shibuya!5e0!3m2!1sen!2sus!4v1776313747113!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+INSERT INTO "Activity" (
+  "title",
+  "slug",
+  "description",
+  "type",
+  "location",
+  "open_hours",
+  "phone",
+  "website",
+  "map_embed_url",
+  "price",
+  "currency",
+  "rating",
+  "category",
+  "highlights",
+  "images",
+  "thumbnail",
+  "details",
+  "duration"
+) VALUES (
+  'Ueno Park',
+  'ueno-park',
+  'One of Tokyo’s most popular public parks, Ueno Park offers a mix of nature, culture, and history. Known for its beautiful cherry blossoms in spring, the park is home to museums, a zoo, scenic walking paths, and tranquil ponds, making it a perfect spot for both relaxation and exploration.',
+  ARRAY[
+    'park',
+    'nature'
+  ],
+  'Tokyo',
+  '5AM - 11PM',
+  '0120-606-313',
+  'https://www.kensetsu.metro.tokyo.lg.jp/jimusho/toubuk/ueno',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.4658495688377!2d139.77085627574817!3d35.71476002813163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188e9b45906ac3%3A0xb1cb3623124e645a!2sUeno%20Park!5e0!3m2!1sen!2sus!4v1776314482794!5m2!1sen!2sus',
+  '{
+      "general": "Free" 
+  }',  
+  'JPY',
+  4.4,
+  ARRAY[
+    'park',
+    'nature'
+  ],
+  ARRAY[
+    'Famous cherry blossom viewing spot (sakura) during spring season',
+    'Home to Ueno Zoo, Japan’s oldest zoo',
+    'Features major museums like Tokyo National Museum and National Museum of Nature and Science',
+    'Shinobazu Pond with lotus flowers and scenic walking paths',
+    'Street performers, food stalls, and lively atmosphere on weekends',
+    'Great for picnics, casual walks, and cultural exploration'
+  ],
+  '["/images/ueno-park/park-skytree-view.webp","/images/ueno-park/ueno-park-board.jpg","/images/ueno-park/ueno-park-day.jpg","/images/ueno-park/ueno-park-lake.jpg","/images/ueno-park/ueno-park-shrine.jpg","/images/ueno-park/ueno-park-museum.webp"]',
+  '/images/ueno-park/park-skytree-view.webp',
+  '{
+    "access": ["JR Ueno Station (Park Exit) – 2 min walk","Tokyo Metro Ginza & Hibiya Lines – Ueno Station","Keisei Ueno Station – 5 min walk"],
+    "admission": ["Park entry is free","Some attractions (zoo, museums) require separate tickets"],
+    "facilities": ["Public restrooms available throughout the park","Vending machines and seating areas","Bike parking and walking paths"]
+  }',
+  '1-3 hours typical visit'
+);
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.4658495688377!2d139.77085627574817!3d35.71476002813163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188e9b45906ac3%3A0xb1cb3623124e645a!2sUeno%20Park!5e0!3m2!1sen!2sus!4v1776314482794!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+INSERT INTO "Activity" (
+  "title",
+  "slug",
+  "description",
+  "type",
+  "location",
+  "open_hours",
+  "phone",
+  "website",
+  "map_embed_url",
+  "price",
+  "currency",
+  "rating",
+  "category",
+  "highlights",
+  "images",
+  "thumbnail",
+  "details",
+  "duration"
+) VALUES (
+  'Ikspiari',
+  'ikspiari',
+  'Ikspiari is a vibrant shopping, dining, and entertainment complex located at Tokyo Disney Resort in Maihama. Designed like a modern entertainment district, it features themed areas inspired by global cities, a wide range of restaurants, fashion and lifestyle stores, a cinema, and seasonal events. It serves as a central hub for visitors before or after exploring Tokyo Disneyland and DisneySea.',
+  ARRAY[
+    'shopping',
+    'mall'
+  ],
+  'Tokyo',
+  '10AM - 10:30PM',
+  '0120-606-313',
+  'https://www.ikspiari.com/',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.7475269712895!2d139.88365487574498!3d35.633950132569986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60187d102b79f70f%3A0x3a55c17f932fed17!2sIkspiari!5e0!3m2!1sen!2sus!4v1776320922193!5m2!1sen!2sus',
+  '{
+      "general": "Free" 
+  }',  
+  'JPY',
+  4.2,
+  ARRAY[
+    'shopping',
+    'mall'
+  ],
+  ARRAY[
+    'Tokyo Disney Resort shopping and entertainment hub with over 200 shops and restaurants',
+    'Themed districts inspired by Paris, New York, and Mediterranean architecture',
+    'Ikspiari Cinema featuring the latest international and Japanese films',
+    'Wide dining options from casual food courts to sit-down restaurants',
+    'Seasonal decorations, events, and limited-time pop-up experiences',
+    'Direct pedestrian access to Tokyo Disneyland and DisneySea via Resort Line'
+  ],
+  '["/images/ikspiari/ikspiari-entrance-day.jpeg","/images/ikspiari/ikspiari-monorail.jpg","/images/ikspiari/ikspiari-center-area-night.jpg","/images/ikspiari/ikspiari-cinema.jpg","/images/ikspiari/ikspiari-kitchen.jpg","/images/ikspiari/ikspiari-night.webp","/images/ikspiari/ikspiari-walkway.jpg","/images/ikspiari/ikspiari-summer-banner.png"]',
+  '/images/ikspiari/ikspiari-entrance-day.jpeg',
+  '{
+  "access": [
+    "Maihama Station (JR Keiyo Line) – direct access",
+    "Tokyo Disney Resort Gateway Station (Disney Resort Line)"
+  ],
+  "shopping": [
+    "Fashion boutiques, lifestyle stores, Disney merchandise shops"
+  ],
+  "dining": [
+    "International restaurants, cafes, and dessert shops",
+    "Food court with quick-service options"
+  ],
+  "entertainment": [
+    "Ikspiari Cinema (multiplex theater)",
+    "Live events and seasonal performances"
+  ],
+  "tips": [
+    "Best visited before or after Disneyland/DisneySea",
+    "Evening visits offer great atmosphere and lighting",
+    "Can get busy on weekends and holidays"
+  ]
+}',
+  '2–4 hours (longer if dining or watching a movie)'
+);
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.7475269712895!2d139.88365487574498!3d35.633950132569986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60187d102b79f70f%3A0x3a55c17f932fed17!2sIkspiari!5e0!3m2!1sen!2sus!4v1776320922193!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>

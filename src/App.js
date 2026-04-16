@@ -50,7 +50,7 @@ function App() {
       <Route path='contact-us' element={<Contact />} />
       <Route path='cities' element={<Cities />} />
       <Route path='explore' element={<Explore />} />
-      <Route path='/explore-details/:id' element={<ExploreDetails />} />
+      <Route path='/explore-details/:slug' element={<ExploreDetails />} />
       <Route path='planning' element={<Planning />} />
       <Route path='account' element={<Account />} />
       <Route path='gallery' element={<Gallery />} />

@@ -117,9 +117,19 @@
     font-size: var(--bodyText);
 }
 
-.popular-card .card-body .Theme {
+.popular-card .card-body .ThemePark {
     background-color: #ffebf5 !important;
     color: #cf3881 !important;
+}
+
+.popular-card .card-body .Mall {
+    background-color: #524df0 !important;
+    color: #ffffff !important;
+}
+
+.popular-card .card-body .FamilyFriendly {
+    background-color: #e8f70a !important;
+    color: #062c0f !important;
 }
 
 .popular-card .card-body .Shopping {
@@ -137,20 +147,30 @@
     color: #ffffff !important;
 }
 
-/* .popular-card .card-body .Arcade {
+.popular-card .card-body .FoodAndDrink {
+    background-color: #ff082d !important;
+    color: #ffffff !important;
+}
+
+.popular-card .card-body .Arcade {
     background-color: #6088c4 !important;
     color: #ffffff !important;
-} */
+}
 
-/* .popular-card .card-body .Park {
+.popular-card .card-body .Park {
     background-color: #e8edf1 !important;
     color: #4f5e71 !important;
+}
+
+.popular-card .card-body .Nature {
+    background-color: #19ac56 !important;
+    color: #ffffff!important;
 }
 
 .popular-card .card-body .Museum {
     background-color: #e8edf1 !important;
     color: #4f5e71 !important;
-} */
+}
 
 .popular-card .card-body .Festival {
     background-color: #e62fd9 !important;

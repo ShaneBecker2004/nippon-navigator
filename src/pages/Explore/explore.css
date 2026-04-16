@@ -69,7 +69,7 @@
 /* Main gallery (LEFT SIDE) */
 .explore-swiper {
   width: 100%;
-  height: 400px;
+  height: 600px;
 }
 
 .explore-image {
@@ -116,4 +116,121 @@
   cursor: pointer;
   border-radius: 6px;
   z-index: 10000;
+}
+
+
+.explore_details .nav-bars {
+    background-color: #f14b361a;
+    padding: 8px;
+}
+
+.explore_details .overview-section {
+  margin-bottom: 40px;
+  padding: 0;
+}
+
+.explore_details .overview-list p {
+  margin-bottom: 8px;
+  line-height: 1.5;
+  padding-left: 0;
+}
+
+.explore_details .pricing-section {
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+  line-height: 2;
+}
+
+.explore_details .highlights-section {
+  margin-bottom: 80px;
+}
+
+.explore_details .highlights-list {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.explore_details .highlights-list li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.explore_details .details-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.explore_details .details-list li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.explore_details .details-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: black;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.map-container {
+  width: 100%;
+  height: 60vh; /* viewport-based height */
+  min-height: 400px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+aside {
+  margin-top: 24px;
+  top: 80px;
+}
+
+.explore_details .card-info {
+  background: #f5f5f6;
+  border: none;
+}
+
+.explore_details .card-info i {
+  color: var(--primaryClr);
+}
+
+.explore_details .detail-key {
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.fullscreen-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff; /* covers header/footer visually */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Simple spinner */
+.loader-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ddd;
+  border-top: 4px solid #0d6efd;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

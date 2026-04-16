@@ -56,7 +56,7 @@
 
 .trip-welcome-card .card-header {
     padding: 28px 28px 22px;
-    background: linear-gradient(135deg, #5b6cff 0%, #3dd7f3 100%);
+    background: var(--primaryClr);
     color: white;
 }
 

@@ -1,0 +1,9 @@
+INSERT INTO "Destination" (
+  "name",
+  "image",
+  "location"
+) VALUES (
+  'Tokyo',
+  '/images/explore/tokyo-night.jpg',
+  'Tokyo Prefecture'
+)
