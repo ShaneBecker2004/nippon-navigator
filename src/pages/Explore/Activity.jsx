@@ -9,6 +9,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { Autoplay } from "swiper/modules";
 import { useAuth } from '../../contexts/authContext';
 import { getAuth } from 'firebase/auth';
+import API from '../../config/api';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -33,8 +34,6 @@ const Activity = () => {
   const [activityAdded, setActivityAdded] = useState(false);
 
   const [showAuthModal, setShowAuthModal] = useState(false);
-
-  const API = process.env.REACT_APP_API_URL;
 
   const formatKey = (key) => {
   return key

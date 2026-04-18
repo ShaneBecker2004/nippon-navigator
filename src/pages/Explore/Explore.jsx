@@ -11,6 +11,8 @@ import Recommended from '../../components/Recommended/Recommended';
 import "../Explore/explore.css";
 import exploreimg from "../../assets/images/breadcrumb/japan-city.webp";
 
+const API = process.env.REACT_APP_API_URL;
+
 const Explore = () => {
   const [activities, setActivities] = useState([]);
   const [show, setShow] = useState(false);
