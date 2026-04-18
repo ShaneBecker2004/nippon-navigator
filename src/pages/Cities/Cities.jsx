@@ -33,7 +33,7 @@ const Cities = () => {
     }
 
     fetchDestinations();
-  }, []);
+  }, [API]);
 
     if (loading) {
     return (

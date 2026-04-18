@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useCallback } from 'react';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { Col, Container, Row, Offcanvas } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
@@ -59,7 +60,7 @@ const Explore = () => {
 
   
   // ✅ Fetch activities
-  const fetchActivities = async () => {
+  const fetchActivities = useCallback(async () => {
     try {
       const res = await fetch(`${API}/api/activities`);
       const data = await res.json();
@@ -79,11 +80,11 @@ const Explore = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [API]);
 
   useEffect(() => {
     fetchActivities();
-  }, []);
+  }, [fetchActivities]);
 
   useEffect(() => {
     if (!socket) return;
@@ -100,7 +101,7 @@ const Explore = () => {
     return () => {
       socket.off("tripUpdated", handleTripUpdate);
     };
-  }, []);
+  }, [fetchActivities]);
 
   // ✅ Combined filtering (search + category)
   const filteredActivities = activities.filter((activity) => {
