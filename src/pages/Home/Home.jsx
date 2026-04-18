@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Banner from '../../components/Banner/Banner';
-import AdvanceSearch from '../../components/AdvanceSearch/AdvanceSearch';
+
 import Features from '../../components/Features/Features';
 import Gallery from '../../components/Gallery/Gallery';
 import { Container, Row, Col } from 'react-bootstrap';
 import Cards from '../../components/Cards/Cards';
-import PopularCard from '../../components/Cards/PopularCard';
+
 
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";

@@ -1,6 +1,6 @@
 import React from 'react'
 import "../Cards/card.css"
-import { Card, Stack } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import { NavLink } from 'react-bootstrap'
 
 

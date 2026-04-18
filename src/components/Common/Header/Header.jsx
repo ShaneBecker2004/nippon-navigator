@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Row, Navbar, Offcanvas, Nav, NavDropdown } from 'react-bootstrap';
+import { Container, Navbar, Offcanvas, Nav, NavDropdown } from 'react-bootstrap';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import "../Header/header.css";
 import { useAuth } from '../../../contexts/authContext';

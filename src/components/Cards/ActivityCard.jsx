@@ -5,7 +5,8 @@ import { NavLink } from 'react-router-dom';
 
 const ActivityCard = ({ val }) => {
   const imageSrc =
-    val.thumbnail || (val.images && val.images.length > 0 ? val.images[0] : "/images/default.jpg");
+    val.thumbnail ||
+    (val.images && val.images.length > 0 ? val.images[0] : "/images/default.jpg");
 
   const categories = Array.isArray(val.category)
     ? val.category
@@ -15,7 +16,7 @@ const ActivityCard = ({ val }) => {
 
   const duration = val.duration || "N/A";
 
-  // 🧠 FORMAT KEY (for labels like "adult_price" → "Adult Price")
+  // 🧠 FORMAT KEY
   const formatKey = (key) =>
     key
       .replace(/_/g, " ")
@@ -23,57 +24,81 @@ const ActivityCard = ({ val }) => {
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
 
-  // 💰 SAFE PRICE NORMALIZER (handles string OR object)
+  // 💰 PRICE NORMALIZER
   const normalizePrice = (price) => {
     if (!price) return null;
 
-    const obj = typeof price === "string" ? JSON.parse(price) : price;
-
-    if (typeof obj !== "object") return null;
-
-    return obj;
+    try {
+      const obj = typeof price === "string" ? JSON.parse(price) : price;
+      return typeof obj === "object" ? obj : null;
+    } catch (e) {
+      return null;
+    }
   };
 
   const price = normalizePrice(val.price);
 
+  // 💰 STARTING PRICE CALCULATOR (USED)
   const getStartingPrice = (priceObj) => {
-  if (!priceObj || typeof priceObj !== "object") return null;
+    if (!priceObj || typeof priceObj !== "object") return null;
 
-  const values = Object.values(priceObj)
-    .map(v => {
-      if (typeof v === "number") return v;
+    const values = Object.values(priceObj)
+      .flatMap((v) => {
+        if (v === null || v === undefined) return [];
 
-      if (typeof v === "string" && v.includes("-")) {
-        const [min] = v.split("-");
-        return Number(min);
-      }
+        // FREE
+        if (
+          v === 0 ||
+          v === "0" ||
+          (typeof v === "string" && v.toLowerCase().includes("free"))
+        ) {
+          return ["free"];
+        }
 
-      if (typeof v === "object" && v.min !== undefined) {
-        return Number(v.min);
-      }
+        // RANGE OBJECT
+        if (typeof v === "object" && v.min !== undefined) {
+          return [Number(v.min)];
+        }
 
-      return Number(v);
-    })
-    .filter(v => !isNaN(v));
+        // RANGE STRING "1000-1500"
+        if (typeof v === "string" && v.includes("-")) {
+          const [min] = v.split("-");
+          return [Number(min)];
+        }
 
-  if (!values.length) return null;
+        // NORMAL NUMBER
+        if (!isNaN(Number(v))) {
+          return [Number(v)];
+        }
 
-  return Math.min(...values);
-};
+        return [];
+      });
+
+    if (values.includes("free")) return "free";
+
+    const numericValues = values.filter(v => typeof v === "number");
+
+    if (!numericValues.length) return null;
+
+    return Math.min(...numericValues);
+  };
+
+  const startingPrice = getStartingPrice(price);
+  const currencySymbol = val.currency === "JPY" ? "¥" : "$";
 
   return (
     <Card className="rounded-2 shadow-sm popular-card">
       <Card.Img
-        variant='top'
+        variant="top"
         src={imageSrc}
-        className='img-fluid'
+        className="img-fluid"
         alt={val.title || "activity image"}
       />
 
       <Card.Body>
         <Card.Text>
           <i className="bi bi-geo-alt"></i>{" "}
-          <span className='text'>{val.location || "Unknown"}</span>
+          <span className="text">{val.location || "Unknown"}</span>
         </Card.Text>
 
         <Card.Title>
@@ -86,7 +111,7 @@ const ActivityCard = ({ val }) => {
         </Card.Title>
 
         {val.rating && (
-          <p className='review'>
+          <p className="review">
             <span><i className="bi bi-star-fill me-1"></i></span>
             <span>{val.rating}</span>
             <span> ({val.reviews || 0} reviews)</span>
@@ -96,94 +121,36 @@ const ActivityCard = ({ val }) => {
         {/* Categories */}
         <div className="mb-2">
           {categories.map((cat, index) => {
-            const formatted = cat
-              .replace(/_/g, " ") // remove underscores
-              .split(" ")
-              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(" ");
-
-            const className = formatted.replace(/\s/g, ""); // "Theme Park" → "ThemePark"
+            const formatted = formatKey(cat);
+            const className = formatted.replace(/\s/g, "");
 
             return (
-              <span
-                key={index}
-                className={`${className} badge me-1`}
-              >
+              <span key={index} className={`${className} badge me-1`}>
                 {formatted}
               </span>
             );
           })}
         </div>
 
-        {/* 💰 PRICE SECTION (FIXED) */}
+        {/* 💰 PRICE SECTION (CLEANED) */}
         <div className="card-prices">
-          {price && Object.keys(price).length > 0 ? (
-            (() => {
-              const currencySymbol = val.currency === "JPY" ? "¥" : "$";
-
-              // 🧠 normalize all price values into usable numbers
-              const values = Object.values(price)
-                .flatMap((v) => {
-                  if (v === null || v === undefined) return [];
-
-                  // FREE
-                  if (
-                    v === 0 ||
-                    v === "0" ||
-                    (typeof v === "string" && v.toLowerCase().includes("free"))
-                  ) {
-                    return ["free"];
-                  }
-
-                  // RANGE OBJECT {min, max}
-                  if (typeof v === "object" && v.min !== undefined && v.max !== undefined) {
-                    return [Number(v.min)];
-                  }
-
-                  // RANGE STRING "1000-1500"
-                  if (typeof v === "string" && v.includes("-")) {
-                    const [min] = v.split("-");
-                    return [Number(min)];
-                  }
-
-                  // NORMAL NUMBER
-                  if (!isNaN(Number(v))) {
-                    return [Number(v)];
-                  }
-
-                  return [];
-                });
-
-              // 🟢 FREE ONLY CASE
-              if (values.includes("free")) {
-                return <p className="mb-0"><b>Free</b></p>;
-              }
-
-              // 🟡 GET STARTING PRICE
-              const numericValues = values.filter(v => typeof v === "number");
-              const startingPrice = numericValues.length
-                ? Math.min(...numericValues)
-                : null;
-
-              return startingPrice ? (
-                <p className="mb-0">
-                  <span className="text-muted">Starting at </span>
-                  <b>
-                    {currencySymbol}
-                    {startingPrice.toLocaleString()}
-                  </b>
-                </p>
-              ) : (
-                <p className="text-muted">No pricing available</p>
-              );
-            })()
+          {startingPrice === "free" ? (
+            <p className="mb-0"><b>Free</b></p>
+          ) : startingPrice ? (
+            <p className="mb-0">
+              <span className="text-muted">Starting at </span>
+              <b>
+                {currencySymbol}
+                {startingPrice.toLocaleString()}
+              </b>
+            </p>
           ) : (
             <p className="text-muted">No pricing available</p>
           )}
         </div>
       </Card.Body>
 
-      <Card.Footer className='py-3 mt-1'>
+      <Card.Footer className="py-3 mt-1">
         <Stack direction="horizontal" className="justify-content-between">
           <p className="mb-0">
             <i className="bi bi-clock"></i> {duration}

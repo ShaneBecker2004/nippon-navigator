@@ -19,19 +19,3 @@ export const doSignInWithGoogle = async () => {
 export const doSignOut = () => {
     return auth.signOut();
 }
-
-//Password Tools
-
-// export const doPasswordReset = (email) => {
-//     return sendPasswordResetEmail(auth, email);
-// }
-
-// export const doPasswordChange = (password) => {
-//     return updatePassword(auth.currentUser, password);
-// }
-
-// export const doSendEmailVerification = () => {
-//     return sendEmailVerification(auth.currentUser, {
-//         url: `${window.location.origin}/home`,
-//     });
-// };

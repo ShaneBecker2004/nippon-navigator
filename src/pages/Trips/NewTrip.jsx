@@ -4,7 +4,7 @@ import { Button, Alert, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardContent } from "./TripCard";
 import { getAuth } from 'firebase/auth';
-import { Calendar, MapPin, Clock, CheckCircle, AlertCircle } from 'react-feather';
+import { Calendar, MapPin, CheckCircle, AlertCircle } from 'react-feather';
 
 const NewTrip = () => {
   const navigate = useNavigate();

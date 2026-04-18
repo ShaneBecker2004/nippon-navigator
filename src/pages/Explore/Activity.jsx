@@ -397,6 +397,7 @@ const ExploreDetails = () => {
                               style={{ border: 0 }}
                               loading="lazy"
                               allowFullScreen
+                              title={`${activity.title} location map`}
                             />
                           </div>
                         </div>

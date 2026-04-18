@@ -88,12 +88,12 @@ const Footer = () => {
 
             <div className='d-flex align-items-top my-2'>
               <i className='bi bi-geo-alt me-3'></i>
-              <a target='_blank' href='mailto:support@nipponnavigator.com' className='d-block'>support@nipponnavigator.com</a>
+              <a href='mailto:support@nipponnavigator.com' className='d-block'>support@nipponnavigator.com</a>
             </div>
             
             <div className='d-flex align-items-top'>
               <i className='bi bi-telephone me-3'></i>
-              <a target='_blank' href='tel:9876543210' className='d-block'>1-800-123-4567</a>
+              <a href='tel:9876543210' className='d-block'>1-800-123-4567</a>
             </div>
 
           </Col>
