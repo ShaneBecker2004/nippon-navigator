@@ -89,11 +89,9 @@ const Explore = () => {
     const handleTripUpdate = (updatedTrip) => {
       console.log("🔥 Real-time update received:", updatedTrip);
 
-      // safest option (your current approach)
+      // safest approach: refetch activities
       fetchActivities();
     };
-
-    socket.connect(); // ensures connection exists
 
     socket.on("tripUpdated", handleTripUpdate);
 
