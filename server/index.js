@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import http from "http";
+import { Server } from "socket.io";
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { authenticateUser } from "./middleware/authMiddleware.js";
@@ -24,7 +26,34 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+//////////////////////////////////
+// 🚀 SOCKET.IO SETUP
+//////////////////////////////////
+
+const server = http.createServer(app);
+
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000", // change in production
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  },
+});
+
+// make io accessible in routes
+app.set("io", io);
+
+io.on("connection", (socket) => {
+  console.log("🟢 User connected:", socket.id);
+
+  socket.on("disconnect", () => {
+    console.log("🔴 User disconnected:", socket.id);
+  });
+});
+
+//////////////////////////////////
 // Test route
+//////////////////////////////////
+
 app.get("/", (req, res) => {
   res.send("Nippon Navigator API is running 🚀");
 });
@@ -33,7 +62,6 @@ app.get("/", (req, res) => {
 // 1. MASTER CATALOG ROUTES
 //////////////////////////////////
 
-// Get all destinations
 app.get("/api/destinations", async (req, res) => {
   try {
     const destinations = await prisma.destination.findMany();
@@ -44,7 +72,6 @@ app.get("/api/destinations", async (req, res) => {
   }
 });
 
-// Get all activities
 app.get("/api/activities", async (req, res) => {
   try {
     const activities = await prisma.activity.findMany();
@@ -55,9 +82,6 @@ app.get("/api/activities", async (req, res) => {
   }
 });
 
-//////////////////////////////////
-// ✅ NEW: Get activity by SLUG
-//////////////////////////////////
 app.get("/api/activities/slug/:slug", async (req, res) => {
   const { slug } = req.params;
 
@@ -77,9 +101,6 @@ app.get("/api/activities/slug/:slug", async (req, res) => {
   }
 });
 
-//////////////////////////////////
-// EXISTING: Get activity by ID
-//////////////////////////////////
 app.get("/api/activities/:id", async (req, res) => {
   const { id } = req.params;
 
@@ -103,11 +124,8 @@ app.get("/api/activities/:id", async (req, res) => {
 // 2. USER TRIP ROUTES
 //////////////////////////////////
 
-// Create trip
 app.post("/api/trips", authenticateUser, async (req, res) => {
   try {
-    console.log("🔥 AUTH USER:", req.user);
-
     const uid = req.user.uid;
 
     const trip = await prisma.trip.create({
@@ -116,32 +134,20 @@ app.post("/api/trips", authenticateUser, async (req, res) => {
         description: req.body.description,
         startDate: req.body.startDate ? new Date(req.body.startDate) : null,
         endDate: req.body.endDate ? new Date(req.body.endDate) : null,
-
         arrivalLocation: req.body.arrivalLocation || null,
         departureLocation: req.body.departureLocation || null,
         partySize: req.body.partySize ? Number(req.body.partySize) : null,
-
         userId: uid,
       },
     });
 
     res.json(trip);
   } catch (err) {
-  console.error("TRIP ERROR:", err);
-
-  if (err.code === "P2002") {
-    return res.status(400).json({
-      error: "A trip with this name already exists.",
-    });
+    console.error("TRIP ERROR:", err);
+    res.status(500).json({ error: "Failed to create trip." });
   }
-
-  return res.status(500).json({
-    error: "Failed to create trip.",
-  });
-}
 });
 
-// Get user trips
 app.get("/api/trips", authenticateUser, async (req, res) => {
   try {
     const uid = req.user.uid;
@@ -162,17 +168,13 @@ app.get("/api/trips", authenticateUser, async (req, res) => {
   }
 });
 
-// Get ONE trip
 app.get("/api/trips/:id", authenticateUser, async (req, res) => {
   try {
     const uid = req.user.uid;
     const { id } = req.params;
 
     const trip = await prisma.trip.findFirst({
-      where: {
-        id: id,
-        userId: uid,
-      },
+      where: { id, userId: uid },
       include: {
         savedItems: {
           include: { activity: true },
@@ -191,16 +193,12 @@ app.get("/api/trips/:id", authenticateUser, async (req, res) => {
   }
 });
 
-// Update trip details
 app.put("/api/trips/:id", authenticateUser, async (req, res) => {
   try {
     const uid = req.user.uid;
     const { id } = req.params;
-    const { description, arrivalLocation, departureLocation, partySize } = req.body;
 
-    const trip = await prisma.trip.findUnique({
-      where: { id },
-    });
+    const trip = await prisma.trip.findUnique({ where: { id } });
 
     if (!trip || trip.userId !== uid) {
       return res.status(404).json({ error: "Trip not found or access denied." });
@@ -208,18 +206,17 @@ app.put("/api/trips/:id", authenticateUser, async (req, res) => {
 
     const updatedTrip = await prisma.trip.update({
       where: { id },
-      data: {
-        description,
-        arrivalLocation,
-        departureLocation,
-        partySize: partySize ? parseInt(partySize) : null,
-      },
+      data: req.body,
       include: {
         savedItems: {
           include: { activity: true },
         },
       },
     });
+
+    // 🚀 REAL-TIME UPDATE
+    const io = req.app.get("io");
+    io.emit("tripUpdated", updatedTrip);
 
     res.json(updatedTrip);
   } catch (err) {
@@ -228,52 +225,35 @@ app.put("/api/trips/:id", authenticateUser, async (req, res) => {
   }
 });
 
-// Delete a trip
-app.delete("/api/trips/:id", authenticateUser, async (req, res) => {
-  try {
-    const uid = req.user.uid;
-    const { id } = req.params;
+//////////////////////////////////
+// Save activity (REAL-TIME HERE)
+//////////////////////////////////
 
-    const trip = await prisma.trip.findUnique({
-      where: { id },
-      include: {
-        savedItems: true,
-      },
-    });
-
-    if (!trip || trip.userId !== uid) {
-      return res.status(404).json({ error: "Trip not found or access denied." });
-    }
-
-    if (trip.savedItems.length > 0) {
-      await prisma.savedActivity.deleteMany({
-        where: { tripId: id },
-      });
-    }
-
-    await prisma.trip.delete({
-      where: { id },
-    });
-
-    res.json({ success: true });
-  } catch (err) {
-    console.error("Delete Trip Error:", err);
-    res.status(500).json({ error: "Failed to delete trip" });
-  }
-});
-
-// Save activity to trip
 app.post("/api/trips/save-activity", async (req, res) => {
   const { tripId, activityId, notes } = req.body;
 
   try {
     const saved = await prisma.savedActivity.create({
       data: {
-        tripId: tripId,
+        tripId,
         activityId: Number(activityId),
         notes,
       },
     });
+
+    // 🔥 REAL-TIME EMIT
+    const io = req.app.get("io");
+
+    const updatedTrip = await prisma.trip.findUnique({
+      where: { id: tripId },
+      include: {
+        savedItems: {
+          include: { activity: true },
+        },
+      },
+    });
+
+    io.emit("tripUpdated", updatedTrip);
 
     res.json(saved);
   } catch (err) {
@@ -282,71 +262,12 @@ app.post("/api/trips/save-activity", async (req, res) => {
   }
 });
 
-// Update saved activity order
-app.put("/api/trips/save-activity/order", authenticateUser, async (req, res) => {
-  const { tripId, order } = req.body;
-
-  if (!tripId || !Array.isArray(order)) {
-    return res.status(400).json({ error: "Trip ID and order array are required." });
-  }
-
-  try {
-    const uid = req.user.uid;
-    const trip = await prisma.trip.findUnique({
-      where: { id: tripId },
-    });
-
-    if (!trip || trip.userId !== uid) {
-      return res.status(404).json({ error: "Trip not found or access denied." });
-    }
-
-    const updates = order.map((item) =>
-      prisma.savedActivity.update({
-        where: { id: Number(item.id) },
-        data: { order: Number(item.order) },
-      })
-    );
-
-    await Promise.all(updates);
-
-    res.json({ success: true });
-  } catch (err) {
-    console.error("Save order error:", err);
-    res.status(500).json({ error: "Failed to save activity order" });
-  }
-});
-
-// Delete saved activity from trip
-app.delete("/api/trips/save-activity/:id", authenticateUser, async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const savedActivity = await prisma.savedActivity.findUnique({
-      where: { id: Number(id) },
-      include: { trip: true },
-    });
-
-    if (!savedActivity || savedActivity.trip.userId !== req.user.uid) {
-      return res.status(404).json({ error: "Saved activity not found." });
-    }
-
-    await prisma.savedActivity.delete({
-      where: { id: Number(id) },
-    });
-
-    res.json({ success: true });
-  } catch (err) {
-    console.error("Delete saved activity error:", err);
-    res.status(500).json({ error: "Failed to delete saved activity" });
-  }
-});
-
 //////////////////////////////////
-// Start server
+// START SERVER
 //////////////////////////////////
 
 const PORT = process.env.PORT || 5001;
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`✅ Server is officially running on http://localhost:${PORT}`);
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`✅ Server running on http://localhost:${PORT}`);
 });

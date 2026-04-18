@@ -47,24 +47,33 @@ const ExploreDetails = () => {
       : activity?.price;
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchActivity = async () => {
       try {
-        const res = await fetch(`http://localhost:5001/api/activities/slug/${slug}`);
+        const res = await fetch(
+          `http://localhost:5001/api/activities/slug/${slug}`
+        );
         const data = await res.json();
 
-        // small delay for smoother UX
-        setTimeout(() => {
-          setActivity(data);
-          setLoading(false);
-        }, 300);
-
+        setActivity(data);
       } catch (err) {
         console.error("Failed to fetch activity:", err);
+      } finally {
         setLoading(false);
       }
     };
 
+    // initial fetch
     fetchActivity();
+
+    // 🔁 poll every 10 seconds
+    const interval = setInterval(fetchActivity, 10000);
+
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
   }, [slug]);
 
   // ✅ NEW: Fetch user's trips when modal opens

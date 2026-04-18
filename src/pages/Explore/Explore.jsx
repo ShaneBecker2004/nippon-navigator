@@ -3,6 +3,7 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { Col, Container, Row, Offcanvas } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { socket } from "../../socket";
 import ActivityCard from '../../components/Cards/ActivityCard';
 import Sidebar from '../Sidebar/Sidebar';
 import Recommended from '../../components/Recommended/Recommended';
@@ -56,30 +57,43 @@ const Explore = () => {
 
   
   // ✅ Fetch activities
+  const fetchActivities = async () => {
+    try {
+      const res = await fetch("http://localhost:5001/api/activities");
+      const data = await res.json();
+
+      const mappedData = data.map(act => ({
+        ...act,
+        category: act.category || [],
+        highlights: act.highlights || [],
+        images: act.images || [],
+        details: act.details || {},
+        reviews: act.reviews || 0,
+      }));
+
+      setActivities(mappedData);
+    } catch (err) {
+      console.error("Failed to fetch activities:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchActivities = async () => {
-      try {
-        const res = await fetch("http://localhost:5001/api/activities");
-        const data = await res.json();
-
-        const mappedData = data.map(act => ({
-          ...act,
-          category: act.category || [],
-          highlights: act.highlights || [],
-          images: act.images || [],
-          details: act.details || {},
-          reviews: act.reviews || 0,
-        }));
-
-        setActivities(mappedData);
-      } catch (err) {
-        console.error("Failed to fetch activities:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchActivities();
+  }, []);
+
+  useEffect(() => {
+    socket.on("tripUpdated", (updatedTrip) => {
+      console.log("🔥 Real-time update received:", updatedTrip);
+
+      // If activities changed, refresh list OR update state
+      fetchActivities(); // simplest & safest approach
+    });
+
+    return () => {
+      socket.off("tripUpdated");
+    };
   }, []);
 
   // ✅ Combined filtering (search + category)
