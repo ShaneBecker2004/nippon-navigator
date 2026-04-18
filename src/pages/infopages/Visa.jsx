@@ -1,6 +1,5 @@
-import React from 'react'
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
-import { Container, Row, Col, Card } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import visaimg from  "../../assets/images/breadcrumb/passport-visa-graphic.jpg"
 
 const Visa = () => {

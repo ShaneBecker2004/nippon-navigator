@@ -1,6 +1,6 @@
 import React from 'react'
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
-import { Container, Row, Col, Card, NavLink } from 'react-bootstrap'
+import { Container, Row, Col, NavLink } from 'react-bootstrap'
 import immigrationimg from  "../../assets/images/breadcrumb/arrivals-lobby-osaka.webp"
 
 const Immigration = () => {
