@@ -14,6 +14,7 @@ const Planning = () => {
 
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [deletingTripId, setDeletingTripId] = useState(null);
 
   // 🔥 FETCH TRIPS
   const fetchTrips = async () => {
@@ -71,6 +72,40 @@ const Planning = () => {
       fetchTrips();
     }
   }, [location]);
+
+  const handleDeleteTrip = async (tripId) => {
+    if (!window.confirm('Delete this trip? This will remove all saved activities.')) return;
+
+    setDeletingTripId(tripId);
+    try {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (!user) {
+        console.error('No authenticated user available to delete trip.');
+        return;
+      }
+
+      const token = await user.getIdToken();
+      const response = await fetch(`http://localhost:5001/api/trips/${tripId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || 'Failed to delete trip');
+      }
+
+      setTrips((prev) => prev.filter((trip) => trip.id !== tripId));
+    } catch (error) {
+      console.error('Error deleting trip:', error);
+    } finally {
+      setDeletingTripId(null);
+    }
+  };
 
   // ✅ SORTED TRIPS
   const sortedTrips = [...trips].sort(
@@ -151,8 +186,20 @@ const Planning = () => {
               {sortedTrips.slice(0, 6).map((trip) => (
                 <NavLink key={trip.id} className="recent-trip-card" href={`trip-details/${trip.id}`}>
                   <Card className="recent-trip-button">
-                    <CardHeader>
+                    <CardHeader className="d-flex justify-content-between align-items-start">
                       <CardTitle className="recent-button">{trip.tripName}</CardTitle>
+                      <Button
+                        variant="outline-danger"
+                        size="sm"
+                        onClick={(event) => {
+                          event.preventDefault()
+                          event.stopPropagation()
+                          handleDeleteTrip(trip.id)
+                        }}
+                        disabled={deletingTripId === trip.id}
+                      >
+                        {deletingTripId === trip.id ? 'Deleting...' : 'Delete'}
+                      </Button>
                     </CardHeader>
 
                     <CardContent>

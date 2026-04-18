@@ -14,7 +14,7 @@ import Immigration from './pages/infopages/Immigration';
 import Online from './pages/infopages/Online';
 import Phrases from './pages/infopages/Phrases';
 import Visa from './pages/infopages/Visa';
-import ExploreDetails from './pages/Explore/ExploreDetails';
+import Activity from './pages/Explore/Activity';
 import Planning from './pages/Planning/Planning';
 import Account from './pages/Account/Account';
 import Gallery from './pages/Gallery/Gallery';
@@ -50,7 +50,7 @@ function App() {
       <Route path='contact-us' element={<Contact />} />
       <Route path='cities' element={<Cities />} />
       <Route path='explore' element={<Explore />} />
-      <Route path='/explore-details/:slug' element={<ExploreDetails />} />
+      <Route path='/activity/:slug' element={<Activity />} />
       <Route path='planning' element={<Planning />} />
       <Route path='account' element={<Account />} />
       <Route path='gallery' element={<Gallery />} />

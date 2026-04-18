@@ -1,35 +1,43 @@
 import React from 'react'
+import Input from '../Input'
 import "./price.css"
 
-const Price = () => {
+function Price({ handlePriceChange }) {
   return (
     <div className='ml'>
       <h2 className='sidebar-title price-title'>Price</h2>
+    <div>
+      <label className='sidebar-label-container'>
+        <input onChange={handlePriceChange} type='radio' value="" name="test2" />
+        <span className='checkmark'></span>
+        All
+      </label>
 
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>All
-      </label>
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>$0 - $25
-      </label>
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>$25 - $50
-      </label>
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>$50 - $75
-      </label>
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>$75 - $100
-      </label>
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>Over $100
-      </label>
+      <Input 
+        handleChange={handlePriceChange}
+        value={2500}
+        title="Free - ¥2,500"
+        name="test2"
+      />
+      <Input 
+        handleChange={handlePriceChange}
+        value={5000}
+        title="¥2,500 - ¥5,000"
+        name="test2"
+      />
+      <Input 
+        handleChange={handlePriceChange}
+        value={10000}
+        title="¥5,000 - ¥10,000"
+        name="test2"
+      />
+      <Input 
+        handleChange={handlePriceChange}
+        value={15000}
+        title="¥10,000 or above"
+        name="test2"
+      />
+    </div>
     </div>
   )
 }

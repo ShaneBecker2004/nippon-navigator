@@ -17,6 +17,9 @@ const Header = () => {
         setOpen(!open);
     };
 
+    const [showExplore, setShowExplore] = useState(false);
+    const [showInformation, setShowInformation] = useState(false);
+
 
     useEffect(() => {
         window.addEventListener("scroll", isSticky);
@@ -69,9 +72,12 @@ const Header = () => {
                                 <NavLink className='nav-link' to="about-us">About Us</NavLink>
                                 <NavDropdown
                                     title="Explore"
-                                    id={`offcanvasNavbarDropdown-expand-lg`}
+                                    show={showExplore}
+                                    onMouseEnter={() => setShowExplore(true)}
+                                    onMouseLeave={() => setShowExplore(false)}
+                                    onClick={() => setShowExplore(!showExplore)}
                                 >
-                                    <NavLink className='nav-link' to="explore">Test Link</NavLink>
+                                    <NavDropdown.Item className='nav-link' href="explore">See All</NavDropdown.Item>
                                     <NavDropdown
                                         title="Tradition" className='inner-dropdown'
                                         id={`dropdown-tradition`}
@@ -105,8 +111,8 @@ const Header = () => {
                                     >
                                         <NavDropdown.Item href="#action3">Scenic Spots</NavDropdown.Item>
                                         <NavDropdown.Item href="#action4">Scenic Night Views</NavDropdown.Item>
-                                        <NavDropdown.Item href="#action4">Theme Parks</NavDropdown.Item>
-                                        <NavDropdown.Item href="#action4">Shopping</NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/explore?category=theme_park">Theme Parks</NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/explore?category=shopping">Shopping</NavDropdown.Item>
                                         <NavDropdown.Item href="#action4">Nightlife</NavDropdown.Item>
                                         <NavDropdown.Item href="#action4">Natrual Wonders</NavDropdown.Item>
                                         <NavDropdown.Item href="#action4">Iconic Architecture</NavDropdown.Item>
@@ -117,7 +123,10 @@ const Header = () => {
 
                                 <NavDropdown
                                     title="Information"
-                                    id={`offcanvasNavbarDropdown-expand-lg`}
+                                    show={showInformation}
+                                    onMouseEnter={() => setShowInformation(true)}
+                                    onMouseLeave={() => setShowInformation(false)}
+                                    onClick={() => setShowInformation(!showInformation)}
                                 >
                                     <NavDropdown.Item href="airport">Navigating the Airport</NavDropdown.Item>
                                     <NavDropdown.Item href="get-to-city">Getting to the City</NavDropdown.Item>

@@ -1,9 +1,107 @@
 INSERT INTO "Destination" (
   "name",
+  "slug",
   "image",
   "location"
 ) VALUES (
   'Tokyo',
+  'tokyo',
   '/images/explore/tokyo-night.jpg',
   'Tokyo Prefecture'
+)
+
+INSERT INTO "Destination" (
+  "name",
+  "slug",
+  "image",
+  "location"
+) VALUES (
+  'Osaka',
+  'osaka',
+  '/images/explore/osaka-castle-evening.jpg',
+  'Osaka Prefecture'
+)
+
+INSERT INTO "Destination" (
+  "name",
+  "slug",
+  "image",
+  "location"
+) VALUES (
+  'Kyoto',
+  'kyoto',
+  '/images/explore/kyoto-evening.jpg',
+  'Kyoto Prefecture'
+)
+
+INSERT INTO "Destination" (
+  "name",
+  "slug",
+  "image",
+  "location"
+) VALUES (
+  'Yokohama',
+  'yokohama',
+  '/images/explore/yokohama-evening.jpg',
+  'Kanagawa Prefecture'
+)
+
+INSERT INTO "Destination" (
+  "name",
+  "slug",
+  "image",
+  "location"
+) VALUES (
+  'Sapporo',
+  'sapporo',
+  '/images/explore/sapporo-night.webp',
+  'Hokkaido Prefecture'
+)
+
+INSERT INTO "Destination" (
+  "name",
+  "slug",
+  "image",
+  "location"
+) VALUES (
+  'Fukuoka',
+  'fukuoka',
+  '/images/explore/fukuoka-city-night.jpg',
+  'Fukuoka Prefecture'
+)
+
+INSERT INTO "Destination" (
+  "name",
+  "slug",
+  "image",
+  "location"
+) VALUES (
+  'Hiroshima',
+  'hiroshima',
+  '/images/explore/hiroshima-city-night.jpg',
+  'Hiroshima Prefecture'
+)
+
+INSERT INTO "Destination" (
+  "name",
+  "slug",
+  "image",
+  "location"
+) VALUES (
+  'Nara',
+  'nara',
+  '/images/explore/nara-deer-park-afternoon.jpg',
+  'Nara Prefecture'
+)
+
+INSERT INTO "Destination" (
+  "name",
+  "slug",
+  "image",
+  "location"
+) VALUES (
+  'Okinawa',
+  'okinawa',
+  '/images/explore/okinawa-coast-day.webp',
+  'Okinawa Prefecture'
 )

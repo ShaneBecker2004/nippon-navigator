@@ -91,6 +91,29 @@ header .navbar .offcanvas-body .dropdown-menu .dropdown-menu .dropdown-item{
     color: var(--black) !important;
 }
 
+.navbar .dropdown:hover > .dropdown-menu {
+  display: block;
+  margin-top: 0; /* prevents jump */
+}
+
+.dropdown-menu .dropdown {
+  position: relative;
+}
+
+/* Position inner dropdown to the side */
+.dropdown-menu .dropdown-menu {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-top: 0;
+  display: none;
+}
+
+/* Show inner dropdown on hover */
+.dropdown-menu .dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
 header .dropdown-item:active {
     background-color: lightgray;
 }

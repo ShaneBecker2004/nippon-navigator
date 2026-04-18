@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import { Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import Cards from "../../components/Cards/Cards";
 import cityimg from "../../assets/images/breadcrumb/shibuya-night.avif";
 import "../Explore/explore.css"; // optional for fade-in CSS
@@ -32,8 +33,13 @@ const Cities = () => {
     fetchDestinations();
   }, []);
 
-  // Show nothing while loading
-  if (loading) return null;
+    if (loading) {
+    return (
+      <div className="fullscreen-loader">
+        <div className="loader-spinner"></div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -41,12 +47,23 @@ const Cities = () => {
 
       <section className="py-5">
         <Container>
-          <Row className="fade-in"> {/* fade-in effect */}
-            {destinations.map((destination) => (
-              <Col md="3" sm="6" key={destination.id} className="pb-4">
-                <Cards destination={destination} />
-              </Col>
-            ))}
+          <Row className="fade-in">
+            {destinations.length > 0 ? (
+              destinations.map((destination) => (
+                <Col md="3" sm="6" key={destination.id} className="pb-4">
+                  <Link
+                    to={`/explore?city=${destination.slug}`}
+                    className="activity-card-link"
+                  >
+                    <Cards destination={destination} />
+                  </Link>
+                </Col>
+              ))
+            ) : (
+              <p className="text-center w-100 mt-4">
+                No destinations found.
+              </p>
+            )}
           </Row>
         </Container>
       </section>

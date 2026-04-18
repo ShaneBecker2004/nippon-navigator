@@ -13,6 +13,9 @@ const NewTrip = () => {
     description: "",
     startDate: "",
     endDate: "",
+    arrivalLocation: "",
+    departureLocation: "",
+    partySize: 1,
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -110,6 +113,9 @@ const NewTrip = () => {
           description: formData.description.trim(),
           startDate: formData.startDate,
           endDate: formData.endDate,
+          arrivalLocation: formData.arrivalLocation.trim(),
+          departureLocation: formData.departureLocation.trim(),
+          partySize: formData.partySize,
         }),
       });
 
@@ -130,6 +136,9 @@ const NewTrip = () => {
         description: "",
         startDate: "",
         endDate: "",
+        arrivalLocation: "",
+        departureLocation: "",
+        partySize: 1,
       });
 
       // Navigate after a short delay to show success message
@@ -227,6 +236,26 @@ const NewTrip = () => {
                 </Form.Text>
               </Form.Group>
 
+              <Form.Group className="form-group">
+                <Form.Label>
+                  <i className="bi bi-people-fill me-2"></i>
+                  Number of Travelers
+                </Form.Label>
+
+                <Form.Control
+                  type="number"
+                  min="1"
+                  name="partySize"
+                  value={formData.partySize}
+                  onChange={handleInputChange}
+                  disabled={loading || submitSuccess}
+                />
+
+                <Form.Text className="text-muted">
+                  How many people are going on this trip?
+                </Form.Text>
+              </Form.Group>
+
               {/* DATES */}
               <div className="dates-section">
                 <h4 className="section-title">
@@ -273,6 +302,45 @@ const NewTrip = () => {
                     )}
                   </Form.Group>
                 </div>
+                <Form.Group className="form-group">
+                  <Form.Label>
+                    <i className="bi bi-airplane-engines me-2"></i>
+                    Arrival Location
+                  </Form.Label>
+
+                  <Form.Control
+                    type="text"
+                    name="arrivalLocation"
+                    value={formData.arrivalLocation}
+                    onChange={handleInputChange}
+                    placeholder="e.g., Tokyo (Narita Airport or City)"
+                    disabled={loading || submitSuccess}
+                  />
+
+                  <Form.Text className="text-muted">
+                    City or airport where your trip starts
+                  </Form.Text>
+                </Form.Group>
+
+                <Form.Group className="form-group">
+                  <Form.Label>
+                    <i className="bi bi-airplane me-2"></i>
+                    Departure Location
+                  </Form.Label>
+
+                  <Form.Control
+                    type="text"
+                    name="departureLocation"
+                    value={formData.departureLocation}
+                    onChange={handleInputChange}
+                    placeholder="e.g., Tokyo or Osaka Airport"
+                    disabled={loading || submitSuccess}
+                  />
+
+                  <Form.Text className="text-muted">
+                    City or airport where your trip ends
+                  </Form.Text>
+                </Form.Group>
               </div>
 
               {/* SUBMIT BUTTON */}

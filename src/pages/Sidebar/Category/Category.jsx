@@ -1,13 +1,62 @@
 import React from 'react'
+import Input from '../Input'
 import "./category.css"
 
-const Category = () => {
+function Category({ handleCategoryChange }) {
   return (
     <div>
       <h1 className='sidebar-title'>Category</h1>
 
     <div>
       <label className='sidebar-label-container'>
+        <input onChange={handleCategoryChange} type='radio' value="" name="test" />
+        <span className='checkmark'></span>All
+      </label>
+
+        <Input
+          handleChange={handleCategoryChange}
+          value="food_and_drink"
+          title="Food And Drink"
+          name="test"
+        />
+        <Input
+          handleChange={handleCategoryChange}
+          value="theme_park"
+          title="Theme Park"
+          name="test"
+        />
+        <Input
+          handleChange={handleCategoryChange}
+          value="park"
+          title="Park"
+          name="test"
+        />
+        <Input
+          handleChange={handleCategoryChange}
+          value="shopping"
+          title="Shopping"
+          name="test"
+        />
+        <Input
+          handleChange={handleCategoryChange}
+          value="nature"
+          title="Nature"
+          name="test"
+        />
+        <Input
+          handleChange={handleCategoryChange}
+          value="family_friendly"
+          title="Family-Friendly"
+          name="test"
+        />
+        <Input
+          handleChange={handleCategoryChange}
+          value="festival"
+          title="Festival"
+          name="test"
+        />
+
+      {/* <label className='sidebar-label-container'>
         <input type='radio' name="test"/>
         <span className='checkmark'></span>All
       </label>
@@ -34,7 +83,7 @@ const Category = () => {
       <label className='sidebar-label-container'>
         <input type='radio' name="test"/>
         <span className='checkmark'></span>Family-Friendly
-      </label>
+      </label> */}
     </div>
 
     </div>

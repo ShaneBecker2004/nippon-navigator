@@ -7,7 +7,7 @@ import Rating from "./Rating/Rating"
 import Seasonal from "./Seasonal/Seasonal"
 import './sidebar.css'
 
-const Sidebar = () => {
+function Sidebar({ handleCategoryChange, handleLocationChange, handlePriceChange, handleRatingChange }) {
   return (
     <>
       <section className='sidebar'>
@@ -15,12 +15,12 @@ const Sidebar = () => {
           <h1>Filters</h1>
         </div>
 
-        <Category />
-        <Location />
-        <Popularity />
-        <Price />
-        <Rating />
-        <Seasonal />
+        <Category handleCategoryChange={handleCategoryChange} />
+        <Location handleLocationChange={handleLocationChange}/>
+        {/* <Popularity handleCategoryChange={handleCategoryChange}/> */}
+        <Price handlePriceChange={handlePriceChange}/>
+        <Rating handleRatingChange={handleRatingChange}/>
+        {/* <Seasonal handleCategoryChange={handleCategoryChange}/> */}
         
       </section>
     </>

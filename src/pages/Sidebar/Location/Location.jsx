@@ -1,12 +1,31 @@
 import React from 'react'
+import Input from '../Input'
 import "./location.css"
 
-const Location = () => {
+function Location ({ handleLocationChange}) {
   return (
     <div className='ml'>
       <h2 className='sidebar-title location-title'>Location</h2>
 
-      <label className='sidebar-label-container'>
+      <div> 
+        <label className='sidebar-label-container'>
+        <input onChange={handleLocationChange} type='radio' value="" name="test3" />
+        <span className='checkmark'></span>All
+      </label>
+
+      <Input 
+      handleChange={handleLocationChange}
+      value="tokyo"
+      title="Tokyo"
+      name="test3"
+      />
+      <Input 
+      handleChange={handleLocationChange}
+      value="osaka"
+      title="Osaka"
+      name="test3"
+      />
+      {/* <label className='sidebar-label-container'>
         <input type='radio' name="test2"/>
         <span className='checkmark'></span>All
       </label>
@@ -29,7 +48,8 @@ const Location = () => {
       <label className='sidebar-label-container'>
         <input type='radio' name="test2"/>
         <span className='checkmark'></span>Yokohama
-      </label>
+      </label> */}
+      </div>
     </div>
   )
 }

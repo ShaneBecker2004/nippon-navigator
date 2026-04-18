@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { Col, Container, Row, Offcanvas } from 'react-bootstrap';
+import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ActivityCard from '../../components/Cards/ActivityCard';
-import Filters from './Filters';
 import Sidebar from '../Sidebar/Sidebar';
 import Recommended from '../../components/Recommended/Recommended';
 import "../Explore/explore.css";
@@ -12,18 +13,55 @@ const Explore = () => {
   const [activities, setActivities] = useState([]);
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedRating, setSelectedRating] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState("");
+  
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // Fetch activities from API
+  const location = useLocation();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const activitiesPerPage = 9;
+
+  const indexOfLastItem = currentPage * activitiesPerPage;
+  const indexOfFirstItem = indexOfLastItem - activitiesPerPage;
+
+
+
+  const getActivityPrice = (price) => {
+    if (!price) return 0;
+
+    const parsed = typeof price === "string" ? JSON.parse(price) : price;
+
+    if (typeof parsed === "object") {
+      const first = Object.values(parsed)[0];
+
+      if (typeof first === "object" && first.min) {
+        return first.min; // use min price
+      }
+
+      if (typeof first === "number") {
+        return first;
+      }
+    }
+
+    return 0;
+  };
+
+
+  
+  // ✅ Fetch activities
   useEffect(() => {
     const fetchActivities = async () => {
       try {
         const res = await fetch("http://localhost:5001/api/activities");
         const data = await res.json();
 
-        // Map fields to match ActivityCard
         const mappedData = data.map(act => ({
           ...act,
           category: act.category || [],
@@ -36,16 +74,79 @@ const Explore = () => {
         setActivities(mappedData);
       } catch (err) {
         console.error("Failed to fetch activities:", err);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchActivities();
   }, []);
 
-  // Filter activities based on search
-  const filteredActivities = activities.filter(activity =>
-    activity.title.toLowerCase().includes(search.toLowerCase())
+  // ✅ Combined filtering (search + category)
+  const filteredActivities = activities.filter((activity) => {
+    const matchesSearch = activity.title
+      ?.toLowerCase()
+      .includes(search.toLowerCase());
+
+    const matchesCategory = selectedCategory
+      ? activity.category.includes(selectedCategory)
+      : true;
+
+    const matchesLocation = selectedLocation
+      ? activity.location?.toLowerCase().includes(selectedLocation.toLowerCase())
+      : true;
+
+    const matchesRating = selectedRating
+      ? activity.rating >= Number(selectedRating)
+      : true;
+
+    const matchesPrice = selectedPrice
+      ? getActivityPrice(activity.price) <= Number(selectedPrice)
+      : true;
+
+    return (
+      matchesSearch &&
+      matchesCategory &&
+      matchesLocation &&
+      matchesRating &&
+      matchesPrice
+    );
+  });
+
+
+  // ✅ Handle category change (used by Sidebar/Filters)
+  const handleCategoryChange = (e) => {setSelectedCategory(e.target.value);};
+  const handleLocationChange = (e) => {setSelectedLocation(e.target.value);};
+  const handleRatingChange = (e) => {setSelectedRating(e.target.value);};
+  const handlePriceChange = (e) => {setSelectedPrice(Number(e.target.value));};
+
+  const handleClick = (e) => {setSelectedCategory(e.target.value);};
+
+  const params = new URLSearchParams(location.search);
+  const cityFromURL = params.get("city");
+
+  useEffect(() => {
+    if (cityFromURL) {
+      setSelectedLocation(cityFromURL);
+    }
+  }, [cityFromURL]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, selectedCategory, selectedLocation, selectedPrice, selectedRating]);
+  
+  const currentActivities = filteredActivities.slice(
+    indexOfFirstItem,
+    indexOfLastItem
   );
+
+  if (loading) {
+    return (
+      <div className="fullscreen-loader">
+        <div className="loader-spinner"></div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -54,6 +155,7 @@ const Explore = () => {
       <section className='py-5 explore_list'>
         <Container>
           <Row>
+            {/* SEARCH */}
             <div className="d-flex align-items-center mb-4">
               <i className="bi bi-search me-2" style={{ fontSize: "1.2rem", color: "#555" }}></i>
               <input
@@ -65,7 +167,7 @@ const Explore = () => {
               />
             </div>
 
-            <Recommended />
+            <Recommended handleClick={handleClick}/>
 
             {/* LEFT SIDE (Filters) */}
             <Col xl='3' lg='4' md='5' sm='6'>
@@ -78,36 +180,62 @@ const Explore = () => {
 
               {/* Desktop filters */}
               <div className='filters d-lg-block d-none'>
-                <Sidebar />
+                <Sidebar
+                  handleCategoryChange={handleCategoryChange}
+                  handleLocationChange={handleLocationChange}
+                  handlePriceChange={handlePriceChange}
+                  handleRatingChange={handleRatingChange}
+                />
               </div>
             </Col>
 
-            {/* RIGHT SIDE (Search + Cards) */}
+            {/* RIGHT SIDE (Cards) */}
             <Col xl='9' lg='8' md='12' sm='12'>
               <Row>
                 {filteredActivities.length === 0 ? (
                   <p>No activities found.</p>
                 ) : (
-                  filteredActivities.map((val, inx) => (
-                    <Col xl={4} lg={6} md={6} sm={6} className='mb-5' key={inx}>
-                      <ActivityCard val={val} />
+                  currentActivities.map((activity) => (
+                    <Col xl={4} lg={6} md={6} sm={6} className='mb-5' key={activity.id}>
+                      <Link to={`/activity/${activity.slug || activity.id}`} className='text-decoration-none'>
+                        <ActivityCard val={activity} />
+                      </Link>
                     </Col>
                   ))
                 )}
               </Row>
+              <div className='pagination'>
+                {Array.from(
+                  { length: Math.ceil(filteredActivities.length / activitiesPerPage) },
+                  (_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setCurrentPage(i + 1)}
+                      className={currentPage === i + 1 ? "active" : ""}
+                    >
+                      {i + 1}
+                    </button>
+                  )
+                )}
+              </div>
             </Col>
           </Row>
         </Container>
       </section>
 
-      {/* Mobile Filters Offcanvas */}
+      {/* MOBILE FILTERS */}
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Filters</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Recommended />
-          <Sidebar />
+          <Sidebar
+            handleCategoryChange={handleCategoryChange}
+            handleLocationChange={handleLocationChange}
+            handlePriceChange={handlePriceChange}
+            handleRatingChange={handleRatingChange}
+/>
         </Offcanvas.Body>
       </Offcanvas>
     </>

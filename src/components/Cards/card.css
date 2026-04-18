@@ -177,11 +177,14 @@
     color: #ffffff !important;
 }
 
-.popular-card .card-body .card-title {
-    font-size: var(--bodyText);
-    font-weight: bold;
-    transition: all 0.5s ease 0s;
-    margin-bottom: 10px;
+.popular-card .card-body .card-title a {
+    text-decoration: none !important;
+    color: inherit;
+}
+
+.popular-card .card-body .card-title a:hover {
+    text-decoration: none !important;
+    color: inherit;
 }
 
 .popular-card .card-body .card-text {

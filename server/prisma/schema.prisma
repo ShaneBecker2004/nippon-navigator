@@ -9,7 +9,7 @@ datasource db {
 model Destination {
   id         Int        @id @default(autoincrement())
   name       String     @unique
-  tours      String
+  slug      String     @unique
   image      String?
   location   String
   activities Activity[]
@@ -38,18 +38,30 @@ model Activity {
   map_embed_url String?
   destination   Destination?    @relation(fields: [destinationId], references: [id])
   savedItems    SavedActivity[]
+
+  @@index([destinationId])
 }
 
 model Trip {
-  id         String          @id @default(cuid())
-  userId     String
-  createdAt  DateTime        @default(now())
-  endDate    DateTime?
-  startDate  DateTime?
-  description String?
-  tripName   String
+  id          String   @id @default(cuid())
+  userId      String
 
-  savedItems SavedActivity[] @relation()
+  tripName    String
+  description String?
+
+  startDate   DateTime?
+  endDate     DateTime?
+
+  arrivalLocation   String?
+  departureLocation String?
+
+  partySize  Int?
+
+  notes      String?
+
+  createdAt  DateTime @default(now())
+
+  savedItems SavedActivity[]
 }
 
 model SavedActivity {
@@ -59,6 +71,10 @@ model SavedActivity {
 
   activityId Int
   notes      String?
+
+  order     Int @default(0)
+  scheduledAt DateTime?
+  status String? // planned, booked, completed
 
   activity   Activity @relation(fields: [activityId], references: [id])
   trip       Trip     @relation(fields: [tripId], references: [id])

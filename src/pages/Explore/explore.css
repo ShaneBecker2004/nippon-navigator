@@ -234,3 +234,57 @@ aside {
     transform: rotate(360deg);
   }
 }
+
+.trip-details-container .trip-title {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.trip-details-container .trip-meta {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.trip-details-container .trip-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #ffffff;
+  margin-top: 10px;
+}
+
+.trip-details-container .trip-locations,
+.trip-details-container .trip-people {
+  font-size: 0.95rem;
+  color: #ffffff;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+.trip-details-container .location-item {
+  margin-bottom: 4px;
+}
+
+.trip-details-container .trip-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.trip-details-container p,
+.trip-details-container span {
+  font-size: 0.95rem;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #666;
+}

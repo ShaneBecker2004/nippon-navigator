@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, NavLink } from 'react-router-dom';
+import { useParams, NavLink, useNavigate } from 'react-router-dom';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
-import { Container, Row, Col, Nav, Tab, Card, CardBody } from 'react-bootstrap';
+import { Container, Row, Col, Nav, Tab, Card, CardBody, Modal, Button } from 'react-bootstrap';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import Stack from 'react-bootstrap/Stack';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { Autoplay } from "swiper/modules";
+import { useAuth } from '../../contexts/authContext';
+import { getAuth } from 'firebase/auth';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -13,11 +16,23 @@ import "../Explore/explore.css";
 
 const ExploreDetails = () => {
   const { slug } = useParams();
+  const { currentUser, userLoggedIn } = useAuth();
 
   const [activity, setActivity] = useState(null);
   const [loading, setLoading] = useState(true); // ✅ NEW
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  
+  // ✅ NEW: Add to Trip states
+  const [showTripModal, setShowTripModal] = useState(false);
+  const [trips, setTrips] = useState([]);
+  const [tripsLoading, setTripsLoading] = useState(false);
+  const [selectedTrip, setSelectedTrip] = useState(null);
+  const [addingActivity, setAddingActivity] = useState(false);
+  const [addMessage, setAddMessage] = useState('');
+  const [activityAdded, setActivityAdded] = useState(false);
+
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   const formatKey = (key) => {
   return key
@@ -52,6 +67,105 @@ const ExploreDetails = () => {
     fetchActivity();
   }, [slug]);
 
+  // ✅ NEW: Fetch user's trips when modal opens
+  const fetchUserTrips = async () => {
+    if (!userLoggedIn) {
+      setAddMessage('Please log in to add activities to trips');
+      return;
+    }
+
+    setTripsLoading(true);
+    try {
+      const auth = getAuth();
+      const token = await auth.currentUser.getIdToken();
+
+      const res = await fetch('http://localhost:5001/api/trips', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!res.ok) throw new Error('Failed to fetch trips');
+
+      const data = await res.json();
+      setTrips(data);
+      setAddMessage('');
+    } catch (err) {
+      console.error('Error fetching trips:', err);
+      setAddMessage('Failed to load trips. Please try again.');
+    } finally {
+      setTripsLoading(false);
+    }
+  };
+
+  // ✅ NEW: Add activity to selected trip
+  const handleAddActivityToTrip = async () => {
+    if (!selectedTrip || !activity) {
+      setAddMessage('Please select a trip');
+      return;
+    }
+
+    setAddingActivity(true);
+    try {
+      const res = await fetch('http://localhost:5001/api/trips/save-activity', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          tripId: selectedTrip.id,
+          activityId: activity.id,
+          notes: ''
+        })
+      });
+
+      if (!res.ok) throw new Error('Failed to add activity');
+
+      setAddMessage('Activity added to trip successfully!');
+      setActivityAdded(true);
+    } catch (err) {
+      console.error('Error adding activity:', err);
+      setAddMessage('Failed to add activity. Please try again.');
+    } finally {
+      setAddingActivity(false);
+    }
+  };
+
+  const navigate = useNavigate();
+
+  // ✅ NEW: Close modal and go to planner
+  const handleGoToPlanner = () => {
+    const tripId = selectedTrip?.id;
+    if (!tripId) return;
+    setShowTripModal(false);
+    setSelectedTrip(null);
+    setAddMessage('');
+    setActivityAdded(false);
+    navigate(`/trip-details/${tripId}`);
+  };
+
+  // ✅ NEW: Continue exploring
+  const handleContinueExploring = () => {
+    setShowTripModal(false);
+    setSelectedTrip(null);
+    setAddMessage('');
+    setActivityAdded(false);
+  };
+
+  // ✅ NEW: Open modal handler
+  const handleOpenTripModal = () => {
+  // 🔒 NOT logged in → show login modal
+  if (!userLoggedIn || !currentUser) {
+    setShowAuthModal(true);
+    return;
+  }
+
+  // ✅ logged in → proceed normally
+  fetchUserTrips();
+  setShowTripModal(true);
+};
+
   // ✅ FULLSCREEN LOADER
   if (loading) {
     return (
@@ -82,7 +196,13 @@ const ExploreDetails = () => {
                 slidesPerView={1}
                 navigation
                 pagination={{ clickable: true }}
-                modules={[Navigation, Pagination]}
+                modules={[Navigation, Pagination, Autoplay]}
+                loop={true}
+                autoplay={{
+                  delay: 4000, // 3 seconds between slides
+                  disableOnInteraction: false, // keeps autoplay after user clicks
+                  pauseOnMouseEnter: true 
+                }}
                 className="explore-swiper"
               >
                 {activity.images?.map((img, index) => (
@@ -338,7 +458,7 @@ const ExploreDetails = () => {
                       </p>
                     </div>
 
-                    <NavLink className="primaryBtn w-100 btn-lg d-block text-center">
+                    <NavLink className="primaryBtn w-100 btn-lg d-block text-center" onClick={handleOpenTripModal} style={{ cursor: 'pointer' }}>
                       Add to Trip
                     </NavLink>
 
@@ -388,6 +508,107 @@ const ExploreDetails = () => {
               </Swiper>
             </div>
           )}
+
+          {/* ✅ NEW: ADD TO TRIP MODAL */}
+          <Modal show={showTripModal} onHide={() => setShowTripModal(false)} centered>
+            <Modal.Header closeButton>
+              <Modal.Title>Add Activity to Trip</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {addMessage && (
+                <div className={`alert ${addMessage.includes('successfully') ? 'alert-success' : 'alert-info'}`}>
+                  {addMessage}
+                </div>
+              )}
+              
+              {tripsLoading ? (
+                <p>Loading your trips...</p>
+              ) : trips.length === 0 ? (
+                <p>You don't have any trips yet. <NavLink to="/planning">Create a trip first</NavLink></p>
+              ) : (
+                <div>
+                  <label className="form-label">Select a trip:</label>
+                  <div className="d-flex flex-column gap-2">
+                    {trips.map((trip) => (
+                      <div
+                        key={trip.id}
+                        className={`p-3 border rounded cursor-pointer ${selectedTrip?.id === trip.id ? 'border-primary bg-light' : ''}`}
+                        onClick={() => setSelectedTrip(trip)}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <strong>{trip.tripName}</strong>
+                        <p className="mb-0 small text-muted">{trip.savedItems?.length || 0} activities</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </Modal.Body>
+            <Modal.Footer>
+              {activityAdded ? (
+                <>
+                  <Button 
+                    variant="outline-primary" 
+                    onClick={handleContinueExploring}
+                  >
+                    Continue Exploring
+                  </Button>
+                  <Button 
+                    variant="primary" 
+                    onClick={handleGoToPlanner}
+                  >
+                    Go to Planner
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button variant="secondary" onClick={() => setShowTripModal(false)}>
+                    Cancel
+                  </Button>
+                  <Button 
+                    variant="primary" 
+                    onClick={handleAddActivityToTrip}
+                    disabled={!selectedTrip || addingActivity || tripsLoading}
+                  >
+                    {addingActivity ? 'Adding...' : 'Add Activity'}
+                  </Button>
+                </>
+              )}
+            </Modal.Footer>
+          </Modal>
+          <Modal
+            show={showAuthModal}
+            onHide={() => setShowAuthModal(false)}
+            centered
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Sign in required</Modal.Title>
+            </Modal.Header>
+
+            <Modal.Body>
+              <p>You need to be signed in to add activities to a trip.</p>
+              <p className="text-muted mb-0">
+                Please log in or create an account to continue.
+              </p>
+            </Modal.Body>
+
+            <Modal.Footer>
+              <Button
+                variant="secondary"
+                onClick={() => setShowAuthModal(false)}
+              >
+                Cancel
+              </Button>
+
+              <NavLink
+                to={`/login?redirect=/activity/${slug}`}
+                className="btn btn-primary"
+                onClick={() => setShowAuthModal(false)}
+              >
+                Login / Sign Up
+              </NavLink>
+            </Modal.Footer>
+          </Modal>
         </Container>
       </section>
     </>

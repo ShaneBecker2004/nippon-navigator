@@ -36,6 +36,31 @@ const ActivityCard = ({ val }) => {
 
   const price = normalizePrice(val.price);
 
+  const getStartingPrice = (priceObj) => {
+  if (!priceObj || typeof priceObj !== "object") return null;
+
+  const values = Object.values(priceObj)
+    .map(v => {
+      if (typeof v === "number") return v;
+
+      if (typeof v === "string" && v.includes("-")) {
+        const [min] = v.split("-");
+        return Number(min);
+      }
+
+      if (typeof v === "object" && v.min !== undefined) {
+        return Number(v.min);
+      }
+
+      return Number(v);
+    })
+    .filter(v => !isNaN(v));
+
+  if (!values.length) return null;
+
+  return Math.min(...values);
+};
+
   return (
     <Card className="rounded-2 shadow-sm popular-card">
       <Card.Img
@@ -54,7 +79,7 @@ const ActivityCard = ({ val }) => {
         <Card.Title>
           <NavLink
             className="body-text text-dark text-decoration-none"
-            to={`/explore-details/${val.slug || val.id}`}
+            to={`/activity/${val.slug || val.id}`}
           >
             {val.title}
           </NavLink>
@@ -93,60 +118,67 @@ const ActivityCard = ({ val }) => {
         {/* 💰 PRICE SECTION (FIXED) */}
         <div className="card-prices">
           {price && Object.keys(price).length > 0 ? (
-            Object.entries(price).map(([key, value]) => {
-              const label = formatKey(key);
+            (() => {
               const currencySymbol = val.currency === "JPY" ? "¥" : "$";
 
-              // 🟢 FREE
-              if (
-                value === 0 ||
-                value === "0" ||
-                (typeof value === "string" && value.toLowerCase().includes("free"))
-              ) {
-                return (
-                  <p key={key} className="mb-0">
-                    <b>{label}:</b> Free
-                  </p>
-                );
+              // 🧠 normalize all price values into usable numbers
+              const values = Object.values(price)
+                .flatMap((v) => {
+                  if (v === null || v === undefined) return [];
+
+                  // FREE
+                  if (
+                    v === 0 ||
+                    v === "0" ||
+                    (typeof v === "string" && v.toLowerCase().includes("free"))
+                  ) {
+                    return ["free"];
+                  }
+
+                  // RANGE OBJECT {min, max}
+                  if (typeof v === "object" && v.min !== undefined && v.max !== undefined) {
+                    return [Number(v.min)];
+                  }
+
+                  // RANGE STRING "1000-1500"
+                  if (typeof v === "string" && v.includes("-")) {
+                    const [min] = v.split("-");
+                    return [Number(min)];
+                  }
+
+                  // NORMAL NUMBER
+                  if (!isNaN(Number(v))) {
+                    return [Number(v)];
+                  }
+
+                  return [];
+                });
+
+              // 🟢 FREE ONLY CASE
+              if (values.includes("free")) {
+                return <p className="mb-0"><b>Free</b></p>;
               }
 
-              // 🟡 RANGE OBJECT {min, max}
-              if (typeof value === "object" && value.min !== undefined && value.max !== undefined) {
-                return (
-                  <p key={key} className="mb-0">
-                    <b>{label}:</b>{" "}
+              // 🟡 GET STARTING PRICE
+              const numericValues = values.filter(v => typeof v === "number");
+              const startingPrice = numericValues.length
+                ? Math.min(...numericValues)
+                : null;
+
+              return startingPrice ? (
+                <p className="mb-0">
+                  <span className="text-muted">Starting at </span>
+                  <b>
                     {currencySymbol}
-                    {Number(value.min).toLocaleString()} - {currencySymbol}
-                    {Number(value.max).toLocaleString()}
-                  </p>
-                );
-              }
-
-              // 🔵 RANGE STRING "1000-1500"
-              if (typeof value === "string" && value.includes("-")) {
-                const [min, max] = value.split("-");
-
-                return (
-                  <p key={key} className="mb-0">
-                    <b>{label}:</b>{" "}
-                    {currencySymbol}
-                    {Number(min).toLocaleString()} - {currencySymbol}
-                    {Number(max).toLocaleString()}
-                  </p>
-                );
-              }
-
-              // 🟣 NORMAL NUMBER
-              return (
-                <p key={key} className="mb-0">
-                  <b>{label}:</b>{" "}
-                  {currencySymbol}
-                  {Number(value).toLocaleString()}
+                    {startingPrice.toLocaleString()}
+                  </b>
                 </p>
+              ) : (
+                <p className="text-muted">No pricing available</p>
               );
-            })
+            })()
           ) : (
-            <p>No pricing available</p>
+            <p className="text-muted">No pricing available</p>
           )}
         </div>
       </Card.Body>

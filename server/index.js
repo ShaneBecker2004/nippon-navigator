@@ -116,6 +116,11 @@ app.post("/api/trips", authenticateUser, async (req, res) => {
         description: req.body.description,
         startDate: req.body.startDate ? new Date(req.body.startDate) : null,
         endDate: req.body.endDate ? new Date(req.body.endDate) : null,
+
+        arrivalLocation: req.body.arrivalLocation || null,
+        departureLocation: req.body.departureLocation || null,
+        partySize: req.body.partySize ? Number(req.body.partySize) : null,
+
         userId: uid,
       },
     });
@@ -186,6 +191,77 @@ app.get("/api/trips/:id", authenticateUser, async (req, res) => {
   }
 });
 
+// Update trip details
+app.put("/api/trips/:id", authenticateUser, async (req, res) => {
+  try {
+    const uid = req.user.uid;
+    const { id } = req.params;
+    const { description, arrivalLocation, departureLocation, partySize } = req.body;
+
+    const trip = await prisma.trip.findUnique({
+      where: { id },
+    });
+
+    if (!trip || trip.userId !== uid) {
+      return res.status(404).json({ error: "Trip not found or access denied." });
+    }
+
+    const updatedTrip = await prisma.trip.update({
+      where: { id },
+      data: {
+        description,
+        arrivalLocation,
+        departureLocation,
+        partySize: partySize ? parseInt(partySize) : null,
+      },
+      include: {
+        savedItems: {
+          include: { activity: true },
+        },
+      },
+    });
+
+    res.json(updatedTrip);
+  } catch (err) {
+    console.error("Update Trip Error:", err);
+    res.status(500).json({ error: "Failed to update trip" });
+  }
+});
+
+// Delete a trip
+app.delete("/api/trips/:id", authenticateUser, async (req, res) => {
+  try {
+    const uid = req.user.uid;
+    const { id } = req.params;
+
+    const trip = await prisma.trip.findUnique({
+      where: { id },
+      include: {
+        savedItems: true,
+      },
+    });
+
+    if (!trip || trip.userId !== uid) {
+      return res.status(404).json({ error: "Trip not found or access denied." });
+    }
+
+    if (trip.savedItems.length > 0) {
+      await prisma.savedActivity.deleteMany({
+        where: { tripId: id },
+      });
+    }
+
+    await prisma.trip.delete({
+      where: { id },
+    });
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Delete Trip Error:", err);
+    res.status(500).json({ error: "Failed to delete trip" });
+  }
+});
+
 // Save activity to trip
 app.post("/api/trips/save-activity", async (req, res) => {
   const { tripId, activityId, notes } = req.body;
@@ -203,6 +279,65 @@ app.post("/api/trips/save-activity", async (req, res) => {
   } catch (err) {
     console.error("Save Activity Error:", err);
     res.status(500).json({ error: "Failed to save activity" });
+  }
+});
+
+// Update saved activity order
+app.put("/api/trips/save-activity/order", authenticateUser, async (req, res) => {
+  const { tripId, order } = req.body;
+
+  if (!tripId || !Array.isArray(order)) {
+    return res.status(400).json({ error: "Trip ID and order array are required." });
+  }
+
+  try {
+    const uid = req.user.uid;
+    const trip = await prisma.trip.findUnique({
+      where: { id: tripId },
+    });
+
+    if (!trip || trip.userId !== uid) {
+      return res.status(404).json({ error: "Trip not found or access denied." });
+    }
+
+    const updates = order.map((item) =>
+      prisma.savedActivity.update({
+        where: { id: Number(item.id) },
+        data: { order: Number(item.order) },
+      })
+    );
+
+    await Promise.all(updates);
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Save order error:", err);
+    res.status(500).json({ error: "Failed to save activity order" });
+  }
+});
+
+// Delete saved activity from trip
+app.delete("/api/trips/save-activity/:id", authenticateUser, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const savedActivity = await prisma.savedActivity.findUnique({
+      where: { id: Number(id) },
+      include: { trip: true },
+    });
+
+    if (!savedActivity || savedActivity.trip.userId !== req.user.uid) {
+      return res.status(404).json({ error: "Saved activity not found." });
+    }
+
+    await prisma.savedActivity.delete({
+      where: { id: Number(id) },
+    });
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Delete saved activity error:", err);
+    res.status(500).json({ error: "Failed to delete saved activity" });
   }
 });
 

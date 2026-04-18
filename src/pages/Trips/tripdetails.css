@@ -69,9 +69,9 @@
 }
 
 .add-activity-btn {
-  background: white;
-  color: var(--primaryClr);
-  border: none;
+  background: transparent;
+  color: white;
+  border: 2px solid white;
   padding: 12px 24px;
   border-radius: 50px;
   font-weight: 600;
@@ -83,9 +83,61 @@
 }
 
 .add-activity-btn:hover {
-  background: #d94b4b;
+  background: white;
+  color: var(--primaryClr);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.edit-activity-btn {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.edit-activity-btn:hover {
+  background: white;
+  color: var(--primaryClr);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.save-edit-btn {
+  background: var(--primaryClr);
+  color: white;
+  border: 2px solid white;
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.save-edit-btn:hover {
+  background: white;
+  color: var(--primaryClr);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cancel-btn {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background: white;
+  color: var(--primaryClr);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Trip Content Section */
@@ -211,6 +263,19 @@
   font-style: italic;
 }
 
+/* Drag and Drop Styles */
+.timeline-item.drag-over {
+  border: 2px dashed var(--primaryClr);
+  background: rgba(0, 123, 255, 0.05);
+  transform: scale(1.02);
+  transition: all 0.2s ease;
+}
+
+.timeline-item.dragging {
+  opacity: 0.5;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
 /* Activities Section */
 .activities-section h3 {
   color: #2d3748;
@@ -277,6 +342,12 @@
   gap: 6px;
   color: #718096;
   font-size: 0.9rem;
+}
+
+.activity-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .activity-notes {
