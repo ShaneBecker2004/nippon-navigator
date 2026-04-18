@@ -47,7 +47,6 @@ const ExploreDetails = () => {
       : activity?.price;
 
   useEffect(() => {
-    let isMounted = true;
 
     const fetchActivity = async () => {
       try {
@@ -71,7 +70,6 @@ const ExploreDetails = () => {
     const interval = setInterval(fetchActivity, 10000);
 
     return () => {
-      isMounted = false;
       clearInterval(interval);
     };
   }, [slug]);
