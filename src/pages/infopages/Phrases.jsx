@@ -1,19 +1,18 @@
 import React from 'react'
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
 import { Container, Row, Col, Card } from 'react-bootstrap'
-import aboutImg from  "../../assets/images/about/about-japan.jpg"
+import mannerImg from  "../../assets/images/breadcrumb/japan-etiquette-banner.jpg"
 
 const Phrases = () => {
   return (
     <>
-      <Breadcrumbs title="important phrases to know" pagename="Important Phrases" />
+      <Breadcrumbs title="important phrases to know" pagename="Important Phrases" bgImage={mannerImg} />
       <section className='py-5'>
         <Container>
           <Row>
             <Col md="8">
               <div className='about-content'>
                 <div className='about-image position-relative'>
-                  <img src={aboutImg} alt="about" className='img-fluid rounded-5' />
                   </div>
                   <h2 className='h2 font-bold pt-4 pb-2'>
                     What Is This Website All About 

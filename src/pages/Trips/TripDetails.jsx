@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getAuth } from 'firebase/auth'
 import "./tripdetails.css"
-import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { Calendar } from 'react-feather'
 import { Nav, NavLink, Button, Tab, Form } from 'react-bootstrap'

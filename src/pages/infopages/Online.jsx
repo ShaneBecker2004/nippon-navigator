@@ -1,12 +1,12 @@
 import React from 'react'
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
 import { Container, Row, Col, Card } from 'react-bootstrap'
-import aboutImg from  "../../assets/images/about/about-japan.jpg"
+import onlineImg from  "../../assets/images/breadcrumb/wifi-banner.jpg"
 
 const Online = () => {
   return (
         <>
-      <Breadcrumbs title="staying connected online" pagename="Online" />
+      <Breadcrumbs title="staying connected online" pagename="Online" bgImage={onlineImg} />
       <section className='py-5'>
         <Container>
           <Row>
