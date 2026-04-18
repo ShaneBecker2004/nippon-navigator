@@ -60,7 +60,7 @@ const Explore = () => {
 
   
   // ✅ Fetch activities
-  const fetchActivities = useCallback(async () => {
+  const fetchActivities = async () => {
     try {
       const res = await fetch(`${API}/api/activities`);
       const data = await res.json();
@@ -80,11 +80,11 @@ const Explore = () => {
     } finally {
       setLoading(false);
     }
-  }, [API]);
+  };
 
   useEffect(() => {
     fetchActivities();
-  }, [fetchActivities]);
+  }, []);
 
   useEffect(() => {
     if (!socket) return;
@@ -101,7 +101,7 @@ const Explore = () => {
     return () => {
       socket.off("tripUpdated", handleTripUpdate);
     };
-  }, [fetchActivities]);
+  }, []);
 
   // ✅ Combined filtering (search + category)
   const filteredActivities = activities.filter((activity) => {
