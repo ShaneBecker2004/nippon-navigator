@@ -14,7 +14,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import "../Explore/explore.css";
 
-const ExploreDetails = () => {
+const Activity = () => {
   const { slug } = useParams();
   const { currentUser, userLoggedIn } = useAuth();
 
@@ -623,4 +623,4 @@ const ExploreDetails = () => {
   );
 };
 
-export default ExploreDetails;
+export default Activity;
