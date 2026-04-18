@@ -27,5 +27,8 @@
   },
   "prisma": {
     "seed": "node seed.js"
+  },
+  "cors": {
+    "origin": "https://nippon-navigator.onrender.com"
   }
 }
