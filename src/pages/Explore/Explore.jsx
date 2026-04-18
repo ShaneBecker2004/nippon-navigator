@@ -84,15 +84,21 @@ const Explore = () => {
   }, []);
 
   useEffect(() => {
-    socket.on("tripUpdated", (updatedTrip) => {
+    if (!socket) return;
+
+    const handleTripUpdate = (updatedTrip) => {
       console.log("🔥 Real-time update received:", updatedTrip);
 
-      // If activities changed, refresh list OR update state
-      fetchActivities(); // simplest & safest approach
-    });
+      // safest option (your current approach)
+      fetchActivities();
+    };
+
+    socket.connect(); // ensures connection exists
+
+    socket.on("tripUpdated", handleTripUpdate);
 
     return () => {
-      socket.off("tripUpdated");
+      socket.off("tripUpdated", handleTripUpdate);
     };
   }, []);
 
