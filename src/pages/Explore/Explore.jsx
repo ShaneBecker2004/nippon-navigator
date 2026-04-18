@@ -27,8 +27,6 @@ const Explore = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const API = process.env.REACT_APP_API_URL;
-
   const location = useLocation();
 
   const [currentPage, setCurrentPage] = useState(1);

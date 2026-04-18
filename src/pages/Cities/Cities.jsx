@@ -2,18 +2,17 @@ import React, { useEffect, useState } from "react";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import API from "../../config/api";
 import Cards from "../../components/Cards/Cards";
 import cityimg from "../../assets/images/breadcrumb/shibuya-night.avif";
 import "../Explore/explore.css"; // optional for fade-in CSS
 
+const API = process.env.REACT_APP_API_URL;
 
 const Cities = () => {
   const [destinations, setDestinations] = useState([]);
   const [loading, setLoading] = useState(true);
 
   
-
   useEffect(() => {
     async function fetchDestinations() {
       try {
@@ -35,7 +34,7 @@ const Cities = () => {
     }
 
     fetchDestinations();
-  }, [API]);
+  }, []);
 
     if (loading) {
     return (

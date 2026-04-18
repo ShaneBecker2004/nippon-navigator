@@ -74,7 +74,7 @@ const Activity = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [slug, API]);
+  }, [slug]);
 
   // ✅ NEW: Fetch user's trips when modal opens
   const fetchUserTrips = async () => {
