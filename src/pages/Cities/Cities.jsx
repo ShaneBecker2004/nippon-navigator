@@ -10,10 +10,12 @@ const Cities = () => {
   const [destinations, setDestinations] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const API = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     async function fetchDestinations() {
       try {
-        const res = await fetch("http://localhost:5001/api/destinations");
+        const res = await fetch(`${API}/api/destinations`);
         const data = await res.json();
 
         // Use image path from database directly, fallback if missing

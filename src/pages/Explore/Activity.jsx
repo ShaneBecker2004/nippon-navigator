@@ -34,6 +34,8 @@ const Activity = () => {
 
   const [showAuthModal, setShowAuthModal] = useState(false);
 
+  const API = process.env.REACT_APP_API_URL;
+
   const formatKey = (key) => {
   return key
     .split(/[_\s]+/) // handles "official hotel" or "official_hotel"
@@ -51,7 +53,7 @@ const Activity = () => {
     const fetchActivity = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5001/api/activities/slug/${slug}`
+          `${API}/api/activities/slug/${slug}`
         );
         const data = await res.json();
 
@@ -86,7 +88,7 @@ const Activity = () => {
       const auth = getAuth();
       const token = await auth.currentUser.getIdToken();
 
-      const res = await fetch('http://localhost:5001/api/trips', {
+      const res = await fetch(`${API}/api/trips`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -115,7 +117,7 @@ const Activity = () => {
 
     setAddingActivity(true);
     try {
-      const res = await fetch('http://localhost:5001/api/trips/save-activity', {
+      const res = await fetch(`${API}/api/trips/save-activity`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

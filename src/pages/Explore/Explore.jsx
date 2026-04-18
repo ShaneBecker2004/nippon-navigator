@@ -24,6 +24,8 @@ const Explore = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const API = process.env.REACT_APP_API_URL;
+
   const location = useLocation();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -59,7 +61,7 @@ const Explore = () => {
   // ✅ Fetch activities
   const fetchActivities = async () => {
     try {
-      const res = await fetch("http://localhost:5001/api/activities");
+      const res = await fetch(`${API}/api/activities`);
       const data = await res.json();
 
       const mappedData = data.map(act => ({

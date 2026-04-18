@@ -1,6 +1,8 @@
 import { io } from "socket.io-client";
 
-export const socket = io("https://nippon-navigator.onrender.com", {
-  autoConnect: false,
+const SOCKET_URL =
+  process.env.REACT_APP_API_URL || "http://localhost:5001";
+
+export const socket = io(SOCKET_URL, {
   transports: ["websocket"],
 });
