@@ -9,11 +9,12 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { Autoplay } from "swiper/modules";
 import { useAuth } from '../../contexts/authContext';
 import { getAuth } from 'firebase/auth';
-import API from '../../config/api';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import "../Explore/explore.css";
+
+const API = process.env.REACT_APP_API_URL;
 
 const Activity = () => {
   const { slug } = useParams();
@@ -73,7 +74,7 @@ const Activity = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [slug]);
+  }, [slug, API]);
 
   // ✅ NEW: Fetch user's trips when modal opens
   const fetchUserTrips = async () => {
