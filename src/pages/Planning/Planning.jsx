@@ -147,7 +147,7 @@ const Planning = () => {
         <div className="dashboard-topbar">
           <h1 className="dashboard-title">Dashboard</h1>
 
-          <Link to="new-trip">
+          <Link to="/new-trip">
             <Button className="new-trip-button">New Trip</Button>
           </Link>
         </div>
