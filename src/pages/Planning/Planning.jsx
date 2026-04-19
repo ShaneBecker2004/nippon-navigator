@@ -47,7 +47,7 @@ const Planning = () => {
         return;
       }
 
-      const token = await user.getIdToken(true);
+      const token = await user.getIdToken();
 
       const response = await fetch(`${API}/api/trips`, {
         method: "GET",
@@ -102,7 +102,7 @@ const Planning = () => {
         return;
       }
 
-      const token = await user.getIdToken(true);
+      const token = await user.getIdToken();
       const response = await fetch(`${API}/api/trips/${tripId}`, {
         method: 'DELETE',
         headers: {

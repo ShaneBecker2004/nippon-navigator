@@ -126,7 +126,7 @@ const handleAddActivityToTrip = async () => {
       return;
     }
 
-    const token = await user.getIdToken(true);
+    const token = await user.getIdToken();
 
     const res = await fetch(`${API}/api/trips/save-activity`, {
       method: 'POST',

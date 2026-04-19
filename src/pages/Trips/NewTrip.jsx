@@ -102,7 +102,7 @@ const NewTrip = () => {
       setLoading(true);
       setSubmitError("");
 
-      const token = await user.getIdToken(true);
+      const token = await user.getIdToken();
 
       const res = await fetch(`${API}/api/trips`, {
         method: "POST",
