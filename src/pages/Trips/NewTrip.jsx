@@ -6,6 +6,8 @@ import { Card, CardHeader, CardTitle, CardContent } from "./TripCard";
 import { getAuth } from 'firebase/auth';
 import { Calendar, MapPin, CheckCircle, AlertCircle } from 'react-feather';
 
+const API = process.env.REACT_APP_API_URL;
+
 const NewTrip = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -102,7 +104,7 @@ const NewTrip = () => {
 
       const token = await user.getIdToken();
 
-      const res = await fetch("http://localhost:5001/api/trips", {
+      const res = await fetch(`${API}/api/trips`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

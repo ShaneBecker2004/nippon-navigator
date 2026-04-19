@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Button, NavLink, Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import { useAuth } from "../../contexts/authContext";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { CardContent, CardHeader, CardTitle } from "../Trips/TripCard";
 import { getAuth } from "firebase/auth";
+import { socket } from "../../socket";
 import "./planning.css";
 import plannerimg from "../../assets/images/breadcrumb/planner-breadcrumb.jpg";
+
+const API = process.env.REACT_APP_API_URL;
 
 const Planning = () => {
   const { currentUser, userLoggedIn } = useAuth();
@@ -15,6 +18,20 @@ const Planning = () => {
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deletingTripId, setDeletingTripId] = useState(null);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    const handleTripUpdate = (updatedTrip) => {
+      setTrips(prev => 
+        prev.map(t => t.id === updatedTrip.id ? updatedTrip : t)
+      );
+    };
+
+    socket.on("tripUpdated", handleTripUpdate);
+
+    return () => socket.off("tripUpdated", handleTripUpdate);
+  }, []);
 
   // 🔥 FETCH TRIPS
   const fetchTrips = async () => {
@@ -32,7 +49,7 @@ const Planning = () => {
 
       const token = await user.getIdToken();
 
-      const response = await fetch("http://localhost:5001/api/trips", {
+      const response = await fetch(`${API}/api/trips`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -86,7 +103,7 @@ const Planning = () => {
       }
 
       const token = await user.getIdToken();
-      const response = await fetch(`http://localhost:5001/api/trips/${tripId}`, {
+      const response = await fetch(`${API}/api/trips/${tripId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -130,9 +147,9 @@ const Planning = () => {
         <div className="dashboard-topbar">
           <h1 className="dashboard-title">Dashboard</h1>
 
-          <NavLink href="new-trip">
+          <Link to="new-trip">
             <Button className="new-trip-button">New Trip</Button>
-          </NavLink>
+          </Link>
         </div>
 
         <Card className="trip-welcome-card">
@@ -176,15 +193,15 @@ const Planning = () => {
                 <p className="no-trips-message">
                   Start planning your next adventure by creating your first trip!
                 </p>
-                <NavLink href="new-trip">
+                <Link to="new-trip">
                   <Button className="new-trip-button">Create Trip</Button>
-                </NavLink>
+                </Link>
               </CardContent>
             </Card>
           ) : (
             <div className="recent-trips-list">
               {sortedTrips.slice(0, 6).map((trip) => (
-                <NavLink key={trip.id} className="recent-trip-card" href={`trip-details/${trip.id}`}>
+                <Link key={trip.id} className="recent-trip-card" to={`trip-details/${trip.id}`}>
                   <Card className="recent-trip-button">
                     <CardHeader className="d-flex justify-content-between align-items-start">
                       <CardTitle className="recent-button">{trip.tripName}</CardTitle>
@@ -212,7 +229,7 @@ const Planning = () => {
                       <p>{trip.savedItems?.length || 0} activities saved</p>
                     </CardContent>
                   </Card>
-                </NavLink>
+                </Link>
               ))}
             </div>
           )}

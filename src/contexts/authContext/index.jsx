@@ -1,6 +1,7 @@
 import { auth } from "../../firebase/firebase";
 import React, { useContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
+import { socket } from "../../socket";
 
 const AuthContext = React.createContext();
 
@@ -22,10 +23,21 @@ export function AuthProvider({ children }) {
         if (user) {
             setCurrentUser({ ...user });
             setUserLoggedIn(true);
+
+            if (!socket.connected) {
+                socket.connect();
+            }
+
+            socket.emit("joinUserRoom", user.uid);
+            console.log("👤 Joined socket room:", user.uid)
+
         } else {
             setCurrentUser(null);
             setUserLoggedIn(false);
+
+            socket.disconnect();
         }
+        
         setLoading(false);
     }
 

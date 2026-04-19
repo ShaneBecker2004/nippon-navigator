@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getAuth } from 'firebase/auth'
+import { useAuth } from '../../contexts/authContext'
 import "./tripdetails.css"
 import 'react-datepicker/dist/react-datepicker.css'
 import { Calendar } from 'react-feather'
 import { Nav, NavLink, Button, Tab, Form } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { socket } from '../../socket'
+
+const API = process.env.REACT_APP_API_URL;
 
 const CreatedTrip = () => {
   const { tripId } = useParams()
@@ -25,6 +29,29 @@ const CreatedTrip = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  const { currentUser } = useAuth();
+
+  useEffect(() => {
+    if (!currentUser?.uid) return;
+
+    socket.emit("joinUserRoom", currentUser.uid);
+  }, [currentUser?.uid]);
+
+  useEffect(() => {
+    const handleTripUpdate = (updatedTrip) => {
+      if (String(updatedTrip.id) === String(tripId)) {
+        setTrip(updatedTrip);
+        setSavedItems((updatedTrip.savedItems || []).slice().sort((a, b) => a.order - b.order));
+      }
+    };
+
+    socket.on("tripUpdated", handleTripUpdate);
+
+    return () => {
+      socket.off("tripUpdated", handleTripUpdate);
+    };
+  }, [tripId]);
+
   useEffect(() => {
     const fetchTrip = async () => {
       setLoading(true)
@@ -41,7 +68,7 @@ const CreatedTrip = () => {
         const token = await user.getIdToken()
 
         // ✅ Fetch ONE trip instead of all
-        const response = await fetch(`http://localhost:5001/api/trips/${tripId}`, {
+        const response = await fetch(`${API}/api/trips/${tripId}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -71,7 +98,7 @@ const CreatedTrip = () => {
     }
 
     fetchTrip()
-  }, [tripId])
+  }, [tripId, currentUser?.uid])
 
   const saveItemOrder = async (items) => {
     try {
@@ -80,7 +107,7 @@ const CreatedTrip = () => {
       if (!user) return
 
       const token = await user.getIdToken()
-      await fetch('http://localhost:5001/api/trips/save-activity/order', {
+      await fetch(`${API}/api/trips/save-activity/order`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -105,7 +132,12 @@ const CreatedTrip = () => {
     
     // Create a custom drag image with just the activity info
     const dragElement = e.target.closest('.timeline-item')
-    const activityContent = dragElement.querySelector('.timeline-content > div > div')
+
+    const title =
+      dragElement?.querySelector('h4')?.textContent || 'Activity'
+
+    const location =
+      dragElement?.querySelector('.activity-location')?.textContent || ''
     
     // Create a clean drag preview
     const dragPreview = document.createElement('div')
@@ -119,8 +151,8 @@ const CreatedTrip = () => {
         font-family: inherit;
         max-width: 300px;
       ">
-        <h5 style="margin: 0 0 4px 0; color: #333;">${activityContent.querySelector('h4').textContent}</h5>
-        <p style="margin: 0; color: #666; font-size: 14px;">${activityContent.querySelector('.activity-location').textContent}</p>
+        <h5 style="margin: 0 0 4px 0; color: #333;">${title}</h5>
+        <p style="margin: 0; color: #666; font-size: 14px;">${location}</p>
       </div>
     `
     dragPreview.style.position = 'absolute'
@@ -168,7 +200,7 @@ const CreatedTrip = () => {
       }
 
       const token = await user.getIdToken()
-      const response = await fetch(`http://localhost:5001/api/trips/${tripId}`, {
+      const response = await fetch(`${API}/api/trips/${tripId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -218,7 +250,7 @@ const CreatedTrip = () => {
       if (!user) throw new Error('You must be signed in to delete this item.')
 
       const token = await user.getIdToken()
-      const response = await fetch(`http://localhost:5001/api/trips/save-activity/${savedActivityId}`, {
+      const response = await fetch(`${API}/api/trips/save-activity/${savedActivityId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -233,7 +265,7 @@ const CreatedTrip = () => {
       setSavedItems((prev) => prev.filter((item) => item.id !== savedActivityId))
       setTrip((prev) => ({
         ...prev,
-        savedItems: prev.savedItems.filter((item) => item.id !== savedActivityId),
+        savedItems: (prev.savedItems || []).filter((item) => item.id !== savedActivityId),
       }))
     } catch (err) {
       console.error('Failed to delete itinerary item:', err)
@@ -286,7 +318,7 @@ const CreatedTrip = () => {
 
               <div className="meta-item">
                 <span className="activity-count">
-                  {savedItems.length || 0} activities planned
+                  {savedItems.length} activities planned
                 </span>
               </div>
             </div>
@@ -436,7 +468,6 @@ const CreatedTrip = () => {
                             setDragItemIndex(null)
                             setDragOverItemIndex(null)
                             setIsDragging(false)
-                            setIsDragging(false)
                           }}
                         >
                           <div className="timeline-marker">
@@ -445,8 +476,8 @@ const CreatedTrip = () => {
                           <div className="timeline-content">
                             <div className="d-flex justify-content-between align-items-start">
                               <div>
-                                <h4>{item.activity.title}</h4>
-                                <p className="activity-location">{item.activity.location}</p>
+                                <h4>{item.activity.title || "Untitled Activity"}</h4>
+                                <p className="activity-location">{item.activity.location || "No location"}</p>
                                 {item.notes && <p className="activity-notes">{item.notes}</p>}
                               </div>
                               <Button
