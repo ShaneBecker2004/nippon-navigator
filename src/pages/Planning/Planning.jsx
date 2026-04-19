@@ -197,7 +197,7 @@ const Planning = () => {
                   <Button className="new-trip-button">Create Trip</Button>
                 </Link>
               </CardContent>
-            </Card>
+            </Card> 
           ) : (
             <div className="recent-trips-list">
               {sortedTrips.slice(0, 6).map((trip) => (
