@@ -113,8 +113,8 @@ const NewTrip = () => {
         body: JSON.stringify({
           tripName: formData.tripName.trim(),
           description: formData.description.trim(),
-          startDate: formData.startDate,
-          endDate: formData.endDate,
+          startDate: formData.startDate || null,
+          endDate: formData.endDate || null,
           arrivalLocation: formData.arrivalLocation.trim(),
           departureLocation: formData.departureLocation.trim(),
           partySize: formData.partySize,

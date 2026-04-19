@@ -193,7 +193,7 @@ const Planning = () => {
                 <p className="no-trips-message">
                   Start planning your next adventure by creating your first trip!
                 </p>
-                <Link to="new-trip">
+                <Link to="/new-trip">
                   <Button className="new-trip-button">Create Trip</Button>
                 </Link>
               </CardContent>
@@ -201,7 +201,7 @@ const Planning = () => {
           ) : (
             <div className="recent-trips-list">
               {sortedTrips.slice(0, 6).map((trip) => (
-                <Link key={trip.id} className="recent-trip-card" to={`trip-details/${trip.id}`}>
+                <Link key={trip.id} className="recent-trip-card" to={`/trip-details/${trip.id}`}>
                   <Card className="recent-trip-button">
                     <CardHeader className="d-flex justify-content-between align-items-start">
                       <CardTitle className="recent-button">{trip.tripName}</CardTitle>

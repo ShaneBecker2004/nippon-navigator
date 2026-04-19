@@ -514,7 +514,7 @@ const CreatedTrip = () => {
                         <div key={item.id}>
 
                           <Link
-                            to={`/explore-details/${item.activity.slug}`}
+                            to={`/activity/${item.activity.slug}`}
                             className="activity-card-link"
                           >
                             <div className="activity-card">

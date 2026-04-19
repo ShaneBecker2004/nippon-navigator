@@ -109,37 +109,50 @@ const Activity = () => {
   };
 
   // ✅ NEW: Add activity to selected trip
-  const handleAddActivityToTrip = async () => {
-    if (!selectedTrip || !activity) {
-      setAddMessage('Please select a trip');
+const handleAddActivityToTrip = async () => {
+  if (!selectedTrip || !activity) {
+    setAddMessage('Please select a trip');
+    return;
+  }
+
+  setAddingActivity(true);
+
+  try {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (!user) {
+      setAddMessage("You must be logged in");
       return;
     }
 
-    setAddingActivity(true);
-    try {
-      const res = await fetch(`${API}/api/trips/save-activity`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          tripId: selectedTrip.id,
-          activityId: activity.id,
-          notes: ''
-        })
-      });
+    const token = await user.getIdToken(true);
 
-      if (!res.ok) throw new Error('Failed to add activity');
+    const res = await fetch(`${API}/api/trips/save-activity`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`   // 🔥 THIS WAS MISSING
+      },
+      body: JSON.stringify({
+        tripId: selectedTrip.id,
+        activityId: Number(activity.id),   // good practice
+        notes: ''
+      })
+    });
 
-      setAddMessage('Activity added to trip successfully!');
-      setActivityAdded(true);
-    } catch (err) {
-      console.error('Error adding activity:', err);
-      setAddMessage('Failed to add activity. Please try again.');
-    } finally {
-      setAddingActivity(false);
-    }
-  };
+    if (!res.ok) throw new Error('Failed to add activity');
+
+    setAddMessage('Activity added to trip successfully!');
+    setActivityAdded(true);
+
+  } catch (err) {
+    console.error('Error adding activity:', err);
+    setAddMessage('Failed to add activity. Please try again.');
+  } finally {
+    setAddingActivity(false);
+  }
+};
 
   const navigate = useNavigate();
 
