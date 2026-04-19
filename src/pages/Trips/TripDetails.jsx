@@ -65,7 +65,7 @@ const CreatedTrip = () => {
           throw new Error('You must be signed in to view trip details.')
         }
 
-        const token = await user.getIdToken()
+        const token = await user.getIdToken(true)
 
         // ✅ Fetch ONE trip instead of all
         const response = await fetch(`${API}/api/trips/${tripId}`, {
@@ -106,7 +106,7 @@ const CreatedTrip = () => {
       const user = auth.currentUser
       if (!user) return
 
-      const token = await user.getIdToken()
+      const token = await user.getIdToken(true)
       await fetch(`${API}/api/trips/save-activity/order`, {
         method: 'PUT',
         headers: {
@@ -199,7 +199,7 @@ const CreatedTrip = () => {
         throw new Error('You must be signed in to save trip details.')
       }
 
-      const token = await user.getIdToken()
+      const token = await user.getIdToken(true)
       const response = await fetch(`${API}/api/trips/${tripId}`, {
         method: 'PUT',
         headers: {
@@ -249,7 +249,7 @@ const CreatedTrip = () => {
       const user = auth.currentUser
       if (!user) throw new Error('You must be signed in to delete this item.')
 
-      const token = await user.getIdToken()
+      const token = await user.getIdToken(true)
       const response = await fetch(`${API}/api/trips/save-activity/${savedActivityId}`, {
         method: 'DELETE',
         headers: {

@@ -7,7 +7,7 @@ export const authenticateUser = async (req, res, next) => {
     return res.status(401).json({ error: "No token provided" });
   }
 
-  const token = header.split("Bearer ")[1];
+  const token = header.split("Bearer ", "").trim();
 
   try {
     const decoded = await admin.auth().verifyIdToken(token);
