@@ -168,11 +168,17 @@ header .dropdown-item:active {
         color: var(--black);
     }
 
-    .offcanvas-body .dropdown-item:hober {
+    .offcanvas-body .dropdown-item:hover {
         color: var(--primaryClr) !important;
     }
 
     .offcanvas-body .dropdown-item:active {
     background-color: lightgray;
 }
+}
+
+@media (min-width: 200px) {
+    .login-button {
+        display: inline-block !important;
+    }
 }

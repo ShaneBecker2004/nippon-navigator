@@ -173,7 +173,7 @@ const Header = () => {
                                 </NavDropdown.Item>
                             </NavDropdown>
                         ) : (
-                            <Link className="primaryBtn d-none d-sm-inline-block" to="/login">
+                            <Link className="primaryBtn d-none d-sm-inline-block login-button" to="/login">
                                 Login/Sign Up
                             </Link>
                         )}
