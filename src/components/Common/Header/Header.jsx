@@ -174,7 +174,7 @@ const Header = () => {
                             </NavDropdown>
                         ) : (
                             <Link className="primaryBtn d-none d-sm-inline-block login-button" to="/login">
-                                Login/Sign Up
+                                Sign In
                             </Link>
                         )}
                         <li className='d-inline-block d-lg-none ms-3 toggle_btn'>
