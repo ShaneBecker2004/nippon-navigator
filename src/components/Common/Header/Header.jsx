@@ -153,7 +153,7 @@ const Header = () => {
                                 title={<i className="bi bi-person-circle fs-4"></i>}
                                 id="profile-dropdown"
                                 align="end"
-                                className="d-inline-block"
+                                className="profile-icon"
                             >
                                 <NavDropdown.Item onClick={() => navigate("/planning")}>
                                     My Plans
