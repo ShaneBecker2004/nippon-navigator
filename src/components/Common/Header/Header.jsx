@@ -54,6 +54,7 @@ const Header = () => {
                         aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
                           placement="start"
                         show={open}
+                        onHide={() => setOpen(false)}
                     >
                         {/* mobile Logo Section */}
 
@@ -68,8 +69,8 @@ const Header = () => {
 
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
-                                <NavLink className='nav-link' to="/">Home</NavLink>
-                                <NavLink className='nav-link' to="about-us">About Us</NavLink>
+                                <NavLink className='nav-link' to="/" onClick={() => setOpen(false)}>Home</NavLink>
+                                <NavLink className='nav-link' to="about-us" onClick={() => setOpen(false)}>About Us</NavLink>
                                 <NavDropdown
                                     title="Explore"
                                     show={showExplore}
@@ -77,7 +78,7 @@ const Header = () => {
                                     onMouseLeave={() => setShowExplore(false)}
                                     onClick={() => setShowExplore(!showExplore)}
                                 >
-                                    <NavDropdown.Item className='nav-link' href="explore">See All</NavDropdown.Item>
+                                    <NavDropdown.Item className='nav-link' href="explore" onClick={() => setOpen(false)}>See All</NavDropdown.Item>
                                     <NavDropdown
                                         title="Tradition" className='inner-dropdown'
                                         id={`dropdown-tradition`}
@@ -119,7 +120,7 @@ const Header = () => {
                                     </NavDropdown>
                                 </NavDropdown>
 
-                                <NavLink className='nav-link' to="cities">Cities</NavLink>
+                                <NavLink className='nav-link' to="cities" onClick={() => setOpen(false)}>Cities</NavLink>
 
                                 <NavDropdown
                                     title="Information"
@@ -138,11 +139,11 @@ const Header = () => {
                                     <NavDropdown.Item href="currency">Currency Exchange</NavDropdown.Item>
                                 </NavDropdown>
 
-                                <NavLink className='nav-link' to="contact-us">Contact</NavLink>
-                                <NavLink className='nav-link' to={userLoggedIn ? "/planning" : "/login"}>
+                                <NavLink className='nav-link' to="contact-us" onClick={() => setOpen(false)}>Contact</NavLink>
+                                <NavLink className='nav-link' to={userLoggedIn ? "/planning" : "/login"} onClick={() => setOpen(false)}>
                                     Planner
                                 </NavLink>
-                                <NavLink className='nav-link' to="gallery">Gallery</NavLink>
+                                <NavLink className='nav-link' to="gallery" onClick={() => setOpen(false)}>Gallery</NavLink>
 
                             </Nav>
                         </Offcanvas.Body>
