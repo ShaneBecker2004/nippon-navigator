@@ -12,14 +12,7 @@ const Cards = ({ destination }) => {
           className="img-fluid"
           alt={destination.name}
         />
-
-        <Card.Body>
           <Card.Title>{destination.name}</Card.Title>
-        </Card.Body>
-
-        {destination.tours && (
-          <span className="tours">{destination.tours}</span>
-        )}
       </Card>
     </div>
   );

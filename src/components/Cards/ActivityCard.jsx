@@ -8,21 +8,7 @@ const ActivityCard = ({ val }) => {
     val.thumbnail ||
     (val.images && val.images.length > 0 ? val.images[0] : "/images/default.jpg");
 
-  const categories = Array.isArray(val.category)
-    ? val.category
-    : val.category
-    ? [val.category]
-    : [];
-
   const duration = val.duration || "N/A";
-
-  // 🧠 FORMAT KEY
-  const formatKey = (key) =>
-    key
-      .replace(/_/g, " ")
-      .split(" ")
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
 
   // 💰 PRICE NORMALIZER
   const normalizePrice = (price) => {
@@ -117,20 +103,6 @@ const ActivityCard = ({ val }) => {
             <span> ({val.reviews || 0} reviews)</span>
           </p>
         )}
-
-        {/* Categories */}
-        <div className="mb-2">
-          {categories.map((cat, index) => {
-            const formatted = formatKey(cat);
-            const className = formatted.replace(/\s/g, "");
-
-            return (
-              <span key={index} className={`${className} badge me-1`}>
-                {formatted}
-              </span>
-            );
-          })}
-        </div>
 
         {/* 💰 PRICE SECTION (CLEANED) */}
         <div className="card-prices">

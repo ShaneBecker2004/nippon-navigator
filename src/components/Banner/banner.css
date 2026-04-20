@@ -6,6 +6,11 @@
     position: relative;
 }
 
+.slider .carousel .carousel-item img {
+    height: 700px; 
+    object-fit: cover;
+}
+
 .slider .carousel .carousel-item .carousel-caption {
     z-index: 9;
     bottom: 20%;

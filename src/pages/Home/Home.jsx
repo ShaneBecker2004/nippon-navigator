@@ -5,7 +5,7 @@ import Features from '../../components/Features/Features';
 import Gallery from '../../components/Gallery/Gallery';
 import { Container, Row, Col } from 'react-bootstrap';
 import Cards from '../../components/Cards/Cards';
-
+import { Link } from 'react-router-dom' 
 
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
@@ -13,12 +13,9 @@ import "slick-carousel/slick/slick-theme.css";
 
 import "./home.css"
 
-import { useAuth } from '../../contexts/authContext';
-
+const API = process.env.REACT_APP_API_URL
 
 const Home = () => {
-
-  const { currentUser } = useAuth()
 
   const [destinations, setDestinations] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -26,7 +23,7 @@ const Home = () => {
   useEffect(() => {
   const fetchDestinations = async () => {
     try {
-      const res = await fetch("http://localhost:5001/api/destinations");
+      const res = await fetch(`${API}/api/destinations`);
       const data = await res.json();
 
       const updatedData = data.map((dest) => ({
@@ -98,16 +95,7 @@ const Home = () => {
 
   return (
     <>
-    
-
     <Banner />
-    <div className='main_heading'>
-      {currentUser ? (
-      <h1>Welcome {currentUser.displayName || "User"}</h1>
-        ) : (
-          <h1>Welcome Guest</h1>
-        )}</div>
-    {/* <AdvanceSearch /> */}
     <Features />
 
     <section className="tours_section slick_slider">
@@ -120,19 +108,30 @@ const Home = () => {
           </Col>
         </Row>
 
-        <Row>
-            <Col md='12'>
-              <Slider {...settings} >
+          <Row>
+            <Col md="12">
+              <Slider {...settings}>
                 {loading ? (
                   <p className="text-center">Loading destinations...</p>
-                ) : (
+                ) : destinations.length > 0 ? (
                   destinations.map((destination) => (
-                    <Cards destination={destination} key={destination.id} />
+                    <div key={destination.id} className="px-2">
+                      <Link
+                        to={`/explore?city=${destination.slug}`}
+                        className="activity-card-link"
+                      >
+                        <Cards destination={destination} />
+                      </Link>
+                    </div>
                   ))
+                ) : (
+                  <p className="text-center w-100 mt-4">
+                    No destinations found.
+                  </p>
                 )}
               </Slider>
-          </Col>
-        </Row>
+            </Col>
+          </Row>
 
       </Container>
     </section>
@@ -171,10 +170,10 @@ const Home = () => {
                 CALL TO ACTION
                 </h5>
               <h2 className="heading">
-                READY FOR AN UNFORGETTABLE TRIP TO JAPAN, LET US HELP YOU OUT!
+                READY FOR AN UNFORGETTABLE TRIP TO JAPAN?
               </h2>
-              <p className="text">
-                This is a test text, it will be a filler text until the final draft is fulfilled and finalized.
+              <p className="text mb-4 fw-bold">
+                Let us help you out and make your trip become a memory of a lifetime!
               </p>
           </Col>
           <Col md={4} className="text-center mt-3 mt-md-0">

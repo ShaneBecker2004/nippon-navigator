@@ -11,6 +11,8 @@ const Header = () => {
     const navigate = useNavigate()
     const { userLoggedIn } = useAuth()
 
+    const { currentUser } = useAuth()
+
     const [open, setOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -156,12 +158,17 @@ const Header = () => {
                                 align="end"
                                 className="profile-icon"
                             >
+                                <div className="px-3 py-2 border-bottom">
+                                    <strong>{currentUser?.displayName || "User"}</strong><br />
+                                    <small className="text-muted">{currentUser?.email}</small>
+                                </div>
                                 <NavDropdown.Item onClick={() => navigate("/planning")}>
                                     My Plans
                                 </NavDropdown.Item>
                                 <NavDropdown.Item onClick={() => navigate("/profile")}>
                                     Profile
                                 </NavDropdown.Item>
+                                    
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item
                                     onClick={() =>
