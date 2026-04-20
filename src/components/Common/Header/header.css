@@ -35,6 +35,14 @@
     color: var(--primaryClr) !important;
 }
 
+.toggle_btn {
+    z-index: 999;
+}
+
+.profile-dropdown {
+    z-index: 10;
+}
+
 header {
     position: absolute;
     top: 0;
@@ -48,6 +56,7 @@ header {
     display: inline-block;
     padding: 8px 8px;
     padding-right: 20px;
+    z-index: 1;
 }
 
 .is-sticky .profile-icon {
@@ -129,10 +138,6 @@ header .dropdown-item:active {
     background-color: lightgray;
 }
 
-.profile-dropdown:hover .dropdown-menu {
-  display: block;
-}
-
 .navbar-logo {
     padding: 0 0 0 0;
     width: 100%;
@@ -185,10 +190,18 @@ header .dropdown-item:active {
 
     .offcanvas-body .dropdown-item:active {
     background-color: lightgray;
-}
+    }
+
+    .profile-dropdown:hover .dropdown-menu {
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 200px) {
+    header .navbar .navbar-brand a {
+        font-size: 19px;
+    }
+
     .login-button {
         display: inline-block !important;
         padding: 8px 8px;
