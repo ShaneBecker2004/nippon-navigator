@@ -180,5 +180,6 @@ header .dropdown-item:active {
 @media (min-width: 200px) {
     .login-button {
         display: inline-block !important;
+        padding: 8px 7px 8px;
     }
 }
