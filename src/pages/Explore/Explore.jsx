@@ -170,7 +170,7 @@ const Explore = () => {
 
   return (
     <>
-      <Breadcrumbs title="Explore" pagename="Explore" bgImage={exploreimg} />
+      <Breadcrumbs title="Explore" pagename={<Link to='/explore'>Explore</Link>} bgImage={exploreimg} />
 
       <section className='py-5 explore_list'>
         <Container>

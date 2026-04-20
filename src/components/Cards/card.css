@@ -179,3 +179,23 @@
     color: black;
     font-weight: bold;
 }
+
+@media only screen and (max-width: 350px) {
+    .slick_slider .img-box .card {
+        border: none;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        padding: 0 0 0 0;
+    }
+    .slick_slider .img-box .card img {
+        height: 150px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .slick_slider .img-box {
+        padding: 0px 8px;
+    }
+}

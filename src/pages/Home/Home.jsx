@@ -64,7 +64,7 @@ const Home = () => {
         breakpoint: 991,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToScroll: 1,
           infinite: false,
           dots: true
         }
@@ -73,7 +73,7 @@ const Home = () => {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToScroll: 1,
           autoplay: true,
           prevArrow: false,
           nextArrow: false,

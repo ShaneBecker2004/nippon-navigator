@@ -288,3 +288,9 @@ aside {
   font-size: 0.9rem;
   color: #666;
 }
+
+.cities-text {
+  padding-bottom: 25px;
+  font-family: var(--fontFamily);
+  font-weight: bold;
+}

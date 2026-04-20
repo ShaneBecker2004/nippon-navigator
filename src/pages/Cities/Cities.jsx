@@ -50,6 +50,10 @@ const Cities = () => {
 
       <section className="py-5">
         <Container>
+          <div className="cities-text">
+            <h1>Select a City And Find Your Activities:</h1>
+          </div>
+
           <Row className="fade-in">
             {destinations.length > 0 ? (
               destinations.map((destination) => (
