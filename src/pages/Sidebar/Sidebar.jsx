@@ -11,8 +11,8 @@ function Sidebar({ handleCategoryChange, handleLocationChange, handlePriceChange
   return (
     <>
       <section className='sidebar'>
-        <div className='logo-container'>
-          <h1>Filters</h1>
+        <div className='logo-container sidebar-title'>
+          <h1 className='fw-bold fs-3 mt-2'>Filters</h1>
         </div>
 
         <Category handleCategoryChange={handleCategoryChange} />

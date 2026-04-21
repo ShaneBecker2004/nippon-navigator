@@ -5,7 +5,7 @@ function Recommended({ handleClick }) {
   return (
     <>
         <div>
-            <h2 className='recommended-title'>Recommended</h2>
+            <h2 className='recommended-title fw-bold fs-3 mt-3'>Recommended</h2>
             <div className='recommended-flex'>
               <Buttons onClickHandler={handleClick} value="" title="All Activities"/>
               <Buttons onClickHandler={handleClick} value="local" title="Local"/>

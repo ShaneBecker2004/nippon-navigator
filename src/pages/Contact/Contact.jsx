@@ -8,7 +8,7 @@ import webimage from '../../assets/images/contact/Nippon_Navigator_Logo.png'
 const Contact = () => {
   return (
     <>
-      <Breadcrumbs title="Contact us" pagename="Contact us" bgImage={contactimg}/>
+      <Breadcrumbs title="Contact us" pagename="Contact Us" bgImage={contactimg}/>
       <section className='contact py-5'>
         <Container>
           <Row >

@@ -19,6 +19,7 @@ import Planning from './pages/Planning/Planning';
 import Account from './pages/Account/Account';
 import Gallery from './pages/Gallery/Gallery';
 import TripDetails from './pages/Trips/TripDetails';
+import ScrollToTop from './components/ScrolltoTop/ScrolltoTop';
 
 // Trip Pages
 import NewTrip from './pages/Trips/NewTrip';
@@ -34,6 +35,9 @@ import BlankLayout from './BlankLayout';
 function App() {
   return (
     <AuthProvider>
+
+    <ScrollToTop />
+
     <Routes>
 
     <Route element={<Layout />}>

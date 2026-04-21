@@ -100,7 +100,7 @@ const Footer = () => {
         </Row>
         <Row className='py-2 bdr'>
           <Col className='col-copyright'>
-            <p className='text-light'> @ 2026, shanebecker All rights reserved </p>
+            <p className='text-light'> ©2026 Nippon Navigator</p>
           </Col>
         </Row>
       </Container>

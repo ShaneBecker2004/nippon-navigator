@@ -1,10 +1,10 @@
 import React from 'react'
 import Input from '../Input'
-import "./category.css"
+import "../sidebar.css"
 
 function Category({ handleCategoryChange }) {
   return (
-    <div>
+    <div className='sidebar-section ml'>
       <h1 className='sidebar-title'>Category</h1>
 
     <div>

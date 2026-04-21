@@ -1,10 +1,10 @@
 import React from 'react'
-import "./rating.css"
+import "../sidebar.css"
 
 const Rating = () => {
   return (
-    <div className='ml'>
-      <h2 className='sidebar-title rating-title'>Ratings</h2>
+    <div className='sidebar-section ml'>
+      <h2 className='sidebar-title'>Ratings</h2>
 
       <label className='sidebar-label-container'>
         <input type='radio' name="test2"/>
@@ -12,15 +12,19 @@ const Rating = () => {
       </label>
       <label className='sidebar-label-container'>
         <input type='radio' name="test2"/>
-        <span className='checkmark'></span>⭐4 & up
+        <span className='checkmark'></span>⭐⭐⭐⭐⭐
       </label>
       <label className='sidebar-label-container'>
         <input type='radio' name="test2"/>
-        <span className='checkmark'></span>⭐3 & up
+        <span className='checkmark'></span>⭐⭐⭐⭐
       </label>
       <label className='sidebar-label-container'>
         <input type='radio' name="test2"/>
-        <span className='checkmark'></span>⭐2 & up
+        <span className='checkmark'></span>⭐⭐⭐
+      </label>
+      <label className='sidebar-label-container'>
+        <input type='radio' name="test2"/>
+        <span className='checkmark'></span>⭐⭐
       </label>
     </div>
   )

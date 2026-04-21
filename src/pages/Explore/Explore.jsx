@@ -182,8 +182,6 @@ const Explore = () => {
               />
             </div>
 
-            <Recommended handleClick={handleClick}/>
-
             {/* LEFT SIDE (Filters) */}
             <Col xl='3' lg='4' md='5' sm='6'>
               {/* Mobile filter button */}
@@ -207,6 +205,9 @@ const Explore = () => {
             {/* RIGHT SIDE (Cards) */}
             <Col xl='9' lg='8' md='12' sm='12'>
               <Row>
+                
+                <Recommended handleClick={handleClick}/>
+
                 {filteredActivities.length === 0 ? (
                   <p>No activities found.</p>
                 ) : (

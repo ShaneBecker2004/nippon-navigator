@@ -1,11 +1,11 @@
 import React from 'react'
 import Input from '../Input'
-import "./location.css"
+import "../sidebar.css"
 
 function Location ({ handleLocationChange}) {
   return (
-    <div className='ml'>
-      <h2 className='sidebar-title location-title'>Location</h2>
+    <div className='sidebar-section ml'>
+      <h2 className='sidebar-title'>Location</h2>
 
       <div> 
         <label className='sidebar-label-container'>

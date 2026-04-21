@@ -1,11 +1,11 @@
 import React from 'react'
 import Input from '../Input'
-import "./price.css"
+import "../sidebar.css"
 
 function Price({ handlePriceChange }) {
   return (
-    <div className='ml'>
-      <h2 className='sidebar-title price-title'>Price</h2>
+    <div className='sidebar-section ml'>
+      <h2 className='sidebar-title'>Price</h2>
     <div>
       <label className='sidebar-label-container'>
         <input onChange={handlePriceChange} type='radio' value="" name="test2" />
