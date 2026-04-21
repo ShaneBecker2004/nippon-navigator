@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { Col, Container, Row, Offcanvas } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
@@ -29,7 +29,6 @@ const Explore = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const activitiesPerPage = 9;
 
   const getActivityPrice = (price) => {
     if (!price) return 0;
@@ -54,7 +53,7 @@ const Explore = () => {
 
   
   // ✅ Fetch activities
-  const fetchActivities = async () => {
+  const fetchActivities = useCallback(async () => {
     try {
       const res = await fetch(`${API}/api/activities?page=${currentPage}&limit=9`);
       const data = await res.json();
@@ -79,11 +78,11 @@ const Explore = () => {
       } finally {
         setLoading(false);
       }
-    };
+    });
 
   useEffect(() => {
     fetchActivities();
-  }, [currentPage]);
+  }, [fetchActivities]);
 
   useEffect(() => {
     if (!socket) return;
@@ -100,7 +99,7 @@ const Explore = () => {
     return () => {
       socket.off("tripUpdated", handleTripUpdate);
     };
-  }, []);
+  }, [fetchActivities]);
 
   // ✅ Combined filtering (search + category)
   const filteredActivities = activities.filter((activity) => {
