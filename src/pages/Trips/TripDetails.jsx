@@ -522,7 +522,7 @@ const CreatedTrip = () => {
                                 <h4>{item.activity.title}</h4>
 
                                 <span className="activity-type">
-                                  {(item.activity.type || []).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(", ").replace(/_/g, " ")}
+                                  {(item.activity.category || []).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(", ").replace(/_/g, " ")}
                                 </span>
                               </div>
 

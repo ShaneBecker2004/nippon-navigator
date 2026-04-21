@@ -141,10 +141,10 @@ const Header = () => {
                                     <NavDropdown.Item href="currency">Currency Exchange</NavDropdown.Item>
                                 </NavDropdown>
 
-                                <NavLink className='nav-link' to="contact-us" onClick={() => setOpen(false)}>Contact</NavLink>
                                 <NavLink className='nav-link' to={userLoggedIn ? "/planning" : "/login"} onClick={() => setOpen(false)}>
                                     Planner
                                 </NavLink>
+                                <NavLink className='nav-link' to="contact-us" onClick={() => setOpen(false)}>Contact</NavLink>
                                 <NavLink className='nav-link' to="gallery" onClick={() => setOpen(false)}>Gallery</NavLink>
 
                             </Nav>

@@ -34,6 +34,8 @@ const Activity = () => {
   const [addMessage, setAddMessage] = useState('');
   const [activityAdded, setActivityAdded] = useState(false);
 
+  const [rates, setRates] = useState(null);
+
   const [showAuthModal, setShowAuthModal] = useState(false);
 
   const formatKey = (key) => {
@@ -43,10 +45,38 @@ const Activity = () => {
     .join(" ");
   };
 
+  useEffect(() => {
+    const fetchRates = async () => {
+      try {
+        const res = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+        const data = await res.json();
+        setRates(data.rates);
+      } catch (error) {
+        console.error("Error fetching rates:", error);
+      }
+    };
+
+    fetchRates();
+
+    const interval = setInterval(fetchRates, 60000); // refresh every minute
+    return () => clearInterval(interval);
+  }, []);
+
   const price =
     typeof activity?.price === "string"
       ? JSON.parse(activity.price)
       : activity?.price;
+
+  const convertPrice = (amount, fromCurrency) => {
+    if (!rates || !amount) return amount;
+
+    // API base = USD
+    if (fromCurrency === "JPY") {
+      return (amount / rates.JPY).toFixed(2);
+    }
+
+    return amount;
+  };
 
   useEffect(() => {
 
@@ -274,6 +304,7 @@ const handleAddActivityToTrip = async () => {
                         <p><strong>Open Hours:</strong> {activity.open_hours}</p>
                         <p><strong>Phone:</strong> {activity.phone}</p>
                         <p><strong>Duration:</strong> {activity.duration}</p>
+                        <p><strong>Category:</strong> {(activity.category || []).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(", ").replace(/_/g, " ")}</p>
                         <a
                           href={activity.website}
                           target="_blank"
@@ -308,8 +339,25 @@ const handleAddActivityToTrip = async () => {
                             return (
                               <div key={type}>
                                 <strong>{formatKey(type)}:</strong>{" "}
-                                {activity.currency === "JPY" ? "¥" : "$"}
-                                {displayPrice}
+                                {!rates ? (
+                                  <p>Loading market data...</p>
+                                ) : (
+                                  <>
+                                    {/* Original price */}
+                                    {activity.currency === "JPY" ? "¥" : "$"}
+                                    {displayPrice}
+
+                                    {/* Converted price */}
+                                    {activity.currency === "JPY" && (
+                                      <span style={{ marginLeft: "8px", color: "#737272" }}>
+                                        = ${convertPrice(
+                                          typeof value === "object" && value.min ? value.min : value,
+                                          activity.currency
+                                        )}
+                                      </span>
+                                    )}
+                                  </>
+                                )}
                               </div>
                             );
                           })

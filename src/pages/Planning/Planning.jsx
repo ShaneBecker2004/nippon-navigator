@@ -215,7 +215,7 @@ const Planning = () => {
                         }}
                         disabled={deletingTripId === trip.id}
                       >
-                        {deletingTripId === trip.id ? 'Deleting...' : 'Delete'}
+                        {deletingTripId === trip.id ? 'Deleting...' : <i className="bi bi-trash"></i>}
                       </Button>
                     </CardHeader>
 
