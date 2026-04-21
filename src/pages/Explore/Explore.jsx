@@ -78,7 +78,7 @@ const Explore = () => {
       } finally {
         setLoading(false);
       }
-    });
+    }, [currentPage]);
 
   useEffect(() => {
     fetchActivities();
