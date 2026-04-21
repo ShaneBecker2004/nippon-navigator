@@ -222,7 +222,7 @@ const Explore = () => {
               </Row>
               <div className='pagination'>
                 {Array.from(
-                  { length: Math.ceil(filteredActivities.length / activitiesPerPage) },
+                  { length: totalPages },
                   (_, i) => (
                     <button
                       key={i}
