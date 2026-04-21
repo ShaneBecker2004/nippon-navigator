@@ -64,7 +64,7 @@ header {
 }
 
 header .navbar .navbar-brand a {
-    font-size: 22px;
+    font-size: 25px;
     color:var(--white);
     line-height: 150%;
     font-family: var(--fontFamily);
@@ -197,13 +197,13 @@ header .dropdown-item:active {
     }
 }
 
-@media only screen and (min-width: 200px) {
+@media only screen and (max-width: 450px) {
     header .navbar .navbar-brand a {
-        font-size: 19px;
+        font-size: 20px;
     }
 
     .login-button {
         display: inline-block !important;
-        padding: 8px 8px;
+        padding: 8px 10px;
     }
 }

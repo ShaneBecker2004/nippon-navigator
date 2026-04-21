@@ -21,7 +21,6 @@ const Explore = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedRating, setSelectedRating] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
-  
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -29,12 +28,8 @@ const Explore = () => {
   const location = useLocation();
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const activitiesPerPage = 9;
-
-  const indexOfLastItem = currentPage * activitiesPerPage;
-  const indexOfFirstItem = indexOfLastItem - activitiesPerPage;
-
-
 
   const getActivityPrice = (price) => {
     if (!price) return 0;
@@ -61,10 +56,12 @@ const Explore = () => {
   // ✅ Fetch activities
   const fetchActivities = async () => {
     try {
-      const res = await fetch(`${API}/api/activities`);
+      const res = await fetch(`${API}/api/activities?page=${currentPage}&limit=9`);
       const data = await res.json();
 
-      const mappedData = data.map(act => ({
+      const activitiesData = data.activities || data;
+
+      const mappedData = activitiesData.map(act => ({
         ...act,
         category: act.category || [],
         highlights: act.highlights || [],
@@ -74,16 +71,19 @@ const Explore = () => {
       }));
 
       setActivities(mappedData);
-    } catch (err) {
-      console.error("Failed to fetch activities:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+      if (data.pages) {
+        setTotalPages(data.pages);
+      }
+      } catch (err) {
+        console.error("Failed to fetch activities:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
   useEffect(() => {
     fetchActivities();
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     if (!socket) return;
@@ -154,11 +154,7 @@ const Explore = () => {
   useEffect(() => {
     setCurrentPage(1);
   }, [search, selectedCategory, selectedLocation, selectedPrice, selectedRating]);
-  
-  const currentActivities = filteredActivities.slice(
-    indexOfFirstItem,
-    indexOfLastItem
-  );
+
 
   if (loading) {
     return (
@@ -170,7 +166,7 @@ const Explore = () => {
 
   return (
     <>
-      <Breadcrumbs title="Explore" pagename={<Link to='/explore'>Explore</Link>} bgImage={exploreimg} />
+      <Breadcrumbs title="Explore" pagename={<a href="/explore">Explore</a>} bgImage={exploreimg} />
 
       <section className='py-5 explore_list'>
         <Container>
@@ -215,7 +211,7 @@ const Explore = () => {
                 {filteredActivities.length === 0 ? (
                   <p>No activities found.</p>
                 ) : (
-                  currentActivities.map((activity) => (
+                  filteredActivities.map((activity) => (
                     <Col xl={4} lg={6} md={6} sm={6} className='mb-5' key={activity.id}>
                       <Link to={`/activity/${activity.slug || activity.id}`} className='text-decoration-none'>
                         <ActivityCard val={activity} />

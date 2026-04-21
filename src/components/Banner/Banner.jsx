@@ -32,7 +32,7 @@ const Banner = () => {
                     <img src={sliderImg2} className="d-block w-100" alt="First slide" />
                     <Carousel.Caption>
                         <div className='slider_des'>
-                            <h5 className='heading'>LEARN <span>AND IMMERSE YOURSELF</span></h5>
+                            <h5 className='heading'>DIVE IN <span>AND IMMERSE YOURSELF</span></h5>
                             <p className="sub_text">Enjoy the cultures of Japan, whether in the day or night.</p>
                         </div>
                     </Carousel.Caption>
