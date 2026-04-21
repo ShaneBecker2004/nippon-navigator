@@ -33,11 +33,11 @@ const Contact = () => {
                   Call us using our business number or our support number down below and we will get back to you!
                 </p>
                 <div className='d-flex gap-2'>
-                  <a type='button' className='btn btn-light me-3 btn-sm'>
+                  <a href="tel:+12-345-6789" type='button' className='btn btn-light me-3 btn-sm'>
                     <i className='bi bi-phone me-1'></i>
                     {" "} +12-345-6789
                   </a>
-                  <a type='button' className='btn btn-light me-2 btn-sm'>
+                  <a href="tel:+12-345-6789" type='button' className='btn btn-light me-2 btn-sm'>
                     <i className='bi bi-telephone'></i>
                     {" "} +12-345-6789
                   </a>
@@ -61,7 +61,7 @@ const Contact = () => {
                   Send us an email using the name below and subscribe for daily updates!
                 </p>
                 <div className='d-block justify-content-between'>
-                  <a type='button' className='btn btn-light me-2 btn-sm'>
+                  <a href="mailto:support@nipponnavigator.com" type='button' className='btn btn-light me-2 btn-sm'>
                     <i className='bi bi-envelope me-2'></i>
                     {" "} support@nipponnavigator.com
                   </a>
@@ -86,29 +86,41 @@ const Contact = () => {
                 </p>
                 <div className='d-block justify-content-center'>
                   <ListGroup horizontal className='justify-content-center'>
-                      <ListGroup.Item 
-                        className='border-0' 
-                        onClick={() => window.open("https://youtu.be/dQw4w9WgXcQ?si=qUmM0Lxkl-vvxIz_", "_blank")} // ONLY FOR THE JOKES, CHANGE LATER
-                        style={{ cursor: "pointer" }}>
-                      <i className='bi bi-youtube' ></i>
+                      <ListGroup.Item className='border-0'>
+                        <a
+                          href="https://youtu.be/dQw4w9WgXcQ?si=qUmM0Lxkl-vvxIz_" // ONLY FOR THE JOKES, CHANGE LATER
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                        >
+                      <i className='bi bi-youtube text-dark' ></i>
+                      </a>
                     </ListGroup.Item>
-                    <ListGroup.Item 
-                        className='border-0' 
-                        onClick={() => window.open("https://www.instagram.com/?hl=en", "_blank")} 
-                        style={{ cursor: "pointer" }}>
-                      <i className='bi bi-instagram'></i>
+                    <ListGroup.Item className='border-0'> 
+                        <a
+                          href="https://www.instagram.com/?hl=en"
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                        >
+                      <i className='bi bi-instagram text-dark'></i>
+                      </a>
                     </ListGroup.Item>
-                    <ListGroup.Item 
-                        className='border-0' 
-                        onClick={() => window.open("https://x.com/?lang=en", "_blank")} 
-                        style={{ cursor: "pointer" }}>
-                      <i className='bi bi-twitter-x'></i>
+                    <ListGroup.Item className='border-0'>
+                        <a 
+                          href="https://x.com/?lang=en" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                        >
+                      <i className='bi bi-twitter-x text-dark'></i>
+                      </a>
                     </ListGroup.Item>
-                    <ListGroup.Item 
-                        className='border-0' 
-                        onClick={() => window.open("https://www.facebook.com/", "_blank")} 
-                        style={{ cursor: "pointer" }}>
-                      <i className='bi bi-facebook'></i>
+                    <ListGroup.Item className='border-0'>
+                        <a 
+                          href="https://www.facebook.com/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                        >
+                      <i className='bi bi-facebook text-dark'></i>
+                      </a>
                     </ListGroup.Item>
                   </ListGroup>
                 </div>
