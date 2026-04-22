@@ -10,10 +10,9 @@ import Airport from './pages/infopages/Airport';
 import Apps from './pages/infopages/Apps';
 import Currency from './pages/infopages/Currency';
 import GettoCity from './pages/infopages/GettoCity';
-import Immigration from './pages/infopages/Immigration';
 import Online from './pages/infopages/Online';
-import Phrases from './pages/infopages/Phrases';
-import Visa from './pages/infopages/Visa';
+import Language from './pages/infopages/Language';
+import Entry from './pages/infopages/Entry';
 import Activity from './pages/Explore/Activity';
 import Planning from './pages/Planning/Planning';
 import Account from './pages/Account/Account';
@@ -47,10 +46,9 @@ function App() {
       <Route path='apps' element={<Apps />} />
       <Route path='currency' element={<Currency />} />
       <Route path='get-to-city' element={<GettoCity />} />
-      <Route path='immigration' element={<Immigration />} />
       <Route path='online' element={<Online />} />
-      <Route path='phrases' element={<Phrases />} />
-      <Route path='visa' element={<Visa />} />
+      <Route path='language' element={<Language />} />
+      <Route path='entry' element={<Entry />} />
       <Route path='contact-us' element={<Contact />} />
       <Route path='cities' element={<Cities />} />
       <Route path='explore' element={<Explore />} />

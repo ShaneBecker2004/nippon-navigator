@@ -1,54 +1,34 @@
+/* =========================
+   STICKY HEADER
+========================= */
+
 .is-sticky {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    animation: smothScroll 1s forwards;
     background: var(--primaryClr);
     z-index: 999;
+    animation: smothScroll 1s forwards;
     box-shadow: var(--bs-box-shadow-sm) !important;
 }
 
 @keyframes smothScroll {
-    0%{
-        transform: translateY(-40px);
-    }
-    100%{
-        transform: translateY(0px);
-    }
+    0% { transform: translateY(-40px); }
+    100% { transform: translateY(0); }
 }
 
-.is-sticky .navbar .navbar-brand a,
-.is-sticky .navbar .offcanvas-body a {
-    color: var(--black) !important;
-}
 
-.is-sticky .toggle_btn {
-    color: var(--primaryClr) !important;
-}
-
-.is-sticky .navbar .offcanvas-body a:hover  {
-    color: var(--white) !important;
-}
-
-.is-sticky .navbar .offcanvas-body .inner-dropdown a:hover  {
-    color: var(--primaryClr) !important;
-}
-
-.toggle_btn {
-    z-index: 999;
-}
-
-.profile-dropdown {
-    z-index: 10;
-}
+/* =========================
+   BASE NAV
+========================= */
 
 header {
     position: absolute;
     top: 0;
-    z-index: 999;
-    padding: 12px 0px;
     width: 100%;
+    z-index: 999;
+    padding: 12px 0;
 }
 
 .profile-icon {
@@ -59,93 +39,187 @@ header {
     z-index: 1;
 }
 
+header .navbar .navbar-brand a {
+    font-size: 25px;
+    color: var(--white);
+    font-family: var(--fontFamily);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* =========================
+   NAV LINKS
+========================= */
+
+header .navbar .offcanvas-body .nav-link,
+header .navbar .inner-dropdown {
+    color: var(--white) !important;
+    font-family: var(--fontFamily);
+    font-weight: bold;
+}
+
+.navbar .inner-dropdown {
+    display: inline-flex;
+    align-items: center;
+}
+
+.navbar .inner-dropdown::after {
+    margin-left: 3px;
+    vertical-align: middle;
+}
+
+/* sticky */
+.is-sticky .navbar .offcanvas-body .nav-link,
+.is-sticky .navbar .inner-dropdown {
+    color: var(--black) !important;
+}
+
+.is-sticky .navbar .navbar-brand a {
+    color: var(--black) !important;
+}
+
 .is-sticky .profile-icon {
     color: var(--black) !important;
 }
 
-header .navbar .navbar-brand a {
-    font-size: 25px;
-    color:var(--white);
-    line-height: 150%;
+
+/* hover */
+header .navbar .offcanvas-body .nav-link:hover {
+    color: var(--primaryClr) !important;
+}
+
+header .navbar .explore-dropdown .inner-dropdown:hover {
+    background: rgba(0,0,0,0.05);
+    color: var(--primaryClr) !important;
+}
+
+header .navbar .information-dropdown .inner-dropdown:hover {
+    background: rgba(0,0,0,0.05);
+    color: var(--primaryClr) !important;
+}
+
+.is-sticky .navbar .offcanvas-body .nav-link:hover {
+    color: var(--white) !important;
+}
+
+.is-sticky .navbar .explore-dropdown .inner-dropdown > .dropdown-toggle:hover {
+    color: var(--primaryClr) !important;
+}
+
+
+/* =========================
+   DROPDOWN ITEMS
+========================= */
+
+.dropdown-menu .dropdown-item {
+    color: #000 !important;
     font-family: var(--fontFamily);
     font-weight: bold;
-    text-transform: capitalize;
-    text-decoration: none;
+    display: block;
+    padding: 10px 10px;
+    margin: 0;
 }
 
-header .navbar .offcanvas-body a {
-    font-size: var(--bodyText);
-    color:var(--white) !important;
-    line-height: 150%;
-    font-family: var(--fontFamily);
-    font-weight: bold;
-    text-transform: capitalize;
+.dropdown-menu .dropdown-item:hover {
+    background: rgba(0,0,0,0.05);
+    color: var(--primaryClr) !important;
+    overflow: hidden;
 }
 
-header .navbar .offcanvas-body .inner-dropdown a  {
-    font-size: var(--bodyText);
-    color:var(--black) !important;
-    line-height: 150%;
-    font-family: var(--fontFamily);
-    font-weight: bold;
-    text-transform: capitalize;
-}
-
-header .navbar .offcanvas-body a:hover {
-    color:var(--primaryClr) !important;
-}
-
-header .is-sticky .navbar .offcanvas-body a:hover {
-    color:var(--primaryClr) !important;
-}
-
-header .navbar .offcanvas-body .dropdown-menu {
-    min-width: 12rem;
-}
-
-header .navbar .offcanvas-body  .dropdown-menu > .dropdown-item {
-    color:var(--black) !important;
-}
-
-header .navbar .offcanvas-body .dropdown-menu .dropdown-menu .dropdown-item{
-    color: var(--black) !important;
-}
-
-.navbar .dropdown:hover > .dropdown-menu {
-  display: block;
-  margin-top: 0; /* prevents jump */
-}
-
-.dropdown-menu .dropdown {
-  position: relative;
-}
-
-/* Position inner dropdown to the side */
-.dropdown-menu .dropdown-menu {
-  position: absolute;
-  top: 0;
-  left: 100%;
-  margin-top: 0;
-  display: none;
-}
-
-/* Show inner dropdown on hover */
-.dropdown-menu .dropdown:hover > .dropdown-menu {
-  display: block;
-}
-
-header .dropdown-item:active {
-    background-color: lightgray;
-}
-
-.navbar-logo {
-    padding: 0 0 0 0;
+.explore-dropdown .dropdown-item {
+    display: block;
     width: 100%;
-    max-height: 75px;
+    padding: 10px 11px;
+}
+
+.explore-dropdown .inner-dropdown .dropdown-item:hover {
+    background: rgba(0,0,0,0.05);
+    color: var(--primaryClr) !important;
+}
+
+.information-dropdown .inner-dropdown .dropdown-item:hover {
+    background: rgba(0,0,0,0.05);
+    color: var(--primaryClr) !important;
+}
+
+.navbar .explore-dropdown .inner-dropdown a {
+    color: black !important;
+    margin: 3px 1px;
+}
+
+.navbar .information-dropdown .inner-dropdown a {
+    color: black !important;
+    margin: 3px 1px;
+}
+
+.navbar .dropdown-menu .inner-dropdown .dropdown-item{
+    padding-left: 10px;
+}
+
+/* =========================
+   DESKTOP INNER DROPDOWN
+========================= */
+
+@media (min-width: 992px) {
+    .navbar .dropdown:hover > .dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-menu .dropdown-menu {
+        position: absolute;
+        left: 100%;
+        top: 0;
+        display: none;
+    }
+
+    .dropdown-menu .dropdown:hover > .dropdown-menu {
+        display: block;
+    }
 }
 
 
-@media only screen and (max-width : 991px) {
+/* =========================
+   MOBILE FIX
+========================= */
+
+@media (max-width: 991px) {
+
+    /* 🔹 1. Normalize ALL text */
+    .offcanvas-body .nav-link,
+    .offcanvas-body .dropdown-item,
+    .offcanvas-body .dropdown-toggle,
+    .offcanvas-body .inner-dropdown {
+        font-family: var(--fontFamily) !important;
+        font-weight: 500 !important; /* change to 400 if you want lighter */
+        font-size: var(--bodyText);
+        color: var(--black) !important;
+        text-transform: capitalize;
+    }
+
+    /* 🔹 2. Remove ALL hover effects on mobile */
+    .offcanvas-body .nav-link:hover,
+    .offcanvas-body .dropdown-item:hover,
+    .offcanvas-body .dropdown-toggle:hover,
+    .offcanvas-body .inner-dropdown:hover,
+    .offcanvas-body .inner-dropdown .dropdown-item:hover {
+        color: var(--black) !important;
+        background: none !important;
+    }
+
+    /* 🔹 3. Keep ONLY tap feedback */
+    .offcanvas-body .nav-link:active,
+    .offcanvas-body .dropdown-item:active {
+        background-color: lightgray;
+        color: var(--primaryClr) !important;
+    }
+
+    /* 🔹 4. Ensure full clickable width */
+    .offcanvas-body .dropdown-item {
+        display: block;
+        width: 100%;
+        padding: 10px 12px;
+    }
+
     header .navbar .toggle_btn {
         font-size: var(--bodyText);
         color: var(--white);
@@ -158,8 +232,19 @@ header .dropdown-item:active {
         border: 2px solid var(--primaryClr);
     }
 
-    .offcanvas-header {
-        border: 1px solid gainsboro;
+     .offcanvas-body .nav-link:active {
+        background-color: lightgray;
+    }
+
+    .offcanvas-body .dropdown-item {
+        padding: 7px 8px;
+        padding-top: 2px;
+        color: var(--black);
+        font-weight: 500;
+    }
+
+    .offcanvas-body .dropdown-item:active {
+        background-color: lightgray;
     }
 
     .offcanvas-header .logo {
@@ -175,25 +260,50 @@ header .dropdown-item:active {
         color: var(--black);
     }
 
-    .offcanvas-body .nav-link:active {
-        background-color: lightgray;
+    .offcanvas-header {
+        border: 1px solid gainsboro;
+    }
+
+    .offcanvas-body .dropdown-menu {
+        position: static !important;
+        border: none;
+        box-shadow: none;
+    }
+
+    .offcanvas-body .dropdown-menu .inner-dropdown {
+        position: static !important;
+        border: none;
+        box-shadow: none;
+    }
+
+    .offcanvas-body .dropdown-menu .dropdown-menu {
+        position: static !important;
+        display: none;
+        margin-left: 12px;
+        border-left: 2px solid #ddd;
+    }
+
+    .offcanvas-body .dropdown-menu .dropdown.show > .dropdown-menu {
+        display: block;
+    }
+
+    .offcanvas-body .explore-dropdown .inner-dropdown {
+        margin-left: 7px;
     }
 
     .offcanvas-body .dropdown-item {
-        padding: 12px 10px;
-        color: var(--black);
+        color: var(--black) !important;
+        font-family: var(--fontFamily);
+        margin-bottom: 8px;
     }
 
-    .offcanvas-body .dropdown-item:hover {
-        color: var(--primaryClr) !important;
-    }
-
-    .offcanvas-body .dropdown-item:active {
-    background-color: lightgray;
-    }
-
-    .profile-dropdown:hover .dropdown-menu {
-        display: none;
+    /* make ALL dropdown items match nav links */
+    .offcanvas-body .dropdown-item,
+    .offcanvas-body .dropdown-menu .dropdown-toggle {
+        font-family: var(--fontFamily);
+        font-weight: none;
+        font-size: var(--bodyText);
+        text-transform: capitalize;
     }
 }
 

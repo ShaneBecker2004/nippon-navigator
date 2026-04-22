@@ -4,61 +4,63 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import "../Header/header.css";
 import { useAuth } from '../../../contexts/authContext';
 import { doSignOut } from '../../../firebase/auth';
-// import headerimg from "../../assets/image/Nippon Navigator logo design.png"
-
 
 const Header = () => {
-    const navigate = useNavigate()
-    const { userLoggedIn } = useAuth()
-
-    const { currentUser } = useAuth()
+    const navigate = useNavigate();
+    const { userLoggedIn, currentUser } = useAuth();
 
     const [open, setOpen] = useState(false);
-
-    const toggleMenu = () => {
-        setOpen(!open);
-    };
-
+    const [openInner, setOpenInner] = useState(null);
     const [showExplore, setShowExplore] = useState(false);
     const [showInformation, setShowInformation] = useState(false);
 
+    const toggleMenu = () => setOpen(prev => !prev);
+
+    const closeAll = () => {
+        setOpen(false);
+        setShowExplore(false);
+        setShowInformation(false);
+    };
+
+    const isSticky = () => {
+        const header = document.querySelector('.header-section');
+        const scrollTop = window.scrollY;
+        if (scrollTop >= 120) header.classList.add('is-sticky');
+        else header.classList.remove('is-sticky');
+    };
 
     useEffect(() => {
         window.addEventListener("scroll", isSticky);
-        return () => {
-            window.removeEventListener("scroll", isSticky)
-        }
-    })
+        return () => window.removeEventListener("scroll", isSticky);
+    }, []);
 
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            const isDropdown = e.target.closest('.dropdown');
+            if (!isDropdown) {
+                setShowExplore(false);
+                setShowInformation(false);
+            }
+        };
 
-
-    // sticky Header
-    const isSticky = (e) => {
-        const header = document.querySelector('.header-section');
-        const scrollTop = window.scrollY;
-        scrollTop >= 120 ? header.classList.add('is-sticky') :
-            header.classList.remove('is-sticky')
-    }
-
+        document.addEventListener("click", handleClickOutside);
+        return () => document.removeEventListener("click", handleClickOutside);
+    }, []);
 
     return (
         <header className='header-section'>
             <Container>
                 <Navbar expand='lg' className="p-0">
-                    {/* Logo Section */}
+
                     <Navbar.Brand>
-                        <NavLink to='/' >Nippon Navigator</NavLink>
+                        <NavLink to='/'>Nippon Navigator</NavLink>
                     </Navbar.Brand>
-                    {/* End Logo Section */}
 
                     <Navbar.Offcanvas
-                        id={`offcanvasNavbar-expand-lg`}
-                        aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
-                          placement="start"
+                        placement="start"
                         show={open}
                         onHide={() => setOpen(false)}
                     >
-                        {/* mobile Logo Section */}
 
                         <Offcanvas.Header>
                             <h1 className='logo'>Nippon Navigator</h1>
@@ -67,133 +69,206 @@ const Header = () => {
                             </span>
                         </Offcanvas.Header>
 
-                        {/* end mobile Logo Section */}
-
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
-                                <NavLink className='nav-link' to="/" onClick={() => setOpen(false)}>Home</NavLink>
-                                <NavLink className='nav-link' to="about-us" onClick={() => setOpen(false)}>About Us</NavLink>
+
+                                <NavLink className='nav-link' to="/" onClick={closeAll}>Home</NavLink>
+                                <NavLink className='nav-link' to="/about-us" onClick={closeAll}>About Us</NavLink>
+
+                                {/* ================= EXPLORE ================= */}
                                 <NavDropdown
                                     title="Explore"
+                                    className='explore-dropdown'
                                     show={showExplore}
-                                    onMouseEnter={() => setShowExplore(true)}
-                                    onMouseLeave={() => setShowExplore(false)}
                                     onClick={() => setShowExplore(!showExplore)}
                                 >
-                                    <NavDropdown.Item className='nav-link' href="explore" onClick={() => setOpen(false)}>See All</NavDropdown.Item>
-                                    <NavDropdown
-                                        title="Tradition" className='inner-dropdown'
-                                        id={`dropdown-tradition`}
+                                    <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                        See All
+                                    </NavDropdown.Item>
+
+                                    <NavDropdown 
+                                        title="Tradition" 
+                                        className="inner-dropdown"
+                                        show={openInner === "tradition"}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setOpenInner(openInner === "tradition" ? null : "tradition");
+                                        }}    
                                     >
-                                        <NavDropdown.Item href="explore">Japanese Gardens</NavDropdown.Item>
-                                        <NavDropdown.Item href="explore">Temple Stays</NavDropdown.Item>
-                                        <NavDropdown.Item href="explore">Festivals and Events</NavDropdown.Item>
-                                        <NavDropdown.Item href="explore">Culture in Japan</NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                            Japanese Gardens
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                            Temple Stays
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                            Festivals & Events
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                            Culture in Japan
+                                        </NavDropdown.Item>
                                     </NavDropdown>
-                                    <NavDropdown
-                                        title="Nature" className='inner-dropdown'
-                                        id={`dropdown-nature`}
-                                    >
-                                        <NavDropdown.Item href="#action3">Scenic Spots</NavDropdown.Item>
-                                        <NavDropdown.Item href="#action4">Adventure</NavDropdown.Item>
-                                        <NavDropdown.Item href="#action4">Seasonal Flowers in Japan</NavDropdown.Item>
-                                        <NavDropdown.Item href="#action4">Skiing in Japan</NavDropdown.Item>
+
+                                    <NavDropdown 
+                                        title="Nature" 
+                                        className="inner-dropdown"
+                                        show={openInner === "nature"}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setOpenInner(openInner === "nature" ? null : "nature");
+                                        }}  >
+                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                            Scenic Spots
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                            Adventure
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                            Seasonal Flowers
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                            Skiing in Japan
+                                        </NavDropdown.Item>
                                     </NavDropdown>
-                                    <NavDropdown
-                                        title="Food & Drink" className='inner-dropdown'
-                                        id={`dropdown-food`}
+
+                                    <NavDropdown 
+                                        title="Food & Drink" 
+                                        className="inner-dropdown"
+                                        show={openInner === "food"}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setOpenInner(openInner === "food" ? null : "food");
+                                        }}  
                                     >
-                                        <NavDropdown.Item href="#action3">Local Cuisine Western Japan</NavDropdown.Item>
-                                        <NavDropdown.Item href="#action4">Local Street Food</NavDropdown.Item>
-                                        <NavDropdown.Item href="#action4">Sushi In Japan</NavDropdown.Item>
-                                        <NavDropdown.Item href="#action4">Vegetarian and Vegan</NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                            Local Cuisine
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                            Street Food
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                            Dining Experiences
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                            Vegetarian & Vegan
+                                        </NavDropdown.Item>
                                     </NavDropdown>
-                                    <NavDropdown
-                                        title="Cities" className='inner-dropdown'
-                                        id={`dropdown-cities`}
-                                    >
-                                        <NavDropdown.Item href="#action3">Scenic Spots</NavDropdown.Item>
-                                        <NavDropdown.Item href="#action4">Scenic Night Views</NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/explore?category=theme_park">Theme Parks</NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/explore?category=shopping">Shopping</NavDropdown.Item>
-                                        <NavDropdown.Item href="#action4">Nightlife</NavDropdown.Item>
-                                        <NavDropdown.Item href="#action4">Natrual Wonders</NavDropdown.Item>
-                                        <NavDropdown.Item href="#action4">Iconic Architecture</NavDropdown.Item>
+
+                                    <NavDropdown 
+                                        title="Attractions"
+                                        className="inner-dropdown"
+                                        show={openInner === "attractions"}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setOpenInner(openInner === "attractions" ? null : "attractions");
+                                        }}  >
+                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                            City Views
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                            Landmarks
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/explore?category=theme_park" onClick={closeAll}>
+                                            Theme Parks
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/explore?category=shopping" onClick={closeAll}>
+                                            Shopping
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                            Nightlife
+                                        </NavDropdown.Item>
                                     </NavDropdown>
                                 </NavDropdown>
 
-                                <NavLink className='nav-link' to="cities" onClick={() => setOpen(false)}>Cities</NavLink>
+                                <NavLink className='nav-link' to="/cities" onClick={closeAll}>Cities</NavLink>
 
+                                {/* ================= INFORMATION ================= */}
                                 <NavDropdown
                                     title="Information"
+                                    className='information-dropdown'
                                     show={showInformation}
-                                    onMouseEnter={() => setShowInformation(true)}
-                                    onMouseLeave={() => setShowInformation(false)}
                                     onClick={() => setShowInformation(!showInformation)}
                                 >
-                                    <NavDropdown.Item href="airport">Navigating the Airport</NavDropdown.Item>
-                                    <NavDropdown.Item href="get-to-city">Getting to the City</NavDropdown.Item>
-                                    <NavDropdown.Item href="online">Staying Connected Online</NavDropdown.Item>
-                                    <NavDropdown.Item href="apps">Essential Apps</NavDropdown.Item>
-                                    <NavDropdown.Item href="phrases">Important Phrases to Know</NavDropdown.Item>
-                                    <NavDropdown.Item href="visa">VISA Information</NavDropdown.Item>
-                                    <NavDropdown.Item href="immigration">Japan Immigration</NavDropdown.Item>
-                                    <NavDropdown.Item href="currency">Currency Exchange</NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} to="/airport" onClick={closeAll}>
+                                        Navigating the Airport
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} to="/get-to-city" onClick={closeAll}>
+                                        Getting to the City
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} to="/entry" onClick={closeAll}>
+                                        Entry Requirements (Visa & Immigration)
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} to="/language" onClick={closeAll}>
+                                        Language & Etiquette
+                                    </NavDropdown.Item>
+                                    <NavDropdown 
+                                        title="Travel Essentials"
+                                        className="inner-dropdown"
+                                        show={openInner === "travel-essentials"}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setOpenInner(openInner === "travel-essentials" ? null : "travel-essentials");
+                                        }}  >
+                                        <NavDropdown.Item as={Link} to="/online" onClick={closeAll}>
+                                            Staying Connected
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/apps" onClick={closeAll}>
+                                            Essential Apps
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/currency" onClick={closeAll}>
+                                            Currency Exchange
+                                        </NavDropdown.Item>
+                                    </NavDropdown>
                                 </NavDropdown>
 
-                                <NavLink className='nav-link' to={userLoggedIn ? "/planning" : "/login"} onClick={() => setOpen(false)}>
+                                <NavLink
+                                    className='nav-link'
+                                    to={userLoggedIn ? "/planning" : "/login"}
+                                    onClick={closeAll}
+                                >
                                     Planner
                                 </NavLink>
-                                <NavLink className='nav-link' to="contact-us" onClick={() => setOpen(false)}>Contact</NavLink>
-                                <NavLink className='nav-link' to="gallery" onClick={() => setOpen(false)}>Gallery</NavLink>
+
+                                <NavLink className='nav-link' to="/contact-us" onClick={closeAll}>
+                                    Contact
+                                </NavLink>
+
+                                <NavLink className='nav-link' to="/gallery" onClick={closeAll}>
+                                    Gallery
+                                </NavLink>
 
                             </Nav>
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>
-                    <div className=' profile-dropdown ms-md-4 ms-2'>
+
+                    {/* profile unchanged */}
+                    <div className='profile-dropdown ms-md-4 ms-2'>
                         {userLoggedIn ? (
-                            <NavDropdown
-                                title={<i className="bi bi-person-circle fs-4"></i>}
-                                id="profile-dropdown"
-                                align="end"
-                                className="profile-icon"
-                            >
+                            <NavDropdown title={<i className="bi bi-person-circle fs-4"></i>} align="end" className='profile-icon'>
                                 <div className="px-3 py-2 border-bottom">
                                     <strong>{currentUser?.displayName || "User"}</strong><br />
                                     <small className="text-muted">{currentUser?.email}</small>
                                 </div>
-                                <NavDropdown.Item onClick={() => navigate("/planning")}>
-                                    My Plans
-                                </NavDropdown.Item>
-                                <NavDropdown.Item onClick={() => navigate("/profile")}>
-                                    Profile
-                                </NavDropdown.Item>
-                                    
+                                <NavDropdown.Item onClick={() => navigate("/planning")}>My Plans</NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => navigate("/profile")}>Profile</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item
-                                    onClick={() =>
-                                        doSignOut().then(() => {
-                                            navigate("/login");
-                                        })
-                                    }
-                                >
+                                <NavDropdown.Item onClick={() => doSignOut().then(() => navigate("/login"))}>
                                     Logout
                                 </NavDropdown.Item>
                             </NavDropdown>
                         ) : (
-                            <Link className="primaryBtn d-none d-sm-inline-block login-button" to="/login">
-                                Sign In
-                            </Link>
+                            <Link className="primaryBtn" to="/login">Sign In</Link>
                         )}
+
                         <li className='d-inline-block d-lg-none ms-3 toggle_btn'>
                             <i className={open ? "bi bi-x-lg" : "bi bi-list"} onClick={toggleMenu}></i>
                         </li>
                     </div>
+
                 </Navbar>
             </Container>
         </header>
-    )
-}
+    );
+};
 
-
-export default Header
+export default Header;

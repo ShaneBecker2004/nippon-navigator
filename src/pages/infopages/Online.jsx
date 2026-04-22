@@ -6,7 +6,7 @@ import onlineImg from  "../../assets/images/breadcrumb/wifi-banner.jpg"
 const Online = () => {
   return (
         <>
-      <Breadcrumbs title="staying connected online" pagename="Online" bgImage={onlineImg} />
+      <Breadcrumbs title="staying connected" pagename="Staying Connected" bgImage={onlineImg} />
       <section className='py-5'>
         <Container>
           <Row>

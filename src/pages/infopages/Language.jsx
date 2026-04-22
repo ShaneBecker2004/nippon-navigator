@@ -1,16 +1,19 @@
+import React from 'react'
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
 import { Container, Row, Col } from 'react-bootstrap'
-import visaimg from  "../../assets/images/breadcrumb/passport-visa-graphic.jpg"
+import mannerImg from  "../../assets/images/breadcrumb/japan-etiquette-banner.jpg"
 
-const Visa = () => {
+const Language = () => {
   return (
     <>
-      <Breadcrumbs title="visa information" pagename="VISA Information" bgImage={visaimg} />
+      <Breadcrumbs title="Language & Etiquette" pagename="Language & Etiquette" bgImage={mannerImg} />
       <section className='py-5'>
         <Container>
           <Row>
             <Col md="8">
               <div className='about-content'>
+                <div className='about-image position-relative'>
+                  </div>
                   <h2 className='h2 font-bold pt-4 pb-2'>
                     What Is This Website All About 
                   </h2>
@@ -32,4 +35,4 @@ const Visa = () => {
   )
 }
 
-export default Visa
+export default Language
