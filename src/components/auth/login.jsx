@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Navigate, Link } from "react-router-dom";
 import { doSignInWithEmailAndPassword, doSignInWithGoogle } from "../../firebase/auth";
 import { useAuth } from "../../contexts/authContext";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./auth.css";
 
 const Login = () => {
@@ -11,13 +12,24 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || "/";
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
     if (!isSigningIn) {
       setIsSigningIn(true);
+      setErrorMessage("");
+
       try {
         await doSignInWithEmailAndPassword(email, password);
+
+        navigate("/", { replace: true })
+
       } catch (err) {
         setErrorMessage("Invalid email or password");
         setIsSigningIn(false);
@@ -29,8 +41,12 @@ const Login = () => {
     e.preventDefault();
     if (!isSigningIn) {
       setIsSigningIn(true);
+      setErrorMessage("");
       try {
         await doSignInWithGoogle();
+
+        navigate("/", { replace: true });
+
       } catch (err) {
         setErrorMessage("Google sign-in failed");
         setIsSigningIn(false);

@@ -5,10 +5,10 @@
 }
 
 .card-image {
-    background: var(--primaryClr);
-    width: 20px;
-    line-height: 24px;
+    width: 100%;
+    padding: 0 0 0 0;
 }
+
 
 @media screen and (max-width: 575px) { 
     .about-image-content {

@@ -193,7 +193,7 @@ const Header = () => {
                                         Navigating the Airport
                                     </NavDropdown.Item>
                                     <NavDropdown.Item as={Link} to="/get-to-city" onClick={closeAll}>
-                                        Getting to the City
+                                        Getting Around the City
                                     </NavDropdown.Item>
                                     <NavDropdown.Item as={Link} to="/entry" onClick={closeAll}>
                                         Entry Requirements
@@ -211,6 +211,9 @@ const Header = () => {
                                         }}  >
                                         <NavDropdown.Item as={Link} to="/online" onClick={closeAll}>
                                             Staying Connected
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/website" onClick={closeAll}>
+                                            Useful Websites
                                         </NavDropdown.Item>
                                         <NavDropdown.Item as={Link} to="/apps" onClick={closeAll}>
                                             Essential Apps

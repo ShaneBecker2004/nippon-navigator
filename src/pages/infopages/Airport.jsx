@@ -1,8 +1,7 @@
 import React from 'react'
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Card } from 'react-bootstrap'
 import airport from "../../assets/images/breadcrumb/narita-airport.webp"
-import { Card } from 'react-bootstrap'
 import haneda from '../../assets/images/airport/haneda-airport.webp'
 import narita from '../../assets/images/airport/narita-airport.jpg'
 import kansai from '../../assets/images/airport/kansai-international-airport.webp'
@@ -143,6 +142,21 @@ const Airport = () => {
                         Gateway to Okinawa islands (beach travel)
                       </p>
                     </Card.Body>
+                  </Card>
+                </Col>
+
+                <Col md="10">
+                  <Card className='p-4 mt-4 shadow-sm border-0 text-center bg-light'>
+                    <h3 className='mb-3 font-bold'>Did this information help you?</h3>
+
+                    <div className='d-flex justify-content-center gap-3'>
+                      <button className='btn btn-outline-success px-4'>
+                        👍 Yes
+                        </button>
+                      <button className='btn btn-outline-danger px-4'>
+                        👎 No
+                      </button>
+                    </div>
                   </Card>
                 </Col>
               </Row>

@@ -13,6 +13,7 @@ import GettoCity from './pages/infopages/GettoCity';
 import Online from './pages/infopages/Online';
 import Language from './pages/infopages/Language';
 import Entry from './pages/infopages/Entry';
+import Website from './pages/infopages/Website';
 import Activity from './pages/Explore/Activity';
 import Planning from './pages/Planning/Planning';
 import Account from './pages/Account/Account';
@@ -49,6 +50,7 @@ function App() {
       <Route path='online' element={<Online />} />
       <Route path='language' element={<Language />} />
       <Route path='entry' element={<Entry />} />
+      <Route path='website' element={<Website />} />
       <Route path='contact-us' element={<Contact />} />
       <Route path='cities' element={<Cities />} />
       <Route path='explore' element={<Explore />} />

@@ -1,7 +1,6 @@
 import React from 'react'
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
 import { Container, Row, Col, Card } from 'react-bootstrap'
-import { Link } from "react-router-dom";
 import aboutImg from  "../../assets/images/about/about-japan.jpg"
 import "../About/about.css"
 import icons1 from "../../assets/images/icons/cherry-blossom-night.jpg"
@@ -9,9 +8,10 @@ import icons2 from "../../assets/images/icons/fukuoka-city-night.jpg"
 import icons3 from "../../assets/images/icons/hello-kitty-shinkansen.jpg"
 
 const About = () => {
+
   return (
     <>
-      <Breadcrumbs title="About us" pagename="About us" bgImage={aboutImg} />
+      <Breadcrumbs title="About us" pagename="About Us" bgImage={aboutImg} />
       <section className='py-5'>
         <Container>
           <Row>
@@ -35,10 +35,9 @@ const About = () => {
               </div>
             </Col>
           <Col md='4'>
-          <Link to="/explore" className="text-decoration-none">
             <Card className='border-0 shadow-sm rounded-3 mb-4'>
               <Card.Body className='text-center'>
-                <div className='d-flex justify-content-center align-item-search my-2'>
+                <div className='d-flex justify-content-center align-item-center my-2'>
                 <div className='rounded-circle bg-light shadow-sm bg-opacity-10 p-2'>
                   <img src={icons1} alt="icon" className='img-fluid' />
                 </div>
@@ -49,12 +48,10 @@ const About = () => {
                 </p>
               </Card.Body>
             </Card>
-          </Link>
           
-          <Link to="/explore" className="text-decoration-none">
             <Card className='border-0 shadow-sm rounded-3 mb-4'>
               <Card.Body className='text-center'>
-                <div className='d-flex justify-content-center align-item-search my-2'>
+                <div className='d-flex justify-content-center align-item-center my-2'>
                 <div className='rounded-circle bg-light shadow-sm bg-opacity-10 p-2'>
                   <img src={icons2} alt="icon" className='img-fluid' />
                 </div>
@@ -65,12 +62,10 @@ const About = () => {
                 </p>
               </Card.Body>
             </Card>
-          </Link>
 
-          <Link to="/explore" className="text-decoration-none">
             <Card className='border-0 shadow-sm rounded-3 mb-4'>
               <Card.Body className='text-center'>
-                <div className='d-flex justify-content-center align-item-search my-2'>
+                <div className='d-flex justify-content-center align-item-center my-2'>
                 <div className='rounded-circle bg-light shadow-sm bg-opacity-10 p-2'>
                   <img src={icons3} alt="icon" className='img-fluid' />
                 </div>
@@ -81,7 +76,6 @@ const About = () => {
                 </p>
               </Card.Body>
             </Card>
-          </Link>
             </Col>
           </Row>
         </Container>
