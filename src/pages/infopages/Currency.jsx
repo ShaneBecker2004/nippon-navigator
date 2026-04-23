@@ -3,8 +3,9 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import airport from "../../assets/images/breadcrumb/narita-airport.webp"
 
+const CORE_CURRENCIES = ["USD", "EUR", "GBP", "CAD", "AUD", "KRW", "SGD"];
+
 const Currency = () => {
-    const CORE_CURRENCIES = ["USD", "EUR", "GBP", "CAD", "AUD", "KRW", "SGD"];
     const [rates, setRates] = useState({});
     const [amount, setAmount] = useState(1);
     const [selectedCurrency, setSelectedCurrency] = useState("USD");
@@ -19,6 +20,7 @@ const Currency = () => {
         AUD: "A$",
         KRW: "₩",
         SGD: "S$",
+        JPY: "¥",
     };    
     
     const format = (num) => 
