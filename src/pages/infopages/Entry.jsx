@@ -5,7 +5,7 @@ import travelimg from  "../../assets/images/breadcrumb/passport-visa-graphic.jpg
 const Entry = () => {
   return (
     <>
-      <Breadcrumbs title="Entry Requirements (Visa & Immigration)" pagename="Entry Requirements" bgImage={travelimg} />
+      <Breadcrumbs title="Entry Requirements" pagename="Entry Requirements" bgImage={travelimg} />
       <section className='py-5'>
         <Container>
           <Row>

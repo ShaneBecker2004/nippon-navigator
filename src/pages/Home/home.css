@@ -43,12 +43,9 @@
     color: var(--white);
     display: inline-block;
     border: 2px solid var(--white);
-    padding: 12px 8px;
+    padding: 15px 12px;
     text-decoration: none;
-}
-
-.bounce {
-    animation: bounce 2s infinite;
+    font-weight: bold;
 }
 
 .overlay {
@@ -61,23 +58,8 @@
     z-index: -1;
 }
 
-@keyframes bounce {
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-30px);
-    }
-    60% {
-        transform: translateY(-15px);
-    }
-}
 
-@media only screen and (max-width: 1199px) {
+@media (max-width: 1199px) {
     .call_us {
         overflow: hidden;
     }
@@ -88,7 +70,7 @@
     }
 }
 
-@media only screen and (max-width: 420px) {
+@media (max-width: 420px) {
     .call_us {
         overflow: hidden;
     }

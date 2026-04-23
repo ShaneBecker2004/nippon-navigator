@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Banner from '../../components/Banner/Banner';
 
 import Features from '../../components/Features/Features';
@@ -19,6 +19,7 @@ const Home = () => {
 
   const [destinations, setDestinations] = useState([]);
   const [loading, setLoading] = useState(true);
+  const sliderRef = useRef(null);
 
   useEffect(() => {
   const fetchDestinations = async () => {
@@ -39,59 +40,86 @@ const Home = () => {
     }
   };
 
-  fetchDestinations();
-}, []);
+    fetchDestinations();
+  }, []);
+
+
+  useEffect(() => {
+    const fixSlider = () => {
+      if (sliderRef.current) {
+        sliderRef.current.slickGoTo(0, true);
+        sliderRef.current.innerSlider?.onWindowResized();
+      }
+    };
+
+    // run AFTER everything renders
+    const timeout = setTimeout(fixSlider, 200);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+  useEffect(() => {
+    const handleLoad = () => {
+      sliderRef.current?.innerSlider?.onWindowResized();
+    };
+
+    window.addEventListener("load", handleLoad);
+
+    return () => window.removeEventListener("load", handleLoad);
+  }, []);
 
   var settings = {
     dots: false,
     infinite: true,
     autoplay: true,
+    speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
+    arrows: true,
+    adaptiveHeight: false,
 
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1200,
         settings: {
           slidesToShow: 4,
           slidesToScroll: 1,
-          infinite: false,
           dots: true,
-          autoplay: true,
+          prevArrow: true,
+          nextArrow: true
         }
       },
       {
-        breakpoint: 991,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          infinite: false,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 600,
+        breakpoint: 992, // tablet
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          autoplay: true,
-          prevArrow: false,
-          nextArrow: false,
-
         }
       },
       {
-        breakpoint: 480,
+        breakpoint: 768, // large phones
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          arrows: false,
+          dots: true,
+          prevArrow: false,
+          nextArrow: false,
+        }
+      },
+      {
+        breakpoint: 480, // small phones
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,
+          dots: true,
           prevArrow: false,
           nextArrow: false,
         }
       }
     ]
   };
-
 
   return (
     <>
@@ -106,7 +134,7 @@ const Home = () => {
               <h1>Top Destinations For You To Explore </h1>
             </div>
           </Col>
-        </Row>
+          </Row>
 
           <Row>
             <Col md="12">
@@ -177,9 +205,9 @@ const Home = () => {
               </p>
           </Col>
           <Col md={4} className="text-center mt-3 mt-md-0">
-              <a href="tel:9876543210" 
-              className="secondary_btn bounce" rel="no">
-                Contact Us !
+              <a href="/contact-us" 
+              className="secondary_btn" rel="no">
+                Visit our Contact page!
               </a>
           </Col>
         </Row>

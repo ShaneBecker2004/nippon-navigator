@@ -18,6 +18,7 @@
     width: 75px;
     margin: 0px auto;
     margin-bottom: 14px;
+    display: inline-block;
 }
 
 .feature-section .card .card-title {

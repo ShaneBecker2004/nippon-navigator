@@ -196,7 +196,7 @@ const Header = () => {
                                         Getting to the City
                                     </NavDropdown.Item>
                                     <NavDropdown.Item as={Link} to="/entry" onClick={closeAll}>
-                                        Entry Requirements (Visa & Immigration)
+                                        Entry Requirements
                                     </NavDropdown.Item>
                                     <NavDropdown.Item as={Link} to="/language" onClick={closeAll}>
                                         Language & Etiquette
