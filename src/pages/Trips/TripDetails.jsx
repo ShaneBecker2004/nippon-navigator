@@ -83,6 +83,13 @@ const CreatedTrip = () => {
     };
   }, [tripId]);
 
+  const calculateTotalJPY = useCallback(() => {
+    return savedItems.reduce((total, item) => {
+      const yenValue = extractJPYPrice(item.activity?.price);
+      return total + yenValue;
+    }, 0);
+  }, [savedItems]);
+
   useEffect(() => {
     const fetchRates = async () => {
       try {
@@ -111,14 +118,7 @@ const CreatedTrip = () => {
 
     const totalJPY = calculateTotalJPY();
     setConvertedTotal(totalJPY / rates[selectedCurrency]);
-  }, [rates, selectedCurrency, savedItems]);
-
-  const calculateTotalJPY = useCallback(() => {
-    return savedItems.reduce((total, item) => {
-      const yenValue = extractJPYPrice(item.activity?.price);
-      return total + yenValue;
-    }, 0);
-  }, [savedItems]);
+  }, [rates, selectedCurrency, savedItems, calculateTotalJPY]);
 
   const extractJPYPrice = (price) => {
     if (!price) return 0;
@@ -241,7 +241,7 @@ const CreatedTrip = () => {
     }
   };
 
-  const saveItemOrder = async (items) => {
+  const saveItemOrder = useCallback(async (items) => {
     try {
       const auth = getAuth();
       const user = auth.currentUser;
@@ -271,7 +271,7 @@ const CreatedTrip = () => {
     } catch (err) {
       console.error("Failed to save itinerary order:", err);
     }
-  };
+  }, [tripId]);
 
   const handleSaveDetails = async () => {
     setSavingDetails(true)
@@ -425,7 +425,7 @@ const CreatedTrip = () => {
     }, 800);
 
     return () => clearTimeout(timeout);
-  }, [savedItems, saveStatus]);
+  }, [savedItems, saveStatus, saveItemOrder]);
 
   const handleSaveItinerary = async () => {
     try {
