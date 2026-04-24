@@ -157,7 +157,7 @@ const CreatedTrip = () => {
 
     const totalJPY = calculateTotalJPY();
     setConvertedTotal(totalJPY / rates[selectedCurrency]);
-  }, [rates, selectedCurrency, savedItems]);
+  }, [rates, selectedCurrency, calculateTotalJPY]);
 
   useEffect(() => {
     const fetchTrip = async () => {
