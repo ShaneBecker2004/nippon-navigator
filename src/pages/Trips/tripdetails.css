@@ -86,6 +86,7 @@
   background: white;
   color: var(--primaryClr);
   transform: translateY(-2px);
+  border: 2px solid white;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -103,6 +104,7 @@
   background: white;
   color: var(--primaryClr);
   transform: translateY(-2px);
+  border: 2px solid white;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -119,6 +121,7 @@
 .save-edit-btn:hover {
   background: white;
   color: var(--primaryClr);
+  border: 2px solid white;
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
@@ -136,6 +139,7 @@
 .cancel-btn:hover {
   background: white;
   color: var(--primaryClr);
+  border: 2px solid white;
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
@@ -414,6 +418,171 @@
 .back-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.itinerary-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.day-row {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #eee;
+}
+
+.day-row-header {
+  margin-bottom: 12px;
+}
+
+.day-row-header h5 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.day-row-header small {
+  font-size: 12px;
+  color: #777;
+}
+
+.day-row-header input {
+  height: 32px;
+  font-size: 13px;
+  padding: 4px 8px;
+  margin-top: 6px;
+}
+
+.day-row-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 10px 12px;
+  border: 1px solid #eee;
+}
+
+.activity-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.activity-left h6 {
+  font-size: 14px;
+  margin: 0;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.activity-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.day-row-item:hover {
+  background: #f1f5f9;
+}
+
+.day-row-item h6 {
+  font-size: 14px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.activity-location {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+}
+
+.empty-day {
+  color: #888;
+  font-size: 14px;
+}
+
+.day-item.dragging {
+  opacity: 0.5;
+  transform: scale(0.98);
+}
+
+.day-column.drag-over {
+  border: 2px dashed var(--primaryClr);
+  background: rgba(0, 123, 255, 0.05);
+}
+
+.day-row-item .btn {
+  padding: 4px 8px;
+  font-size: 12px;
+  line-height: 1;
+  width: auto;
+  height: auto;
+}
+
+.day-row-item .bi-trash {
+  font-size: 14px;
+}
+
+.activity-right select {
+  width: 110px;
+  height: 32px;
+  font-size: 12px;
+}
+
+.activity-right input[type="time"] {
+  width: 95px;
+  height: 32px;
+  font-size: 12px;
+}
+
+.activity-right button {
+  padding: 4px 6px;
+}
+
+.day-row-item button {
+  padding: 4px 6px;
+  font-size: 12px;
+}
+
+.budget-summary {
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.total-price {
+  font-size: 24px;
+  font-weight: bold;
+  color: #16a34a;
+}
+
+.budget-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.save-button {
+  background-color: var(--primaryClr);
+  border: 1px solid white
+}
+
+.save-button:hover {
+  background-color: #d94b4b;
+  border: 1px solid white;
 }
 
 /* Responsive Design */

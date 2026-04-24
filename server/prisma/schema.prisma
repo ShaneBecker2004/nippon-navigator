@@ -59,6 +59,8 @@ model Trip {
 
   notes      String?
 
+  dayLabels Json?
+
   createdAt  DateTime @default(now())
 
   savedItems SavedActivity[]
@@ -73,7 +75,8 @@ model SavedActivity {
   notes      String?
 
   order     Int @default(0)
-  scheduledAt DateTime?
+  day         Int @default(1)
+  time String?
   status String? // planned, booked, completed
 
   activity   Activity @relation(fields: [activityId], references: [id])

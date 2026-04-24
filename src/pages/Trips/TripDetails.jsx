@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { getAuth } from 'firebase/auth'
 import { useAuth } from '../../contexts/authContext'
@@ -15,9 +15,6 @@ const CreatedTrip = () => {
   const { tripId } = useParams()
   const [trip, setTrip] = useState(null)
   const [savedItems, setSavedItems] = useState([])
-  const [dragItemIndex, setDragItemIndex] = useState(null)
-  const [dragOverItemIndex, setDragOverItemIndex] = useState(null)
-  const [isDragging, setIsDragging] = useState(false)
   const [deletingItemId, setDeletingItemId] = useState(null)
   const [isEditingDetails, setIsEditingDetails] = useState(false)
   const [editDescription, setEditDescription] = useState('')
@@ -29,7 +26,28 @@ const CreatedTrip = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  const [tripNotes, setTripNotes] = useState("");
+  const [savingNotes, setSavingNotes] = useState(false);
+
+  const [rates, setRates] = useState({});
+  const [selectedCurrency, setSelectedCurrency] = useState("USD");
+  const [convertedTotal, setConvertedTotal] = useState(0);
+
+  const isSyncingRef = useRef(false);
+  const lastSavedRef = useRef([]);
+  const [saveStatus, setSaveStatus] = useState("saved"); 
+
   const { currentUser } = useAuth();
+
+  const SYMBOLS = {
+    USD: "$",
+    EUR: "€",
+    GBP: "£",
+    CAD: "C$",
+    AUD: "A$",
+    KRW: "₩",
+    SGD: "S$",
+  };
 
   useEffect(() => {
     if (!currentUser?.uid) return;
@@ -39,10 +57,24 @@ const CreatedTrip = () => {
 
   useEffect(() => {
     const handleTripUpdate = (updatedTrip) => {
-      if (String(updatedTrip.id) === String(tripId)) {
-        setTrip(updatedTrip);
-        setSavedItems((updatedTrip.savedItems || []).slice().sort((a, b) => a.order - b.order));
-      }
+      if (String(updatedTrip.id) !== String(tripId)) return;
+      if (isSyncingRef.current) return;
+
+      const serverItems = updatedTrip.savedItems || [];
+
+      setTrip(updatedTrip);
+
+      setSavedItems((prev) => {
+        return sortItems(
+          prev.map((localItem) => {
+            const match = serverItems.find((s) => s.id === localItem.id);
+            return match ? { ...localItem, ...match } : localItem;
+          })
+        );
+      });
+
+      lastSavedRef.current = serverItems;
+      setSaveStatus("saved");
     };
 
     socket.on("tripUpdated", handleTripUpdate);
@@ -51,6 +83,75 @@ const CreatedTrip = () => {
       socket.off("tripUpdated", handleTripUpdate);
     };
   }, [tripId]);
+
+  useEffect(() => {
+    const fetchRates = async () => {
+      try {
+        const res = await fetch('https://api.exchangerate-api.com/v4/latest/JPY');
+        const data = await res.json();
+
+        const filteredRates = {};
+
+        const CORE_CURRENCIES = ["USD", "EUR", "GBP", "CAD", "AUD", "KRW", "SGD"];
+
+        CORE_CURRENCIES.forEach((currency) => {
+          filteredRates[currency] = 1 / data.rates[currency];
+        });
+
+        setRates(filteredRates);
+      } catch (err) {
+        console.error("Error fetching rates:", err);
+      }
+    };
+
+    fetchRates();
+  }, []);
+
+  const calculateTotalJPY = () => {
+    return savedItems.reduce((total, item) => {
+      const yenValue = extractJPYPrice(item.activity?.price);
+      return total + yenValue;
+    }, 0);
+  };
+
+  const extractJPYPrice = (price) => {
+    if (!price) return 0;
+
+    if (typeof price === "string") {
+      try {
+        price = JSON.parse(price);
+      } catch {
+        return 0;
+      }
+    }
+
+    if (typeof price === "object") {
+      const first = Object.values(price)[0];
+
+      if (typeof first === "number") return first;
+      if (first?.min) return first.min;
+    }
+
+    if (typeof price === "number") return price;
+
+    return 0;
+  };
+
+  const sortItems = (items) => {
+    return [...items].sort((a, b) => {
+      if ((a.day || 1) !== (b.day || 1)) {
+        return (a.day || 1) - (b.day || 1);
+      }
+      return (a.time || "99:99").localeCompare(b.time || "99:99");
+    });
+  };
+
+  useEffect(() => {
+    if (!rates[selectedCurrency]) return;
+
+    const totalJPY = calculateTotalJPY();
+    setConvertedTotal(totalJPY / rates[selectedCurrency]);
+  }, [rates, selectedCurrency, savedItems]);
 
   useEffect(() => {
     const fetchTrip = async () => {
@@ -82,12 +183,13 @@ const CreatedTrip = () => {
         }
 
         const data = await response.json()
-        setTrip(data)
-        setSavedItems((data.savedItems || []).slice().sort((a, b) => a.order - b.order))
-        setEditDescription(data.description || '')
-        setEditArrivalLocation(data.arrivalLocation || '')
-        setEditDepartureLocation(data.departureLocation || '')
-        setEditPartySize(data.partySize || '')
+          setTrip(data)
+          setSavedItems(sortItems(data.savedItems|| []))
+          setEditDescription(data.description || '')
+          setEditArrivalLocation(data.arrivalLocation || '')
+          setEditDepartureLocation(data.departureLocation || '')
+          setEditPartySize(data.partySize || '')
+          setTripNotes(data.notes || '')
 
       } catch (err) {
         console.error('Error loading trip:', err)
@@ -100,93 +202,70 @@ const CreatedTrip = () => {
     fetchTrip()
   }, [tripId, currentUser?.uid])
 
+  const handleSaveNotes = async () => {
+    setSavingNotes(true);
+
+    try {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (!user) return;
+
+      const token = await user.getIdToken(true);
+
+      const res = await fetch(`${API}/api/trips/${tripId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          notes: tripNotes,
+        }),
+      });
+
+      if (!res.ok) throw new Error("Failed to save notes");
+
+      const updated = await res.json();
+      setTrip(updated);
+
+    } catch (err) {
+      console.error("Error saving notes:", err);
+    } finally {
+      setSavingNotes(false);
+    }
+  };
+
   const saveItemOrder = async (items) => {
     try {
-      const auth = getAuth()
-      const user = auth.currentUser
-      if (!user) return
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (!user) return;
 
-      const token = await user.getIdToken(true)
+      const token = await user.getIdToken(true);
+
+      const payload = items.map((item, index) => ({
+        id: item.id,
+        day: item.day ?? 1,
+        time: item.time || null,
+        order: index + 1,
+      }));
+
       await fetch(`${API}/api/trips/save-activity/order`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           tripId,
-          order: items.map((item, index) => ({
-            id: item.id,
-            order: index + 1,
-          })),
+          order: payload,
         }),
-      })
+      });
+
     } catch (err) {
-      console.error('Failed to save itinerary order:', err)
+      console.error("Failed to save itinerary order:", err);
     }
-  }
-
-  const handleDragStart = (index, e) => {
-    setDragItemIndex(index)
-    setIsDragging(true)
-    
-    // Create a custom drag image with just the activity info
-    const dragElement = e.target.closest('.timeline-item')
-
-    const title =
-      dragElement?.querySelector('h4')?.textContent || 'Activity'
-
-    const location =
-      dragElement?.querySelector('.activity-location')?.textContent || ''
-    
-    // Create a clean drag preview
-    const dragPreview = document.createElement('div')
-    dragPreview.innerHTML = `
-      <div style="
-        background: white;
-        border: 2px solid #007bff;
-        border-radius: 8px;
-        padding: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        font-family: inherit;
-        max-width: 300px;
-      ">
-        <h5 style="margin: 0 0 4px 0; color: #333;">${title}</h5>
-        <p style="margin: 0; color: #666; font-size: 14px;">${location}</p>
-      </div>
-    `
-    dragPreview.style.position = 'absolute'
-    dragPreview.style.top = '-1000px'
-    document.body.appendChild(dragPreview)
-    
-    e.dataTransfer.setDragImage(dragPreview, 10, 10)
-    
-    // Remove the preview element after a short delay
-    setTimeout(() => {
-      document.body.removeChild(dragPreview)
-    }, 0)
-  }
-
-  const handleDragEnter = (index) => {
-    setDragOverItemIndex(index)
-  }
-
-  const handleDrop = async () => {
-    if (dragItemIndex === null || dragOverItemIndex === null || dragItemIndex === dragOverItemIndex) {
-      setDragItemIndex(null)
-      setDragOverItemIndex(null)
-      return
-    }
-
-    const updatedItems = [...savedItems]
-    const [movedItem] = updatedItems.splice(dragItemIndex, 1)
-    updatedItems.splice(dragOverItemIndex, 0, movedItem)
-
-    setSavedItems(updatedItems)
-    setDragItemIndex(null)
-    setDragOverItemIndex(null)
-    await saveItemOrder(updatedItems)
-  }
+  };
 
   const handleSaveDetails = async () => {
     setSavingDetails(true)
@@ -273,6 +352,114 @@ const CreatedTrip = () => {
       setDeletingItemId(null)
     }
   }
+
+  const getTotalCost = () => {
+    return savedItems.reduce((total, item) => {
+      const yenValue = extractJPYPrice(item.activity?.price);
+      return total + yenValue;
+    }, 0);
+  };
+
+   const getTripDays = () => {
+    if (!trip?.startDate || !trip?.endDate) return [];
+
+    const days = [];
+    const start = new Date(trip.startDate);
+    const end = new Date(trip.endDate);
+
+    let current = new Date(start);
+    let dayCount = 1;
+
+    while (current <= end) {
+      days.push({
+        day: dayCount,
+        date: new Date(current),
+        label: `Day ${dayCount}`,
+        customLabel: "",
+        note: ""
+      });
+
+      current.setDate(current.getDate() + 1);
+      dayCount++;
+    }
+
+    return days;
+  }
+
+  const updateItem = (id, updates) => {
+    isSyncingRef.current = true;
+
+    setSavedItems((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, ...updates } : item
+      )
+    );
+
+    setSaveStatus("unsaved");
+
+    setTimeout(() => {
+      isSyncingRef.current = false;
+    }, 0);
+  };
+
+  useEffect(() => {
+    if (isSyncingRef.current) return;
+    if (saveStatus !== "unsaved") return;
+
+    const timeout = setTimeout(async () => {
+      setSaveStatus("saving");
+
+      try {
+        await saveItemOrder(savedItems);
+
+        lastSavedRef.current = JSON.parse(JSON.stringify(savedItems));
+        setSaveStatus("saved");
+      } catch (err) {
+        console.error(err);
+        setSaveStatus("unsaved"); // retry state
+      }
+    }, 800);
+
+    return () => clearTimeout(timeout);
+  }, [savedItems]);
+
+  const handleSaveItinerary = async () => {
+    try {
+      setSaveStatus("saving");
+
+      await saveItemOrder(savedItems);
+
+      lastSavedRef.current = JSON.parse(JSON.stringify(savedItems));
+      setSaveStatus("saved");
+
+    } catch (err) {
+      console.error("Manual save failed:", err);
+      setSaveStatus("unsaved");
+    }
+  };
+
+  const sortByTime = (items) => {
+    return [...items].sort((a, b) => {
+      const timeA = a.time || "99:99";
+      const timeB = b.time || "99:99";
+      return timeA.localeCompare(timeB);
+    });
+  };
+
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (saveStatus !== "unsaved") return;
+
+      e.preventDefault();
+      e.returnValue = ""; // required for browser prompt
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [saveStatus]);
 
   if (loading) {
     return (
@@ -447,55 +634,109 @@ const CreatedTrip = () => {
                   Notes
                 </Nav.Link>
               </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="expenses" className="tab-link">
+                  <i className="bi bi-currency-dollar"></i>
+                  Expenses
+                </Nav.Link>
+              </Nav.Item>
             </Nav>
 
             <Tab.Content className="tab-content">
               <Tab.Pane eventKey="itinerary">
                 <div className="itinerary-section">
                   <h3>Trip Itinerary</h3>
+                  <div className={`save-status ${saveStatus} mb-3`}>
+                    {saveStatus === "saved" && "All changes saved"}
+                    {saveStatus === "saving" && "Saving..."}
+                    {saveStatus === "unsaved" && "Unsaved changes"}
+                  </div>
+                  <Button
+                    className="save-itinerary-btn"
+                    onClick={handleSaveItinerary}
+                    disabled={saveStatus === "saving"}
+                  >
+                    {saveStatus === "saving" ? "Saving..." : "Save Itinerary"}
+                  </Button>
+
                   {savedItems.length > 0 ? (
-                    <div className="itinerary-timeline">
-                      {savedItems.map((item, index) => (
-                        <div
-                          key={item.id}
-                          className={`timeline-item ${dragOverItemIndex === index ? 'drag-over' : ''} ${isDragging && dragItemIndex === index ? 'dragging' : ''}`}
-                          draggable
-                          onDragStart={(e) => handleDragStart(index, e)}
-                          onDragEnter={() => handleDragEnter(index)}
-                          onDragOver={(e) => e.preventDefault()}
-                          onDrop={handleDrop}
-                          onDragEnd={() => {
-                            setDragItemIndex(null)
-                            setDragOverItemIndex(null)
-                            setIsDragging(false)
-                          }}
-                        >
-                          <div className="timeline-marker">
-                            <span className="day-number">{index + 1}</span>
+                    <div className="itinerary-rows">
+                      {getTripDays().map((dayObj) => {
+                        const itemsForDay = savedItems.filter(
+                          (item) => (item.day ?? 1) === dayObj.day
+                        );
+
+                        return (
+                          <div 
+                            key={dayObj.day} 
+                            className='day-row'
+                          >
+
+                          <div className='day-row-header'>
+                            <h5>
+                              {dayObj.label}
+                              <br />
+                              <small>{dayObj.date.toLocaleDateString()}</small>
+                            </h5>
                           </div>
-                          <div className="timeline-content">
-                            <div className="d-flex justify-content-between align-items-start">
-                              <div>
-                                <h4>{item.activity.title || "Untitled Activity"}</h4>
-                                <p className="activity-location">{item.activity.location || "No location"}</p>
-                                {item.notes && <p className="activity-notes">{item.notes}</p>}
-                              </div>
-                              <Button
-                                variant="outline-danger"
-                                size="sm"
-                                onClick={() => handleDeleteItem(item.id)}
-                                disabled={deletingItemId === item.id}
-                              >
-                                <i className="bi bi-trash"></i>
-                              </Button>
-                            </div>
+
+                            {itemsForDay.length > 0 ? (
+                              itemsForDay.map((item, index) => (
+                                <div 
+                                  key={item.id} 
+                                  className='day-row-item'
+                                >
+                                  <div className='activity-left'>
+                                    <h6>{item.activity.title || "Untitled Activity"}</h6>
+                                    <p className='activity-location'>
+                                      {item.activity.location || "No location"}
+                                    </p>
+                                  </div>
+
+                                <div className='activity-right'>
+                                  <Form.Select
+                                    value={item.day ?? 1}
+                                    onChange={(e) =>
+                                      updateItem(item.id, { day: parseInt(e.target.value) })
+                                    }
+                                  >
+                                    {getTripDays().map((d) => (
+                                      <option key={d.day} value={d.day}>
+                                        {d.label}
+                                      </option>
+                                    ))}
+                                  </Form.Select>
+
+                                  <input
+                                    type='time'
+                                    value={item.time || ""}
+                                    onChange={(e) => 
+                                      updateItem(item.id, { time: e.target.value })
+                                    }
+                                  />
+
+                                    <Button
+                                      variant='outline-danger'
+                                      size="sm"
+                                      onClick={() => handleDeleteItem(item.id)}
+                                    >
+                                      <i className='bi bi-trash'></i>
+                                    </Button>
+                                  </div>
+                                </div>
+                              ))
+                            ) : (
+                              <p className='empty-day'>No activities</p>
+                            )}
+
                           </div>
-                        </div>
-                      ))}
+                        );
+                      })}
+
                     </div>
                   ) : (
-                    <div className="empty-state">
-                      <i className="bi bi-calendar-x"></i>
+                    <div className='empty-state'>
+                      <i className='bi bi-calendar-x'></i>
                       <h4>No activities planned yet</h4>
                       <p>Start building your itinerary by adding activities from the Explore page.</p>
                     </div>
@@ -519,7 +760,7 @@ const CreatedTrip = () => {
                           >
                             <div className="activity-card">
                               <div className="activity-header">
-                                <h4>{item.activity.title}</h4>
+                                <h4>{item.activity.title || "Untitled Activity"}</h4>
 
                                 <span className="activity-type">
                                   {(item.activity.category || []).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(", ").replace(/_/g, " ")}
@@ -597,8 +838,85 @@ const CreatedTrip = () => {
               <Tab.Pane eventKey="notes">
                 <div className="notes-section">
                   <h3>Trip Notes</h3>
-                  <div className="notes-content">
-                    {trip?.notes || "No notes added yet. Add some personal notes about your trip planning."}
+                  <Form.Control
+                    as="textarea"
+                    rows={6}
+                    placeholder='Write notes about your trip...'
+                    value={tripNotes}
+                    onChange={(e) => setTripNotes(e.target.value)}
+                  />
+
+                  <Button 
+                    className='save-button mt-2'
+                    onClick={handleSaveNotes}
+                    disabled={savingNotes}
+                  >
+                    {savingNotes ? "Saving..." : "Save Notes"}
+                  </Button>
+                </div>
+              </Tab.Pane>
+
+              <Tab.Pane eventKey="expenses">
+                <div className="expenses-section">
+                  <h3 className='mb-4 fw-bold'>Budget</h3>
+
+                  <div className='currency-select mb-3'>
+                    <label>Select Currency</label>
+                    <select
+                      className='form-control mt-2'
+                      value={selectedCurrency}
+                      onChange={(e) => setSelectedCurrency(e.target.value)}
+                    >
+                      <option value="USD">USD</option>
+                      <option value="EUR">EUR</option>
+                      <option value="GBP">GBP</option>
+                      <option value="CAD">CAD</option>
+                      <option value="AUD">AUD</option>
+                      <option value="KRW">KRW</option>
+                      <option value="SGD">SGD</option>
+                    </select>
+                  </div>
+
+                  <div className="budget-summary">
+                    <h4>Total Estimated Cost:</h4>
+
+                    <p className='total-price'>
+                      ¥{getTotalCost().toLocaleString()}
+                    </p>
+
+                    <p className='converted-total'>
+                      {selectedCurrency}:{" "}{SYMBOLS[selectedCurrency]}
+                      {convertedTotal.toLocaleString(undefined, {
+                        maximumFractionDigits: 2
+                      })}
+                    </p>
+                  </div>
+
+                  <div className='budget-breakdown'>
+                    {savedItems.map((item) => {
+                      const yenValue = extractJPYPrice(item.activity?.price);
+                      const rate = rates[selectedCurrency];
+
+                      return (
+                        <div key={item.id} className='budget-item'>
+                          <span>{item.activity.title || "Untitled Activity"}</span>
+
+                          <span>
+                            {yenValue > 0 ? `¥${yenValue.toLocaleString()}` : "-"}
+
+                            <br />
+
+                            <small>
+                              {rate
+                                ? `${SYMBOLS[selectedCurrency]} ${(yenValue / rate).toLocaleString(undefined, {
+                                  maximumFractionDigits: 2
+                                })}`
+                                : "-"}
+                            </small>
+                          </span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </Tab.Pane>

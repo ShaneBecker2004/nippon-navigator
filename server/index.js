@@ -134,6 +134,7 @@ app.post("/api/trips", authenticateUser, async (req, res) => {
         arrivalLocation: req.body.arrivalLocation || null,
         departureLocation: req.body.departureLocation || null,
         partySize: Number(req.body.partySize) || null,
+        dayLabels: req.body.dayLabels || {},
         userId: uid,
       },
     });
@@ -218,6 +219,7 @@ app.put("/api/trips/:id", authenticateUser, async (req, res) => {
     res.status(500).json({ error: "Failed to update trip" });
   }
 });
+
 
 //////////////////////////////////
 // DELETE TRIP
@@ -330,7 +332,11 @@ app.put("/api/trips/save-activity/order", authenticateUser, async (req, res) => 
       order.map((item) =>
         prisma.savedActivity.update({
           where: { id: item.id },
-          data: { order: item.order },
+          data: {
+            order: item.order,
+            day: item.day,
+            time: item.time,
+          },
         })
       )
     );
