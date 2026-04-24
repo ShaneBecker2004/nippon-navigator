@@ -242,7 +242,11 @@ const Explore = () => {
       {/* MOBILE FILTERS */}
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Filters</Offcanvas.Title>
+          <Offcanvas.Title>
+            <div className='fw-bold fs-2'>
+              Filters
+            </div>
+            </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Recommended />
@@ -251,7 +255,7 @@ const Explore = () => {
             handleLocationChange={handleLocationChange}
             handlePriceChange={handlePriceChange}
             handleRatingChange={handleRatingChange}
-/>
+          />
         </Offcanvas.Body>
       </Offcanvas>
     </>

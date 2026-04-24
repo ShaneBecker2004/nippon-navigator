@@ -1,11 +1,12 @@
 import React from 'react'
 import "../Features/features.css"
 
-import feature1 from "../../assets/images/feature/japan-map-graphic.webp";
-import feature2 from "../../assets/images/feature/shibuya-crossing-night.jpg";
+import feature1 from "../../assets/images/feature/shibuya-crossing-night.jpg";
+import feature2 from "../../assets/images/feature/cafe-smartphone.jpg";
 import feature3 from "../../assets/images/feature/gokart-tokyo.webp";
-import feature4 from "../../assets/images/feature/inari-shrine-day.webp";
+import feature4 from "../../assets/images/feature/tokyo-station-sign.jpg";
 import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -66,26 +67,27 @@ const Features = () => {
             id: 0,
             image: feature1,
             title: "Discover the magic of Japan",
-            des: "Booking made easier, you can count on us to help you plan for your trip."
+            des: "Turn your dream Japan trip into a simple, stress-free plan.",
+            link: ""
         },
         {
             id: 1,
             image: feature2,
             title: "Reviews you can trust",
-            des: "Within a glance, you can trust what others have experienced."
+            des: "See what others truly think before you go."
         },
         {
             id: 2,
             image: feature3,
             title: "Go and enjoy the fun",
-            des: "With a lot of activities to do and see, you are guaranteed to have fun no matter where you are.",
+            des: "Discover experiences that make your trip exciting.",
             link: "/explore"
         },
         {
             id: 3,
             image: feature4,
-            title: "Need to know what to expect",
-            des: "Needing to know how to get around the city or what common phrases to use, we can help you."
+            title: "Know what to expect",
+            des: "Learn how to get around, speak, and explore like a local."
         },
     ];
 
@@ -97,22 +99,30 @@ const Features = () => {
                     <Col md='12'>
                         <Slider {...settings} >
                         {featureList.map((feature, inx)=>{
+                          const CardContent = (
+                            <Card className='feature-card'>
+                              <Card.Img
+                                variant='top'
+                                src={feature.image}
+                                className='img-fluid'
+                                alt={feature.title}
+                              />
+                              <Card.Title>{feature.title}</Card.Title>
+                              <Card.Text>{feature.des}</Card.Text>
+                            </Card>
+                          );
+
                             return (
                               <div key={inx} className="img-box-feature">
-                                <Card>
-                                    <Card.Img
-                                    variant='top'
-                                    src={feature.image}
-                                    className='img-fluid'
-                                    alt={feature.title}
-                                    />
-                                    <Card.Title>{feature.title}</Card.Title>
-                                    <Card.Text>
-                                        {feature.des}
-                                    </Card.Text>
-                                </Card>
-                                </div>
-                            )
+                                {feature.link ? (
+                                  <Link to={feature.link} className='card-link-wrapper'>
+                                    {CardContent}
+                                  </Link>
+                                ) : (
+                                  CardContent
+                                )}
+                              </div>
+                            );
                         })}
                         </Slider>
                     </Col>
