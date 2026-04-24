@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import { getAuth } from 'firebase/auth'
 import { useAuth } from '../../contexts/authContext'
@@ -15,7 +15,6 @@ const CreatedTrip = () => {
   const { tripId } = useParams()
   const [trip, setTrip] = useState(null)
   const [savedItems, setSavedItems] = useState([])
-  const [deletingItemId, setDeletingItemId] = useState(null)
   const [isEditingDetails, setIsEditingDetails] = useState(false)
   const [editDescription, setEditDescription] = useState('')
   const [editArrivalLocation, setEditArrivalLocation] = useState('')
@@ -107,12 +106,19 @@ const CreatedTrip = () => {
     fetchRates();
   }, []);
 
-  const calculateTotalJPY = () => {
+  useEffect(() => {
+  if (!rates[selectedCurrency]) return;
+
+    const totalJPY = calculateTotalJPY();
+    setConvertedTotal(totalJPY / rates[selectedCurrency]);
+  }, [rates, selectedCurrency, savedItems]);
+
+  const calculateTotalJPY = useCallback(() => {
     return savedItems.reduce((total, item) => {
       const yenValue = extractJPYPrice(item.activity?.price);
       return total + yenValue;
     }, 0);
-  };
+  }, [savedItems]);
 
   const extractJPYPrice = (price) => {
     if (!price) return 0;
@@ -322,7 +328,6 @@ const CreatedTrip = () => {
   const handleDeleteItem = async (savedActivityId) => {
     if (!window.confirm('Remove this activity from your trip?')) return
 
-    setDeletingItemId(savedActivityId)
     try {
       const auth = getAuth()
       const user = auth.currentUser
@@ -349,7 +354,6 @@ const CreatedTrip = () => {
     } catch (err) {
       console.error('Failed to delete itinerary item:', err)
     } finally {
-      setDeletingItemId(null)
     }
   }
 
@@ -421,7 +425,7 @@ const CreatedTrip = () => {
     }, 800);
 
     return () => clearTimeout(timeout);
-  }, [savedItems]);
+  }, [savedItems, saveStatus]);
 
   const handleSaveItinerary = async () => {
     try {
@@ -436,14 +440,6 @@ const CreatedTrip = () => {
       console.error("Manual save failed:", err);
       setSaveStatus("unsaved");
     }
-  };
-
-  const sortByTime = (items) => {
-    return [...items].sort((a, b) => {
-      const timeA = a.time || "99:99";
-      const timeB = b.time || "99:99";
-      return timeA.localeCompare(timeB);
-    });
   };
 
   useEffect(() => {
