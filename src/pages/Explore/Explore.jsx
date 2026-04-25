@@ -226,8 +226,6 @@ const Explore = () => {
   const params = new URLSearchParams(location.search);
   const cityFromURL = params.get("city");
 
-  const normalize = (str) =>
-  (str ?? "").trim().toLowerCase();
 
 console.log(
   activities
