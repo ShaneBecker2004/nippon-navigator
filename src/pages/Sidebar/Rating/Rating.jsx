@@ -1,31 +1,42 @@
 import React from 'react'
+import Input from '../Input'
 import "../sidebar.css"
 
-const Rating = () => {
+function Rating({ handleRatingChange, selectedRating }) {
   return (
     <div className='sidebar-section ml'>
-      <h2 className='sidebar-title'>Ratings</h2>
+      <h1 className='sidebar-title'>Rating</h1>
 
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>All
-      </label>
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>⭐⭐⭐⭐⭐
-      </label>
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>⭐⭐⭐⭐
-      </label>
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>⭐⭐⭐
-      </label>
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>⭐⭐
-      </label>
+    <div>
+        <Input
+          handleChange={handleRatingChange}
+          value="5"
+          title="⭐⭐⭐⭐⭐"
+          name="rating"
+          checked={selectedRating=== "5"}
+        />
+        <Input
+          handleChange={handleRatingChange}
+          value="4"
+          title="⭐⭐⭐⭐ & up"
+          name="rating"
+          checked={selectedRating=== "4"}
+        />
+        <Input
+          handleChange={handleRatingChange}
+          value="3"
+          title="⭐⭐⭐ & up"
+          name="rating"
+          checked={selectedRating=== "3"}
+        />
+        <Input
+          handleChange={handleRatingChange}
+          value="2"
+          title="⭐⭐ & up"
+          name="rating"
+          checked={selectedRating=== "2"}
+        />
+    </div>
     </div>
   )
 }

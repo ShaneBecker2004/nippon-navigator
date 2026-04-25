@@ -1,31 +1,42 @@
 import React from 'react'
-import "./seasonal.css"
+import Input from '../Input'
+import "../sidebar.css"
 
-const Seasonal = () => {
+function Seasonal({ handleSeasonalChange, selectedSeasonal }) {
   return (
-    <div className='ml'>
-      <h2 className='sidebar-title seasonal-title'>Seasonal</h2>
+    <div className='sidebar-section ml'>
+      <h1 className='sidebar-title'>Seasonal</h1>
 
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>All
-      </label>
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>Winter Activities
-      </label>
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>Spring Flowers / Cherry Blossoms
-      </label>
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>Summer Festivals
-      </label>
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>Autumn Foliage
-      </label>
+    <div>
+        <Input
+          handleChange={handleSeasonalChange}
+          value="winter"
+          title="Winter"
+          name="seasonal"
+          checked={selectedSeasonal === "winter"}
+        />
+        <Input
+          handleChange={handleSeasonalChange}
+          value="spring"
+          title="Spring"
+          name="seasonal"
+          checked={selectedSeasonal === "spring"}
+        />
+        <Input
+          handleChange={handleSeasonalChange}
+          value="summer"
+          title="Summer"
+          name="seasonal"
+          checked={selectedSeasonal === "summer"}
+        />
+        <Input
+          handleChange={handleSeasonalChange}
+          value="fall"
+          title="Fall"
+          name="seasonal"
+          checked={selectedSeasonal === "fall"}
+        />
+    </div>
     </div>
   )
 }

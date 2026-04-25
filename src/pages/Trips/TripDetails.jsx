@@ -91,6 +91,7 @@ const CreatedTrip = () => {
   }, [savedItems]);
 
   useEffect(() => {
+
     const fetchRates = async () => {
       try {
         const res = await fetch('https://api.exchangerate-api.com/v4/latest/JPY');
@@ -641,7 +642,7 @@ const CreatedTrip = () => {
             <Tab.Content className="tab-content">
               <Tab.Pane eventKey="itinerary">
                 <div className="itinerary-section">
-                  <h3>Trip Itinerary</h3>
+                  <h3 className='fw-bold'>Trip Itinerary</h3>
                   <div className={`save-status ${saveStatus} mb-3`}>
                     {saveStatus === "saved" && "All changes saved"}
                     {saveStatus === "saving" && "Saving..."}

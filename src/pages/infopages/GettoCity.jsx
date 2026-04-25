@@ -68,14 +68,31 @@ const GettoCity = () => {
 
             </Col>
             <Col md="10">
-                <h2 className='h2 font-bold pt-4 pb-2 mb-2'>🚌 Buses</h2>
-                <p className='body-text'>
-                  Buses are useful for reaching areas not covered by trains, especially in suburban or rural locations.
-                  In cities, they are reliable but slightly more complex for first-time visitors.
-                </p>
-                <p className='body-text mb-5'>
-                  Many buses accept IC cards, making payment simple and cash-free.
-                </p>
+              <h2 className='h2 font-bold pt-4 pb-2 mb-2'>🚌 Buses</h2>
+              <p className='body-text mb-4'>
+                Buses are useful for reaching areas not covered by trains, especially in suburban or rural locations.
+                In cities, they are reliable but slightly more complex for first-time visitors.
+              </p>
+              <h4 className='font-bold mb-2'>🚍 Local/City Buses</h4>
+              <p className='body-text mb-4'>
+                Best for daily travel within cities and rural areas, often featuring flat fares in city centers and rear-door boarding.
+              </p>
+              <h4 className='font-bold mb-2'>🛣️ Highway Buses</h4>
+              <p className='body-text mb-4'>
+                Known as coaches, these travel between major cities (e.g., Tokyo to Osaka) or to tourist spots (e.g., Mt. Fuji). They are economical and faster alternatives to trains.
+              </p>
+              <h4 className='font-bold mb-2'>🌙 Night/Overnight Buses</h4>
+              <p className='body-text mb-4'>
+                A specialized type of highway bus that runs late at night, featuring reclining seats (sometimes individual curtains) to save on accommodation costs.
+              </p>
+              <h4 className='font-bold mb-2'>✈️ Airport Limousine Buses</h4>
+              <p className='body-text mb-4'>
+                 Provide direct, comfortable travel between airports (Narita/Haneda) and major city hotels or train stations, with luggage storage.
+              </p>
+              <h4 className='font-bold mb-2'>🗺️ Sightseeing/Tourist Buses</h4>
+              <p className='body-text mb-4'>
+                Specialized buses, such as the Hato Bus in Tokyo, often with guides for visiting major sites.
+              </p>
             </Col>
             <Col md="10">
                 <h2 className='h2 font-bold pt-4 pb-2 mb-2'>🚕 Taxis & Ride Services</h2>

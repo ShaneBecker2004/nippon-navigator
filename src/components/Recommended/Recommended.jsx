@@ -8,9 +8,10 @@ function Recommended({ handleClick }) {
             <h2 className='recommended-title fw-bold fs-3 mt-3'>Recommended</h2>
             <div className='recommended-flex'>
               <Buttons onClickHandler={handleClick} value="" title="All Activities"/>
-              <Buttons onClickHandler={handleClick} value="local" title="Local"/>
-              <Buttons onClickHandler={handleClick} value="food_and_drink" title="Food And Drink"/>
-              <Buttons onClickHandler={handleClick} value="entertainment" title="Entertainment"/>
+              <Buttons onClickHandler={handleClick} value="local" title="Top Rated"/>
+              <Buttons onClickHandler={handleClick} value="popular" title="Popular"/>
+              <Buttons onClickHandler={handleClick} value="must_do" title="Must-Do"/>
+              <Buttons onClickHandler={handleClick} value="hidden" title="Hidden Gems"/>
                 {/* <button className='btns'>Local</button>
                 <button className='btns'>Shopping</button>
                 <button className='btns'>Entertainment</button>

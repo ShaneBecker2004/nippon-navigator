@@ -36,6 +36,13 @@ model Activity {
   open_hours    String?
   type          String[]
   map_embed_url String?
+  enviroment  String?
+  accessibility String?
+  seasonal  String?
+  traveler  String?
+  popular   Boolean @default(false)
+  subcity   String?
+
   destination   Destination?    @relation(fields: [destinationId], references: [id])
   savedItems    SavedActivity[]
 

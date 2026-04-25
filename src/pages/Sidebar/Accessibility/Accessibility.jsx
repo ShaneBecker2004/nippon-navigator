@@ -1,27 +1,35 @@
 import React from 'react'
-import "./accessibility.css"
+import Input from '../Input'
+import "../sidebar.css"
 
-const Accessibility = () => {
+function Accessibility({ handleAccessibilityChange, selectedAccessibility }) {
   return (
-    <div className='ml'>
-        <h2 className='sidebar-title accessibility-title'>Accessibility</h2>
-        
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>Wheelchair Accessibility
-      </label>
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>Pet-Friendly
-      </label>
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>Family-Friendly
-      </label>
-      <label className='sidebar-label-container'>
-        <input type='radio' name="test2"/>
-        <span className='checkmark'></span>Language Support
-      </label>
+    <div className='sidebar-section ml'>
+      <h1 className='sidebar-title'>Accessibility</h1>
+
+    <div>
+        <Input
+          handleChange={handleAccessibilityChange}
+          value="wheelchair"
+          title="Wheelchair Accessible"
+          name="accessibility"
+          checked={selectedAccessibility === "wheelchair"}
+        />
+        <Input
+          handleChange={handleAccessibilityChange}
+          value="stairs"
+          title="Stairs Required"
+          name="accessibility"
+          checked={selectedAccessibility === "stairs"}
+        />
+        <Input
+          handleChange={handleAccessibilityChange}
+          value="terrain"
+          title="Uneven Terrain"
+          name="accessibility"
+          checked={selectedAccessibility === "terrain"}
+        />
+    </div>
     </div>
   )
 }

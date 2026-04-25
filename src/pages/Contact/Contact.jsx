@@ -189,6 +189,20 @@ const Contact = () => {
                 </div>
               </Card>
             </Col>
+            <Col md="12">
+              <Card className='p-4 mt-5 shadow-sm border-0 text-center bg-light'>
+                <h3 className='mb-3 font-bold'>Did this information help you?</h3>
+
+                <div className='d-flex justify-content-center gap-3'>
+                  <button className='btn btn-outline-success px-4'>
+                    👍 Yes
+                  </button>
+                  <button className='btn btn-outline-danger px-4'>
+                    👎 No
+                  </button>
+                </div>
+              </Card>
+            </Col>
           </Row>
         </Container>
       </section>

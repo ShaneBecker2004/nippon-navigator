@@ -585,6 +585,18 @@
   border: 1px solid white;
 }
 
+.save-itinerary-btn {
+  background-color: var(--primaryClr);
+  border: 1px solid var(--white);
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.save-itinerary-btn:hover {
+  background-color: #d94b4b;
+  border: 1px solid white;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .trip-details-container {

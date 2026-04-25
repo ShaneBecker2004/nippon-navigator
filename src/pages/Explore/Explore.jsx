@@ -19,11 +19,21 @@ const Explore = () => {
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedSubcity, setSelectedSubcity] = useState("");
   const [selectedRating, setSelectedRating] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
+  const [selectedDuration, setSelectedDuration] = useState("");
+  const [selectedAccessibility, setSelectedAccessibility] = useState("");
+  const [selectedSeasonal, setSelectedSeasonal] = useState("");
+  const [selectedTraveler, setSelectedTraveler] = useState("");
+  const [selectedEnvironment, setSelectedEnvironment] = useState("");
+  const [selectedPopular, setSelectedPopular] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const toggleFilter = (setter) => (value) => {
+    setter((prev) => (prev === value ? "" : value));
+  };
 
   const location = useLocation();
 
@@ -103,41 +113,106 @@ const Explore = () => {
 
   // ✅ Combined filtering (search + category)
   const filteredActivities = activities.filter((activity) => {
-    const matchesSearch = activity.title
-      ?.toLowerCase()
-      .includes(search.toLowerCase());
+    const matchesSearch =
+      !search ||
+      activity.title?.toLowerCase().includes(search.toLowerCase());
 
-    const matchesCategory = selectedCategory
-      ? activity.category.includes(selectedCategory)
-      : true;
+    const matchesCategory =
+      !selectedCategory ||
+      activity.category?.includes(selectedCategory);
 
-    const matchesLocation = selectedLocation
-      ? activity.location?.toLowerCase().includes(selectedLocation.toLowerCase())
-      : true;
+    const matchesLocation =
+      !selectedLocation ||
+      (activity.location ?? "")
+        .toLowerCase()
+        .includes(selectedLocation.toLowerCase());
 
-    const matchesRating = selectedRating
-      ? activity.rating >= Number(selectedRating)
-      : true;
+    const matchesSubcity =
+      !selectedSubcity ||
+      (activity.subcity ?? "")
+        .toLowerCase()
+        .includes(selectedSubcity.toLowerCase());
 
-    const matchesPrice = selectedPrice
-      ? getActivityPrice(activity.price) <= Number(selectedPrice)
-      : true;
+    const matchesRating =
+      !selectedRating ||
+      Number(activity.rating) >= Number(selectedRating);
+
+    const matchesPrice =
+      !selectedPrice ||
+      getActivityPrice(activity.price) <= Number(selectedPrice);
+
+    const matchesDuration =
+      !selectedDuration ||
+      (activity.duration ?? "").includes(selectedDuration);
+
+    const matchesAccessibility =
+      !selectedAccessibility ||
+      (activity.accessibility ?? []).includes(selectedAccessibility);
+
+    const matchesEnvironment =
+      !selectedEnvironment ||
+      (activity.environment ?? []).includes(selectedEnvironment);
+
+    const matchesSeasonal =
+      !selectedSeasonal ||
+      (activity.seasonal ?? []).includes(selectedSeasonal);
+
+    const matchesTraveler =
+      !selectedTraveler ||
+      (activity.traveler ?? []).includes(selectedTraveler);
+
+    const matchesPopular =
+      !selectedPopular || activity.popular === true;
 
     return (
       matchesSearch &&
       matchesCategory &&
       matchesLocation &&
+      matchesSubcity &&
       matchesRating &&
-      matchesPrice
+      matchesPrice &&
+      matchesDuration &&
+      matchesAccessibility &&
+      matchesEnvironment &&
+      matchesSeasonal &&
+      matchesTraveler &&
+      matchesPopular
     );
   });
 
-
   // ✅ Handle category change (used by Sidebar/Filters)
-  const handleCategoryChange = (e) => {setSelectedCategory(e.target.value);};
-  const handleLocationChange = (e) => {setSelectedLocation(e.target.value);};
-  const handleRatingChange = (e) => {setSelectedRating(e.target.value);};
-  const handlePriceChange = (e) => {setSelectedPrice(Number(e.target.value));};
+  const handleCategoryChange = (e) => 
+    toggleFilter(setSelectedCategory)(e.target.value);
+
+  const handleLocationChange = (e) => 
+    toggleFilter(setSelectedLocation)(e.target.value);
+
+  const handleSubcityChange = (e) => 
+    toggleFilter(setSelectedSubcity)(e.target.value);
+
+  const handleDurationChange = (e) => 
+    toggleFilter(setSelectedDuration)(e.target.value);
+
+  const handleAccessibilityChange = (e) => 
+    toggleFilter(setSelectedAccessibility)(e.target.value);
+
+  const handleEnvironmentChange = (e) => 
+    toggleFilter(setSelectedEnvironment)(e.target.value);
+
+  const handleSeasonalChange = (e) => 
+    toggleFilter(setSelectedSeasonal)(e.target.value);
+
+  const handleTravelerChange = (e) => 
+    toggleFilter(setSelectedTraveler)(e.target.value);
+
+  const handleRatingChange = (e) => 
+    toggleFilter(setSelectedRating)(e.target.value);
+
+  const handlePopularChange = (e) => 
+    toggleFilter(setSelectedPopular)(e.target.checked); 
+
+  const handlePriceChange = (e) => 
+    toggleFilter(setSelectedPrice)(Number(e.target.value)); 
 
   const handleClick = (e) => {setSelectedCategory(e.target.value);};
 
@@ -152,8 +227,23 @@ const Explore = () => {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [search, selectedCategory, selectedLocation, selectedPrice, selectedRating]);
+  }, [search, selectedCategory, selectedLocation, selectedSubcity, selectedPrice, selectedRating, selectedAccessibility, selectedDuration, selectedEnvironment, selectedSeasonal, selectedTraveler, selectedPopular]);
 
+
+  const handleResetFilters = () => {
+    setSelectedCategory("");
+    setSelectedLocation("");
+    setSelectedSubcity("");
+    setSelectedRating("");
+    setSelectedPrice("");
+    setSelectedDuration("");
+    setSelectedAccessibility("");
+    setSelectedEnvironment("");
+    setSelectedSeasonal("");
+    setSelectedTraveler("");
+    setSelectedPopular("");
+    setSearch("");
+  };
 
   if (loading) {
     return (
@@ -191,13 +281,26 @@ const Explore = () => {
                 </button>
               </div>
 
+              <div className='filter-reset-section'>
+                <button className="reset-btn" onClick={handleResetFilters}>
+                  Clear All Filters
+                </button>
+              </div>
+
               {/* Desktop filters */}
               <div className='filters d-lg-block d-none'>
                 <Sidebar
                   handleCategoryChange={handleCategoryChange}
                   handleLocationChange={handleLocationChange}
+                  handleSubcityChange={handleSubcityChange}
                   handlePriceChange={handlePriceChange}
                   handleRatingChange={handleRatingChange}
+                  handleDurationChange={handleDurationChange}
+                  handleAccessibilityChange={handleAccessibilityChange}
+                  handleEnvironmentChange={handleEnvironmentChange}
+                  handleSeasonalChange={handleSeasonalChange}
+                  handleTravelerChange={handleTravelerChange}
+                  handlePopularChange={handlePopularChange}
                 />
               </div>
             </Col>
@@ -220,6 +323,8 @@ const Explore = () => {
                   ))
                 )}
               </Row>
+              <Row>
+                <Col md='8'>
               <div className='pagination'>
                 {Array.from(
                   { length: totalPages },
@@ -234,6 +339,8 @@ const Explore = () => {
                   )
                 )}
               </div>
+              </Col>
+              </Row>
             </Col>
           </Row>
         </Container>
@@ -249,12 +356,21 @@ const Explore = () => {
             </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <Recommended />
+          <button className="reset-btn-small" onClick={handleResetFilters}>
+            Clear All Filters
+          </button>
           <Sidebar
             handleCategoryChange={handleCategoryChange}
             handleLocationChange={handleLocationChange}
+            handleSubcityChange={handleSubcityChange}
             handlePriceChange={handlePriceChange}
             handleRatingChange={handleRatingChange}
+            handleDurationChange={handleDurationChange}
+            handleAccessibilityChange={handleAccessibilityChange}
+            handleEnvironmentChange={handleEnvironmentChange}
+            handleSeasonalChange={handleSeasonalChange}
+            handleTravelerChange={handleTravelerChange}
+            handlePopularChange={handlePopularChange}
           />
         </Offcanvas.Body>
       </Offcanvas>

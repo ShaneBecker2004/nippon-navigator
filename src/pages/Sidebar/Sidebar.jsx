@@ -1,13 +1,18 @@
 import React from 'react'
 import Category from "./Category/Category"
 import Location from "./Location/Location"
-
+import Subcity from './Subcity/Subcity'
+import Environment from './Environment/Environment'
 import Price from "./Price/Price"
 import Rating from "./Rating/Rating"
-
+import Seasonal from './Seasonal/Seasonal'
+import Duration from './Duration/Duration'
+import Accessibility from './Accessibility/Accessibility'
+import Traveler from './Traveler/Traveler'
 import './sidebar.css'
+import { hasUnreliableEmptyValue } from '@testing-library/user-event/dist/utils'
 
-function Sidebar({ handleCategoryChange, handleLocationChange, handlePriceChange, handleRatingChange }) {
+function Sidebar({ handleCategoryChange, handleLocationChange, handleSubcityChange, handlePriceChange, handleRatingChange, handleDurationChange, handleEnvironmentChange, handleAccessibilityChange, handleSeasonalChange, handleTravelerChange }) { 
   return (
     <>
       <section className='sidebar'>
@@ -17,11 +22,15 @@ function Sidebar({ handleCategoryChange, handleLocationChange, handlePriceChange
 
         <Category handleCategoryChange={handleCategoryChange} />
         <Location handleLocationChange={handleLocationChange}/>
-        {/* <Popularity handleCategoryChange={handleCategoryChange}/> */}
+        <Subcity handleSubcityChange={handleSubcityChange}/>
+        <Environment handleEnvironmentChange={handleEnvironmentChange}/>
         <Price handlePriceChange={handlePriceChange}/>
+        <Seasonal handleCategoryChange={handleCategoryChange}/>
         <Rating handleRatingChange={handleRatingChange}/>
-        {/* <Seasonal handleCategoryChange={handleCategoryChange}/> */}
-        
+        <Accessibility handleAccessibilityChange={handleAccessibilityChange}/>
+        <Duration handleDurationChange={handleDurationChange}/>
+        <Traveler handleTravelerChange={handleTravelerChange}/>
+    
       </section>
     </>
   )
