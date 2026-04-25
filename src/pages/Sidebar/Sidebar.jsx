@@ -10,7 +10,6 @@ import Duration from './Duration/Duration'
 import Accessibility from './Accessibility/Accessibility'
 import Traveler from './Traveler/Traveler'
 import './sidebar.css'
-import { hasUnreliableEmptyValue } from '@testing-library/user-event/dist/utils'
 
 function Sidebar({ handleCategoryChange, handleLocationChange, handleSubcityChange, handlePriceChange, handleRatingChange, handleDurationChange, handleEnvironmentChange, handleAccessibilityChange, handleSeasonalChange, handleTravelerChange }) { 
   return (

@@ -31,6 +31,7 @@ const Explore = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  
   const toggleFilter = (setter) => (value) => {
     setter((prev) => (prev === value ? "" : value));
   };
