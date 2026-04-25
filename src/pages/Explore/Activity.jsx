@@ -301,6 +301,7 @@ const handleAddActivityToTrip = async () => {
                       <div className="overview-list">
                         <p><strong>Description:</strong> {activity.description}</p>
                         <p><strong>Location:</strong> {activity.location}</p>
+                        <p><strong>City:</strong> {activity.subcity}</p> 
                         <p><strong>Open Hours:</strong> {activity.open_hours}</p>
                         <p><strong>Phone:</strong> {activity.phone}</p>
                         <p><strong>Duration:</strong> {activity.duration}</p>

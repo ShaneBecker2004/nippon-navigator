@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react'
 import Banner from '../../components/Banner/Banner';
 
 import Features from '../../components/Features/Features';
-import Gallery from '../../components/Gallery/Gallery';
 import { Container, Row, Col } from 'react-bootstrap';
 import Cards from '../../components/Cards/Cards';
 import { Link } from 'react-router-dom' 
@@ -214,24 +213,6 @@ const Home = () => {
       </Container>
       <div className='overlay'></div>
     </section>
-
-
-    <section className="gallery">
-      <Container>
-        <Row>
-          <Col md="12">
-            <div className="main_heading">
-              <h1> Photo Gallery </h1>
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col md="12">
-              <Gallery />
-          </Col>
-        </Row>
-              </Container>
-        </section>
 
     </>
   )

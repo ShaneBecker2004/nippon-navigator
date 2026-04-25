@@ -10,52 +10,52 @@ function Location ({ handleLocationChange, selectedLocation }) {
       <div> 
         <Input
           handleChange={handleLocationChange}
-          value="tokyo"
+          value="Tokyo"
           title="Tokyo"
           name="location"
-          checked={selectedLocation === "tokyo"}
+          checked={selectedLocation === "Tokyo"}
         />
         <Input
           handleChange={handleLocationChange}
-          value="osaka"
+          value="Osaka"
           title="Osaka"
           name="location"
-          checked={selectedLocation === "osaka"}
+          checked={selectedLocation === "Osaka"}
         />
         <Input
           handleChange={handleLocationChange}
-          value="kyoto"
+          value="Kyoto"
           title="Kyoto"
           name="location"
-          checked={selectedLocation === "kyoto"}
+          checked={selectedLocation === "Kyoto"}
         />
         <Input
           handleChange={handleLocationChange}
-          value="fukuoka"
+          value="Fukuoka"
           title="Fukuoka"
           name="location"
-          checked={selectedLocation === "fukuoka"}
+          checked={selectedLocation === "Fukuoka"}
         />
         <Input
           handleChange={handleLocationChange}
-          value="yokohama"
+          value="Yokohama"
           title="Yokohama"
           name="location"
-          checked={selectedLocation === "yokohama"}
+          checked={selectedLocation === "Yokohama"}
         />
         <Input
           handleChange={handleLocationChange}
-          value="hokkaido"
+          value="Hokkaido"
           title="Hokkaido"
           name="location"
-          checked={selectedLocation === "hokkaido"}
+          checked={selectedLocation === "Hokkaido"}
         />
         <Input
           handleChange={handleLocationChange}
-          value="okinawa"
+          value="Okinawa"
           title="Okinawa"
           name="location"
-          checked={selectedLocation === "okinawa"}
+          checked={selectedLocation === "Okinawa"}
         />
       </div>
     </div>

@@ -88,7 +88,7 @@ const Contact = () => {
                   <ListGroup horizontal className='justify-content-center'>
                       <ListGroup.Item className='border-0'>
                         <a
-                          href="https://youtu.be/QDia3e12czc?si=6dvCmVNX6yJ_a5yH" // ONLY FOR THE JOKES, CHANGE LATER
+                          href="https://www.youtube.com/" // ONLY FOR THE JOKES, CHANGE LATER
                           target="_blank" 
                           rel="noopener noreferrer"
                         >

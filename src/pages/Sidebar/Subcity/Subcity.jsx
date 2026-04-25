@@ -2,40 +2,29 @@ import React from 'react'
 import Input from '../Input'
 import "../sidebar.css"
 
-function Subcity({ handleSubcityChange, selectedSubcity }) {
+function Subcity({ handleSubcityChange, selectedSubcity, selectedLocation, subcities = [] }) {
+
   return (
     <div className='sidebar-section ml'>
       <h1 className='sidebar-title'>Subcity</h1>
 
     <div>
-        <Input
-          handleChange={handleSubcityChange}
-          value="Shibuya"
-          title="Shibuya"
-          name="subcity"
-          checked={selectedSubcity === "Shibuya"}
-        />
-        <Input
-          handleChange={handleSubcityChange}
-          value="Shinjuku"
-          title="Shinjuku"
-          name="subcity"
-          checked={selectedSubcity === "Shinjuku"}
-        />
-        <Input
-          handleChange={handleSubcityChange}
-          value="Namba"
-          title="Namba"
-          name="subcity"
-          checked={selectedSubcity === "Namba"}
-        />
-        <Input
-          handleChange={handleSubcityChange}
-          value="Sapporo"
-          title="Sapporo"
-          name="subcity"
-          checked={selectedSubcity === "Sapporo"}
-        />
+        {!selectedLocation ? (
+          <p>Select a city first</p>
+        ) : subcities.length === 0 ? (
+          <p>No subcities found</p>
+        ) : (
+          subcities.map((city) => (
+            <Input
+              key={city}
+              handleChange={handleSubcityChange}
+              value={city}
+              title={city}
+              name="subcity"
+              checked={selectedSubcity === city}
+            />
+          ))
+        )}
     </div>
     </div>
   )

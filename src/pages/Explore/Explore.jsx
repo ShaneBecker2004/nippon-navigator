@@ -131,8 +131,7 @@ const Explore = () => {
     const matchesSubcity =
       !selectedSubcity ||
       (activity.subcity ?? "")
-        .toLowerCase()
-        .includes(selectedSubcity.toLowerCase());
+        .toLowerCase().trim() === selectedSubcity.toLowerCase().trim();
 
     const matchesRating =
       !selectedRating ||
@@ -148,7 +147,11 @@ const Explore = () => {
 
     const matchesAccessibility =
       !selectedAccessibility ||
-      (activity.accessibility ?? []).includes(selectedAccessibility);
+      (Array.isArray(activity.accessibility)
+        ? activity.accessibility.includes(selectedAccessibility)
+        : (activity.accessibility ?? "")
+          .toLowerCase()
+          .includes(selectedAccessibility.toLowerCase()));
 
     const matchesEnvironment =
       !selectedEnvironment ||
@@ -188,8 +191,11 @@ const Explore = () => {
   const handleLocationChange = (e) => 
     toggleFilter(setSelectedLocation)(e.target.value);
 
-  const handleSubcityChange = (e) => 
-    toggleFilter(setSelectedSubcity)(e.target.value);
+  const handleSubcityChange = (e) => {
+    setSelectedSubcity((prev) =>
+      prev === e.target.value ? "" : e.target.value
+    );
+  };
 
   const handleDurationChange = (e) => 
     toggleFilter(setSelectedDuration)(e.target.value);
@@ -209,8 +215,8 @@ const Explore = () => {
   const handleRatingChange = (e) => 
     toggleFilter(setSelectedRating)(e.target.value);
 
-  const handlePopularChange = (e) => 
-    toggleFilter(setSelectedPopular)(e.target.checked); 
+  const handlePopularChange = () => 
+    setSelectedPopular((prev) => !prev);
 
   const handlePriceChange = (e) => 
     toggleFilter(setSelectedPrice)(Number(e.target.value)); 
@@ -220,11 +226,37 @@ const Explore = () => {
   const params = new URLSearchParams(location.search);
   const cityFromURL = params.get("city");
 
+  const normalize = (str) =>
+  (str ?? "").trim().toLowerCase();
+
+console.log(
+  activities
+    .filter(a => a.location === selectedLocation)
+    .map(a => ({
+      location: a.location,
+      subcity: a.subcity,
+      details: a.details
+    }))
+);
+
+  const subcities = [
+    ...new Set(
+      activities
+        .filter(a => a.location === selectedLocation)
+        .map(a => a.subcity || a.details?.subcity)
+        .filter(Boolean)
+    )
+  ];
+
   useEffect(() => {
     if (cityFromURL) {
       setSelectedLocation(cityFromURL);
     }
   }, [cityFromURL]);
+
+  useEffect(() => {
+    setSelectedSubcity(""); // reset when city changes
+  }, [selectedLocation]);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -302,6 +334,9 @@ const Explore = () => {
                   handleSeasonalChange={handleSeasonalChange}
                   handleTravelerChange={handleTravelerChange}
                   handlePopularChange={handlePopularChange}
+                  selectedSubcity={selectedSubcity}
+                  selectedLocation={selectedLocation}
+                  subcities={subcities}
                 />
               </div>
             </Col>
@@ -372,6 +407,9 @@ const Explore = () => {
             handleSeasonalChange={handleSeasonalChange}
             handleTravelerChange={handleTravelerChange}
             handlePopularChange={handlePopularChange}
+            selectedSubcity={selectedSubcity}
+            selectedLocation={selectedLocation}
+            subcities={subcities}
           />
         </Offcanvas.Body>
       </Offcanvas>

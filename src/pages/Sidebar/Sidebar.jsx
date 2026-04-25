@@ -11,7 +11,7 @@ import Accessibility from './Accessibility/Accessibility'
 import Traveler from './Traveler/Traveler'
 import './sidebar.css'
 
-function Sidebar({ handleCategoryChange, handleLocationChange, handleSubcityChange, handlePriceChange, handleRatingChange, handleDurationChange, handleEnvironmentChange, handleAccessibilityChange, handleSeasonalChange, handleTravelerChange }) { 
+function Sidebar({ handleCategoryChange, handleLocationChange, handleSubcityChange, handlePriceChange, handleRatingChange, handleDurationChange, handleEnvironmentChange, handleAccessibilityChange, handleSeasonalChange, handleTravelerChange, selectedLocation, selectedSubcity, subcities }) { 
   return (
     <>
       <section className='sidebar'>
@@ -21,10 +21,15 @@ function Sidebar({ handleCategoryChange, handleLocationChange, handleSubcityChan
 
         <Category handleCategoryChange={handleCategoryChange} />
         <Location handleLocationChange={handleLocationChange}/>
-        <Subcity handleSubcityChange={handleSubcityChange}/>
+        <Subcity 
+          handleSubcityChange={handleSubcityChange}
+          selectedLocation={selectedLocation}
+          selectedSubcity={selectedSubcity}
+          subcities={subcities}
+        />
         <Environment handleEnvironmentChange={handleEnvironmentChange}/>
         <Price handlePriceChange={handlePriceChange}/>
-        <Seasonal handleCategoryChange={handleCategoryChange}/>
+        <Seasonal handleSeasonalChange={handleSeasonalChange}/>
         <Rating handleRatingChange={handleRatingChange}/>
         <Accessibility handleAccessibilityChange={handleAccessibilityChange}/>
         <Duration handleDurationChange={handleDurationChange}/>
