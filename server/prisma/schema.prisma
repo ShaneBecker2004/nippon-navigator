@@ -41,6 +41,10 @@ model Activity {
   seasonal  String?
   traveler  String?
   popular   Boolean @default(false)
+  top_rated Boolean @default(false)
+  must_do Boolean @default(false)
+  hidden Boolean @default(false)
+  local Boolean @default(false)
   subcity   String?
 
   destination   Destination?    @relation(fields: [destinationId], references: [id])

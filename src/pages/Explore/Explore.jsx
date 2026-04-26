@@ -27,11 +27,12 @@ const Explore = () => {
   const [selectedSeasonal, setSelectedSeasonal] = useState("");
   const [selectedTraveler, setSelectedTraveler] = useState("");
   const [selectedEnvironment, setSelectedEnvironment] = useState("");
-  const [selectedPopular, setSelectedPopular] = useState(false);
+  const [selectedRecommended, setSelectedRecommended] = useState("");
+
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
+
   const toggleFilter = (setter) => (value) => {
     setter((prev) => (prev === value ? "" : value));
   };
@@ -62,7 +63,7 @@ const Explore = () => {
   };
 
 
-  
+
   // ✅ Fetch activities
   const fetchActivities = useCallback(async () => {
     try {
@@ -84,12 +85,12 @@ const Explore = () => {
       if (data.pages) {
         setTotalPages(data.pages);
       }
-      } catch (err) {
-        console.error("Failed to fetch activities:", err);
-      } finally {
-        setLoading(false);
-      }
-    }, [currentPage]);
+    } catch (err) {
+      console.error("Failed to fetch activities:", err);
+    } finally {
+      setLoading(false);
+    }
+  }, [currentPage]);
 
   useEffect(() => {
     fetchActivities();
@@ -112,6 +113,12 @@ const Explore = () => {
     };
   }, [fetchActivities]);
 
+  const params = new URLSearchParams(location.search);
+  const cityFromURL = params.get("city");
+  const categoryFromURL = params.get("category");
+
+  const categoryList = params.getAll("category") || [];
+
   // ✅ Combined filtering (search + category)
   const filteredActivities = activities.filter((activity) => {
     const matchesSearch =
@@ -119,8 +126,8 @@ const Explore = () => {
       activity.title?.toLowerCase().includes(search.toLowerCase());
 
     const matchesCategory =
-      !selectedCategory ||
-      activity.category?.includes(selectedCategory);
+      categoryList.length === 0 ||
+      categoryList.some(cat => activity.category?.includes(cat));
 
     const matchesLocation =
       !selectedLocation ||
@@ -165,8 +172,14 @@ const Explore = () => {
       !selectedTraveler ||
       (activity.traveler ?? []).includes(selectedTraveler);
 
-    const matchesPopular =
-      !selectedPopular || activity.popular === true;
+    const matchesRecommended =
+      !selectedRecommended ||
+      (selectedRecommended === "popular" && activity.popular === true) ||
+      (selectedRecommended === "top_rated" && activity.top_rated === true) ||
+      (selectedRecommended === "must_do" && activity.must_do === true) ||
+      (selectedRecommended === "hidden" && activity.hidden === true) ||
+      (selectedRecommended === "local" && activity.local === true);
+
 
     return (
       matchesSearch &&
@@ -180,15 +193,15 @@ const Explore = () => {
       matchesEnvironment &&
       matchesSeasonal &&
       matchesTraveler &&
-      matchesPopular
+      matchesRecommended
     );
   });
 
   // ✅ Handle category change (used by Sidebar/Filters)
-  const handleCategoryChange = (e) => 
+  const handleCategoryChange = (e) =>
     toggleFilter(setSelectedCategory)(e.target.value);
 
-  const handleLocationChange = (e) => 
+  const handleLocationChange = (e) =>
     toggleFilter(setSelectedLocation)(e.target.value);
 
   const handleSubcityChange = (e) => {
@@ -197,45 +210,43 @@ const Explore = () => {
     );
   };
 
-  const handleDurationChange = (e) => 
+  const handleDurationChange = (e) =>
     toggleFilter(setSelectedDuration)(e.target.value);
 
-  const handleAccessibilityChange = (e) => 
+  const handleAccessibilityChange = (e) =>
     toggleFilter(setSelectedAccessibility)(e.target.value);
 
-  const handleEnvironmentChange = (e) => 
+  const handleEnvironmentChange = (e) =>
     toggleFilter(setSelectedEnvironment)(e.target.value);
 
-  const handleSeasonalChange = (e) => 
+  const handleSeasonalChange = (e) =>
     toggleFilter(setSelectedSeasonal)(e.target.value);
 
-  const handleTravelerChange = (e) => 
+  const handleTravelerChange = (e) =>
     toggleFilter(setSelectedTraveler)(e.target.value);
 
-  const handleRatingChange = (e) => 
+  const handleRatingChange = (e) =>
     toggleFilter(setSelectedRating)(e.target.value);
 
-  const handlePopularChange = () => 
-    setSelectedPopular((prev) => !prev);
 
-  const handlePriceChange = (e) => 
-    toggleFilter(setSelectedPrice)(Number(e.target.value)); 
+  const handlePriceChange = (e) =>
+    toggleFilter(setSelectedPrice)(Number(e.target.value));
 
-  const handleClick = (e) => {setSelectedCategory(e.target.value);};
-
-  const params = new URLSearchParams(location.search);
-  const cityFromURL = params.get("city");
+  const handleClick = (value) => {
+    setSelectedRecommended(prev => prev === value ? "" : value);
+  };
 
 
-console.log(
-  activities
-    .filter(a => a.location === selectedLocation)
-    .map(a => ({
-      location: a.location,
-      subcity: a.subcity,
-      details: a.details
-    }))
-);
+
+  console.log(
+    activities
+      .filter(a => a.location === selectedLocation)
+      .map(a => ({
+        location: a.location,
+        subcity: a.subcity,
+        details: a.details
+      }))
+  );
 
   const subcities = [
     ...new Set(
@@ -253,12 +264,18 @@ console.log(
   }, [cityFromURL]);
 
   useEffect(() => {
+    if (categoryFromURL) {
+      setSelectedCategory(categoryFromURL);
+    }
+  }, [categoryFromURL]);
+
+  useEffect(() => {
     setSelectedSubcity(""); // reset when city changes
   }, [selectedLocation]);
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [search, selectedCategory, selectedLocation, selectedSubcity, selectedPrice, selectedRating, selectedAccessibility, selectedDuration, selectedEnvironment, selectedSeasonal, selectedTraveler, selectedPopular]);
+  }, [search, selectedCategory, selectedLocation, selectedSubcity, selectedPrice, selectedRating, selectedAccessibility, selectedDuration, selectedEnvironment, selectedSeasonal, selectedTraveler]);
 
 
   const handleResetFilters = () => {
@@ -272,7 +289,6 @@ console.log(
     setSelectedEnvironment("");
     setSelectedSeasonal("");
     setSelectedTraveler("");
-    setSelectedPopular("");
     setSearch("");
   };
 
@@ -331,9 +347,16 @@ console.log(
                   handleEnvironmentChange={handleEnvironmentChange}
                   handleSeasonalChange={handleSeasonalChange}
                   handleTravelerChange={handleTravelerChange}
-                  handlePopularChange={handlePopularChange}
-                  selectedSubcity={selectedSubcity}
+                  selectedCategory={selectedCategory}
                   selectedLocation={selectedLocation}
+                  selectedSubcity={selectedSubcity}
+                  selectedPrice={selectedPrice}
+                  selectedRating={selectedRating}
+                  selectedDuration={selectedDuration}
+                  selectedAccessibility={selectedAccessibility}
+                  selectedEnvironment={selectedEnvironment}
+                  selectedSeasonal={selectedSeasonal}
+                  selectedTraveler={selectedTraveler}
                   subcities={subcities}
                 />
               </div>
@@ -342,8 +365,8 @@ console.log(
             {/* RIGHT SIDE (Cards) */}
             <Col xl='9' lg='8' md='12' sm='12'>
               <Row>
-                
-                <Recommended handleClick={handleClick}/>
+
+                <Recommended handleClick={handleClick} />
 
                 {filteredActivities.length === 0 ? (
                   <p>No activities found.</p>
@@ -359,21 +382,21 @@ console.log(
               </Row>
               <Row>
                 <Col md='8'>
-              <div className='pagination'>
-                {Array.from(
-                  { length: totalPages },
-                  (_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setCurrentPage(i + 1)}
-                      className={currentPage === i + 1 ? "active" : ""}
-                    >
-                      {i + 1}
-                    </button>
-                  )
-                )}
-              </div>
-              </Col>
+                  <div className='pagination'>
+                    {Array.from(
+                      { length: totalPages },
+                      (_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setCurrentPage(i + 1)}
+                          className={currentPage === i + 1 ? "active" : ""}
+                        >
+                          {i + 1}
+                        </button>
+                      )
+                    )}
+                  </div>
+                </Col>
               </Row>
             </Col>
           </Row>
@@ -387,7 +410,7 @@ console.log(
             <div className='fw-bold fs-2'>
               Filters
             </div>
-            </Offcanvas.Title>
+          </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <button className="reset-btn-small" onClick={handleResetFilters}>
@@ -404,9 +427,16 @@ console.log(
             handleEnvironmentChange={handleEnvironmentChange}
             handleSeasonalChange={handleSeasonalChange}
             handleTravelerChange={handleTravelerChange}
-            handlePopularChange={handlePopularChange}
-            selectedSubcity={selectedSubcity}
+            selectedCategory={selectedCategory}
             selectedLocation={selectedLocation}
+            selectedSubcity={selectedSubcity}
+            selectedPrice={selectedPrice}
+            selectedRating={selectedRating}
+            selectedDuration={selectedDuration}
+            selectedAccessibility={selectedAccessibility}
+            selectedEnvironment={selectedEnvironment}
+            selectedSeasonal={selectedSeasonal}
+            selectedTraveler={selectedTraveler}
             subcities={subcities}
           />
         </Offcanvas.Body>

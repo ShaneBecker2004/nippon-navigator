@@ -70,15 +70,6 @@
     display: none;
 }
 
-/* Custom radio */
-.checkmark {
-    height: 14px;
-    width: 14px;
-    background-color: #eee;
-    border-radius: 50%;
-    position: relative; /* 🔥 changed from absolute */
-}
-
 /* Hover */
 .sidebar-label-container:hover {
     background: rgba(0, 0, 0, 0.05);
@@ -86,31 +77,6 @@
 
 .sidebar-label-container:hover .checkmark {
     background-color: #ccc;
-}
-
-/* Checked state */
-.sidebar-label-container input:checked + .checkmark {
-    background-color: #2196f3;
-}
-
-/* Inner dot */
-.checkmark::after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-
-.sidebar-label-container input:checked + .checkmark::after {
-    display: block;
-}
-
-.checkmark::after {
-    top: 4px;
-    left: 4px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--white);
 }
 
 .line {
@@ -137,4 +103,41 @@
     .filter-title {
         display: none;
     }
+}
+
+.checkmark {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.sidebar-label-container input:checked + .checkmark {
+  background-color: #2196f3;
+  transform: scale(1.15);
+  transition: 0.2s ease;
+}
+
+.sidebar-label-container:has(input:checked) {
+  border-color: #2196f3;
+  background: rgba(33, 150, 243, 0.08);
+  box-shadow: 0 2px 6px rgba(33, 150, 243, 0.15);
+}
+
+.checkmark::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: white;
+  border-radius: 50%;
+  display: none;
+}
+
+.sidebar-label-container input:checked + .checkmark::after {
+  display: block;
 }

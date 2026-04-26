@@ -95,16 +95,16 @@ const Header = () => {
                                             setOpenInner(openInner === "tradition" ? null : "tradition");
                                         }}    
                                     >
-                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                        <NavDropdown.Item as={Link} to="/explore?category=garden" onClick={closeAll}>
                                             Japanese Gardens
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                        <NavDropdown.Item as={Link} to="/explore?category=temple" onClick={closeAll}>
                                             Temple Stays
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                        <NavDropdown.Item as={Link} to="/explore?category=festival&category=event" onClick={closeAll}>
                                             Festivals & Events
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                        <NavDropdown.Item as={Link} to="/explore?category=culture" onClick={closeAll}>
                                             Culture in Japan
                                         </NavDropdown.Item>
                                     </NavDropdown>
@@ -117,16 +117,16 @@ const Header = () => {
                                             e.stopPropagation();
                                             setOpenInner(openInner === "nature" ? null : "nature");
                                         }}  >
-                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                        <NavDropdown.Item as={Link} to="/explore?category=scenic" onClick={closeAll}>
                                             Scenic Spots
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                        <NavDropdown.Item as={Link} to="/explore?category=adventure" onClick={closeAll}>
                                             Adventure
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                        <NavDropdown.Item as={Link} to="/explore?category=flower" onClick={closeAll}>
                                             Seasonal Flowers
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                        <NavDropdown.Item as={Link} to="/explore?category=skiing" onClick={closeAll}>
                                             Skiing in Japan
                                         </NavDropdown.Item>
                                     </NavDropdown>
@@ -140,16 +140,16 @@ const Header = () => {
                                             setOpenInner(openInner === "food" ? null : "food");
                                         }}  
                                     >
-                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                        <NavDropdown.Item as={Link} to="/explore?category=local_food" onClick={closeAll}>
                                             Local Cuisine
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                        <NavDropdown.Item as={Link} to="/explore?category=food_and_drink" onClick={closeAll}>
                                             Street Food
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                        <NavDropdown.Item as={Link} to="/explore?category=restaurant" onClick={closeAll}>
                                             Dining Experiences
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                        <NavDropdown.Item as={Link} to="/explore?category=vegetarian" onClick={closeAll}>
                                             Vegetarian & Vegan
                                         </NavDropdown.Item>
                                     </NavDropdown>
@@ -162,10 +162,10 @@ const Header = () => {
                                             e.stopPropagation();
                                             setOpenInner(openInner === "attractions" ? null : "attractions");
                                         }}  >
-                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                        <NavDropdown.Item as={Link} to="/explore?category=view" onClick={closeAll}>
                                             City Views
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                        <NavDropdown.Item as={Link} to="/explore?category=landmark" onClick={closeAll}>
                                             Landmarks
                                         </NavDropdown.Item>
                                         <NavDropdown.Item as={Link} to="/explore?category=theme_park" onClick={closeAll}>
@@ -174,7 +174,7 @@ const Header = () => {
                                         <NavDropdown.Item as={Link} to="/explore?category=shopping" onClick={closeAll}>
                                             Shopping
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/explore" onClick={closeAll}>
+                                        <NavDropdown.Item as={Link} to="/explore?category=nightlife" onClick={closeAll}>
                                             Nightlife
                                         </NavDropdown.Item>
                                     </NavDropdown>

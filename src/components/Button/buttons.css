@@ -1,0 +1,27 @@
+.btns {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: all 0.2s ease;
+  background: #fff;
+}
+
+.btns input {
+  display: none;
+}
+
+/* hover */
+.btns:hover {
+  border-color: rgb(122, 122, 122);
+}
+
+/* active (selected) */
+.btns.active {
+  background: #2196f3;
+  color: #fff;
+  border-color: #2196f3;
+}

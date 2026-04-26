@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Activity" ADD COLUMN     "hidden" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "local" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "must_do" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "top_rated" BOOLEAN NOT NULL DEFAULT false;

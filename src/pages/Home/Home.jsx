@@ -4,7 +4,8 @@ import Banner from '../../components/Banner/Banner';
 import Features from '../../components/Features/Features';
 import { Container, Row, Col } from 'react-bootstrap';
 import Cards from '../../components/Cards/Cards';
-import { Link } from 'react-router-dom' 
+import ActivityCard from '../../components/Cards/ActivityCard';
+import { Link } from 'react-router-dom'
 
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
@@ -20,27 +21,50 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const sliderRef = useRef(null);
 
+  const [activities, setActivities] = useState([]);
+
   useEffect(() => {
-  const fetchDestinations = async () => {
-    try {
-      const res = await fetch(`${API}/api/destinations`);
-      const data = await res.json();
+    const fetchDestinations = async () => {
+      try {
+        const res = await fetch(`${API}/api/destinations`);
+        const data = await res.json();
 
-      const updatedData = data.map((dest) => ({
-        ...dest,
-        image: dest.image || "/images/default.jpg",
-      }));
+        const updatedData = data.map((dest) => ({
+          ...dest,
+          images: dest.images || "/images/default.jpg",
+        }));
 
-      setDestinations(updatedData);
-    } catch (err) {
-      console.error("Failed to fetch destinations:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+        setDestinations(updatedData);
+      } catch (err) {
+        console.error("Failed to fetch destinations:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
     fetchDestinations();
   }, []);
+
+  useEffect(() => {
+  const fetchActivities = async () => {
+    try {
+      const res = await fetch(`${API}/api/activities`);
+      const data = await res.json();
+
+      const activitiesData = data.activities || data;
+
+      setActivities(activitiesData);
+    } catch (err) {
+      console.error("Failed to fetch activities:", err);
+    }
+  };
+
+  fetchActivities();
+}, []);
+
+  const popularActivities = activities.filter(
+    (activity) => activity.popular === true
+  );
 
 
   useEffect(() => {
@@ -122,17 +146,17 @@ const Home = () => {
 
   return (
     <>
-    <Banner />
-    <Features />
+      <Banner />
+      <Features />
 
-    <section className="tours_section slick_slider">
-      <Container>
-        <Row>
-          <Col md="12">
-            <div className="main_heading">
-              <h1>Top Destinations For You To Explore </h1>
-            </div>
-          </Col>
+      <section className="tours_section slick_slider">
+        <Container>
+          <Row>
+            <Col md="12">
+              <div className="main_heading">
+                <h1>Top Destinations For You To Explore </h1>
+              </div>
+            </Col>
           </Row>
 
           <Row>
@@ -160,59 +184,68 @@ const Home = () => {
             </Col>
           </Row>
 
-      </Container>
-    </section>
-    
-    {/* <section className='popular-home py-5 slick_slider'>
+        </Container>
+      </section>
+
+      <section className='popular-home py-5 slick_slider'>
         <Container>
-            <Row>
-                <Col md="12">
-                    <div className='main_heading'>
-                        <h1> Popular Activities </h1>
-                    </div>
-                </Col>
-            </Row>
-            <Row>
-            <Col md='12'>
-              <Slider {...settings} >
-            {popularsData.map((val, inx) => {
-                return (
-                <Col md={3} sm={6} xs={12} className='mb-5' key={inx}>
-                  <PopularCard val={val}  key={inx} />
-                </Col>
-            )
-            })}
-              </Slider>
-          </Col>
+          <Row>
+            <Col md="12">
+              <div className='main_heading'>
+                <h1>Check Out Some Popular Activities</h1>
+              </div>
+            </Col>
           </Row>
 
+          <Row>
+            <Col md='12'>
+              <Slider {...settings}>
+                {popularActivities.length > 0 ? (
+                  popularActivities.map((val) => (
+                    <div key={val.id} className='px-2'>
+                      <Link
+                        to={`/activity/${val.slug || val.id}`}
+                        className='activity-card-link'
+                      >
+                        <ActivityCard val={val} />
+                      </Link>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-center w-100 mt-4">
+                    No popular activities found.
+                  </p>
+                )}
+              </Slider>
+            </Col>
+          </Row>
         </Container>
-    </section>  */}
+      </section>
 
-    <section className="call_us">
-      <Container>
-        <Row className="align-items-center">
-          <Col md={8}>
+      <section className="call_us">
+        <Container>
+          <Row className="align-items-center">
+            <Col md={8}>
               <h5 className="title">
                 CALL TO ACTION
-                </h5>
+              </h5>
               <h2 className="heading">
                 READY FOR AN UNFORGETTABLE TRIP TO JAPAN?
               </h2>
               <p className="text mb-4 fw-bold">
                 Let us help you out and make your trip become a memory of a lifetime!
               </p>
-          </Col>
-          <Col md={4} className="text-center mt-3 mt-md-0">
-              <a href="/contact-us" 
-              className="secondary_btn" rel="no">
+            </Col>
+            <Col md={4} className="text-center mt-3 mt-md-0">
+              <a href="/contact-us"
+                className="secondary_btn" rel="no">
                 Visit our Contact page!
               </a>
-          </Col>
-        </Row>
-      </Container>
-      <div className='overlay'></div>
-    </section>
+            </Col>
+          </Row>
+        </Container>
+        <div className='overlay'></div>
+      </section>
 
     </>
   )
