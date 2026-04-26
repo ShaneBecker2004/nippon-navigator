@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import React, { useEffect } from 'react'
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
 import galleryimg from '../../assets/images/breadcrumb/arrivals-lobby-osaka.webp'
 import './gallery.css'
