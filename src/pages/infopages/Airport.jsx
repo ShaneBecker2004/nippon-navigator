@@ -146,7 +146,7 @@ const Airport = () => {
                 </Col>
 
                 <Col md="10">
-                  <Card className='p-4 mt-4 shadow-sm border-0 text-center bg-light'>
+                  <Card className='p-4 mt-5 shadow-sm border-0 text-center bg-light'>
                     <h3 className='mb-3 font-bold'>Did this information help you?</h3>
 
                     <div className='d-flex justify-content-center gap-3'>

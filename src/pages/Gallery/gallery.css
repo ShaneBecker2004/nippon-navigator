@@ -1,0 +1,25 @@
+.gallery-container {
+  padding: 40px;
+}
+
+.instagram-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.instagram-item img,
+.instagram-item video {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.page-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  font-weight: bold;
+}

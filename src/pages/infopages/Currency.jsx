@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'; // Group your imports
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import airport from "../../assets/images/breadcrumb/narita-airport.webp"
+import airport from "../../assets/images/breadcrumb/currency-exchange-image.jpg"
 
 const CORE_CURRENCIES = ["USD", "EUR", "GBP", "CAD", "AUD", "KRW", "SGD"];
 
@@ -172,7 +172,7 @@ const Currency = () => {
                         </Col>
 
                         <Col md="10">
-                            <Card className='p-4 mt-4 shadow-sm border-0 text-center bg-light'>
+                            <Card className='p-4 mt-5 shadow-sm border-0 text-center bg-light'>
                                 <h3 className='mb-3 font-bold'>Did this information help you?</h3>
 
                                 <div className='d-flex justify-content-center gap-3'>

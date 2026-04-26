@@ -63,24 +63,24 @@ const GettoCity = () => {
 
               <h3 className='h4 font-bold pt-4 pb-2 mb-2'>How to Use Trains</h3>
 
-              <h4 className='font-bold mb-2'>IC Cards</h4>
+              <h4 className='font-bold mb-2'>💳 IC Cards</h4>
               <p className='body-text mb-4'>
                 Tap your IC card (Suica or Pasmo) at the ticket gates to enter and exit. Fares are calculated automatically.
               </p>
 
-              <h4 className='font-bold mb-2'>Buying Tickets</h4>
+              <h4 className='font-bold mb-2'>🎫 Buying Tickets</h4>
               <p className='body-text mb-4'>
                 Use ticket machines at stations. Select your destination and pay the displayed fare.
               </p>
 
-              <h4 className='font-bold mb-2'>Navigation Apps</h4>
+              <h4 className='font-bold mb-2'>📍 Navigation Apps</h4>
               <p className='body-text mb-4'>
                 Apps like Google Maps provide accurate routes, transfer info, and platform numbers.
               </p>
 
               {/* TIP */}
               <p className='body-text mb-5'>
-                <strong>Tip:</strong> Rush hours (7–9 AM and 5–7 PM) can be extremely crowded. If possible, travel outside peak times for a more comfortable experience.
+                <strong>⚠️ Tip:</strong> Rush hours (7–9 AM and 5–7 PM) can be extremely crowded. If possible, travel outside peak times for a more comfortable experience.
               </p>
 
             </Col>
@@ -90,27 +90,27 @@ const GettoCity = () => {
                 Buses are useful for reaching areas not covered by trains, especially in suburban or rural locations.
                 In cities, they are reliable but slightly more complex for first-time visitors.
               </p>
-              <h4 className='font-bold mb-2'>Local/City Buses</h4>
+              <h4 className='font-bold mb-2'>🏙️ Local/City Buses</h4>
               <p className='body-text mb-4'>
                 Best for daily travel within cities and rural areas, often featuring flat fares in city centers and rear-door boarding.
               </p>
-              <h4 className='font-bold mb-2'>Highway Buses</h4>
+              <h4 className='font-bold mb-2'>🛣️ Highway Buses</h4>
               <p className='body-text mb-4'>
                 Known as coaches, these travel between major cities (e.g., Tokyo to Osaka) or to tourist spots (e.g., Mt. Fuji). They are economical and faster alternatives to trains.
               </p>
-              <h4 className='font-bold mb-2'>Night/Overnight Buses</h4>
+              <h4 className='font-bold mb-2'>🌙 Night/Overnight Buses</h4>
               <p className='body-text mb-4'>
                 A specialized type of highway bus that runs late at night, featuring reclining seats (sometimes individual curtains) to save on accommodation costs.
               </p>
-              <h4 className='font-bold mb-2'>Airport Limousine Buses</h4>
+              <h4 className='font-bold mb-2'>✈️ Airport Limousine Buses</h4>
               <p className='body-text mb-4'>
                 Provide direct, comfortable travel between airports (Narita/Haneda) and major city hotels or train stations, with luggage storage.
               </p>
-              <h4 className='font-bold mb-2'>Sightseeing/Tourist Buses</h4>
+              <h4 className='font-bold mb-2'>🗺️ Sightseeing/Tourist Buses</h4>
               <p className='body-text mb-4'>
                 Specialized buses, such as the Hato Bus in Tokyo, often with guides for visiting major sites.
               </p>
-              <h3 className='h4 font-bold pt-4 pb-2 mb-2'>How to Use Buses</h3>
+              <h3 className='h4 font-bold pt-4 pb-2 mb-2'>🚌 How to Use Buses</h3>
               <p className='body-text mb-4'>
                 Enter from the rear door and exit from the front. Pay using an IC card or cash when you get off.
                 In some cities, buses have a flat fare, while others calculate distance-based fares.
@@ -123,45 +123,45 @@ const GettoCity = () => {
                 They’re especially useful late at night, in areas with limited public transport, or when traveling with luggage.
                 Most taxis accept cash, credit cards, and IC cards.
               </p>
-              <h4 className='font-bold mb-2'> Standard Taxis</h4>
+              <h4 className='font-bold mb-2'>🚕 Standard Taxis</h4>
               <p className='body-text mb-4'>
                 The most common option, offering reliable service with professional drivers. Doors open automatically,
                 so there’s no need to open them yourself.
               </p>
-              <h4 className='font-bold mb-2'> Individual/Private Taxis</h4>
+              <h4 className='font-bold mb-2'>👤 Individual/Private Taxis</h4>
               <p className='body-text mb-4'>
                 Operated by independent drivers, these taxis provide the same level of service as company taxis and are common throughout cities.
               </p>
-              <h4 className='font-bold mb-2'> Sightseeing Taxis</h4>
+              <h4 className='font-bold mb-2'>🗺️ Sightseeing Taxis</h4>
               <p className='body-text mb-4'>
                 Pre-booked taxis where drivers act as guides, taking you to popular attractions with flexible itineraries.
               </p>
-              <h4 className='font-bold mb-2'> Airport Taxis</h4>
+              <h4 className='font-bold mb-2'>✈️ Airport Taxis</h4>
               <p className='body-text mb-4'>
                 Offer fixed-rate fares to and from major airports, making them a convenient option for travelers with luggage.
               </p>
-              <h4 className='font-bold mb-2'> Universal Design (UD) Taxis</h4>
+              <h4 className='font-bold mb-2'>♿ Universal Design (UD) Taxis</h4>
               <p className='body-text mb-4'>
                 Accessible vehicles designed for passengers with mobility needs, including wheelchair access and extra space for luggage.
               </p>
-              <h4 className='font-bold mb-2'> "GO Premium"</h4>
+              <h4 className='font-bold mb-2'>✨ GO Premium</h4>
               <p className='body-text mb-4'>
                 A higher-end service available through the GO app, offering larger vehicles and a more comfortable experience for groups or travelers with extra luggage.
               </p>
               <h3 className='h4 font-bold pt-4 pb-2 mb-2'> Taxi Booking Methods</h3>
-              <h4 className='font-bold mb-2'> Taxi Apps</h4>
+              <h4 className='font-bold mb-2'>📱 Taxi Apps</h4>
               <p className='body-text mb-4'>
                 Apps like GO, Uber, and DiDi are widely used in major cities. GO is the most popular and supports coverage across Japan.
               </p>
-              <h4 className='font-bold mb-2'> Taxi Stands</h4>
+              <h4 className='font-bold mb-2'>📍 Taxi Stands</h4>
               <p className='body-text mb-4'>
                 Found at train stations, airports, and major hotels. Simply line up and take the next available taxi.
               </p>
-              <h4 className='font-bold mb-2'> Hailing on the Street</h4>
+              <h4 className='font-bold mb-2'>🙋 Hailing on the Street</h4>
               <p className='body-text mb-4'>
                 Look for a red light (空車) in the windshield, which indicates the taxi is available. Green means it’s occupied.
               </p>
-              <h4 className='font-bold mb-2'> Phone/Hotel Booking</h4>
+              <h4 className='font-bold mb-2'>🏨 Phone/Hotel Booking</h4>
               <p className='body-text mb-4'>
                 Hotel staff can easily arrange a taxi for you, which is a convenient option if you’re unsure about language or availability.
               </p>
@@ -171,16 +171,16 @@ const GettoCity = () => {
               <p className='body-text mb-4'>
                 Japan offers a mix of modern and traditional payment options. While digital payments are becoming more common, it’s still important to carry some cash, especially when traveling outside major cities.
               </p>
-              <h4 className='font-bold mb-2'> IC Cards (Recommended)</h4>
+              <h4 className='font-bold mb-2'>💳 IC Cards (Recommended)</h4>
               <p className='body-text mb-4'>
                 IC cards like Suica and Pasmo are the most convenient way to pay for transportation and small purchases. You can use them on trains, buses, vending machines, and at many convenience stores. Simply tap your card at the gate or register—no need to buy individual tickets each time.
               </p>
-              <h4 className='font-bold mb-2'> Cash (Coins & Bills)</h4>
+              <h4 className='font-bold mb-2'>💴 Cash (Coins & Bills)</h4>
               <p className='body-text mb-4'>
                 Cash is still widely used across Japan, especially at smaller shops, local restaurants, temples, and rural areas. It’s a good idea to carry yen with you at all times. ATMs at convenience stores like 7-Eleven and Lawson are reliable for international withdrawals.
               </p>
-              <h4 className='font-bold mb-2'> Credit Cards</h4>
-              <p className='body-text mb-4'>
+              <h4 className='font-bold mb-2'>💳 Credit Cards</h4>
+              <p className='body-text mb-5'>
                 Credit cards are accepted at most hotels, department stores, and larger restaurants. However, smaller businesses may not accept them, so it’s best to have a backup payment method. Contactless payment is becoming more common but isn’t universal yet.
               </p>
             </Col>

@@ -69,7 +69,7 @@ const Entry = () => {
                   Japan offers an online service called Visit Japan Web, which allows you to complete immigration and customs forms in advance. This can significantly speed up your arrival process
                   and reduce paperwork at the airport.
                 </p>
-                  <p className='body-text mb-2'>
+                  <p className='body-text mb-5'>
                   <a
                     href="https://www.vjw.digital.go.jp/main/#/vjwplo001"
                     target="_blank"
@@ -82,7 +82,7 @@ const Entry = () => {
             </Col>
 
             <Col md="10">
-              <Card className='p-4 mt-4 shadow-sm border-0 text-center bg-light'>
+              <Card className='p-4 mt-5 shadow-sm border-0 text-center bg-light'>
                 <h3 className='mb-3 font-bold'>Did this information help you?</h3>
 
                 <div className='d-flex justify-content-center gap-3'>

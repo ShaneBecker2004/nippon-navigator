@@ -213,7 +213,7 @@ const Header = () => {
                                             Staying Connected
                                         </NavDropdown.Item>
                                         <NavDropdown.Item as={Link} to="/website" onClick={closeAll}>
-                                            Useful Websites
+                                            Extra Resources
                                         </NavDropdown.Item>
                                         <NavDropdown.Item as={Link} to="/apps" onClick={closeAll}>
                                             Essential Apps
