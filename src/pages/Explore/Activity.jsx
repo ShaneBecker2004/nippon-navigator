@@ -9,6 +9,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { Autoplay } from "swiper/modules";
 import { useAuth } from '../../contexts/authContext';
 import { getAuth } from 'firebase/auth';
+import { cloudinaryUrl } from '../../utils/cloudinary';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -233,7 +234,7 @@ const handleAddActivityToTrip = async () => {
         title={activity.title}
         pagename={<NavLink to='/explore'>Explore</NavLink>}
         childpagename={activity.title}
-        bgImage={activity.thumbnail}
+        bgImage={cloudinaryUrl(activity.thumbnail, 1200)}
       />
 
       <section className='explore_details py-5'>

@@ -74,7 +74,11 @@ const Explore = () => {
 
       const mappedData = activitiesData.map(act => ({
         ...act,
-        category: act.category || [],
+        category: Array.isArray(act.category)
+          ? act.category
+          : act.category
+            ? [act.category]
+            : [],
         highlights: act.highlights || [],
         images: act.images || [],
         details: act.details || {},
@@ -126,8 +130,10 @@ const Explore = () => {
       activity.title?.toLowerCase().includes(search.toLowerCase());
 
     const matchesCategory =
-      categoryList.length === 0 ||
-      categoryList.some(cat => activity.category?.includes(cat));
+      (!selectedCategory && categoryList.length === 0) ||
+      (selectedCategory && activity.category?.includes(selectedCategory)) ||
+      (categoryList.length > 0 &&
+        categoryList.some(cat => activity.category?.includes(cat)));
 
     const matchesLocation =
       !selectedLocation ||

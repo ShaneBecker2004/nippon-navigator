@@ -2,11 +2,12 @@ import React from 'react';
 import "../Cards/card.css";
 import { Card, Stack } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import { cloudinaryUrl } from '../../utils/cloudinary';
 
 const ActivityCard = ({ val }) => {
-  const imageSrc =
-    val.thumbnail ||
-    (val.images && val.images.length > 0 ? val.images[0] : "/images/default.jpg");
+  const imageSrc = cloudinaryUrl(val.thumbnail || val.images?.[0], 500, 300);
+
+  console.log("FINAL IMAGE URL:", imageSrc);
 
   const duration = val.duration || "N/A";
 
