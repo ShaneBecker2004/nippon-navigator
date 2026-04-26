@@ -5,20 +5,19 @@ import galleryimg from '../../assets/images/breadcrumb/arrivals-lobby-osaka.webp
 import './gallery.css'
 
 const Gallery = () => {
-  const [loading, setLoading] = useState(true)
-  const location = useLocation()
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false)
+    const script = document.createElement("script");
+    script.src = "https://widgets.sociablekit.com/instagram-feed/widget.js";
+    script.async = true;
 
-      if (window.SK?.refresh) {
-        window.SK.refresh()
-      }
-    }, 600)
+    document.body.appendChild(script);
 
-    return () => clearTimeout(timer)
-  }, [location.pathname])
+    return () => {
+      document.body.removeChild(script); // cleanup
+    };
+  }, []);
+
 
   return (
     <>
@@ -31,13 +30,6 @@ const Gallery = () => {
         <div>
           <p>(If the page doesn't load correctly, reload the page)</p>
         </div>
-        {loading && (
-          <div className="page-loader">
-            Loading Gallery...
-          </div>
-        )}
-
-
           <div
             className="sk-instagram-feed"
             data-embed-id="25676084"
