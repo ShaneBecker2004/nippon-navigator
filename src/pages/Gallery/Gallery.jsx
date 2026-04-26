@@ -15,7 +15,7 @@ const Gallery = () => {
       if (window.SK?.refresh) {
         window.SK.refresh()
       }
-    }, 800)
+    }, 600)
 
     return () => clearTimeout(timer)
   }, [location.pathname])
