@@ -1,63 +1,63 @@
 .filter_box {
-    padding: 20px 30px 30px;
-    border: 1px solid #e7e6e6;
+  padding: 20px 30px 30px;
+  border: 1px solid #e7e6e6;
 }
 
 .filter_box .accordion-item {
-    border-bottom: 1px solid #e7e6e6 !important;
+  border-bottom: 1px solid #e7e6e6 !important;
 }
 
 .filter_box .accordion:last-child .accordion-item {
-    border: none !important;
+  border: none !important;
 }
 
 .filter_box .accordion-item,
 .filter_box .accordion-item button {
-    background: none;
-    border: none;
-    border-radius: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
 }
 
 .filter_box .accordion-item button {
-    border: none !important;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 16px 0px;
-    box-shadow: none !important;
+  border: none !important;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 16px 0px;
+  box-shadow: none !important;
 }
 
 .filter_box .accordion-item button:focus {
-    border: none;
-    outline: none;
-    box-shadow: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
 }
 
 .filter_box .accordion-item .accordion-body {
-    padding: 0;
-    margin-bottom: 15px;
+  padding: 0;
+  margin-bottom: 15px;
 }
 
 .filter_box .accordion-item .accordion-body .form-check {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .filter_box .accordion-item .accordion-body .form-check-input {
-    width: 1.2em;
-    height: 1.2em;
+  width: 1.2em;
+  height: 1.2em;
 }
 
 .filter_box .accordion-item .accordion-body .form-check-label {
-    margin-left: 8px;
-    margin-top: 5px;
+  margin-left: 8px;
+  margin-top: 5px;
 }
 
 .filters {
-    position: sticky;
-    top: 55px;
+  position: sticky;
+  top: 55px;
 }
 
 .filterBtn {
-    display: none;
+  display: none;
 }
 
 .reset-btn {
@@ -76,29 +76,29 @@
 }
 
 @media only screen and (max-width: 991px) {
-    .filterBtn {
-        display: inline-block;
-    }
+  .filterBtn {
+    display: inline-block;
+  }
 
-    .reset-btn {
-      display: none
-    }
+  .reset-btn {
+    display: none
+  }
 
-    .reset-btn-small {
-      background-color: var(--primaryClr);
-      color: var(--white);
-      border: 1px solid white;
-      border-radius: 15px;
-      margin: 5px 10px;
-      padding: 14px 12px 14px 12px;
-      font-style: var(--fontFamily);
-    }
+  .reset-btn-small {
+    background-color: var(--primaryClr);
+    color: var(--white);
+    border: 1px solid white;
+    border-radius: 15px;
+    margin: 5px 10px;
+    padding: 14px 12px 14px 12px;
+    font-style: var(--fontFamily);
+  }
 
-    .reset-btn-small:hover {
-      background-color: #d94b4b;
+  .reset-btn-small:hover {
+    background-color: #d94b4b;
 
-    }
-  
+  }
+
 }
 
 /* Main gallery (LEFT SIDE) */
@@ -117,13 +117,13 @@
 /* FULLSCREEN (UNCHANGED - TRUE FULLSCREEN) */
 .fullscreen-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  inset: 0;
   background: black;
   z-index: 9999;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -134,9 +134,29 @@
 }
 
 .fullscreen-image {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
   object-fit: contain;
+  display: block;
+  /* or cover depending on preference */
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fullscreen-swiper .swiper-wrapper {
+  align-items: center;
+}
+
+.fullscreen-swiper .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Close button */
@@ -155,8 +175,8 @@
 
 
 .explore_details .nav-bars {
-    background-color: #f14b361a;
-    padding: 8px;
+  background-color: #f14b361a;
+  padding: 8px;
 }
 
 .explore_details .overview-section {
@@ -216,7 +236,8 @@
 
 .map-container {
   width: 100%;
-  height: 60vh; /* viewport-based height */
+  height: 60vh;
+  /* viewport-based height */
   min-height: 400px;
   border-radius: 12px;
   overflow: hidden;
@@ -247,7 +268,8 @@ aside {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #ffffff; /* covers header/footer visually */
+  background: #ffffff;
+  /* covers header/footer visually */
   display: flex;
   justify-content: center;
   align-items: center;

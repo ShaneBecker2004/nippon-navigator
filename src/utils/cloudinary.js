@@ -5,7 +5,9 @@ export const cloudinaryUrl = (path, width = 400, height = null) => {
     return path.includes("res.cloudinary.com")
       ? path.replace(
           "/upload/",
-          `/upload/w_${width},h_${height || "auto"},c_fill,q_auto,f_auto/`
+          height
+          ? `/upload/w_${width},h_${height || "auto"},c_fill,q_auto,f_auto/`
+          : `/upload/w_${width},c_fill,q_auto,f_auto/`
         )
       : path;
   }

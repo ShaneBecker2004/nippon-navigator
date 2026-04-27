@@ -21,6 +21,7 @@ import Gallery from './pages/Gallery/Gallery';
 import TripDetails from './pages/Trips/TripDetails';
 import ScrollToTop from './components/ScrolltoTop/ScrolltoTop';
 
+
 // Trip Pages
 import NewTrip from './pages/Trips/NewTrip';
 
@@ -60,6 +61,7 @@ function App() {
       <Route path='gallery' element={<Gallery />} />
       <Route path='login' element={<Login />} />
       <Route path='register' element={<Register />} />
+      
       
     </Route>
     

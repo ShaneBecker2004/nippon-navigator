@@ -219,6 +219,21 @@ const handleAddActivityToTrip = async () => {
   setShowTripModal(true);
 };
 
+const images = (() => {
+  if (!activity?.images) return [];
+
+  // already an array → good
+  if (Array.isArray(activity.images)) return activity.images;
+
+  // string → try to parse
+  try {
+    return JSON.parse(activity.images);
+  } catch (e) {
+    console.error("Invalid images format:", activity.images);
+    return [];
+  }
+})();
+
   // ✅ FULLSCREEN LOADER
   if (loading) {
     return (
@@ -254,14 +269,14 @@ const handleAddActivityToTrip = async () => {
                 autoplay={{
                   delay: 4000, // 3 seconds between slides
                   disableOnInteraction: false, // keeps autoplay after user clicks
-                  pauseOnMouseEnter: true 
+                  pauseOnMouseEnter: true
                 }}
                 className="explore-swiper"
               >
-                {activity.images?.map((img, index) => (
+                {images.map((img, index) => (
                   <SwiperSlide key={index}>
                     <img
-                      src={img}
+                      src={cloudinaryUrl(img, 1000)}
                       alt={`slide-${index}`}
                       className="explore-image"
                       onClick={() => {
@@ -411,14 +426,10 @@ const handleAddActivityToTrip = async () => {
                                           const isPDF = lower.endsWith(".pdf");
                                           const isImage = /\.(jpg|jpeg|png|webp|gif)$/i.test(lower);
 
-                                          if (isLink) {
+                                          if (isImage) {
                                             return (
                                               <a href={item} target="_blank" rel="noreferrer">
-                                                {isPDF
-                                                  ? "View PDF"
-                                                  : isImage
-                                                    ? "View Image"
-                                                    : "View Link"}
+                                                View Here
                                               </a>
                                             );
                                           }
@@ -568,14 +579,19 @@ const handleAddActivityToTrip = async () => {
               <button className="close-btn" onClick={() => setIsOpen(false)}>✕</button>
 
               <Swiper
+                className='fullscreen-swiper'
                 initialSlide={activeIndex}
                 navigation
                 pagination={{ clickable: true }}
                 modules={[Navigation, Pagination]}
+                loop={true}
               >
-                {activity.images?.map((img, index) => (
+                {images.map((img, index) => (
                   <SwiperSlide key={index}>
-                    <img src={img} className="fullscreen-image" alt="" />
+                    <img
+                      src={cloudinaryUrl(img, 1600)}
+                      className="fullscreen-image"
+                      alt="" />
                   </SwiperSlide>
                 ))}
               </Swiper>
