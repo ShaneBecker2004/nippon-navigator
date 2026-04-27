@@ -205,3 +205,11 @@
         padding: 0px 8px;
     }
 }
+
+.review-section {
+    font-size: 14px;
+}
+
+.bi-star-fill {
+    color: var(--primaryClr);
+}

@@ -24,6 +24,7 @@ model Activity {
   highlights    String[]
   location      String
   rating        Float?
+  reviews       Float?
   title         String
   details       Json?
   images        Json?

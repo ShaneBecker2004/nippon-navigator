@@ -98,10 +98,10 @@ const ActivityCard = ({ val }) => {
         </Card.Title>
 
         {val.rating && (
-          <p className="review">
+          <p className="review-section">
             <span><i className="bi bi-star-fill me-1"></i></span>
             <span>{val.rating}</span>
-            <span> ({val.reviews || 0} reviews)</span>
+            <span> ({(val.reviews || 0).toLocaleString()} reviews)</span>
           </p>
         )}
 

@@ -488,7 +488,7 @@ const images = (() => {
                   <Tab.Pane eventKey="4">
                     <div className="explore_details">
                       <h3 className="font-bold mb-2 h3 border-bottom pb-2">Ratings & Reviews</h3>
-                      <p><strong>Rating:</strong> {activity.rating} ({activity.review || 0} reviews)</p>
+                      <p><strong>Rating:</strong> ⭐ {activity.rating} out of 5 ({(activity.reviews || 0).toLocaleString()} reviews)</p>
                       <p>Coming Soon!</p>
                     </div>
                   </Tab.Pane>
@@ -534,7 +534,7 @@ const images = (() => {
                       <p className="mb-0 fw-bold">
                         ⭐ {activity.rating}{" "}
                         <span className="fw-normal text-muted">
-                          ({activity.reviews || 0} reviews)
+                          ({(activity.reviews || 0).toLocaleString()} reviews)
                         </span>
                       </p>
                     </div>
