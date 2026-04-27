@@ -1,6 +1,7 @@
 import React from "react";
 import "../Cards/card.css";
 import { Card } from "react-bootstrap";
+import { cloudinaryUrl } from "../../utils/cloudinary";
 
 const Cards = ({ destination }) => {
   return (
@@ -8,7 +9,7 @@ const Cards = ({ destination }) => {
       <Card>
         <Card.Img
           variant="top"
-          src={destination.image || "/images/default.jpg"}
+          src={cloudinaryUrl(destination.image, 500, 250)}
           className="img-fluid"
           alt={destination.name}
         />
