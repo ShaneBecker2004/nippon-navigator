@@ -24,7 +24,7 @@ model Activity {
   highlights    String[]
   location      String
   rating        Float?
-  reviews       Float?
+  reviews       Int?
   title         String
   details       Json?
   images        Json?
@@ -38,9 +38,9 @@ model Activity {
   type          String[]
   map_embed_url String?
   environment  String?
-  accessibility String?
-  seasonal  String?
-  traveler  String?
+  accessibility String[]
+  seasonal  String[]
+  traveler  String[]
   popular   Boolean @default(false)
   top_rated Boolean @default(false)
   must_do Boolean @default(false)

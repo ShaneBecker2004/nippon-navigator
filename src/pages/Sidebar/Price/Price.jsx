@@ -17,21 +17,14 @@ function Price({ handlePriceChange, selectedPrice }) {
       <Input 
         handleChange={handlePriceChange}
         value={5000}
-        title="¥2,500 - ¥5,000"
+        title="Free - ¥5,000"
         name="price"
         checked={selectedPrice === [5000]}
       />
       <Input 
         handleChange={handlePriceChange}
         value={10000}
-        title="¥5,000 - ¥10,000"
-        name="price"
-        checked={selectedPrice === [10000]}
-      />
-      <Input 
-        handleChange={handlePriceChange}
-        value={15000}
-        title="¥10,000 or above"
+        title="Free - ¥10,000 & up"
         name="price"
         checked={selectedPrice === [15000]}
       />

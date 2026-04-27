@@ -10,13 +10,6 @@ function Rating({ handleRatingChange, selectedRating }) {
     <div>
         <Input
           handleChange={handleRatingChange}
-          value="5"
-          title="⭐⭐⭐⭐⭐"
-          name="rating"
-          checked={selectedRating=== "5"}
-        />
-        <Input
-          handleChange={handleRatingChange}
           value="4"
           title="⭐⭐⭐⭐ & up"
           name="rating"

@@ -67,7 +67,7 @@ const Explore = () => {
   // ✅ Fetch activities
   const fetchActivities = useCallback(async () => {
     try {
-      const res = await fetch(`${API}/api/activities?page=${currentPage}&limit=9`);
+      const res = await fetch(`${API}/api/activities?page=${currentPage}&limit=15`);
       const data = await res.json();
 
       const activitiesData = data.activities || data;
@@ -241,7 +241,6 @@ const Explore = () => {
   const handleClick = (value) => {
     setSelectedRecommended(prev => prev === value ? "" : value);
   };
-
 
 
   console.log(
