@@ -35,7 +35,7 @@ model Activity {
   price         Json?
   currency      String?
   open_hours    String?
-  type          String[]
+  tags          String[]
   map_embed_url String?
   environment  String?
   accessibility String[]

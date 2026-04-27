@@ -321,7 +321,7 @@ const images = (() => {
                         <p><strong>Open Hours:</strong> {activity.open_hours}</p>
                         <p><strong>Phone:</strong> {activity.phone}</p>
                         <p><strong>Duration:</strong> {activity.duration}</p>
-                        <p><strong>Category:</strong> {(activity.type || []).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(", ").replace(/_/g, " ")}</p>
+                        <p><strong>Tags:</strong> {(activity.tags || []).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(", ").replace(/_/g, " ")}</p>
                         <a
                           href={activity.website}
                           target="_blank"

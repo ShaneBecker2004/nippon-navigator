@@ -29,74 +29,44 @@ INSERT INTO "Activity" (
   "local",
   "subcity"
 ) VALUES (
-  'Dotonbori', --title
-  'dotonbori', --slug
-  'Dotonbori is one of Osaka’s most famous entertainment districts, known for its bright neon lights, street food, and vibrant nightlife along the canal.', --description
-  ARRAY['food_and_drink',
-  'nightlife'
-  ], --type
-  'Osaka', --location
-  '24 hours', --open_hours
-  '+81 6-6211-4542', --phone
-  'http://www.dotonbori.or.jp/en/', --website
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13125.779014480167!2d135.49099736128053!3d34.66872296689345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e713818af9fd%3A0xb8bb1326b48ba590!2sDotonbori!5e0!3m2!1sen!2sus!4v1777276619890!5m2!1sen!2sus', --map_embed_url
+  'Tokyo Skytree', --title
+  'tokyo-skytree', --slug
+  '', --description
+  ARRAY['sightseeing'], --type
+  '', --location
+  '', --open_hours
+  '', --phone
+  '', --website
+  '', --map_embed_url
   '{
-      "general": "Free"
+      "":""
   }'::jsonb,  --price
   'JPY', --currency
-  4.4, --rating
-  82912, --reviews
-  ARRAY['food_and_drink',
-  'nightlife'
+  , --rating
+  , --reviews
+  ARRAY[''
   ], --category
   ARRAY[
-    'Famous Glico Running Man sign overlooking the canal',
-    'Street food like takoyaki and okonomiyaki',
-    'Neon-lit nightlife and entertainment district',
-    'Dotonbori Canal boat rides',
-    'Iconic giant restaurant signs like the Kani Doraku crab'
+    ''
   ], --highlights
-  '["dotonbori_lloacj",
-  "dotonbori-street-night_nx6c1e",
-  "glico-man_b7dddb",
-  "dotonbori-canal_ev2ulf",
-  "dotonbori-bridge_lu8u21",
-  "canal-night_mbblzg",
-  "dotonbori-food-stands_f5lofo",
-  "dotonbori-street_pzznr7"
-  ]', --images
-  'dotonbori_lloacj', --thumbnail
+  '[""]', --images
+  '', --thumbnail
   '{
-    "famous_foods": [
-      "Takoyaki (octopus balls)",
-      "Okonomiyaki (savory pancake)",
-      "Kushikatsu (deep-fried skewers)"
-    ],
-    "landmarks": [
-      "Glico Running Man Sign",
-      "Kani Doraku Crab Sign",
-      "Dotonbori Canal"
-    ],
-    "best_time_to_visit": [
-      "Evening for neon lights",
-      "Late night for nightlife atmosphere"
-    ],
-    "nearest_station": [
-      "Namba Station"
-    ]
+    "":[""]
   }'::jsonb, --details
-  '2-4 hours', --duration: minutes, hour, Half, Full
-  'outdoor', --environment: indoor, outdoor, mixed
-  ARRAY['wheelchair, stairs, uneven'], --accessibility: wheelchair, stairs, uneven
-  ARRAY['spring, summer, fall, winter'], --seasonal: winter, spring, summer, fall
-  ARRAY['family-friendly, solo-friendly'], --traveler: family-friendly, solo-friendly, pet-friendly
-  true, --popular
-  true, --top_rated
-  true, --must_do
+  '', --duration: minutes, hour, Half, Full
+  '', --environment: indoor, outdoor, mixed
+  ARRAY[''], --accessibility: wheelchair, stairs, uneven
+  ARRAY[''], --seasonal: winter, spring, summer, fall
+  ARRAY[''], --traveler: family-friendly, solo-friendly, pet-friendly
+  false, --popular
+  false, --top_rated
+  false, --must_do
   false, --hidden
   false, --local
-  'Namba' --subcity
+  '' --subcity
 );
+
 
 /////////////////
 
@@ -132,7 +102,8 @@ INSERT INTO "Activity" (
   "local",
   "subcity"
 ) VALUES (
-  'Dotonbori', --slug
+  '', --title
+  '', --slug
   '', --description
   ARRAY[''], --type
   '', --location

@@ -162,7 +162,7 @@ const Header = () => {
                                             e.stopPropagation();
                                             setOpenInner(openInner === "attractions" ? null : "attractions");
                                         }}  >
-                                        <NavDropdown.Item as={Link} to="/explore?category=view" onClick={closeAll}>
+                                        <NavDropdown.Item as={Link} to="/explore?category=sightseeing" onClick={closeAll}>
                                             City Views
                                         </NavDropdown.Item>
                                         <NavDropdown.Item as={Link} to="/explore?category=landmark" onClick={closeAll}>
