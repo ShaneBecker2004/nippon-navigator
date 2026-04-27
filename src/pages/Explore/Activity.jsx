@@ -421,9 +421,6 @@ const images = (() => {
                                       {typeof item === "string" ? (
                                         (() => {
                                           const lower = item.toLowerCase();
-
-                                          const isLink = lower.startsWith("http") || lower.startsWith("/");
-                                          const isPDF = lower.endsWith(".pdf");
                                           const isImage = /\.(jpg|jpeg|png|webp|gif)$/i.test(lower);
 
                                           if (isImage) {

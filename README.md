@@ -79,6 +79,7 @@ cd nippon-navigator
 - Allow users to upload images when creating trips.
 - Develop a user profile page with personalization options (saved activities, preferences, visa tracking, etc.).
 - Build an admin dashboard for managing activities, destinations, and content.
+- Improve the mobile UI experience.
 
 ## Deployed Application: 
 https://nippon-navigator.vercel.app
