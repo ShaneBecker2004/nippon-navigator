@@ -2,7 +2,7 @@ INSERT INTO "Activity" (
   "title",
   "slug",
   "description",
-  "type",
+  "tags",
   "location",
   "open_hours",
   "phone",
@@ -29,43 +29,74 @@ INSERT INTO "Activity" (
   "local",
   "subcity"
 ) VALUES (
-  'Tokyo Skytree', --title
-  'tokyo-skytree', --slug
-  '', --description
-  ARRAY['sightseeing'], --type
-  '', --location
-  '', --open_hours
-  '', --phone
-  '', --website
-  '', --map_embed_url
+  'Nintendo Tokyo',
+  'nintendo-tokyo',
+  'Official Nintendo store featuring exclusive merchandise, themed displays, and immersive gaming culture experiences located in Shibuya PARCO.',
+  ARRAY['nintendo', 'gaming', 'shopping', 'pop_culture'],
+  'Tokyo',
+  '10AM - 9PM',
+  '+81 3-6712-7155',
+  'https://www.nintendo.com/jp/officialstore/index.html',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12966.417844727166!2d139.6883387619644!3d35.662115661491256!2m3!1f0!2f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188dae14b52bed%3A0xca9863932bd4be02!2sNintendo%20Tokyo!5e0!3m2!1sen!2sus!4v1777360038985!5m2!1sen!2sus',
   '{
-      "":""
-  }'::jsonb,  --price
-  'JPY', --currency
-  , --rating
-  , --reviews
-  ARRAY[''
-  ], --category
+    "General":"Free"
+  }'::jsonb,
+  'JPY',
+  4.5,
+  4336,
+  ARRAY['shopping', 'entertainment', 'gaming'],
   ARRAY[
-    ''
-  ], --highlights
-  '[""]', --images
-  '', --thumbnail
+    'Exclusive Nintendo merchandise only available in Japan',
+    'Themed displays featuring Mario, Zelda, and Pokémon',
+    'Interactive and immersive store design',
+    'Limited edition collectibles and apparel'
+  ],
+  '["nintendo-store-entrance_xc9dlq",
+  "nintendo-glass-display_kwhtgv",
+  "nintendo-shelf_z9m3i1",
+  "nintiendo-games-merch_gharst",
+  "nintendo-zelda_zuwj0d",
+  "nintendo-entrance_cnullh",
+  "nintendo-banner_b7e4fb"]',
+  'nintendo-store-entrance_xc9dlq',
   '{
-    "":[""]
-  }'::jsonb, --details
-  '', --duration: minutes, hour, Half, Full
-  '', --environment: indoor, outdoor, mixed
-  ARRAY[''], --accessibility: wheelchair, stairs, uneven
-  ARRAY[''], --seasonal: winter, spring, summer, fall
-  ARRAY[''], --traveler: family-friendly, solo-friendly, pet-friendly
-  false, --popular
-  false, --top_rated
-  false, --must_do
-  false, --hidden
-  false, --local
-  '' --subcity
+  "overview": "Official Nintendo store located in Shibuya PARCO featuring exclusive merchandise and immersive gaming displays.",
+  "experiences": [
+    "Explore themed Nintendo worlds featuring Mario, Zelda, and Pokémon",
+    "Shop Japan-exclusive merchandise and collectibles",
+    "Take photos with life-sized character displays",
+    "Discover limited edition product releases"
+  ],
+  "highlights": [
+    "Exclusive Japan-only items",
+    "Highly popular tourist attraction",
+    "Located in Shibuya PARCO shopping complex"
+  ],
+  "tips": [
+    "Visit early or weekdays to avoid crowds",
+    "Combine with Pokémon Center and Capcom Store in same building",
+    "Expect queues during weekends and holidays"
+  ],
+  "nearby": [
+    "Shibuya Scramble Crossing",
+    "Pokémon Center Shibuya",
+    "Shibuya Sky"
+  ]
+}'::jsonb,
+  '1-2 hours',
+  'indoor',
+  ARRAY['wheelchair'],
+  ARRAY['winter', 'spring', 'summer', 'fall'],
+  ARRAY['family-friendly', 'solo-friendly'],
+  true,
+  true,
+  true,
+  false,
+  false,
+  'Shibuya'
 );
+
+
 
 
 /////////////////
@@ -75,7 +106,7 @@ INSERT INTO "Activity" (
   "title",
   "slug",
   "description",
-  "type",
+  "tags",
   "location",
   "open_hours",
   "phone",
@@ -108,7 +139,7 @@ INSERT INTO "Activity" (
   ARRAY[''], --type
   '', --location
   '', --open_hours
-  '', --phone
+  '+81 ', --phone
   '', --website
   '', --map_embed_url
   '{

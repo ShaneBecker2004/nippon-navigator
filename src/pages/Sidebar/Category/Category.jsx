@@ -45,13 +45,6 @@ function Category({ handleCategoryChange, selectedCategory }) {
         />
         <Input
           handleChange={handleCategoryChange}
-          value="family_friendly"
-          title="Family-Friendly"
-          name="category"
-          checked={selectedCategory === "family_friendly"}
-        />
-        <Input
-          handleChange={handleCategoryChange}
           value="festival"
           title="Festival"
           name="category"

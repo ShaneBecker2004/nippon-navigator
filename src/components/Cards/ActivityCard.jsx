@@ -7,8 +7,6 @@ import { cloudinaryUrl } from '../../utils/cloudinary';
 const ActivityCard = ({ val }) => {
   const imageSrc = cloudinaryUrl(val.thumbnail || val.images?.[0], 500, 300);
 
-  console.log("FINAL IMAGE URL:", imageSrc);
-
   const duration = val.duration || "N/A";
 
   // 💰 PRICE NORMALIZER
@@ -25,15 +23,46 @@ const ActivityCard = ({ val }) => {
 
   const price = normalizePrice(val.price);
 
-  // 💰 STARTING PRICE CALCULATOR (USED)
+  // 💰 STARTING PRICE (ADULT-FIRST LOGIC)
   const getStartingPrice = (priceObj) => {
     if (!priceObj || typeof priceObj !== "object") return null;
 
+    // 🔥 1. PRIORITIZE ADULT PRICE
+    // 🔥 Find adult key (case-insensitive)
+    const adultKey = Object.keys(priceObj).find(
+      key => key.toLowerCase().includes("adult")
+    );
+
+    if (adultKey) {
+      const v = priceObj[adultKey];
+
+      if (
+        v === 0 ||
+        v === "0" ||
+        (typeof v === "string" && v.toLowerCase().includes("free"))
+      ) {
+        return "free";
+      }
+
+      if (typeof v === "object" && v.min !== undefined) {
+        return Number(v.min);
+      }
+
+      if (typeof v === "string" && v.includes("-")) {
+        const [min] = v.split("-");
+        return Number(min);
+      }
+
+      if (!isNaN(Number(v))) {
+        return Number(v);
+      }
+    }
+
+    // 🔁 2. FALLBACK: lowest available price
     const values = Object.values(priceObj)
       .flatMap((v) => {
         if (v === null || v === undefined) return [];
 
-        // FREE
         if (
           v === 0 ||
           v === "0" ||
@@ -42,18 +71,15 @@ const ActivityCard = ({ val }) => {
           return ["free"];
         }
 
-        // RANGE OBJECT
         if (typeof v === "object" && v.min !== undefined) {
           return [Number(v.min)];
         }
 
-        // RANGE STRING "1000-1500"
         if (typeof v === "string" && v.includes("-")) {
           const [min] = v.split("-");
           return [Number(min)];
         }
 
-        // NORMAL NUMBER
         if (!isNaN(Number(v))) {
           return [Number(v)];
         }
@@ -105,11 +131,11 @@ const ActivityCard = ({ val }) => {
           </p>
         )}
 
-        {/* 💰 PRICE SECTION (CLEANED) */}
+        {/* 💰 PRICE SECTION */}
         <div className="card-prices">
           {startingPrice === "free" ? (
             <p className="mb-0"><b>Free</b></p>
-          ) : startingPrice ? (
+          ) : typeof startingPrice === "number" ? (
             <p className="mb-0">
               <span className="text-muted">Starting at </span>
               <b>

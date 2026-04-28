@@ -104,7 +104,7 @@ const Header = () => {
                                         <NavDropdown.Item as={Link} to="/explore?category=festival&category=event" onClick={closeAll}>
                                             Festivals & Events
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/explore?category=culture" onClick={closeAll}>
+                                        <NavDropdown.Item as={Link} to="/explore?category=cultural" onClick={closeAll}>
                                             Culture in Japan
                                         </NavDropdown.Item>
                                     </NavDropdown>

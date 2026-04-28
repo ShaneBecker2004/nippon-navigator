@@ -258,7 +258,7 @@ const images = (() => {
 
           <Row>
             {/* LEFT: Image Gallery */}
-            <Col md={13}>
+            <Col md={12}>
               <Swiper
                 spaceBetween={10}
                 slidesPerView={1}

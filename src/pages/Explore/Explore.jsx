@@ -63,7 +63,6 @@ const Explore = () => {
   };
 
 
-
   // ✅ Fetch activities
   const fetchActivities = useCallback(async () => {
     try {
@@ -384,24 +383,6 @@ const Explore = () => {
                     </Col>
                   ))
                 )}
-              </Row>
-              <Row>
-                <Col md='8'>
-                  <div className='pagination'>
-                    {Array.from(
-                      { length: totalPages },
-                      (_, i) => (
-                        <button
-                          key={i}
-                          onClick={() => setCurrentPage(i + 1)}
-                          className={currentPage === i + 1 ? "active" : ""}
-                        >
-                          {i + 1}
-                        </button>
-                      )
-                    )}
-                  </div>
-                </Col>
               </Row>
             </Col>
           </Row>

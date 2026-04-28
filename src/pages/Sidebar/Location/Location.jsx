@@ -45,10 +45,10 @@ function Location ({ handleLocationChange, selectedLocation }) {
         />
         <Input
           handleChange={handleLocationChange}
-          value="Hokkaido"
-          title="Hokkaido"
+          value="Sapporo"
+          title="Sapporo"
           name="location"
-          checked={selectedLocation === "Hokkaido"}
+          checked={selectedLocation === "Sapporo"}
         />
         <Input
           handleChange={handleLocationChange}
