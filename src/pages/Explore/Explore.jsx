@@ -39,9 +39,6 @@ const Explore = () => {
 
   const location = useLocation();
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [setTotalPages] = useState(1);
-
   const getActivityPrice = (price) => {
     if (!price) return 0;
 
@@ -66,7 +63,7 @@ const Explore = () => {
   // ✅ Fetch activities
   const fetchActivities = useCallback(async () => {
     try {
-      const res = await fetch(`${API}/api/activities?page=${currentPage}&limit=15`);
+      const res = await fetch(`${API}/api/activities`);
       const data = await res.json();
 
       const activitiesData = data.activities || data;
@@ -85,15 +82,12 @@ const Explore = () => {
       }));
 
       setActivities(mappedData);
-      if (data.pages) {
-        setTotalPages(data.pages);
-      }
     } catch (err) {
       console.error("Failed to fetch activities:", err);
     } finally {
       setLoading(false);
     }
-  }, [currentPage]);
+  }, []);
 
   useEffect(() => {
     fetchActivities();
@@ -276,10 +270,6 @@ const Explore = () => {
   useEffect(() => {
     setSelectedSubcity(""); // reset when city changes
   }, [selectedLocation]);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [search, selectedCategory, selectedLocation, selectedSubcity, selectedPrice, selectedRating, selectedAccessibility, selectedDuration, selectedEnvironment, selectedSeasonal, selectedTraveler]);
 
 
   const handleResetFilters = () => {

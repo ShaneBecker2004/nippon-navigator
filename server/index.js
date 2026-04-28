@@ -74,7 +74,10 @@ app.get("/api/destinations", async (req, res) => {
 //////////////////////////////////
 app.get("/api/activities", async (req, res) => {
   try {
-    const data = await prisma.activity.findMany();
+    const data = await prisma.activity.findMany({
+      orderBy: { id: "asc" },
+    });
+
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: "Failed to fetch activities" });
