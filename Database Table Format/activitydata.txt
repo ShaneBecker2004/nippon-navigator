@@ -29,65 +29,51 @@ INSERT INTO "Activity" (
   "local",
   "subcity"
 ) VALUES (
-  'Nintendo Tokyo',
-  'nintendo-tokyo',
-  'Official Nintendo store featuring exclusive merchandise, themed displays, and immersive gaming culture experiences located in Shibuya PARCO.',
-  ARRAY['nintendo', 'gaming', 'shopping', 'pop_culture'],
+  'Shibuya Crossing',
+  'shibuya-crossing',
+  'World-famous pedestrian scramble in the heart of Tokyo where hundreds of people cross simultaneously from all directions, creating one of the most iconic urban scenes in the world.',
+  ARRAY['shibuya', 'scramble_crossing', 'night_photography', 'urban_landmark', 'city_lights'],
   'Tokyo',
-  '10AM - 9PM',
-  '+81 3-6712-7155',
-  'https://www.nintendo.com/jp/officialstore/index.html',
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12966.417844727166!2d139.6883387619644!3d35.662115661491256!2m3!1f0!2f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188dae14b52bed%3A0xca9863932bd4be02!2sNintendo%20Tokyo!5e0!3m2!1sen!2sus!4v1777360038985!5m2!1sen!2sus',
+  '24 hours',
+  '',
+  'https://play-shibuya.com/',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12966.845585306248!2d139.69025986196252!3d35.659481561504876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188bcaeb0cd12b%3A0x20e563a2e0aec969!2sShibuya%20Crossing!5e0!3m2!1sen!2sus!4v1777363623622!5m2!1sen!2sus',
   '{
     "General":"Free"
   }'::jsonb,
   'JPY',
   4.5,
-  4336,
-  ARRAY['shopping', 'entertainment', 'gaming'],
+  20307,
+  ARRAY['landmark', 'experience', 'photography_spot'],
   ARRAY[
-    'Exclusive Nintendo merchandise only available in Japan',
-    'Themed displays featuring Mario, Zelda, and Pokémon',
-    'Interactive and immersive store design',
-    'Limited edition collectibles and apparel'
+    'Experience one of the busiest pedestrian crossings in the world where hundreds of people move in perfect chaos every light change.',
+    'Watch the iconic neon-lit scramble from surrounding buildings like Starbucks or Magnet by Shibuya 109.',
+    'A must-visit Tokyo landmark that captures the energy, density, and rhythm of modern Japanese city life.',
+    'Perfect for photography, especially at night when neon signs and crowds create a cinematic atmosphere.'
   ],
-  '["nintendo-store-entrance_xc9dlq",
-  "nintendo-glass-display_kwhtgv",
-  "nintendo-shelf_z9m3i1",
-  "nintiendo-games-merch_gharst",
-  "nintendo-zelda_zuwj0d",
-  "nintendo-entrance_cnullh",
-  "nintendo-banner_b7e4fb"]',
-  'nintendo-store-entrance_xc9dlq',
+  '["shibuya_crossing_iyitch",
+  "shibuya-crossing-aerial_hsow2a",
+  "crossing-day-view_gb44rl",
+  "crossing-building_b2bnte",
+  "crossing-overlooking_ltbbjq",
+  "shibuya-crossing-night_skcevt",
+  "shibuya-crossing-buildings_tx96ie"]',
+  'shibuya_crossing_iyitch',
   '{
-  "overview": "Official Nintendo store located in Shibuya PARCO featuring exclusive merchandise and immersive gaming displays.",
-  "experiences": [
-    "Explore themed Nintendo worlds featuring Mario, Zelda, and Pokémon",
-    "Shop Japan-exclusive merchandise and collectibles",
-    "Take photos with life-sized character displays",
-    "Discover limited edition product releases"
-  ],
-  "highlights": [
-    "Exclusive Japan-only items",
-    "Highly popular tourist attraction",
-    "Located in Shibuya PARCO shopping complex"
-  ],
-  "tips": [
-    "Visit early or weekdays to avoid crowds",
-    "Combine with Pokémon Center and Capcom Store in same building",
-    "Expect queues during weekends and holidays"
-  ],
-  "nearby": [
-    "Shibuya Scramble Crossing",
-    "Pokémon Center Shibuya",
-    "Shibuya Sky"
-  ]
-}'::jsonb,
-  '1-2 hours',
-  'indoor',
+    "best_time": "Evening for neon lights and peak crowd energy",
+    "photo_spots": [
+      "Starbucks Shibuya (second floor window view)",
+      "Magnet by Shibuya 109 rooftop",
+      "Shibuya Sky observation deck"
+    ],
+    "what_to_expect": "Short pedestrian cycles with large synchronized crowd waves crossing from all directions",
+    "crowd_level": "Extremely high during evenings and weekends"
+  }'::jsonb,
+  '15-30 min',
+  'outdoor',
   ARRAY['wheelchair'],
-  ARRAY['winter', 'spring', 'summer', 'fall'],
-  ARRAY['family-friendly', 'solo-friendly'],
+  ARRAY['spring', 'summer', 'fall', 'winter'],
+  ARRAY['solo-friendly', 'family-friendly', 'pet-friendly'],
   true,
   true,
   true,
@@ -136,7 +122,7 @@ INSERT INTO "Activity" (
   '', --title
   '', --slug
   '', --description
-  ARRAY[''], --type
+  ARRAY[''], --tags
   '', --location
   '', --open_hours
   '+81 ', --phone
