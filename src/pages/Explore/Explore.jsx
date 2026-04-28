@@ -40,7 +40,7 @@ const Explore = () => {
   const location = useLocation();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [setTotalPages] = useState(1);
 
   const getActivityPrice = (price) => {
     if (!price) return 0;
