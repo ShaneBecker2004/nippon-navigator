@@ -418,24 +418,30 @@ const images = (() => {
                                 <ul className="details-list">
                                   {value.map((item, i) => (
                                     <li key={i}>
-                                      {typeof item === "string" ? (
-                                        (() => {
-                                          const lower = item.toLowerCase();
-                                          const isImage = /\.(jpg|jpeg|png|webp|gif)$/i.test(lower);
+                                      {typeof item === "string" ? (() => {
+                                        const lower = item.toLowerCase();
 
-                                          if (isImage) {
-                                            return (
-                                              <a href={item} target="_blank" rel="noreferrer">
-                                                View Here
-                                              </a>
-                                            );
-                                          }
+                                        const isUrl = /^https?:\/\/.+/i.test(item);
+                                        const isImage = /\.(jpg|jpeg|png|webp|gif)$/i.test(lower);
 
-                                          return item;
-                                        })()
-                                      ) : (
-                                        item
-                                      )}
+                                        if (isUrl && isImage) {
+                                          return (
+                                            <a href={item} target="_blank" rel="noreferrer">
+                                              View Image
+                                            </a>
+                                          );
+                                        }
+
+                                        if (isUrl) {
+                                          return (
+                                            <a href={item} target="_blank" rel="noreferrer">
+                                              Visit Website
+                                            </a>
+                                          );
+                                        }
+
+                                        return item;
+                                      })() : item}
                                     </li>
                                   ))}
                                 </ul>

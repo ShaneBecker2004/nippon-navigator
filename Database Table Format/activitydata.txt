@@ -29,57 +29,62 @@ INSERT INTO "Activity" (
   "local",
   "subcity"
 ) VALUES (
-  'Shibuya Crossing',
-  'shibuya-crossing',
-  'World-famous pedestrian scramble in the heart of Tokyo where hundreds of people cross simultaneously from all directions, creating one of the most iconic urban scenes in the world.',
-  ARRAY['shibuya', 'scramble_crossing', 'night_photography', 'urban_landmark', 'city_lights'],
-  'Tokyo',
+  'Arashiyama Bamboo Forest',
+  'arashiyama-bamboo-forest',
+  'A famous bamboo grove in Kyoto where towering bamboo stalks create a peaceful, otherworldly atmosphere. One of Japan’s most photographed natural landmarks.',
+  ARRAY['bamboo_forest', 'nature_walk', 'scenic_spot', 'photography', 'kyoto_landmark'],
+  'Kyoto',
   '24 hours',
   '',
-  'https://play-shibuya.com/',
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12966.845585306248!2d139.69025986196252!3d35.659481561504876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188bcaeb0cd12b%3A0x20e563a2e0aec969!2sShibuya%20Crossing!5e0!3m2!1sen!2sus!4v1777363623622!5m2!1sen!2sus',
+  'https://ja.kyoto.travel/tourism/single01.php?category_id=8&tourism_id=2683',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3267.5957580755244!2d135.66872637572052!3d35.01682306618568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6001abebbf5c8bad%3A0xfb9ffc7bbdd67cdd!2sArashiyama%20Bamboo%20Forest!5e0!3m2!1sen!2sus!4v1777412880875!5m2!1sen!2sus',
   '{
-    "General":"Free"
+      "General":"Free"
   }'::jsonb,
   'JPY',
-  4.5,
-  20307,
-  ARRAY['landmark', 'experience', 'photography_spot'],
+  4.3,
+  21923,
+  ARRAY['nature', 'landmark', 'outdoor', 'experience'],
   ARRAY[
-    'Experience one of the busiest pedestrian crossings in the world where hundreds of people move in perfect chaos every light change.',
-    'Watch the iconic neon-lit scramble from surrounding buildings like Starbucks or Magnet by Shibuya 109.',
-    'A must-visit Tokyo landmark that captures the energy, density, and rhythm of modern Japanese city life.',
-    'Perfect for photography, especially at night when neon signs and crowds create a cinematic atmosphere.'
+    'Walk through towering bamboo stalks that sway and create a calming, immersive natural environment.',
+    'One of Kyoto’s most iconic and photographed locations, especially popular during early morning hours.',
+    'A peaceful escape from the city with a unique soundscape created by wind moving through the bamboo.',
+    'Easily combined with nearby attractions like Tenryu-ji Temple and the Arashiyama district.'
   ],
-  '["shibuya_crossing_iyitch",
-  "shibuya-crossing-aerial_hsow2a",
-  "crossing-day-view_gb44rl",
-  "crossing-building_b2bnte",
-  "crossing-overlooking_ltbbjq",
-  "shibuya-crossing-night_skcevt",
-  "shibuya-crossing-buildings_tx96ie"]',
-  'shibuya_crossing_iyitch',
+  '["arashiyama-bamboo-path_pkezd5",
+  "arashiyama-bamboo-tourist_pmvoeq",
+  "arashiyama-bamboo-turn_oret5s",
+  "arashiyama-bamboo-umbrella_z7rzf8",
+  "arashiyama-bamboo-tourist-group_yqkl3d",
+  "arashiyama-bamboo-boats_vmhxpf",
+  "arashiyama-bamboo-group_ux9gil",
+  "arashiyama-bamboo-snow_rys0os"]',
+  'arashiyama-bamboo-path_pkezd5',
   '{
-    "best_time": "Evening for neon lights and peak crowd energy",
-    "photo_spots": [
-      "Starbucks Shibuya (second floor window view)",
-      "Magnet by Shibuya 109 rooftop",
-      "Shibuya Sky observation deck"
+    "best_time": "Early morning to avoid crowds and capture the best lighting",
+    "tips": [
+      "Arrive before 8 AM for fewer crowds",
+      "Stay on designated paths to preserve the environment",
+      "Visit nearby Tenryu-ji Temple and Togetsukyo Bridge"
     ],
-    "what_to_expect": "Short pedestrian cycles with large synchronized crowd waves crossing from all directions",
-    "crowd_level": "Extremely high during evenings and weekends"
+    "what_to_expect": "A relatively short walking path through dense bamboo with heavy tourist traffic during peak hours",
+    "nearby": [
+      "Tenryu-ji Temple",
+      "Togetsukyo Bridge",
+      "Arashiyama Monkey Park"
+    ]
   }'::jsonb,
-  '15-30 min',
+  '30-60 min',
   'outdoor',
-  ARRAY['wheelchair'],
+  ARRAY['wheelchair', 'uneven'],
   ARRAY['spring', 'summer', 'fall', 'winter'],
-  ARRAY['solo-friendly', 'family-friendly', 'pet-friendly'],
+  ARRAY['family-friendly', 'solo-friendly'],
   true,
   true,
   true,
   false,
   false,
-  'Shibuya'
+  'Arashiyama'
 );
 
 
