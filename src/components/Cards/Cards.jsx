@@ -14,8 +14,9 @@ const Cards = ({ destination }) => {
           alt={destination.name}
         />
           <Card.Title>{destination.name}</Card.Title>
+        <span className="prefecture">{destination.location}</span>
       </Card>
-    </div>
+    </div>  
   );
 };
 

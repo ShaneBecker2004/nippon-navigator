@@ -29,46 +29,73 @@ INSERT INTO "Activity" (
   "local",
   "subcity"
 ) VALUES (
-  '', --title
-  '', --slug
-  '', --description
-  ARRAY[''], --tags
-  '', --location
-  '', --open_hours
-  '+81 ', --phone
-  '', --website
-  '', --map_embed_url
+  'LaLaport Tokyo-Bay',
+  'lalaport-tokyo-bay',
+  'One of Japan’s largest shopping complexes featuring hundreds of stores, dining options, entertainment areas, and seasonal events. Popular for both shopping and casual day trips outside central Tokyo.',
+  ARRAY['shopping', 'mall', 'entertainment', 'family', 'food', 'lifestyle'],
+  'Tokyo',
+  '10AM - 8PM',
+  '+81 570-012-784',
+  'https://mitsui-shopping-park.com/lalaport/tokyo-bay/',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.582616785214!2d139.98518347574714!3d35.687277929641866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60187fda5f7485e7%3A0xd77eefa69fe0c1c7!2sLaLaport%20TOKYO-BAY!5e0!3m2!1sen!2sus!4v1777453454478!5m2!1sen!2sus',
   '{
-      "":""
-  }'::jsonb,  --price
-  'JPY', --currency
-  , --rating
-  , --reviews
-  ARRAY[''
-  ], --category
+      "General":"Free"
+  }'::jsonb,
+  'JPY',
+  4.1,
+  16194,
+  ARRAY['shopping', 'dining', 'entertainment', 'family-friendly', 'indoor'],
   ARRAY[
-    ''
-  ], --highlights
-  '[""]', --images
-  '', --thumbnail
+    'Massive shopping complex with hundreds of Japanese and international stores.',
+    'Wide variety of dining options from casual food courts to sit-down restaurants.',
+    'Family-friendly entertainment including cinemas and play areas.',
+    'Frequent seasonal events, sales, and pop-up attractions throughout the year.'
+  ],
+  '["lalaport-building_v5dfh7",
+  "lalaport-front_x6x7mn",
+  "lalaport-outside_vveupn",
+  "lalaport-park_zbrqdy",
+  "lalaport-shopping_s688ra",
+  "lalaport-tree_kozuvp",
+  "lalaport-view_c2wqcp",
+    "lalaport-area_mtlsfp"]',
+  'lalaport-building_v5dfh7',
   '{
-    "":[""]
-  }'::jsonb, --details
-  '', --duration: minutes, hour, Half, Full
-  '', --environment: indoor, outdoor, mixed
-  ARRAY[''], --accessibility: wheelchair, stairs, uneven
-  ARRAY[''], --seasonal: winter, spring, summer, fall
-  ARRAY[''], --traveler: family-friendly, solo-friendly, pet-friendly
-  false, --popular
-  false, --top_rated
-  false, --must_do
-  false, --hidden
-  false, --local
-  '' --subcity
+    "best_time": "Weekday afternoons for fewer crowds",
+    "time_needed": "3-5 hours depending on shopping interest",
+    "crowd_level": "High on weekends",
+    "best_for": [
+      "Shopping trips",
+      "Families",
+      "Rainy-day activities",
+      "Casual dining experiences"
+    ],
+    "what_to_expect": "A large suburban shopping complex with fashion, electronics, dining, and entertainment all in one place",
+    "tips": [
+      "Easily accessible by train from central Tokyo",
+      "Great for half-day or full-day casual visits",
+      "Check seasonal sales and events",
+      "Less crowded on weekday mornings/afternoons"
+    ],
+    "nearby": [
+      "IKEA Tokyo-Bay",
+      "Tokyo Disney Resort (short train ride)"
+    ]
+  }'::jsonb,
+  '3-5 hours',
+  'indoor',
+  ARRAY['wheelchair'],
+  ARRAY['spring', 'summer', 'fall', 'winter'],
+  ARRAY['family-friendly', 'solo-friendly'],
+  true,
+  false,
+  false,
+  false,
+  false,
+  'Funabashi'
 );
 
-
-
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.582616785214!2d139.98518347574714!3d35.687277929641866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60187fda5f7485e7%3A0xd77eefa69fe0c1c7!2sLaLaport%20TOKYO-BAY!5e0!3m2!1sen!2sus!4v1777453454478!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 
 /////////////////

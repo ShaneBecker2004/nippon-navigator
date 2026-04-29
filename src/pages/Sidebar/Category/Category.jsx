@@ -38,6 +38,13 @@ function Category({ handleCategoryChange, selectedCategory }) {
         />
         <Input
           handleChange={handleCategoryChange}
+          value="cafe"
+          title="Cafe"
+          name="category"
+          checked={selectedCategory === "cafe"}
+        />
+        <Input
+          handleChange={handleCategoryChange}
           value="shopping"
           title="Shopping"
           name="category"

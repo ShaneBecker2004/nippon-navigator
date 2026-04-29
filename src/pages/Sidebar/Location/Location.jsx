@@ -57,6 +57,27 @@ function Location ({ handleLocationChange, selectedLocation }) {
           name="location"
           checked={selectedLocation === "Okinawa"}
         />
+        <Input
+          handleChange={handleLocationChange}
+          value="Hiroshima"
+          title="Hiroshima"
+          name="location"
+          checked={selectedLocation === "Hiroshima"}
+        />
+        <Input
+          handleChange={handleLocationChange}
+          value="Nagoya"
+          title="Nagoya"
+          name="location"
+          checked={selectedLocation === "Nagoya"}
+        />
+        <Input
+          handleChange={handleLocationChange}
+          value="Nara"
+          title="Nara"
+          name="location"
+          checked={selectedLocation === "Nara"}
+        />
       </div>
     </div>
   )
