@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import Banner from '../../components/Banner/Banner';
 
 import Features from '../../components/Features/Features';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import Cards from '../../components/Cards/Cards';
 import ActivityCard from '../../components/Cards/ActivityCard';
 import { Link } from 'react-router-dom'
@@ -125,7 +125,7 @@ const Home = () => {
           slidesToShow: 1,
           slidesToScroll: 1,
           arrows: false,
-          dots: true,
+          dots: false,
           prevArrow: false,
           nextArrow: false,
         }
@@ -136,7 +136,7 @@ const Home = () => {
           slidesToShow: 1,
           slidesToScroll: 1,
           arrows: false,
-          dots: true,
+          dots: false,
           prevArrow: false,
           nextArrow: false,
         }
@@ -161,7 +161,7 @@ const Home = () => {
 
           <Row>
             <Col md="12">
-              <Slider {...settings}>
+              <Slider {...settings} className='city-slider'>
                 {loading ? (
                   <p className="text-center">Loading destinations...</p>
                 ) : destinations.length > 0 ? (
@@ -181,6 +181,7 @@ const Home = () => {
                   </p>
                 )}
               </Slider>
+              <Button href="/cities" className="mobile-city-button">Check Out Some Destinations!</Button>
             </Col>
           </Row>
 
@@ -199,7 +200,7 @@ const Home = () => {
 
           <Row>
             <Col md='12'>
-              <Slider {...settings}>
+              <Slider {...settings} className='activity-slider'>
                 {popularActivities.length > 0 ? (
                   popularActivities.map((val) => (
                     <div key={val.id} className='px-2'>
@@ -217,6 +218,7 @@ const Home = () => {
                   </p>
                 )}
               </Slider>
+              <Button href="/explore" className="explore-button">Visit The Explore Page!</Button>
             </Col>
           </Row>
         </Container>

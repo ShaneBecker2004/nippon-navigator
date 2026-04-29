@@ -17,6 +17,13 @@ function Category({ handleCategoryChange, selectedCategory }) {
         />
         <Input
           handleChange={handleCategoryChange}
+          value="restaurant"
+          title="Restaurant"
+          name="category"
+          checked={selectedCategory === "restaurant"}
+        />
+        <Input
+          handleChange={handleCategoryChange}
           value="theme_park"
           title="Theme Park"
           name="category"
@@ -49,6 +56,48 @@ function Category({ handleCategoryChange, selectedCategory }) {
           title="Festival"
           name="category"
           checked={selectedCategory === "festival"}
+        />
+        <Input
+          handleChange={handleCategoryChange}
+          value="sightseeing"
+          title="Sightseeing"
+          name="category"
+          checked={selectedCategory === "sightseeing"}
+        />
+        <Input
+          handleChange={handleCategoryChange}
+          value="shrine"
+          title="Shrine"
+          name="category"
+          checked={selectedCategory === "shrine"}
+        />
+        <Input
+          handleChange={handleCategoryChange}
+          value="castle"
+          title="Castle"
+          name="category"
+          checked={selectedCategory === "castle"}
+        />
+        <Input
+          handleChange={handleCategoryChange}
+          value="temple"
+          title="Temple"
+          name="category"
+          checked={selectedCategory === "temple"}
+        />
+        <Input
+          handleChange={handleCategoryChange}
+          value="skiing"
+          title="Skiing"
+          name="category"
+          checked={selectedCategory === "skiing"}
+        />
+        <Input
+          handleChange={handleCategoryChange}
+          value="landmark"
+          title="Landmarks"
+          name="category"
+          checked={selectedCategory === "landmark"}
         />
     </div>
 

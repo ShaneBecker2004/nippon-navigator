@@ -55,3 +55,15 @@
         margin: 0 0 0 0;
     }
 }
+
+@media (max-width: 400px) {
+    .feature-section .card img {
+        display: none;
+    }
+}
+
+@media (max-width: 400px) {
+    .feature-section {
+        display: none;
+    }
+}

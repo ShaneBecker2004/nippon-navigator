@@ -67,15 +67,48 @@
         font-size: 28px;
         line-height: 38px;
         padding: 5px 0 10px 0;
-    }
+        }
 }
 
 @media (max-width: 420px) {
     .call_us {
         overflow: hidden;
     }
+
     .call_us .heading {
         font-size: 22px;
+    }
+}
+
+@media (max-width: 600px) {
+    .activity-slider {
+        display: none;
+    }
+
+    .city-slider {
+        display: none;
+    }
+
+    .explore-button {
+        background-color: var(--primaryClr);
+        border: none;
+        color: white;
+        padding: 0.95rem 1.6rem;
+        border-radius: 999px;
+        box-shadow: 0 14px 30px rgba(109, 90, 255, 0.17);
+        transition: transform 0.2s ease, background-color 0.2s ease;
+        display: block !important;
+    }
+
+    .mobile-city-button {
+        background-color: var(--primaryClr);
+        border: none;
+        color: white;
+        padding: 0.95rem 1.6rem;
+        border-radius: 999px;
+        box-shadow: 0 14px 30px rgba(109, 90, 255, 0.17);
+        transition: transform 0.2s ease, background-color 0.2s ease;
+        display: block !important;
     }
 }
 
@@ -83,4 +116,12 @@
     background-color: var(--secondaryClr);
     overflow: hidden;
     padding: 50px 0px;
+}
+
+.mobile-city-button {
+    display: none;
+}
+
+.explore-button {
+    display: none;
 }
