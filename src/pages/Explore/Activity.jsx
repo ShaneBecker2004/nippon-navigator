@@ -303,7 +303,7 @@ const images = (() => {
                     <Nav.Link eventKey="3">Location</Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="4">Ratings & Reviews</Nav.Link>
+                    <Nav.Link eventKey="4">Reviews</Nav.Link>
                   </Nav.Item>
                 </Nav>
 
